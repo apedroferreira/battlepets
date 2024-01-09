@@ -1,3 +1,40 @@
 {
-  "extends": "next/core-web-vitals"
+  "extends": [
+    "plugin:import/recommended",
+    "plugin:import/typescript",
+    "plugin:security/recommended-legacy",
+    "plugin:prettier/recommended",
+    "next/core-web-vitals"
+  ],
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "project": "./tsconfig.json",
+    "sourceType": "module"
+  },
+  "plugins": ["import", "@typescript-eslint", "sort-destructure-keys", "security"],
+  "rules": {
+    "quotes": [1, "single", { "avoidEscape": true, "allowTemplateLiterals": false }],
+    "import/no-cycle": 1,
+    "import/order": [
+      2,
+      {
+        "alphabetize": {
+          "order": "asc",
+          "caseInsensitive": true
+        },
+        "groups": ["builtin", "external", "internal", "parent", "sibling", "index", "type"],
+        "newlines-between": "always"
+      }
+    ],
+    "security/detect-object-injection": 0,
+    "security/detect-unsafe-regex": 0,
+    "sort-destructure-keys/sort-destructure-keys": 2,
+    "sort-imports": [
+      2,
+      {
+        "ignoreDeclarationSort": true
+      }
+    ],
+    "@typescript-eslint/await-thenable": 1
+  }
 }

@@ -6,19 +6,61 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "reset:lite": "yarn cache clean && rm -rf node_modules && yarn install",
+    "reset:hard": "yarn cache clean && rm -rf node_modules yarn.lock && yarn install",
+    "analyze": "ANALYZE=true yarn build",
+    "format": "prettier --write '*/**/*.{js,jsx,ts,tsx,md,json}'",
+    "lint": "next lint && stylelint \"**/*.{css,scss}\"",
+    "audit": "${SKIP_AUDIT:-false} == true || yarn npm audit --all --recursive",
+    "audit:ci": "yarn audit --severity high",
+    "precommit": "lint-staged",
+    "preinstall": "npx -y only-allow yarn",
+    "prepare": "husky install"
+  },
+  "engines": {
+    "node": "20.10.0"
   },
   "dependencies": {
-    "react": "^18",
-    "react-dom": "^18",
-    "next": "14.0.4"
+    "modern-normalize": "^2.0.0",
+    "next": "14.0.4",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "sharp": "^0.33.1"
   },
   "devDependencies": {
-    "typescript": "^5",
-    "@types/node": "^20",
-    "@types/react": "^18",
-    "@types/react-dom": "^18",
-    "eslint": "^8",
-    "eslint-config-next": "14.0.4"
+    "@next/bundle-analyzer": "^14.0.4",
+    "@types/node": "^20.10.7",
+    "@types/react": "^18.2.47",
+    "@types/react-dom": "^18.2.18",
+    "@typescript-eslint/eslint-plugin": "^6.18.1",
+    "@typescript-eslint/parser": "^6.18.1",
+    "eslint": "^8.56.0",
+    "eslint-config-next": "14.0.4",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-import": "^2.29.1",
+    "eslint-plugin-prettier": "^5.1.2",
+    "eslint-plugin-security": "^2.1.0",
+    "eslint-plugin-sort-destructure-keys": "^1.5.0",
+    "husky": "^8.0.3",
+    "lint-staged": "^15.2.0",
+    "prettier": "^3.1.1",
+    "sass": "^1.69.7",
+    "stylelint": "^16.1.0",
+    "stylelint-config-standard-scss": "^13.0.0",
+    "stylelint-order": "^6.0.4",
+    "typescript": "^5.3.3"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not ie <= 11",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
   }
 }
