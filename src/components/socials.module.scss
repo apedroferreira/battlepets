@@ -1,0 +1,22 @@
+.socialButtonsWrapper {
+  display: flex;
+
+  > * {
+    margin-right: 1.4rem;
+
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+}
+
+.socialButtonWrapper {
+  height: 5.4rem;
+  position: relative;
+  transition: transform 0.1s ease-out;
+  width: 5.4rem;
+
+  &:hover {
+    transform: scale(1.05);
+  }
+}

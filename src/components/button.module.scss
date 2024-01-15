@@ -1,0 +1,40 @@
+@use '../common/mixins' as mixins;
+
+.button {
+  align-items: center;
+  border: 0.3rem solid var(--contrast-text);
+  box-shadow: 0 0.2rem 0.3rem var(--shadow-light);
+  color: var(--contrast-text);
+  cursor: pointer;
+  display: flex;
+  font-size: 2.4rem;
+  justify-content: center;
+  padding: 1.6rem 4.2rem;
+  text-transform: uppercase;
+  transition:
+    box-shadow 0.2s ease-out,
+    transform 0.1s ease-out;
+  white-space: nowrap;
+
+  @include mixins.bernhardGothic;
+
+  &:hover {
+    transform: scale(1.01);
+  }
+}
+
+.iceButton {
+  @include mixins.iceGradientBackground;
+
+  &:hover {
+    box-shadow: 0 0 0.8rem 0.4rem var(--ice-glow);
+  }
+}
+
+.fireButton {
+  @include mixins.fireGradientBackground;
+
+  &:hover {
+    box-shadow: 0 0 0.8rem 0.4rem var(--fire-glow);
+  }
+}

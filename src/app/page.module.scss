@@ -1,0 +1,550 @@
+@use '../common/mixins' as mixins;
+
+.headerContent {
+  align-items: flex-start;
+  display: flex;
+  justify-content: space-between;
+  max-width: var(--max-content-width);
+  padding-top: 2.6rem;
+  width: 100%;
+}
+
+.logoWrapper {
+  height: 12rem;
+  position: relative;
+  width: 12rem;
+}
+
+.sectionContent {
+  max-width: var(--max-content-width);
+  width: 100%;
+}
+
+.intro {
+  background: linear-gradient(
+    130deg,
+    var(--background-gradient-fire) 20%,
+    var(--background-gradient-ice) 40%,
+    var(--background-gradient-ice) 60%,
+    var(--background-gradient-fire) 80%
+  );
+
+  @include mixins.animatedGradientBackground(10s);
+}
+
+.hero {
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 26rem;
+  padding-top: 24rem;
+  position: relative;
+}
+
+.heroContent {
+  max-width: 58rem;
+}
+
+.heroText {
+  font-size: 2.2rem;
+  line-height: 1.5;
+  margin-top: 1.8rem;
+
+  span {
+    animation-delay: -1.5s;
+  }
+}
+
+.heroSignUpForm {
+  margin-top: 2rem;
+
+  @include mixins.signUpForm;
+}
+
+.heroCaptions {
+  align-items: flex-start;
+  display: flex;
+  margin-top: 6rem;
+
+  > div {
+    margin-right: 5rem;
+
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+}
+
+.solanaLogoWrapper {
+  height: 16rem;
+  margin-top: -5.4rem;
+  position: relative;
+  width: 16rem;
+}
+
+.heroImages {
+  height: 100%;
+  pointer-events: none;
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 47.5%;
+}
+
+.heroIceImageWrapper {
+  position: relative;
+  top: 40rem;
+}
+
+.heroIceDecorationWrapper {
+  height: 36rem;
+  left: -24rem;
+  position: absolute;
+  top: 11rem;
+  width: 36rem;
+}
+
+@keyframes heroIcePortalAnimation {
+  from {
+    transform: rotate(-17.5deg);
+  }
+
+  to {
+    transform: rotate(-12.5deg);
+  }
+}
+
+.heroIcePortal {
+  align-items: center;
+  animation: heroIcePortalAnimation 15s ease-in-out infinite alternate;
+  box-shadow: 0.3rem 0.3rem 0.3rem var(--shadow-light);
+  display: flex;
+  height: 40rem;
+  justify-content: center;
+  position: absolute;
+  width: 35rem;
+
+  @include mixins.iceGradientBackground;
+}
+
+.heroIcePortalScene {
+  background-image: url('../../public/images/background1.png');
+  background-position: center;
+  background-size: cover;
+  height: 79%;
+  width: 79%;
+}
+
+.heroFireImageWrapper {
+  left: 18rem;
+  position: relative;
+  top: 20rem;
+}
+
+.heroFireDecorationWrapper {
+  height: 30rem;
+  left: 24rem;
+  position: absolute;
+  top: -18rem;
+  width: 30rem;
+}
+
+@keyframes heroFirePortalAnimation {
+  from {
+    transform: rotate(7.5deg);
+  }
+
+  to {
+    transform: rotate(2.5deg);
+  }
+}
+
+.heroFirePortal {
+  align-items: center;
+  animation: heroFirePortalAnimation 12s ease-in-out infinite alternate;
+  box-shadow: 0.3rem 0.3rem 0.3rem var(--shadow-light);
+  display: flex;
+  height: 50rem;
+  justify-content: center;
+  position: absolute;
+  width: 42rem;
+
+  @include mixins.fireGradientBackground;
+}
+
+.heroFirePortalScene {
+  background-image: url('../../public/images/background2.png');
+  background-position: center;
+  background-size: cover;
+  height: 79%;
+  width: 79%;
+}
+
+@keyframes heroPet1Animation {
+  from {
+    transform: rotate(-1deg);
+  }
+
+  to {
+    transform: rotate(1deg);
+  }
+}
+
+.heroPet1Wrapper {
+  animation: heroPet1Animation 8s ease-in-out infinite alternate;
+  height: 45rem;
+  left: -5rem;
+  position: absolute;
+  top: 43rem;
+  width: 45rem;
+}
+
+@keyframes heroPet2Animation {
+  from {
+    transform: rotate(-10deg);
+  }
+
+  to {
+    transform: rotate(-4deg);
+  }
+}
+
+.heroPet2Wrapper {
+  animation: heroPet2Animation 10s ease-in-out infinite alternate;
+  height: 30rem;
+  left: 16rem;
+  position: absolute;
+  top: 16rem;
+  width: 30rem;
+}
+
+@keyframes heroPet3Animation {
+  from {
+    transform: rotate(4deg);
+  }
+
+  to {
+    transform: rotate(10deg);
+  }
+}
+
+.heroPet3Wrapper {
+  animation: heroPet3Animation 12s ease-in-out infinite alternate;
+  height: 41rem;
+  left: 30rem;
+  position: absolute;
+  top: 32rem;
+  width: 41rem;
+}
+
+@keyframes backgroundElementAnimation {
+  from {
+    transform: translateX(-50%) translateY(-2rem) rotate(-0.25deg);
+  }
+
+  to {
+    transform: translateX(-50%) translateY(-2rem) rotate(0.25deg);
+  }
+}
+
+.introFireBackground {
+  @include mixins.fillSpace;
+
+  animation: backgroundElementAnimation 6s ease-in-out infinite alternate;
+  clip-path: polygon(87.5% 0%, 91% 0%, 87.5% 92.5%, 80% 92.5%);
+  height: 120%;
+  left: 50%;
+  max-width: var(--max-content-width);
+  opacity: 0.2;
+  pointer-events: none;
+  transform-origin: top center;
+
+  @include mixins.fireGradientBackground;
+}
+
+.introIceBackground {
+  @include mixins.fillSpace;
+
+  animation: backgroundElementAnimation 8s ease-in-out infinite alternate;
+  clip-path: polygon(82.5% 0%, 86% 0%, 77.5% 92.5%, 70% 92.5%);
+  height: 120%;
+  left: 50%;
+  max-width: var(--max-content-width);
+  opacity: 0.2;
+  pointer-events: none;
+  transform-origin: top center;
+
+  @include mixins.iceGradientBackground;
+}
+
+@keyframes heroPortalsSquareAnimation {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.heroPortalsSquare1 {
+  animation: heroPortalsSquareAnimation 32s linear infinite;
+  box-shadow: 0.3rem 0.3rem 0.3rem var(--shadow-light);
+  height: 7rem;
+  left: 5rem;
+  position: absolute;
+  top: 10rem;
+  width: 7rem;
+
+  @include mixins.fireGradientBackground;
+}
+
+.heroPortalsSquare2 {
+  animation: heroPortalsSquareAnimation 24s linear infinite reverse;
+  animation-delay: -1.5s;
+  box-shadow: 0.3rem 0.3rem 0.3rem var(--shadow-light);
+  height: 5rem;
+  left: 15.5rem;
+  position: absolute;
+  top: 7rem;
+  width: 5rem;
+
+  @include mixins.fireGradientBackground;
+}
+
+.heroPortalsSquare3 {
+  animation: heroPortalsSquareAnimation 20s linear infinite;
+  animation-delay: -3s;
+  box-shadow: 0.3rem 0.3rem 0.3rem var(--shadow-light);
+  height: 5.5rem;
+  left: 24rem;
+  position: absolute;
+  top: 9.5rem;
+  width: 5.5rem;
+
+  @include mixins.iceGradientBackground;
+}
+
+.featuresSectionContent {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  padding: 0 6rem 7rem;
+}
+
+.features {
+  display: flex;
+  margin-bottom: 8rem;
+  margin-top: 6rem;
+}
+
+.feature {
+  display: flex;
+  flex-direction: column;
+  margin-right: 4rem;
+
+  &:last-child {
+    margin-right: 0;
+  }
+
+  > h5 {
+    margin-bottom: 1.4rem;
+  }
+
+  > p {
+    font-size: 1.8rem;
+  }
+}
+
+@keyframes featureImageAnimation {
+  from {
+    transform: rotate(-1deg);
+  }
+
+  to {
+    transform: rotate(1deg);
+  }
+}
+
+@mixin featureImageWrapper {
+  animation: featureImageAnimation 8s ease-in-out infinite alternate;
+  height: 38rem;
+  margin-bottom: 1rem;
+  position: relative;
+}
+
+.featureImageWrapper1 {
+  width: 38rem;
+
+  @include featureImageWrapper;
+}
+
+.featureImageWrapper2 {
+  animation-delay: -4s;
+  width: 32rem;
+
+  @include featureImageWrapper;
+}
+
+.featureBattleFirePortal {
+  @include mixins.fillSpace;
+
+  align-items: center;
+  box-shadow: 0 0.3rem 0.3rem var(--shadow-light);
+  display: flex;
+  height: 90%;
+  justify-content: center;
+  width: 90%;
+
+  @include mixins.fireGradientBackground;
+}
+
+.featureBattleIcePortal {
+  @include mixins.fillSpace;
+
+  clip-path: polygon(100% 0%, 100% 100%, 0% 100%);
+
+  @include mixins.iceGradientBackground;
+}
+
+.featureBattlePortalScene {
+  background-image: url('../../public/images/background3.png');
+  background-position: center;
+  background-size: cover;
+  height: 85%;
+  width: 85%;
+  z-index: 1;
+}
+
+@keyframes featureBattleCard2Animation {
+  from {
+    transform: rotate(-9deg);
+  }
+
+  to {
+    transform: rotate(-7deg);
+  }
+}
+
+.featureBattleCard2Wrapper {
+  animation: featureBattleCard2Animation 10s ease-in-out infinite alternate;
+  height: 22rem;
+  left: -5rem;
+  position: absolute;
+  top: -2rem;
+  width: 22rem;
+  z-index: 2;
+}
+
+@keyframes featureBattleCard3Animation {
+  from {
+    transform: rotate(9deg);
+  }
+
+  to {
+    transform: rotate(7deg);
+  }
+}
+
+.featureBattleCard3Wrapper {
+  animation: featureBattleCard3Animation 9s ease-in-out infinite alternate;
+  bottom: -3rem;
+  height: 24rem;
+  position: absolute;
+  right: -7rem;
+  width: 24rem;
+  z-index: 2;
+}
+
+.featureImageWrapper3 {
+  width: 30rem;
+
+  @include featureImageWrapper;
+}
+
+.storeLogosWrapper {
+  align-items: center;
+  display: flex;
+  margin-bottom: 10rem;
+
+  > * {
+    margin-right: 2rem;
+
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+}
+
+.googlePlayLogoWrapper {
+  height: 5rem;
+  position: relative;
+  width: 17rem;
+}
+
+.appStoreLogoWrapper {
+  height: 5rem;
+  position: relative;
+  top: -0.4rem;
+  width: 14rem;
+}
+
+.tokenSection {
+  padding: 6.4rem 0;
+  position: relative;
+
+  @include mixins.iceGradientBackground;
+}
+
+.tokenSectionBackground {
+  clip-path: polygon(0% 0%, 100% 0%, 95% 100%, 0% 100%);
+  height: 100%;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 37.5%;
+
+  @include mixins.fireGradientBackground;
+}
+
+.tokenSectionContent {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 4rem;
+  width: var(--max-content-width);
+  z-index: 1;
+}
+
+.tokenMetric {
+  color: var(--contrast-text);
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+
+.tokenValue {
+  font-size: 8.6rem;
+
+  @include mixins.bernhardGothic;
+}
+
+.roadmapSection {
+  background: linear-gradient(
+    130deg,
+    var(--background-gradient-fire) 20%,
+    var(--background-gradient-ice) 40%,
+    var(--background-gradient-ice) 60%,
+    var(--background-gradient-fire) 80%
+  );
+
+  @include mixins.animatedGradientBackground(10s);
+}
+
+.roadmapSectionContent {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  padding: 10rem 0 7rem;
+}
+
+.roadmapSectionHeader {
+  align-items: flex-start;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}

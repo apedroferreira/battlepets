@@ -1,0 +1,66 @@
+@mixin bernhardGothic {
+  font-family: bernhard-gothic-urw, sans-serif;
+  font-style: normal;
+  font-weight: 700;
+}
+
+@mixin fillSpace {
+  height: 100%;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 100%;
+}
+
+@mixin fireGradientBackground($angle: 135deg) {
+  background-image: linear-gradient($angle, var(--fire-gradient-light) 0%, var(--fire-gradient-dark) 100%);
+}
+
+@mixin iceGradientBackground($angle: 135deg) {
+  background-image: linear-gradient($angle, var(--ice-gradient-light) 0%, var(--ice-gradient-dark) 100%);
+}
+
+@keyframes gradientBackgroundAnimation {
+  to {
+    background-position: 200% center;
+  }
+}
+
+@mixin animatedGradientBackground($duration: 3s) {
+  animation: gradientBackgroundAnimation $duration linear infinite;
+  background-size: 200% auto;
+}
+
+@mixin animatedFireGradientBackground($angle: 135deg, $duration: 3s) {
+  background-image: linear-gradient(
+    $angle,
+    var(--fire-gradient-light) 20%,
+    var(--fire-gradient-dark) 40%,
+    var(--fire-gradient-dark) 60%,
+    var(--fire-gradient-light) 80%
+  );
+
+  @include animatedGradientBackground($duration);
+}
+
+@mixin animatedIceGradientBackground($angle: 135deg, $duration: 3s) {
+  background-image: linear-gradient(
+    $angle,
+    var(--ice-gradient-light) 20%,
+    var(--ice-gradient-dark) 40%,
+    var(--ice-gradient-dark) 60%,
+    var(--ice-gradient-light) 80%
+  );
+
+  @include animatedGradientBackground($duration);
+}
+
+@mixin signUpForm {
+  align-items: center;
+  display: flex;
+
+  input {
+    flex: 1;
+    margin-right: 0.8rem;
+  }
+}
