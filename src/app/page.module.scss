@@ -1,18 +1,54 @@
 @use '../common/mixins' as mixins;
+@use '../common/keyframes';
 
 .headerContent {
-  align-items: flex-start;
+  align-items: center;
   display: flex;
   justify-content: space-between;
   max-width: var(--max-content-width);
   padding-top: 2.6rem;
   width: 100%;
+
+  nav > ul {
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+    list-style-type: none;
+    margin-left: 4rem;
+
+    li {
+      color: var(--ice-gradient-dark);
+      font-size: 1.6rem;
+      font-weight: bold;
+      margin: 0 3rem;
+      opacity: 0.9;
+      text-transform: uppercase;
+      transition:
+        color 0.1s ease-in-out,
+        text-shadow 0.1s ease-in-out;
+
+      &:first-child {
+        color: var(--fire-gradient-dark);
+      }
+
+      &:hover {
+        color: var(--fire-gradient-dark);
+        opacity: 1;
+        text-shadow: 0 0 0.3rem var(--fire-glow);
+      }
+    }
+  }
 }
 
-.logoWrapper {
-  height: 12rem;
+.headerLeft {
+  align-items: center;
+  display: flex;
+}
+
+.headerLogoWrapper {
+  height: 11rem;
   position: relative;
-  width: 12rem;
+  width: 11rem;
 }
 
 .sectionContent {
@@ -20,16 +56,19 @@
   width: 100%;
 }
 
-.intro {
-  background: linear-gradient(
-    130deg,
-    var(--background-gradient-fire) 20%,
-    var(--background-gradient-ice) 40%,
-    var(--background-gradient-ice) 60%,
-    var(--background-gradient-fire) 80%
-  );
+.sectionTarget {
+  pointer-events: none;
+  position: absolute;
+  transform: translateY(-20vh);
+  visibility: hidden;
+}
 
-  @include mixins.animatedGradientBackground(10s);
+@mixin mainBackground {
+  background: linear-gradient(135deg, var(--background-gradient-fire), var(--background-gradient-ice));
+}
+
+.intro {
+  @include mainBackground;
 }
 
 .hero {
@@ -238,11 +277,11 @@
 
 @keyframes backgroundElementAnimation {
   from {
-    transform: translateX(-50%) translateY(-2rem) rotate(-0.25deg);
+    transform: translate(-50%, -2rem) rotate(-0.25deg);
   }
 
   to {
-    transform: translateX(-50%) translateY(-2rem) rotate(0.25deg);
+    transform: translate(-50%, -2rem) rotate(0.25deg);
   }
 }
 
@@ -276,14 +315,8 @@
   @include mixins.iceGradientBackground;
 }
 
-@keyframes heroPortalsSquareAnimation {
-  to {
-    transform: rotate(360deg);
-  }
-}
-
 .heroPortalsSquare1 {
-  animation: heroPortalsSquareAnimation 32s linear infinite;
+  animation: fullRotateAnimation 32s linear infinite;
   box-shadow: 0.3rem 0.3rem 0.3rem var(--shadow-light);
   height: 7rem;
   left: 5rem;
@@ -295,7 +328,7 @@
 }
 
 .heroPortalsSquare2 {
-  animation: heroPortalsSquareAnimation 24s linear infinite reverse;
+  animation: fullRotateAnimation 24s linear infinite reverse;
   animation-delay: -1.5s;
   box-shadow: 0.3rem 0.3rem 0.3rem var(--shadow-light);
   height: 5rem;
@@ -308,7 +341,7 @@
 }
 
 .heroPortalsSquare3 {
-  animation: heroPortalsSquareAnimation 20s linear infinite;
+  animation: fullRotateAnimation 20s linear infinite;
   animation-delay: -3s;
   box-shadow: 0.3rem 0.3rem 0.3rem var(--shadow-light);
   height: 5.5rem;
@@ -524,22 +557,14 @@
 }
 
 .roadmapSection {
-  background: linear-gradient(
-    130deg,
-    var(--background-gradient-fire) 20%,
-    var(--background-gradient-ice) 40%,
-    var(--background-gradient-ice) 60%,
-    var(--background-gradient-fire) 80%
-  );
-
-  @include mixins.animatedGradientBackground(10s);
+  @include mainBackground;
 }
 
 .roadmapSectionContent {
   align-items: center;
   display: flex;
   flex-direction: column;
-  padding: 10rem 0 7rem;
+  padding: 12rem 0 10rem;
 }
 
 .roadmapSectionHeader {
@@ -547,4 +572,171 @@
   display: flex;
   justify-content: space-between;
   width: 100%;
+}
+
+.roadmap {
+  margin: 6rem 0 22rem;
+  position: relative;
+  width: 100%;
+}
+
+@keyframes roadmapPointAnimation {
+  from {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+
+  to {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+}
+
+.roadmapPoint {
+  animation: roadmapPointAnimation 20s linear infinite;
+  box-shadow: 0.3rem 0.3rem 0.3rem var(--shadow-light);
+  height: 3rem;
+  transform-origin: 50% 50%;
+  width: 3rem;
+}
+
+.roadmapPointWrapper {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  transform: translateX(-40%);
+  transform-origin: 50% 0%;
+  transition: transform 0.15s ease-in-out;
+  z-index: 1;
+
+  &:nth-of-type(1) {
+    left: 10%;
+    top: 81px;
+
+    .roadmapPoint {
+      @include mixins.fireGradientBackground;
+    }
+  }
+
+  &:nth-of-type(2) {
+    left: 36.6%;
+    top: 82px;
+
+    .roadmapPoint {
+      animation-delay: -1.25s;
+
+      @include mixins.fireGradientBackground;
+    }
+  }
+
+  &:nth-of-type(3) {
+    left: 63.3%;
+    top: 36px;
+
+    .roadmapPoint {
+      animation-delay: -2.5s;
+
+      @include mixins.fireGradientBackground;
+    }
+  }
+
+  &:nth-of-type(4) {
+    left: 90%;
+    top: 42px;
+
+    .roadmapPoint {
+      animation-delay: -3.75s;
+
+      @include mixins.iceGradientBackground;
+    }
+  }
+}
+
+.roadmapPointText {
+  position: relative;
+}
+
+.roadmapPointTextHeading {
+  font-size: 2.6rem;
+  font-weight: bolder;
+  margin-bottom: 0.6rem;
+}
+
+.roadmapPointTextItems {
+  font-size: 1.6rem;
+  padding-left: 1.8rem;
+
+  /* stylelint-disable-next-line no-descending-specificity */
+  > li {
+    margin-bottom: 0.6rem;
+    white-space: nowrap;
+  }
+}
+
+.footerTopBorder {
+  height: 0.6rem;
+  width: 100%;
+
+  @include mixins.iceGradientBackground;
+}
+
+.footerContent {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+  max-width: var(--max-content-width);
+  padding: 5.26rem 0 7.2rem;
+  width: 100%;
+
+  nav > ul {
+    align-items: center;
+    color: var(--contrast-text);
+    display: flex;
+    justify-content: space-between;
+    list-style-type: none;
+
+    /* stylelint-disable-next-line no-descending-specificity */
+    li {
+      font-size: 1.6rem;
+      margin: 0 1.6rem;
+
+      &:hover {
+        opacity: 0.8;
+      }
+    }
+  }
+}
+
+.footerLeft {
+  display: flex;
+  flex-direction: column;
+}
+
+.footerLogoWrapper {
+  height: 11rem;
+  position: relative;
+  width: 11rem;
+}
+
+.footerSocials {
+  transform: scale(0.95);
+  transform-origin: 50% 50%;
+}
+
+.footerContact {
+  color: var(--ice-gradient-light);
+  font-size: 1.4rem;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+.footerCopyright {
+  bottom: 2rem;
+  color: var(--contrast-text);
+  font-size: 1.2rem;
+  left: 50%;
+  opacity: 0.75;
+  position: absolute;
+  transform: translateX(-50%);
 }

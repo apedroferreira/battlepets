@@ -2,7 +2,7 @@ import styles from './button.module.scss'
 
 import type React from 'react'
 
-interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: 'fire' | 'ice'
 }
 

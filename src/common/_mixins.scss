@@ -20,14 +20,14 @@
   background-image: linear-gradient($angle, var(--ice-gradient-light) 0%, var(--ice-gradient-dark) 100%);
 }
 
-@keyframes gradientBackgroundAnimation {
+@keyframes gradientBackgroundImageAnimation {
   to {
     background-position: 200% center;
   }
 }
 
-@mixin animatedGradientBackground($duration: 3s) {
-  animation: gradientBackgroundAnimation $duration linear infinite;
+@mixin animatedGradientBackgroundImage($duration: 3s) {
+  animation: gradientBackgroundImageAnimation $duration linear infinite;
   background-size: 200% auto;
 }
 
@@ -40,7 +40,7 @@
     var(--fire-gradient-light) 80%
   );
 
-  @include animatedGradientBackground($duration);
+  @include animatedGradientBackgroundImage($duration);
 }
 
 @mixin animatedIceGradientBackground($angle: 135deg, $duration: 3s) {
@@ -52,7 +52,28 @@
     var(--ice-gradient-light) 80%
   );
 
-  @include animatedGradientBackground($duration);
+  @include animatedGradientBackgroundImage($duration);
+}
+
+@mixin gradientText {
+  background-clip: text;
+  font-weight: bold;
+  -webkit-text-fill-color: transparent;
+  -moz-text-fill-color: transparent;
+}
+
+@mixin fireText {
+  color: var(--fire-gradient-dark);
+
+  @include gradientText;
+  @include animatedFireGradientBackground(-45deg);
+}
+
+@mixin iceText {
+  color: var(--ice-gradient-dark);
+
+  @include gradientText;
+  @include animatedIceGradientBackground(-45deg);
 }
 
 @mixin signUpForm {

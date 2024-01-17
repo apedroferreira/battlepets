@@ -1,9 +1,10 @@
 import Image from 'next/image'
 import Link from 'next/link'
 
-import { LITEPAPER_URL } from '@/common/constants'
+import { CONTACT_EMAIL, LITEPAPER_URL } from '@/common/constants'
 import globalStyles from '@/common/global.module.scss'
 import { Button } from '@/components/Button'
+import { CTA } from '@/components/CTA'
 import { Input } from '@/components/Input'
 import { Socials } from '@/components/Socials'
 
@@ -23,13 +24,74 @@ import token from '../../public/images/token.png'
 
 import styles from './page.module.scss'
 
+const TOKEN_METRICS: { value: string; caption: React.ReactNode }[] = [
+  {
+    value: '10M',
+    caption: (
+      <>
+        Total <strong>$BPETS</strong> supply
+      </>
+    ),
+  },
+  {
+    value: '$0.12',
+    caption: 'Public sale price',
+  },
+  {
+    value: '$696K',
+    caption: 'Public sale market cap',
+  },
+]
+
+/* eslint-disable react/jsx-key */
+const ROADMAP_POINTS: { heading: string; items: React.ReactNode[] }[] = [
+  {
+    heading: 'Q1 2024',
+    items: [
+      <strong>Airdrop</strong>,
+      <strong>Public Sale</strong>,
+      <>
+        <strong>$BPETS</strong> Launch
+      </>,
+    ],
+  },
+  {
+    heading: 'Q2-Q3 2024',
+    items: ['BattlePets DAO', 'Create Series 1 cards', 'App development'],
+  },
+  {
+    heading: 'Q4 2024',
+    items: ['Beta App launch'],
+  },
+  {
+    heading: 'Q1 2025',
+    items: ['Public App launch'],
+  },
+]
+/* eslint-enable react/jsx-key */
+
 const Home = () => (
   <>
     <header>
       <div className={styles.headerContent}>
-        <Link href="/" className={styles.logoWrapper}>
-          <Image src={logo} alt="BattlePets logo" fill style={{ objectFit: 'contain' }} />
-        </Link>
+        <div className={styles.headerLeft}>
+          <Link href="/" className={styles.headerLogoWrapper}>
+            <Image src={logo} alt="BattlePets logo" fill style={{ objectFit: 'contain' }} />
+          </Link>
+          <nav>
+            <ul>
+              <li>
+                <Link href="#game">Game</Link>
+              </li>
+              <li>
+                <Link href="#token">Token</Link>
+              </li>
+              <li>
+                <Link href="#roadmap">Roadmap</Link>
+              </li>
+            </ul>
+          </nav>
+        </div>
         <Link href={LITEPAPER_URL} target="_blank" rel="noopener noreferrer nofollow">
           <Button>Read Litepaper</Button>
         </Link>
@@ -98,6 +160,7 @@ const Home = () => (
           </div>
         </section>
         <section>
+          <div id="game" className={styles.sectionTarget} />
           <div className={`${styles.sectionContent} ${styles.featuresSectionContent}`}>
             <h2>
               <span className={globalStyles.fireText}>Play to earn</span> in a deck builder,{' '}
@@ -148,39 +211,24 @@ const Home = () => (
                 </div>
               </div>
             </div>
-            <h4>Get $BPETS early with a discount!</h4>
-            <p className={globalStyles.ctaText}>
-              Join the waitlist to get the <strong>$BPETS airdrop</strong> and sign up for our{' '}
-              <strong>public sale</strong> at an exclusive price!
-            </p>
-            <form className={globalStyles.ctaSignUpForm}>
-              <Input type="email" placeholder="Enter your email" />
-              <Button variant="ice">Let me in!</Button>
-            </form>
-            <Socials />
+            <CTA heading="Get $BPETS early with a discount!" buttonText="Let me in!" />
           </div>
         </section>
       </div>
       <section className={styles.tokenSection}>
+        <div id="token" className={styles.sectionTarget} />
         <div className={styles.tokenSectionBackground} />
         <div className={styles.tokenSectionContent}>
-          <div className={styles.tokenMetric}>
-            <div className={styles.tokenValue}>10M</div>
-            <div className={globalStyles.captionText}>
-              Total <strong>$BPETS</strong> supply
+          {TOKEN_METRICS.map(({ caption, value }) => (
+            <div key={value} className={styles.tokenMetric}>
+              <div className={styles.tokenValue}>{value}</div>
+              <div className={globalStyles.captionText}>{caption}</div>
             </div>
-          </div>
-          <div className={styles.tokenMetric}>
-            <div className={styles.tokenValue}>$0.12</div>
-            <div className={globalStyles.captionText}>Public sale price</div>
-          </div>
-          <div className={styles.tokenMetric}>
-            <div className={styles.tokenValue}>$696K</div>
-            <div className={globalStyles.captionText}>Public sale initial market cap</div>
-          </div>
+          ))}
         </div>
       </section>
       <section className={styles.roadmapSection}>
+        <div id="roadmap" className={styles.sectionTarget} />
         <div className={`${styles.sectionContent} ${styles.roadmapSectionContent}`}>
           <div className={styles.roadmapSectionHeader}>
             <h3>Roadmap</h3>
@@ -188,9 +236,77 @@ const Home = () => (
               <Button>Read Litepaper</Button>
             </Link>
           </div>
+          <div className={styles.roadmap}>
+            <svg viewBox="0 0 1280 160" xmlns="http://www.w3.org/2000/svg">
+              <path
+                d="M 0 60 Q 320 120, 640 60 T 1280 60"
+                stroke="black"
+                strokeWidth={6}
+                strokeOpacity={0.75}
+                fill="transparent"
+              />
+            </svg>
+            {ROADMAP_POINTS.map(({ heading, items }) => (
+              <div key={heading} className={styles.roadmapPointWrapper}>
+                <div className={styles.roadmapPoint} />
+                <div className={styles.roadmapPointText}>
+                  <p className={styles.roadmapPointTextHeading}>{heading}</p>
+                  <ul className={styles.roadmapPointTextItems}>
+                    {items.map((item, itemIndex) => (
+                      <li key={itemIndex}>{item}</li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+            ))}
+          </div>
+          <CTA heading="Want to stay in the loop?" buttonText="Keep me updated!" buttonVariant="fire" />
         </div>
       </section>
     </main>
+    <footer>
+      <div className={styles.footerTopBorder} />
+      <div className={styles.footerContent}>
+        <div className={styles.footerLeft}>
+          <Link href="/" className={styles.footerLogoWrapper}>
+            <Image src={logo} alt="BattlePets logo" fill style={{ objectFit: 'contain' }} />
+          </Link>
+          <Link
+            href={`mailto:${CONTACT_EMAIL}`}
+            target="_blank"
+            rel="noopener noreferrer nofollow"
+            className={styles.footerContact}
+          >
+            {CONTACT_EMAIL}
+          </Link>
+        </div>
+        <nav>
+          <ul>
+            <li>
+              <Link href="#top">Back to top</Link>
+            </li>
+            <li>
+              <Link href="#game">Game</Link>
+            </li>
+            <li>
+              <Link href="#token">Token</Link>
+            </li>
+            <li>
+              <Link href="#roadmap">Roadmap</Link>
+            </li>
+            <li>
+              <Link href={LITEPAPER_URL} target="_blank" rel="noopener noreferrer nofollow">
+                Litepaper
+              </Link>
+            </li>
+          </ul>
+        </nav>
+        <div className={styles.footerSocials}>
+          <Socials hideCaption />
+        </div>
+      </div>
+      <div className={styles.footerCopyright}>© {new Date().getFullYear()} BattlePets. All rights reserved.</div>
+    </footer>
   </>
 )
 
