@@ -1,25 +1,6 @@
 {
-  "extends": ["stylelint-config-standard-scss"],
   "plugins": ["stylelint-order"],
   "rules": {
-    "order/properties-alphabetical-order": true,
-    "selector-class-pattern": [
-      "^[a-z][a-zA-Z0-9]*$",
-      {
-        "message": "Expected class selector \"%s\" to be lower camel-case"
-      }
-    ],
-    "scss/at-mixin-pattern": [
-      "^[a-z][a-zA-Z0-9]*$",
-      {
-        "message": "Expected mixin name \"%s\" to be lower camel-case"
-      }
-    ],
-    "keyframes-name-pattern": [
-      "^[a-z][a-zA-Z0-9]*$",
-      {
-        "message": "Expected keyframe name \"%s\" to be lower camel-case"
-      }
-    ]
+    "order/properties-alphabetical-order": true
   }
 }

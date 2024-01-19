@@ -1,4 +1,10 @@
 {
+  "eslint.workingDirectories": [
+    {
+      "directory": "apps/battlepets-static",
+      "changeProcessCWD": true
+    }
+  ],
   "editor.formatOnSave": true,
   "eslint.alwaysShowStatus": true,
   "eslint.validate": ["javascript", "javascriptreact", "typescript", "typescriptreact"],
@@ -26,7 +32,14 @@
     "source.fixAll.stylelint": "explicit"
   },
   "jest.jestCommandLine": "yarn test",
-  "typescript.tsdk": "node_modules/typescript/lib",
+  "typescript.tsdk": ".yarn/sdks/typescript/lib",
   "stylelint.validate": ["css", "scss"],
-  "editor.guides.indentation": false
+  "editor.guides.indentation": false,
+  "search.exclude": {
+    "**/.yarn": true,
+    "**/.pnp.*": true
+  },
+  "eslint.nodePath": ".yarn/sdks",
+  "prettier.prettierPath": ".yarn/sdks/prettier/index.cjs",
+  "typescript.enablePromptUseWorkspaceTsdk": true
 }
