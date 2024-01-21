@@ -1,0 +1,27 @@
+{
+  "name": "battlepets-token",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "run:script": "ts-node -r tsconfig-paths/register --cwd ./src/scripts",
+    "format": "yarn g:prettier --write '*/**/*.{js,ts,md,json}'",
+    "lint": "yarn g:eslint \"**/*.{js,ts}\" --fix",
+    "precommit": "yarn g:lint-staged"
+  },
+  "dependencies": {
+    "@solana-developers/helpers": "^1.4.3",
+    "@solana/spl-token": "^0.3.11",
+    "@solana/web3.js": "^1.89.1",
+    "colors": "^1.4.0",
+    "csvtojson": "^2.0.10",
+    "dotenv": "^16.3.2",
+    "get-caller-file": "^2.0.5",
+    "ramda": "^0.29.1",
+    "yargs": "^17.7.2"
+  },
+  "devDependencies": {
+    "@types/ramda": "^0",
+    "@types/yargs": "^17.0.32",
+    "ts-node": "^10.9.2"
+  }
+}

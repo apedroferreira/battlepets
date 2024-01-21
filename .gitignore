@@ -35,6 +35,18 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
+# dotenv environment variables file
+.env
+
+# specific envs
+.env.development
+.env.test
+.env.production
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
 # yarn v2 (not using Zero-Installs)
 .pnp.*
 .yarn/*
@@ -46,3 +58,7 @@ next-env.d.ts
 
 # turborepo
 .turbo
+
+# token scripts data
+**/scripts/scriptsData/*
+!**/scripts/scriptsData/*.example.*

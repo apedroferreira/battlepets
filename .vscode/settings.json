@@ -3,6 +3,10 @@
     {
       "directory": "apps/battlepets-static",
       "changeProcessCWD": true
+    },
+    {
+      "directory": "apps/battlepets-token",
+      "changeProcessCWD": true
     }
   ],
   "editor.formatOnSave": true,
