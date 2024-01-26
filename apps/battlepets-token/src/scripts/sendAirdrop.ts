@@ -11,7 +11,7 @@ import 'colors'
 import { INITIAL_TOKEN_DISTRIBUTION, TOKEN_AMOUNT } from 'common/constants'
 import { TokenDistribution } from 'common/enums'
 import { executeScript } from 'utils/scriptUtils'
-import { getCluster, getConnection, getTokenAmount } from 'utils/solanaUtils'
+import { getConnection, getTokenAmount, getURLCluster } from 'utils/solanaUtils'
 
 const sendAirdrop = async (): Promise<void> => {
   if (!process.env.WALLET_SECRET_KEY) {
@@ -28,7 +28,7 @@ const sendAirdrop = async (): Promise<void> => {
 
   const tokenPublicKey = new web3.PublicKey(process.env.TOKEN_ADDRESS)
 
-  const cluster = getCluster()
+  const urlCluster = getURLCluster()
 
   const tokenMint = await token.getMint(connection, tokenPublicKey)
 
@@ -98,7 +98,7 @@ const sendAirdrop = async (): Promise<void> => {
   const transactionSignature = await web3.sendAndConfirmTransaction(connection, transaction, [senderAccount])
 
   console.log(
-    `Airdrop Token Transaction: https://explorer.solana.com/tx/${transactionSignature}?cluster=${cluster}`.cyan
+    `Airdrop Token Transaction: https://explorer.solana.com/tx/${transactionSignature}?cluster=${urlCluster}`.cyan
   )
 }
 

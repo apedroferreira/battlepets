@@ -3,6 +3,10 @@ import { TokenDistribution } from './enums'
 export const TOKEN_DECIMALS = 9
 export const TOKEN_AMOUNT = 10000000
 
+export const TOKEN_NAME = 'BattlePets'
+export const TOKEN_SYMBOL = 'BPETS'
+export const TOKEN_DESCRIPTION = 'Official token for the BattlePets game.'
+
 export const INITIAL_TOKEN_DISTRIBUTION: Record<
   TokenDistribution,
   { allocation: number; walletAddress: string | undefined }

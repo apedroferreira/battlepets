@@ -1,14 +1,37 @@
 import 'dotenv/config'
 
+import fs from 'fs/promises'
+import path from 'path'
+
+import { createMetadataAccountV3 } from '@metaplex-foundation/mpl-token-metadata'
+import { createGenericFile, createSignerFromKeypair, none } from '@metaplex-foundation/umi'
+import { createUmi } from '@metaplex-foundation/umi-bundle-defaults'
+import { createBundlrUploader } from '@metaplex-foundation/umi-uploader-bundlr'
+import { fromWeb3JsKeypair, fromWeb3JsPublicKey } from '@metaplex-foundation/umi-web3js-adapters'
 import * as token from '@solana/spl-token'
 import * as web3 from '@solana/web3.js'
 import { getKeypairFromEnvironment } from '@solana-developers/helpers'
+import bs58 from 'bs58'
 import 'colors'
 
-import { INITIAL_TOKEN_DISTRIBUTION, TOKEN_AMOUNT, TOKEN_DECIMALS } from 'common/constants'
+import {
+  INITIAL_TOKEN_DISTRIBUTION,
+  TOKEN_AMOUNT,
+  TOKEN_DECIMALS,
+  TOKEN_DESCRIPTION,
+  TOKEN_NAME,
+  TOKEN_SYMBOL,
+} from 'common/constants'
 import { TokenDistribution } from 'common/enums'
 import { executeScript } from 'utils/scriptUtils'
-import { getCluster, getConnection, getTokenAmount } from 'utils/solanaUtils'
+import {
+  getConnection,
+  getEndpoint,
+  getTokenAmount,
+  getURLCluster,
+  getUploaderAddress,
+  getUploaderProviderUrl,
+} from 'utils/solanaUtils'
 
 const createToken = async (): Promise<void> => {
   if (!process.env.WALLET_SECRET_KEY) {
@@ -19,11 +42,11 @@ const createToken = async (): Promise<void> => {
 
   const ownerAccount = getKeypairFromEnvironment('WALLET_SECRET_KEY')
 
-  const cluster = getCluster()
+  const urlCluster = getURLCluster()
 
   const tokenMint = await token.createMint(connection, ownerAccount, ownerAccount.publicKey, null, TOKEN_DECIMALS)
 
-  console.log(`Token Mint: https://explorer.solana.com/address/${tokenMint}?cluster=${cluster}`.cyan)
+  console.log(`Token Mint: https://explorer.solana.com/address/${tokenMint}?cluster=${urlCluster}`.cyan)
 
   const ownerTokenAccount = await token.getOrCreateAssociatedTokenAccount(
     connection,
@@ -33,7 +56,7 @@ const createToken = async (): Promise<void> => {
   )
 
   console.log(
-    `Owner Token Account: https://explorer.solana.com/address/${ownerTokenAccount.address}?cluster=${cluster}`.cyan
+    `Owner Token Account: https://explorer.solana.com/address/${ownerTokenAccount.address}?cluster=${urlCluster}`.cyan
   )
 
   const mintTransactionSignature = await token.mintTo(
@@ -46,21 +69,7 @@ const createToken = async (): Promise<void> => {
   )
 
   console.log(
-    `Mint Token Transaction: https://explorer.solana.com/tx/${mintTransactionSignature}?cluster=${cluster}`.cyan
-  )
-
-  const revokeMintAuthorityTransactionSignature = await token.setAuthority(
-    connection,
-    ownerAccount,
-    tokenMint,
-    ownerAccount.publicKey,
-    token.AuthorityType.MintTokens,
-    null
-  )
-
-  console.log(
-    `Revoke Mint Authority Token Transaction: https://explorer.solana.com/tx/${revokeMintAuthorityTransactionSignature}?cluster=${cluster}`
-      .cyan
+    `Mint Token Transaction: https://explorer.solana.com/tx/${mintTransactionSignature}?cluster=${urlCluster}`.cyan
   )
 
   const distributionWalletsTokenAddresses: [TokenDistribution, web3.PublicKey, web3.PublicKey][] = await Promise.all(
@@ -120,7 +129,7 @@ const createToken = async (): Promise<void> => {
   )
 
   console.log(
-    `Initial Distribution Token Transaction: https://explorer.solana.com/tx/${initialDistributionTransactionSignature}?cluster=${cluster}`
+    `Initial Distribution Token Transaction: https://explorer.solana.com/tx/${initialDistributionTransactionSignature}?cluster=${urlCluster}`
       .cyan
   )
 }

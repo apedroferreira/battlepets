@@ -1,4 +1,6 @@
 @use '../common/mixins' as mixins;
+@use '../common/variables' as variables;
+@use '../common/breakpoints' as breakpoints;
 @use '../common/keyframes';
 
 .headerContent {
@@ -6,7 +8,7 @@
   display: flex;
   justify-content: space-between;
   max-width: var(--max-content-width);
-  padding-top: 2.6rem;
+  padding-top: 1.6rem;
   width: 100%;
 
   nav > ul {
@@ -18,7 +20,7 @@
 
     li {
       color: var(--ice-gradient-dark);
-      font-size: 1.8rem;
+      font-size: 1.6rem;
       font-weight: bold;
       margin: 0 2.6rem;
       opacity: 0.9;
@@ -34,7 +36,17 @@
       &:hover {
         color: var(--fire-gradient-dark);
         opacity: 1;
-        text-shadow: 0 0 0.3rem var(--fire-glow);
+        text-shadow: 0 0 0.4rem var(--fire-glow);
+      }
+    }
+  }
+
+  @include breakpoints.breakpoint(xxl) {
+    padding-top: 2.6rem;
+
+    nav > ul {
+      li {
+        font-size: 1.8rem;
       }
     }
   }
@@ -46,9 +58,14 @@
 }
 
 .headerLogoWrapper {
-  height: 11rem;
+  height: 10rem;
   position: relative;
-  width: 11rem;
+  width: 10rem;
+
+  @include breakpoints.breakpoint(xxl) {
+    height: 11rem;
+    width: 11rem;
+  }
 }
 
 .sectionContent {
@@ -68,28 +85,50 @@
 }
 
 .intro {
+  position: relative;
+
   @include mainBackground;
 }
 
 .hero {
   display: flex;
   flex-direction: column;
-  padding-bottom: 26rem;
-  padding-top: 24rem;
+  padding-bottom: 22rem;
+  padding-top: 20rem;
   position: relative;
+
+  h1 {
+    position: relative;
+    z-index: 1;
+  }
+
+  @include breakpoints.breakpoint(xxl) {
+    padding-bottom: 26rem;
+    padding-top: 24rem;
+  }
 }
 
 .heroContent {
-  max-width: 58rem;
+  max-width: 54rem;
+  position: relative;
+  z-index: 1;
+
+  @include breakpoints.breakpoint(xxl) {
+    max-width: 61rem;
+  }
 }
 
 .heroText {
-  font-size: 2.2rem;
+  font-size: 2rem;
   line-height: 1.5;
   margin-top: 1.8rem;
 
   span {
     animation-delay: -1.5s;
+  }
+
+  @include breakpoints.breakpoint(xxl) {
+    font-size: 2.2rem;
   }
 }
 
@@ -102,7 +141,9 @@
 .heroCaptions {
   align-items: flex-start;
   display: flex;
-  margin-top: 6rem;
+  margin-top: 4.2rem;
+  position: relative;
+  z-index: 1;
 
   > div {
     margin-right: 5rem;
@@ -111,13 +152,23 @@
       margin-right: 0;
     }
   }
+
+  @include breakpoints.breakpoint(xxl) {
+    margin-top: 6rem;
+  }
 }
 
 .solanaLogoWrapper {
-  height: 16rem;
-  margin-top: -5.4rem;
+  height: 14rem;
+  margin-top: -4.6rem;
   position: relative;
-  width: 16rem;
+  width: 14rem;
+
+  @include breakpoints.breakpoint(xxl) {
+    height: 16rem;
+    margin-top: -5.4rem;
+    width: 16rem;
+  }
 }
 
 .heroImages {
@@ -125,8 +176,12 @@
   pointer-events: none;
   position: absolute;
   right: 0;
-  top: 0;
+  top: -6rem;
   width: 47.5%;
+
+  @include breakpoints.breakpoint(xxl) {
+    top: 0;
+  }
 }
 
 .heroIceImageWrapper {
@@ -135,11 +190,17 @@
 }
 
 .heroIceDecorationWrapper {
-  height: 36rem;
-  left: -24rem;
+  height: 34rem;
+  left: -22rem;
   position: absolute;
   top: 11rem;
-  width: 36rem;
+  width: 34rem;
+
+  @include breakpoints.breakpoint(xxl) {
+    height: 36rem;
+    left: -24rem;
+    width: 36rem;
+  }
 }
 
 @keyframes heroIcePortalAnimation {
@@ -157,12 +218,17 @@
   animation: heroIcePortalAnimation 15s ease-in-out infinite alternate;
   box-shadow: 0.3rem 0.3rem 0.3rem var(--shadow-light);
   display: flex;
-  height: 40rem;
+  height: 36rem;
   justify-content: center;
   position: absolute;
-  width: 35rem;
+  width: 32rem;
 
   @include mixins.iceGradientBackground;
+
+  @include breakpoints.breakpoint(xxl) {
+    height: 38rem;
+    width: 32rem;
+  }
 }
 
 .heroIcePortalScene {
@@ -180,11 +246,18 @@
 }
 
 .heroFireDecorationWrapper {
-  height: 30rem;
-  left: 24rem;
+  height: 26rem;
+  left: 19rem;
   position: absolute;
-  top: -18rem;
-  width: 30rem;
+  top: -12rem;
+  width: 26rem;
+
+  @include breakpoints.breakpoint(xxl) {
+    height: 30rem;
+    left: 24rem;
+    top: -18rem;
+    width: 30rem;
+  }
 }
 
 @keyframes heroFirePortalAnimation {
@@ -202,12 +275,17 @@
   animation: heroFirePortalAnimation 12s ease-in-out infinite alternate;
   box-shadow: 0.3rem 0.3rem 0.3rem var(--shadow-light);
   display: flex;
-  height: 50rem;
+  height: 44rem;
   justify-content: center;
   position: absolute;
-  width: 42rem;
+  width: 36rem;
 
   @include mixins.fireGradientBackground;
+
+  @include breakpoints.breakpoint(xxl) {
+    height: 50rem;
+    width: 42rem;
+  }
 }
 
 .heroFirePortalScene {
@@ -230,11 +308,16 @@
 
 .heroPet1Wrapper {
   animation: heroPet1Animation 8s ease-in-out infinite alternate;
-  height: 45rem;
+  height: 42rem;
   left: -5rem;
   position: absolute;
   top: 43rem;
-  width: 45rem;
+  width: 42rem;
+
+  @include breakpoints.breakpoint(xxl) {
+    height: 45rem;
+    width: 45rem;
+  }
 }
 
 @keyframes heroPet2Animation {
@@ -249,11 +332,17 @@
 
 .heroPet2Wrapper {
   animation: heroPet2Animation 10s ease-in-out infinite alternate;
-  height: 30rem;
-  left: 16rem;
+  height: 27rem;
+  left: 14rem;
   position: absolute;
   top: 16rem;
-  width: 30rem;
+  width: 27rem;
+
+  @include breakpoints.breakpoint(xxl) {
+    height: 30rem;
+    left: 16rem;
+    width: 30rem;
+  }
 }
 
 @keyframes heroPet3Animation {
@@ -268,11 +357,17 @@
 
 .heroPet3Wrapper {
   animation: heroPet3Animation 12s ease-in-out infinite alternate;
-  height: 41rem;
-  left: 30rem;
+  height: 38rem;
+  left: 25rem;
   position: absolute;
   top: 32rem;
-  width: 41rem;
+  width: 38rem;
+
+  @include breakpoints.breakpoint(xxl) {
+    height: 41rem;
+    left: 30rem;
+    width: 41rem;
+  }
 }
 
 @keyframes backgroundElementAnimation {
@@ -285,102 +380,161 @@
   }
 }
 
+@mixin introBackground {
+  height: 148.6rem;
+
+  @include breakpoints.breakpoint(xxl) {
+    height: 172.8rem;
+  }
+}
+
 .introFireBackground {
   @include mixins.fillSpace;
 
   animation: backgroundElementAnimation 6s ease-in-out infinite alternate;
-  clip-path: polygon(87.5% 0%, 91% 0%, 87.5% 92.5%, 80% 92.5%);
-  height: 120%;
+  clip-path: polygon(87.5% 0%, 91% 0%, 85.5% 92.5%, 78% 92.5%);
   left: 50%;
-  max-width: var(--max-content-width);
+  max-width: #{variables.$max-content-width}em;
   opacity: 0.2;
   pointer-events: none;
   transform-origin: top center;
 
+  @include introBackground;
   @include mixins.fireGradientBackground;
+
+  @include breakpoints.breakpoint(xxl) {
+    clip-path: polygon(87.5% 0%, 91% 0%, 89.5% 92.5%, 82% 92.5%);
+  }
 }
 
 .introIceBackground {
   @include mixins.fillSpace;
 
   animation: backgroundElementAnimation 8s ease-in-out infinite alternate;
-  clip-path: polygon(82.5% 0%, 86% 0%, 77.5% 92.5%, 70% 92.5%);
-  height: 120%;
+  clip-path: polygon(82.5% 0%, 86% 0%, 75.5% 92.5%, 68% 92.5%);
   left: 50%;
-  max-width: var(--max-content-width);
+  max-width: #{variables.$max-content-width}em;
   opacity: 0.2;
   pointer-events: none;
   transform-origin: top center;
 
+  @include introBackground;
   @include mixins.iceGradientBackground;
+
+  @include breakpoints.breakpoint(xxl) {
+    clip-path: polygon(82.5% 0%, 86% 0%, 79.5% 92.5%, 72% 92.5%);
+  }
 }
 
 .heroPortalsSquare1 {
   animation: fullRotateAnimation 32s linear infinite;
   box-shadow: 0.3rem 0.3rem 0.3rem var(--shadow-light);
-  height: 7rem;
-  left: 5rem;
+  height: 6rem;
+  left: 7rem;
   position: absolute;
-  top: 10rem;
-  width: 7rem;
+  top: 11rem;
+  width: 6rem;
 
   @include mixins.fireGradientBackground;
+
+  @include breakpoints.breakpoint(xxl) {
+    height: 7rem;
+    left: 5rem;
+    top: 10rem;
+    width: 7rem;
+  }
 }
 
 .heroPortalsSquare2 {
   animation: fullRotateAnimation 24s linear infinite reverse;
   animation-delay: -1.5s;
   box-shadow: 0.3rem 0.3rem 0.3rem var(--shadow-light);
-  height: 5rem;
-  left: 15.5rem;
+  height: 4rem;
+  left: 16.5rem;
   position: absolute;
-  top: 7rem;
-  width: 5rem;
+  top: 8rem;
+  width: 4rem;
 
   @include mixins.fireGradientBackground;
+
+  @include breakpoints.breakpoint(xxl) {
+    height: 5rem;
+    left: 15.5rem;
+    top: 7rem;
+    width: 5rem;
+  }
 }
 
 .heroPortalsSquare3 {
   animation: fullRotateAnimation 20s linear infinite;
   animation-delay: -3s;
   box-shadow: 0.3rem 0.3rem 0.3rem var(--shadow-light);
-  height: 5.5rem;
+  height: 4.5rem;
   left: 24rem;
   position: absolute;
-  top: 9.5rem;
-  width: 5.5rem;
+  top: 10.5rem;
+  width: 4.5rem;
 
   @include mixins.iceGradientBackground;
+
+  @include breakpoints.breakpoint(xxl) {
+    height: 5.5rem;
+    top: 9.5rem;
+    width: 5.5rem;
+  }
 }
 
 .featuresSectionContent {
   align-items: center;
   display: flex;
   flex-direction: column;
-  padding: 0 6rem 7rem;
+  justify-content: space-between;
+  padding: 0 6rem 5rem;
+
+  @include breakpoints.breakpoint(xxl) {
+    padding-bottom: 7rem;
+  }
 }
 
 .features {
   display: flex;
-  margin-bottom: 8rem;
-  margin-top: 6rem;
+  margin-bottom: 6.6rem;
+  margin-top: 5rem;
+
+  @include breakpoints.breakpoint(xxl) {
+    margin-bottom: 8rem;
+    margin-top: 6rem;
+  }
 }
 
 .feature {
   display: flex;
+  flex: 1;
   flex-direction: column;
-  margin-right: 4rem;
+  margin-right: 3rem;
 
   &:last-child {
     margin-right: 0;
   }
 
   > h5 {
-    margin-bottom: 1.4rem;
+    margin-bottom: 1rem;
   }
 
   > p {
-    font-size: 1.8rem;
+    font-size: 1.6rem;
+  }
+
+  @include breakpoints.breakpoint(xxl) {
+    margin-right: 4rem;
+
+    > h5 {
+      margin-bottom: 1.4rem;
+    }
+
+    > p {
+      font-size: 1.8rem;
+    }
   }
 }
 
@@ -395,23 +549,37 @@
 }
 
 @mixin featureImageWrapper {
+  align-self: center;
   animation: featureImageAnimation 8s ease-in-out infinite alternate;
-  height: 38rem;
+  height: 34rem;
   margin-bottom: 1rem;
   position: relative;
+  width: 100%;
+
+  @include breakpoints.breakpoint(xxl) {
+    height: 38rem;
+  }
 }
 
 .featureImageWrapper1 {
-  width: 38rem;
+  max-width: 34rem;
 
   @include featureImageWrapper;
+
+  @include breakpoints.breakpoint(xxl) {
+    max-width: 38rem;
+  }
 }
 
 .featureImageWrapper2 {
   animation-delay: -4s;
-  width: 32rem;
+  max-width: 28rem;
 
   @include featureImageWrapper;
+
+  @include breakpoints.breakpoint(xxl) {
+    max-width: 32rem;
+  }
 }
 
 .featureBattleFirePortal {
@@ -456,12 +624,17 @@
 
 .featureBattleCard2Wrapper {
   animation: featureBattleCard2Animation 10s ease-in-out infinite alternate;
-  height: 22rem;
+  height: 20rem;
   left: -5rem;
   position: absolute;
   top: -2rem;
-  width: 22rem;
+  width: 20rem;
   z-index: 2;
+
+  @include breakpoints.breakpoint(xxl) {
+    height: 22rem;
+    width: 22rem;
+  }
 }
 
 @keyframes featureBattleCard3Animation {
@@ -477,23 +650,32 @@
 .featureBattleCard3Wrapper {
   animation: featureBattleCard3Animation 9s ease-in-out infinite alternate;
   bottom: -3rem;
-  height: 24rem;
+  height: 21.6rem;
   position: absolute;
   right: -7rem;
-  width: 24rem;
+  width: 21.6rem;
   z-index: 2;
+
+  @include breakpoints.breakpoint(xxl) {
+    height: 24rem;
+    width: 24rem;
+  }
 }
 
 .featureImageWrapper3 {
-  width: 30rem;
+  max-width: 27rem;
 
   @include featureImageWrapper;
+
+  @include breakpoints.breakpoint(xxl) {
+    max-width: 30rem;
+  }
 }
 
 .storeLogosWrapper {
   align-items: center;
   display: flex;
-  margin-bottom: 10rem;
+  margin-bottom: 8rem;
 
   > * {
     margin-right: 2rem;
@@ -502,26 +684,44 @@
       margin-right: 0;
     }
   }
+
+  @include breakpoints.breakpoint(xxl) {
+    margin-bottom: 10rem;
+  }
 }
 
 .googlePlayLogoWrapper {
-  height: 5rem;
+  height: 4rem;
   position: relative;
-  width: 17rem;
+  width: 16rem;
+
+  @include breakpoints.breakpoint(xxl) {
+    height: 5rem;
+    width: 17rem;
+  }
 }
 
 .appStoreLogoWrapper {
-  height: 5rem;
+  height: 4rem;
   position: relative;
   top: -0.4rem;
-  width: 14rem;
+  width: 13rem;
+
+  @include breakpoints.breakpoint(xxl) {
+    height: 5rem;
+    width: 14rem;
+  }
 }
 
 .tokenSection {
-  padding: 6.4rem 0;
+  padding: 5rem 0;
   position: relative;
 
   @include mixins.iceGradientBackground;
+
+  @include breakpoints.breakpoint(xxl) {
+    padding: 6.4rem 0;
+  }
 }
 
 .tokenSectionBackground {
@@ -530,7 +730,7 @@
   left: 0;
   position: absolute;
   top: 0;
-  width: 37.5%;
+  width: calc((100% - var(--max-content-width)) / 2 + var(--max-content-width) / 3.5);
 
   @include mixins.fireGradientBackground;
 }
@@ -551,9 +751,13 @@
 }
 
 .tokenValue {
-  font-size: 8.6rem;
+  font-size: 7.4rem;
 
   @include mixins.bernhardGothic;
+
+  @include breakpoints.breakpoint(xxl) {
+    font-size: 8.6rem;
+  }
 }
 
 .roadmapSection {
@@ -564,7 +768,11 @@
   align-items: center;
   display: flex;
   flex-direction: column;
-  padding: 12rem 0 10rem;
+  padding: 10rem 0 8rem;
+
+  @include breakpoints.breakpoint(xxl) {
+    padding: 12rem 0 10rem;
+  }
 }
 
 .roadmapSectionHeader {
@@ -575,27 +783,58 @@
 }
 
 .roadmap {
-  margin: 6rem 0 22rem;
+  margin: 5.6rem 0 18rem;
   position: relative;
-  width: 100%;
+  width: 88%;
+
+  @include breakpoints.breakpoint(xxl) {
+    margin: 6rem 0 22rem;
+    width: 100%;
+  }
 }
 
-@keyframes roadmapPointAnimation {
-  from {
-    transform: translate(-50%, -50%) rotate(0deg);
+@keyframes roadmapPointScalerAnimation {
+  0% {
+    transform: translate(-50%, -50%) scale(1);
   }
 
-  to {
-    transform: translate(-50%, -50%) rotate(360deg);
+  10% {
+    transform: translate(-50%, -50%) scale(1.15);
+  }
+
+  20% {
+    transform: translate(-50%, -50%) scale(1);
+  }
+
+  100% {
+    transform: translate(-50%, -50%) scale(1);
+  }
+}
+
+.roadmapPointScaler {
+  animation: roadmapPointScalerAnimation 5s ease-in-out infinite;
+  height: 3rem;
+  transform-origin: 100 100%;
+  width: 3rem;
+}
+
+@keyframes roadmapPointAnimation1 {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
   }
 }
 
 .roadmapPoint {
-  animation: roadmapPointAnimation 20s linear infinite;
+  animation:
+    roadmapPointAnimation1 20s linear infinite,
+    roadmapPointAnimation2 5s linear infinite;
   box-shadow: 0.3rem 0.3rem 0.3rem var(--shadow-light);
-  height: 3rem;
-  transform-origin: 50% 50%;
-  width: 3rem;
+  height: 100%;
+  width: 100%;
 }
 
 .roadmapPointWrapper {
@@ -610,7 +849,7 @@
 
   &:nth-of-type(1) {
     left: 10%;
-    top: 81px;
+    top: 48%;
 
     .roadmapPoint {
       @include mixins.fireGradientBackground;
@@ -619,7 +858,11 @@
 
   &:nth-of-type(2) {
     left: 36.6%;
-    top: 82px;
+    top: 50%;
+
+    .roadmapPointScaler {
+      animation-delay: -3.75s;
+    }
 
     .roadmapPoint {
       animation-delay: -1.25s;
@@ -630,7 +873,11 @@
 
   &:nth-of-type(3) {
     left: 63.3%;
-    top: 36px;
+    top: 22%;
+
+    .roadmapPointScaler {
+      animation-delay: -2.5s;
+    }
 
     .roadmapPoint {
       animation-delay: -2.5s;
@@ -641,7 +888,11 @@
 
   &:nth-of-type(4) {
     left: 90%;
-    top: 42px;
+    top: 25%;
+
+    .roadmapPointScaler {
+      animation-delay: -1.25s;
+    }
 
     .roadmapPoint {
       animation-delay: -3.75s;
@@ -656,9 +907,14 @@
 }
 
 .roadmapPointTextHeading {
-  font-size: 2.6rem;
+  font-size: 2.4rem;
   font-weight: bolder;
   margin-bottom: 0.8rem;
+
+  @include breakpoints.breakpoint(xxl) {
+    font-size: 2.6rem;
+    margin-bottom: 1rem;
+  }
 }
 
 .roadmapPointTextItems {
@@ -670,13 +926,22 @@
     margin-bottom: 0.6rem;
     white-space: nowrap;
   }
+
+  @include breakpoints.breakpoint(xxl) {
+    font-size: 1.8rem;
+    padding-left: 1.8rem;
+  }
 }
 
 .footerTopBorder {
-  height: 0.6rem;
+  height: 0.5rem;
   width: 100%;
 
   @include mixins.iceGradientBackground;
+
+  @include breakpoints.breakpoint(xxl) {
+    height: 0.6rem;
+  }
 }
 
 .footerContent {
@@ -684,7 +949,7 @@
   display: flex;
   justify-content: space-between;
   max-width: var(--max-content-width);
-  padding: 5.26rem 0 7.2rem;
+  padding: 3.8rem 0 6rem;
   width: 100%;
 
   nav > ul {
@@ -696,11 +961,22 @@
 
     /* stylelint-disable-next-line no-descending-specificity */
     li {
-      font-size: 1.6rem;
-      margin: 0 2.2rem;
+      font-size: 1.5rem;
+      margin: 0 2.4rem;
 
       &:hover {
         opacity: 0.8;
+      }
+    }
+  }
+
+  @include breakpoints.breakpoint(xxl) {
+    padding: 5.26rem 0 7.2rem;
+
+    nav > ul {
+      li {
+        font-size: 1.6rem;
+        margin: 0 2.8rem;
       }
     }
   }
@@ -712,9 +988,14 @@
 }
 
 .footerLogoWrapper {
-  height: 11rem;
+  height: 10rem;
   position: relative;
-  width: 11rem;
+  width: 10rem;
+
+  @include breakpoints.breakpoint(xxl) {
+    height: 11rem;
+    width: 11rem;
+  }
 }
 
 .footerSocials {

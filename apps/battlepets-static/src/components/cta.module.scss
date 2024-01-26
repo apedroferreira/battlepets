@@ -1,19 +1,33 @@
 @use '../common/mixins' as mixins;
+@use '../common/variables' as variables;
+@use '../common/breakpoints' as breakpoints;
 
 .ctaText {
-  font-size: 2.2rem;
+  font-size: 2rem;
   margin-bottom: 3.2rem;
   margin-top: 2.4rem;
-  max-width: calc(var(--max-content-width) * 0.5);
+  max-width: calc(#{variables.$max-content-width}em * 0.42);
   text-align: center;
+
+  @include breakpoints.breakpoint(xxl) {
+    font-size: 2.2rem;
+  }
 }
 
 .ctaSignUpForm {
-  margin-bottom: 3rem;
+  margin-bottom: 2.8rem;
 
   > input {
-    width: 42rem;
+    width: 40rem;
   }
 
   @include mixins.signUpForm;
+
+  @include breakpoints.breakpoint(xxl) {
+    margin-bottom: 3rem;
+
+    > input {
+      width: 42rem;
+    }
+  }
 }

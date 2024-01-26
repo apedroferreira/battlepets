@@ -1,0 +1,11 @@
+@use 'sass:math';
+
+$base-font-size: 16; // px
+
+$max-content-width: math.div(1280, $base-font-size); // em
+
+$breakpoint-sm: math.div(576, $base-font-size); // em
+$breakpoint-md: math.div(768, $base-font-size); // em
+$breakpoint-lg: math.div(992, $base-font-size); // em
+$breakpoint-xl: math.div(1200, $base-font-size); // em
+$breakpoint-xxl: math.div(1440, $base-font-size); // em

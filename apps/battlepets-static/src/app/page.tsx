@@ -188,7 +188,7 @@ const Home = () => (
                   </div>
                 </div>
                 <h5>Battle</h5>
-                <p>Battle against other players to win rewards, including new NFTs!</p>
+                <p>Battle against other players to win rewards, including new cards!</p>
               </div>
               <div className={styles.feature}>
                 <div className={styles.featureImageWrapper3}>
@@ -248,7 +248,9 @@ const Home = () => (
             </svg>
             {ROADMAP_POINTS.map(({ heading, items }) => (
               <div key={heading} className={styles.roadmapPointWrapper}>
-                <div className={styles.roadmapPoint} />
+                <div className={styles.roadmapPointScaler}>
+                  <div className={styles.roadmapPoint} />
+                </div>
                 <div className={styles.roadmapPointText}>
                   <p className={styles.roadmapPointTextHeading}>{heading}</p>
                   <ul className={styles.roadmapPointTextItems}>
