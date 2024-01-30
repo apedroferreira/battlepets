@@ -1,3 +1,5 @@
+@use './breakpoints' as breakpoints;
+
 @mixin bernhardGothic {
   font-family: bernhard-gothic-urw, sans-serif;
   font-style: normal;
@@ -56,6 +58,8 @@
 }
 
 @mixin gradientText {
+  /* stylelint-disable-next-line property-no-vendor-prefix */
+  -webkit-background-clip: text;
   background-clip: text;
   font-weight: bold;
   -webkit-text-fill-color: transparent;
@@ -79,9 +83,33 @@
 @mixin signUpForm {
   align-items: center;
   display: flex;
+  flex-direction: column;
 
   input {
-    flex: 1;
+    margin-bottom: 0.4rem;
+    width: 100%;
+  }
+
+  button {
+    width: 100%;
+  }
+
+  @include breakpoints.breakpoint(sm) {
+    flex-direction: row;
+
+    input {
+      flex: 1;
+      margin-bottom: 0;
+      margin-right: 0.4rem;
+      width: auto;
+    }
+
+    button {
+      width: auto;
+    }
+  }
+
+  @include breakpoints.breakpoint(md) {
     margin-right: 0.8rem;
   }
 }

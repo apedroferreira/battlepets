@@ -6,6 +6,7 @@ import globalStyles from '@/common/global.module.scss'
 import { Button } from '@/components/Button'
 import { CTA } from '@/components/CTA'
 import { Input } from '@/components/Input'
+import { RevealedSection } from '@/components/RevealedSection'
 import { Socials } from '@/components/Socials'
 
 import appStoreLogo from '../../public/images/appstorelogo.svg'
@@ -101,13 +102,13 @@ const Home = () => (
       <div className={styles.intro}>
         <div className={styles.introFireBackground} />
         <div className={styles.introIceBackground} />
-        <section className={styles.hero}>
+        <RevealedSection className={styles.hero}>
           <div className={styles.sectionContent}>
-            <h1>
+            <h1 className={globalStyles.slideInOnReveal1}>
               <span className={globalStyles.fireText}>Ready</span> To{' '}
               <span className={globalStyles.iceText}>Battle</span>?
             </h1>
-            <div className={styles.heroContent}>
+            <div className={`${styles.heroContent} ${globalStyles.slideInOnReveal2}`}>
               <p className={styles.heroText}>
                 Join the waitlist to get the <strong>$BPETS</strong>{' '}
                 <span className={globalStyles.iceText}>airdrop</span> and sign up for our{' '}
@@ -118,7 +119,7 @@ const Home = () => (
                 <Button variant="fire">I&apos;m in!</Button>
               </form>
             </div>
-            <div className={styles.heroCaptions}>
+            <div className={`${styles.heroCaptions} ${globalStyles.slideInOnReveal3}`}>
               <div className={globalStyles.captionContainer}>
                 <p className={globalStyles.captionText}>Soon on</p>
                 <div className={styles.solanaLogoWrapper}>
@@ -158,8 +159,8 @@ const Home = () => (
               <Image src={battlePet3} alt="Secret Agent BattlePet" fill style={{ objectFit: 'contain' }} />
             </div>
           </div>
-        </section>
-        <section>
+        </RevealedSection>
+        <RevealedSection>
           <div id="game" className={styles.sectionTarget} />
           <div className={`${styles.sectionContent} ${styles.featuresSectionContent}`}>
             <h2>
@@ -168,6 +169,7 @@ const Home = () => (
             </h2>
             <div className={styles.features}>
               <div className={styles.feature}>
+                <div className={styles.featureBackground} />
                 <div className={styles.featureImageWrapper1}>
                   <Image src={card1} alt="BattlePets card" fill style={{ objectFit: 'contain' }} />
                 </div>
@@ -175,6 +177,7 @@ const Home = () => (
                 <p>Collect NFT battle cards with different pets and rarities to build your deck!</p>
               </div>
               <div className={styles.feature}>
+                <div className={styles.featureBackground} />
                 <div className={styles.featureImageWrapper2}>
                   <div className={styles.featureBattleFirePortal}>
                     <div className={styles.featureBattleIcePortal} />
@@ -191,6 +194,7 @@ const Home = () => (
                 <p>Battle against other players to win rewards, including new cards!</p>
               </div>
               <div className={styles.feature}>
+                <div className={styles.featureBackground} />
                 <div className={styles.featureImageWrapper3}>
                   <Image src={token} alt="$BPETS token" fill style={{ objectFit: 'contain' }} />
                 </div>
@@ -213,9 +217,9 @@ const Home = () => (
             </div>
             <CTA heading="Get $BPETS early with a discount!" buttonText="Let me in!" />
           </div>
-        </section>
+        </RevealedSection>
       </div>
-      <section className={styles.tokenSection}>
+      <RevealedSection className={styles.tokenSection}>
         <div id="token" className={styles.sectionTarget} />
         <div className={styles.tokenSectionBackground} />
         <div className={styles.tokenSectionContent}>
@@ -226,8 +230,8 @@ const Home = () => (
             </div>
           ))}
         </div>
-      </section>
-      <section className={styles.roadmapSection}>
+      </RevealedSection>
+      <RevealedSection className={styles.roadmapSection}>
         <div id="roadmap" className={styles.sectionTarget} />
         <div className={`${styles.sectionContent} ${styles.roadmapSectionContent}`}>
           <div className={styles.roadmapSectionHeader}>
@@ -262,9 +266,14 @@ const Home = () => (
               </div>
             ))}
           </div>
-          <CTA heading="Want to stay in the loop?" buttonText="Keep me updated!" buttonVariant="fire" />
+          <div className={styles.roadmapMobileCTAWrapper}>
+            <Link href={LITEPAPER_URL} target="_blank" rel="noopener noreferrer nofollow">
+              <Button>Read Litepaper</Button>
+            </Link>
+          </div>
+          <CTA heading="Want to stay in the loop?" buttonText="Let me know!" buttonVariant="fire" />
         </div>
-      </section>
+      </RevealedSection>
     </main>
     <footer>
       <div className={styles.footerTopBorder} />

@@ -1,11 +1,12 @@
 import styles from './button.module.scss'
 
-import type React from 'react'
-
 export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: 'fire' | 'ice'
 }
 
-export const Button: React.FC<ButtonProps> = ({ variant = 'ice', ...rest }) => (
-  <button className={`${styles.button} ${variant === 'ice' ? styles.iceButton : styles.fireButton}`} {...rest} />
+export const Button: React.FC<ButtonProps> = ({ className, variant = 'ice', ...rest }) => (
+  <button
+    {...rest}
+    className={`${className} ${styles.button} ${variant === 'ice' ? styles.iceButton : styles.fireButton}`}
+  />
 )

@@ -1,5 +1,6 @@
 @use './mixins' as mixins;
 @use './breakpoints' as breakpoints;
+@use './keyframes';
 
 .fireText {
   @include mixins.fireText;
@@ -18,14 +19,43 @@
 .captionText {
   font-size: 1.2rem;
   font-weight: 300;
-  margin-bottom: 1.4rem;
+  margin-bottom: 0.8rem;
+  text-align: center;
   text-transform: uppercase;
 
   strong {
     font-weight: bold;
   }
 
+  @include breakpoints.breakpoint(md) {
+    margin-bottom: 1.2rem;
+  }
+
+  @include breakpoints.breakpoint(xxl) {
+    margin-bottom: 1.4rem;
+  }
+
   @include breakpoints.breakpoint(xxl) {
     font-size: 1.4rem;
+  }
+}
+
+.slideInOnReveal1,
+.slideInOnReveal2,
+.slideInOnReveal3 {
+  opacity: 0;
+}
+
+.revealedSectionVisible {
+  .slideInOnReveal1 {
+    animation: slideInHorizontalAnimation 0.25s ease-out 0s forwards;
+  }
+
+  .slideInOnReveal2 {
+    animation: slideInHorizontalAnimation 0.25s ease-out 0.15s forwards;
+  }
+
+  .slideInOnReveal3 {
+    animation: slideInHorizontalAnimation 0.25s ease-out 0.3s forwards;
   }
 }

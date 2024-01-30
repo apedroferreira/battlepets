@@ -7,22 +7,22 @@
   align-items: center;
   display: flex;
   justify-content: space-between;
-  max-width: var(--max-content-width);
-  padding-top: 1.6rem;
+  margin-top: 0.4rem;
+  max-width: 94%;
   width: 100%;
 
   nav > ul {
     align-items: center;
-    display: flex;
+    display: none;
     justify-content: space-between;
     list-style-type: none;
-    margin-left: 4rem;
+    margin-left: 1.8rem;
 
     li {
       color: var(--ice-gradient-dark);
-      font-size: 1.6rem;
+      font-size: 1.4rem;
       font-weight: bold;
-      margin: 0 2.6rem;
+      margin: 0 1.4rem;
       opacity: 0.9;
       text-transform: uppercase;
       transition:
@@ -41,8 +41,34 @@
     }
   }
 
+  @include breakpoints.breakpoint(sm) {
+    margin-top: 0.6rem;
+    max-width: var(--max-content-width);
+  }
+
+  @include breakpoints.breakpoint(md) {
+    nav > ul {
+      display: flex;
+    }
+  }
+
+  @include breakpoints.breakpoint(lg) {
+    nav > ul {
+      margin-left: 4rem;
+
+      li {
+        font-size: 1.6rem;
+        margin: 0 2.6rem;
+      }
+    }
+  }
+
+  @include breakpoints.breakpoint(xl) {
+    margin-top: 1.6rem;
+  }
+
   @include breakpoints.breakpoint(xxl) {
-    padding-top: 2.6rem;
+    margin-top: 2.6rem;
 
     nav > ul {
       li {
@@ -58,9 +84,24 @@
 }
 
 .headerLogoWrapper {
-  height: 10rem;
+  height: 8.6rem;
   position: relative;
-  width: 10rem;
+  width: 8.6rem;
+
+  @include breakpoints.breakpoint(sm) {
+    height: 9.2rem;
+    width: 9.2rem;
+  }
+
+  @include breakpoints.breakpoint(lg) {
+    height: 9.6rem;
+    width: 9.6rem;
+  }
+
+  @include breakpoints.breakpoint(xl) {
+    height: 10rem;
+    width: 10rem;
+  }
 
   @include breakpoints.breakpoint(xxl) {
     height: 11rem;
@@ -69,8 +110,15 @@
 }
 
 .sectionContent {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
   max-width: var(--max-content-width);
   width: 100%;
+
+  @include breakpoints.breakpoint(md) {
+    align-items: flex-start;
+  }
 }
 
 .sectionTarget {
@@ -92,14 +140,34 @@
 
 .hero {
   display: flex;
-  flex-direction: column;
-  padding-bottom: 22rem;
-  padding-top: 20rem;
+  flex-direction: column-reverse;
+  padding-bottom: 1.4rem;
+  padding-top: 0;
   position: relative;
 
   h1 {
     position: relative;
     z-index: 1;
+  }
+
+  @include breakpoints.breakpoint(sm) {
+    padding-bottom: 1.8rem;
+  }
+
+  @include breakpoints.breakpoint(md) {
+    flex-direction: column;
+    padding-bottom: 10.4rem;
+    padding-top: 15rem;
+  }
+
+  @include breakpoints.breakpoint(lg) {
+    padding-bottom: 18rem;
+    padding-top: 18rem;
+  }
+
+  @include breakpoints.breakpoint(xl) {
+    padding-bottom: 22rem;
+    padding-top: 20rem;
   }
 
   @include breakpoints.breakpoint(xxl) {
@@ -109,9 +177,21 @@
 }
 
 .heroContent {
-  max-width: 54rem;
+  max-width: 47.2rem;
   position: relative;
   z-index: 1;
+
+  @include breakpoints.breakpoint(md) {
+    max-width: 44.4rem;
+  }
+
+  @include breakpoints.breakpoint(lg) {
+    max-width: 48rem;
+  }
+
+  @include breakpoints.breakpoint(xl) {
+    max-width: 54rem;
+  }
 
   @include breakpoints.breakpoint(xxl) {
     max-width: 61rem;
@@ -119,12 +199,25 @@
 }
 
 .heroText {
-  font-size: 2rem;
+  font-size: 1.6rem;
   line-height: 1.5;
-  margin-top: 1.8rem;
+  margin-top: 0.4rem;
 
   span {
     animation-delay: -1.5s;
+  }
+
+  @include breakpoints.breakpoint(md) {
+    margin-top: 0.6rem;
+  }
+
+  @include breakpoints.breakpoint(lg) {
+    font-size: 1.8rem;
+    margin-top: 1.8rem;
+  }
+
+  @include breakpoints.breakpoint(xl) {
+    font-size: 2rem;
   }
 
   @include breakpoints.breakpoint(xxl) {
@@ -133,24 +226,52 @@
 }
 
 .heroSignUpForm {
-  margin-top: 2rem;
+  margin-top: 1.3rem;
 
   @include mixins.signUpForm;
+
+  @include breakpoints.breakpoint(sm) {
+    margin-top: 1.6rem;
+  }
+
+  @include breakpoints.breakpoint(md) {
+    margin-top: 2rem;
+  }
 }
 
 .heroCaptions {
   align-items: flex-start;
   display: flex;
-  margin-top: 4.2rem;
+  margin-top: 2.6rem;
   position: relative;
   z-index: 1;
 
   > div {
-    margin-right: 5rem;
+    margin-right: 2rem;
 
     &:last-child {
       margin-right: 0;
     }
+  }
+
+  @include breakpoints.breakpoint(sm) {
+    margin-top: 3rem;
+
+    > div {
+      margin-right: 5rem;
+
+      &:last-child {
+        margin-right: 0;
+      }
+    }
+  }
+
+  @include breakpoints.breakpoint(md) {
+    margin-top: 3.2rem;
+  }
+
+  @include breakpoints.breakpoint(xl) {
+    margin-top: 4.2rem;
   }
 
   @include breakpoints.breakpoint(xxl) {
@@ -159,10 +280,22 @@
 }
 
 .solanaLogoWrapper {
-  height: 14rem;
-  margin-top: -4.6rem;
+  height: 10.8rem;
+  margin-top: -3rem;
   position: relative;
-  width: 14rem;
+  width: 10.8rem;
+
+  @include breakpoints.breakpoint(sm) {
+    height: 12rem;
+    margin-top: -3.8rem;
+    width: 12rem;
+  }
+
+  @include breakpoints.breakpoint(lg) {
+    height: 14rem;
+    margin-top: -4.6rem;
+    width: 14rem;
+  }
 
   @include breakpoints.breakpoint(xxl) {
     height: 16rem;
@@ -172,12 +305,34 @@
 }
 
 .heroImages {
-  height: 100%;
-  pointer-events: none;
-  position: absolute;
-  right: 0;
-  top: -6rem;
-  width: 47.5%;
+  height: 38rem;
+  margin-bottom: -4.6rem;
+  margin-top: -1.3rem;
+  padding-left: 0.8rem;
+  position: relative;
+  transform: scale(0.76);
+  transform-origin: 50% 50%;
+  width: 100%;
+
+  @include breakpoints.breakpoint(sm) {
+    margin-bottom: 0;
+    margin-top: 0;
+    transform: scale(1);
+  }
+
+  @include breakpoints.breakpoint(md) {
+    height: 100%;
+    padding-left: 0;
+    pointer-events: none;
+    position: absolute;
+    right: 0;
+    top: -8rem;
+    width: 47.5%;
+  }
+
+  @include breakpoints.breakpoint(xl) {
+    top: -6rem;
+  }
 
   @include breakpoints.breakpoint(xxl) {
     top: 0;
@@ -185,16 +340,47 @@
 }
 
 .heroIceImageWrapper {
+  left: calc(50% - 18.5rem);
   position: relative;
-  top: 40rem;
+  top: 14rem;
+
+  @include breakpoints.breakpoint(md) {
+    left: 2rem;
+    top: 36rem;
+  }
+
+  @include breakpoints.breakpoint(lg) {
+    left: 0;
+    top: 40rem;
+  }
 }
 
 .heroIceDecorationWrapper {
-  height: 34rem;
-  left: -22rem;
+  height: 18rem;
+  left: -12rem;
   position: absolute;
-  top: 11rem;
-  width: 34rem;
+  top: 5rem;
+  width: 18rem;
+
+  @include breakpoints.breakpoint(md) {
+    height: 22rem;
+    left: -13rem;
+    top: 6rem;
+    width: 22rem;
+  }
+
+  @include breakpoints.breakpoint(lg) {
+    height: 32rem;
+    left: -20rem;
+    top: 11rem;
+    width: 32rem;
+  }
+
+  @include breakpoints.breakpoint(xl) {
+    height: 34rem;
+    left: -22rem;
+    width: 34rem;
+  }
 
   @include breakpoints.breakpoint(xxl) {
     height: 36rem;
@@ -218,12 +404,27 @@
   animation: heroIcePortalAnimation 15s ease-in-out infinite alternate;
   box-shadow: 0.3rem 0.3rem 0.3rem var(--shadow-light);
   display: flex;
-  height: 36rem;
+  height: 20rem;
   justify-content: center;
   position: absolute;
-  width: 32rem;
+  width: 16.6rem;
 
   @include mixins.iceGradientBackground;
+
+  @include breakpoints.breakpoint(md) {
+    height: 24rem;
+    width: 21rem;
+  }
+
+  @include breakpoints.breakpoint(lg) {
+    height: 32rem;
+    width: 28rem;
+  }
+
+  @include breakpoints.breakpoint(xl) {
+    height: 36rem;
+    width: 32rem;
+  }
 
   @include breakpoints.breakpoint(xxl) {
     height: 38rem;
@@ -240,17 +441,48 @@
 }
 
 .heroFireImageWrapper {
-  left: 18rem;
+  left: calc(50% - 2rem);
   position: relative;
-  top: 20rem;
+  top: 11.4rem;
+
+  @include breakpoints.breakpoint(md) {
+    left: 13.8rem;
+    top: 18rem;
+  }
+
+  @include breakpoints.breakpoint(lg) {
+    left: 18rem;
+    top: 20rem;
+  }
 }
 
 .heroFireDecorationWrapper {
-  height: 26rem;
-  left: 19rem;
+  height: 14rem;
+  left: 15rem;
   position: absolute;
-  top: -12rem;
-  width: 26rem;
+  top: -7.4rem;
+  width: 14rem;
+
+  @include breakpoints.breakpoint(md) {
+    height: 16.4rem;
+    left: 12.4rem;
+    top: -8.4rem;
+    width: 16.4rem;
+  }
+
+  @include breakpoints.breakpoint(lg) {
+    height: 22rem;
+    left: 13.4rem;
+    top: -12rem;
+    width: 22rem;
+  }
+
+  @include breakpoints.breakpoint(xl) {
+    height: 26rem;
+    left: 19rem;
+    top: -12rem;
+    width: 26rem;
+  }
 
   @include breakpoints.breakpoint(xxl) {
     height: 30rem;
@@ -275,12 +507,27 @@
   animation: heroFirePortalAnimation 12s ease-in-out infinite alternate;
   box-shadow: 0.3rem 0.3rem 0.3rem var(--shadow-light);
   display: flex;
-  height: 44rem;
+  height: 24rem;
   justify-content: center;
   position: absolute;
-  width: 36rem;
+  width: 21rem;
 
   @include mixins.fireGradientBackground;
+
+  @include breakpoints.breakpoint(md) {
+    height: 26rem;
+    width: 23rem;
+  }
+
+  @include breakpoints.breakpoint(lg) {
+    height: 35.2rem;
+    width: 31rem;
+  }
+
+  @include breakpoints.breakpoint(xl) {
+    height: 44rem;
+    width: 37rem;
+  }
 
   @include breakpoints.breakpoint(xxl) {
     height: 50rem;
@@ -308,11 +555,30 @@
 
 .heroPet1Wrapper {
   animation: heroPet1Animation 8s ease-in-out infinite alternate;
-  height: 42rem;
-  left: -5rem;
+  height: 23rem;
+  left: calc(50% - 19.9rem);
   position: absolute;
-  top: 43rem;
-  width: 42rem;
+  top: 14.8rem;
+  width: 23rem;
+
+  @include breakpoints.breakpoint(md) {
+    height: 28rem;
+    left: 0.8rem;
+    top: 36rem;
+    width: 28rem;
+  }
+
+  @include breakpoints.breakpoint(lg) {
+    height: 38rem;
+    left: -5rem;
+    top: 43rem;
+    width: 38rem;
+  }
+
+  @include breakpoints.breakpoint(xl) {
+    height: 42rem;
+    width: 42rem;
+  }
 
   @include breakpoints.breakpoint(xxl) {
     height: 45rem;
@@ -332,11 +598,31 @@
 
 .heroPet2Wrapper {
   animation: heroPet2Animation 10s ease-in-out infinite alternate;
-  height: 27rem;
-  left: 14rem;
+  height: 15.8rem;
+  left: calc(50% - 2.8rem);
   position: absolute;
-  top: 16rem;
-  width: 27rem;
+  top: 8.6rem;
+  width: 15.8rem;
+
+  @include breakpoints.breakpoint(md) {
+    height: 17.4rem;
+    left: 11rem;
+    top: 14.6rem;
+    width: 17.4rem;
+  }
+
+  @include breakpoints.breakpoint(lg) {
+    height: 23.4rem;
+    left: 13.4rem;
+    top: 16rem;
+    width: 23.4rem;
+  }
+
+  @include breakpoints.breakpoint(xl) {
+    height: 27rem;
+    left: 14rem;
+    width: 27rem;
+  }
 
   @include breakpoints.breakpoint(xxl) {
     height: 30rem;
@@ -357,11 +643,31 @@
 
 .heroPet3Wrapper {
   animation: heroPet3Animation 12s ease-in-out infinite alternate;
-  height: 38rem;
-  left: 25rem;
+  height: 21.6rem;
+  left: calc(50% + 3.5rem);
   position: absolute;
-  top: 32rem;
-  width: 38rem;
+  top: 17.4rem;
+  width: 21.6rem;
+
+  @include breakpoints.breakpoint(md) {
+    height: 23.6rem;
+    left: 16.6rem;
+    top: 28rem;
+    width: 23.6rem;
+  }
+
+  @include breakpoints.breakpoint(lg) {
+    height: 32rem;
+    left: 20.6rem;
+    top: 32rem;
+    width: 32rem;
+  }
+
+  @include breakpoints.breakpoint(xl) {
+    height: 38rem;
+    left: 25rem;
+    width: 38rem;
+  }
 
   @include breakpoints.breakpoint(xxl) {
     height: 41rem;
@@ -381,10 +687,26 @@
 }
 
 @mixin introBackground {
-  height: 148.6rem;
+  height: 30rem;
+
+  @include breakpoints.breakpoint(sm) {
+    height: 36rem;
+  }
+
+  @include breakpoints.breakpoint(md) {
+    height: 108rem;
+  }
+
+  @include breakpoints.breakpoint(lg) {
+    height: 134.4rem;
+  }
+
+  @include breakpoints.breakpoint(xl) {
+    height: 151.6rem;
+  }
 
   @include breakpoints.breakpoint(xxl) {
-    height: 172.8rem;
+    height: 176rem;
   }
 }
 
@@ -392,15 +714,24 @@
   @include mixins.fillSpace;
 
   animation: backgroundElementAnimation 6s ease-in-out infinite alternate;
-  clip-path: polygon(87.5% 0%, 91% 0%, 85.5% 92.5%, 78% 92.5%);
+  clip-path: polygon(0% 84%, 100% 68%, 100% 80%, 0% 93%);
   left: 50%;
-  max-width: #{variables.$max-content-width}em;
   opacity: 0.2;
   pointer-events: none;
-  transform-origin: top center;
+  transform-origin: 50% 50%;
 
   @include introBackground;
   @include mixins.fireGradientBackground;
+
+  @include breakpoints.breakpoint(md) {
+    clip-path: polygon(87.5% 0%, 91% 0%, 87.5% 92.5%, 80% 92.5%);
+    max-width: #{variables.$max-content-width}em;
+    transform-origin: top center;
+  }
+
+  @include breakpoints.breakpoint(lg) {
+    clip-path: polygon(87.5% 0%, 91% 0%, 85.5% 92.5%, 78% 92.5%);
+  }
 
   @include breakpoints.breakpoint(xxl) {
     clip-path: polygon(87.5% 0%, 91% 0%, 89.5% 92.5%, 82% 92.5%);
@@ -411,15 +742,23 @@
   @include mixins.fillSpace;
 
   animation: backgroundElementAnimation 8s ease-in-out infinite alternate;
-  clip-path: polygon(82.5% 0%, 86% 0%, 75.5% 92.5%, 68% 92.5%);
+  clip-path: polygon(0% 66%, 100% 52.5%, 100% 64%, 0% 77%);
   left: 50%;
-  max-width: #{variables.$max-content-width}em;
   opacity: 0.2;
   pointer-events: none;
   transform-origin: top center;
 
   @include introBackground;
   @include mixins.iceGradientBackground;
+
+  @include breakpoints.breakpoint(md) {
+    clip-path: polygon(82.5% 0%, 86% 0%, 77.5% 92.5%, 70% 92.5%);
+    max-width: #{variables.$max-content-width}em;
+  }
+
+  @include breakpoints.breakpoint(lg) {
+    clip-path: polygon(82.5% 0%, 86% 0%, 75.5% 92.5%, 68% 92.5%);
+  }
 
   @include breakpoints.breakpoint(xxl) {
     clip-path: polygon(82.5% 0%, 86% 0%, 79.5% 92.5%, 72% 92.5%);
@@ -429,13 +768,30 @@
 .heroPortalsSquare1 {
   animation: fullRotateAnimation 32s linear infinite;
   box-shadow: 0.3rem 0.3rem 0.3rem var(--shadow-light);
-  height: 6rem;
-  left: 7rem;
+  height: 3.6rem;
+  left: calc(50% - 6.9rem);
   position: absolute;
-  top: 11rem;
-  width: 6rem;
+  top: 7rem;
+  width: 3.6rem;
 
   @include mixins.fireGradientBackground;
+
+  @include breakpoints.breakpoint(md) {
+    height: 4rem;
+    left: 7rem;
+    top: 11rem;
+    width: 4rem;
+  }
+
+  @include breakpoints.breakpoint(lg) {
+    height: 5rem;
+    width: 5rem;
+  }
+
+  @include breakpoints.breakpoint(xl) {
+    height: 6rem;
+    width: 6rem;
+  }
 
   @include breakpoints.breakpoint(xxl) {
     height: 7rem;
@@ -449,13 +805,28 @@
   animation: fullRotateAnimation 24s linear infinite reverse;
   animation-delay: -1.5s;
   box-shadow: 0.3rem 0.3rem 0.3rem var(--shadow-light);
-  height: 4rem;
-  left: 16.5rem;
+  height: 3rem;
+  left: calc(50% - 1.5rem);
   position: absolute;
-  top: 8rem;
-  width: 4rem;
+  top: 5.2rem;
+  width: 3rem;
 
   @include mixins.fireGradientBackground;
+
+  @include breakpoints.breakpoint(md) {
+    left: 16.5rem;
+    top: 8rem;
+  }
+
+  @include breakpoints.breakpoint(lg) {
+    height: 3.6rem;
+    width: 3.6rem;
+  }
+
+  @include breakpoints.breakpoint(xl) {
+    height: 4rem;
+    width: 4rem;
+  }
 
   @include breakpoints.breakpoint(xxl) {
     height: 5rem;
@@ -469,13 +840,30 @@
   animation: fullRotateAnimation 20s linear infinite;
   animation-delay: -3s;
   box-shadow: 0.3rem 0.3rem 0.3rem var(--shadow-light);
-  height: 4.5rem;
-  left: 24rem;
+  height: 2.6rem;
+  left: calc(50% + 3.3rem);
   position: absolute;
-  top: 10.5rem;
-  width: 4.5rem;
+  top: 7rem;
+  width: 2.6rem;
 
   @include mixins.iceGradientBackground;
+
+  @include breakpoints.breakpoint(md) {
+    height: 3.6rem;
+    left: 24rem;
+    top: 10.5rem;
+    width: 3.6rem;
+  }
+
+  @include breakpoints.breakpoint(lg) {
+    height: 4rem;
+    width: 4rem;
+  }
+
+  @include breakpoints.breakpoint(xl) {
+    height: 4.5rem;
+    width: 4.5rem;
+  }
 
   @include breakpoints.breakpoint(xxl) {
     height: 5.5rem;
@@ -489,7 +877,23 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  padding: 0 6rem 5rem;
+  padding-bottom: 3.4rem;
+
+  @include breakpoints.breakpoint(sm) {
+    padding-bottom: 4rem;
+  }
+
+  @include breakpoints.breakpoint(md) {
+    padding: 0 1rem 4rem;
+  }
+
+  @include breakpoints.breakpoint(lg) {
+    padding: 0 3.6rem 4.4rem;
+  }
+
+  @include breakpoints.breakpoint(xl) {
+    padding: 0 6rem 5rem;
+  }
 
   @include breakpoints.breakpoint(xxl) {
     padding-bottom: 7rem;
@@ -498,8 +902,30 @@
 
 .features {
   display: flex;
-  margin-bottom: 6.6rem;
-  margin-top: 5rem;
+  flex-direction: column;
+  margin-bottom: 2rem;
+  margin-top: 1.6rem;
+
+  @include breakpoints.breakpoint(sm) {
+    margin-bottom: 2.8rem;
+    margin-top: 2.4rem;
+  }
+
+  @include breakpoints.breakpoint(md) {
+    flex-direction: row;
+    margin-bottom: 4rem;
+  }
+
+  @include breakpoints.breakpoint(lg) {
+    margin-bottom: 5.8rem;
+    margin-top: 4.4rem;
+    max-width: 100%;
+  }
+
+  @include breakpoints.breakpoint(xl) {
+    margin-bottom: 6.6rem;
+    margin-top: 5rem;
+  }
 
   @include breakpoints.breakpoint(xxl) {
     margin-bottom: 8rem;
@@ -507,22 +933,84 @@
   }
 }
 
+@mixin featureBackgroundElement {
+  @include mixins.fillSpace;
+
+  animation: backgroundElementAnimation 6s ease-in-out infinite alternate;
+  content: '';
+  left: 50%;
+  transform-origin: 50% 50%;
+}
+
+.featureBackground {
+  height: 25rem;
+  left: 0;
+  min-width: 100%;
+  opacity: 0.2;
+  pointer-events: none;
+  position: absolute;
+  width: 100vw;
+
+  &::before {
+    clip-path: polygon(0% 75%, 100% 40%, 100% 50%, 0% 87%);
+
+    @include featureBackgroundElement;
+    @include mixins.fireGradientBackground;
+  }
+
+  &::after {
+    clip-path: polygon(0% 55%, 100% 24%, 100% 35%, 0% 68%);
+
+    @include featureBackgroundElement;
+    @include mixins.iceGradientBackground;
+  }
+
+  @include breakpoints.breakpoint(md) {
+    display: none;
+  }
+
+  @include breakpoints.breakpoint(sm) {
+    height: 26rem;
+  }
+}
+
 .feature {
   display: flex;
   flex: 1;
   flex-direction: column;
-  margin-right: 3rem;
-
-  &:last-child {
-    margin-right: 0;
-  }
+  margin-bottom: 1.8rem;
+  max-width: 47.2rem;
 
   > h5 {
-    margin-bottom: 1rem;
+    margin-bottom: 0.4rem;
   }
 
   > p {
     font-size: 1.6rem;
+  }
+
+  @include breakpoints.breakpoint(sm) {
+    margin-bottom: 2rem;
+
+    > h5 {
+      margin-bottom: 0.6rem;
+    }
+  }
+
+  @include breakpoints.breakpoint(md) {
+    margin-bottom: 0;
+    margin-right: 2rem;
+    max-width: 100%;
+  }
+
+  @include breakpoints.breakpoint(lg) {
+    margin-right: 3rem;
+  }
+
+  @include breakpoints.breakpoint(xl) {
+    > h5 {
+      margin-bottom: 1rem;
+    }
   }
 
   @include breakpoints.breakpoint(xxl) {
@@ -535,6 +1023,14 @@
     > p {
       font-size: 1.8rem;
     }
+  }
+
+  &:last-child {
+    margin-right: 0;
+  }
+
+  &:nth-of-type(even) > .featureBackground {
+    transform: scaleX(-1);
   }
 }
 
@@ -551,10 +1047,34 @@
 @mixin featureImageWrapper {
   align-self: center;
   animation: featureImageAnimation 8s ease-in-out infinite alternate;
-  height: 34rem;
-  margin-bottom: 1rem;
+  height: 25rem;
+  margin-bottom: -0.5rem;
   position: relative;
   width: 100%;
+
+  img {
+    z-index: 1;
+  }
+
+  @include breakpoints.breakpoint(sm) {
+    height: 26rem;
+    margin-bottom: -0.6rem;
+  }
+
+  @include breakpoints.breakpoint(md) {
+    height: 26rem;
+    margin-bottom: 0.4rem;
+  }
+
+  @include breakpoints.breakpoint(lg) {
+    height: 30rem;
+    margin-bottom: 0.6rem;
+  }
+
+  @include breakpoints.breakpoint(xl) {
+    height: 34rem;
+    margin-bottom: 1rem;
+  }
 
   @include breakpoints.breakpoint(xxl) {
     height: 38rem;
@@ -562,9 +1082,11 @@
 }
 
 .featureImageWrapper1 {
-  max-width: 34rem;
-
   @include featureImageWrapper;
+
+  @include breakpoints.breakpoint(md) {
+    max-width: 34rem;
+  }
 
   @include breakpoints.breakpoint(xxl) {
     max-width: 38rem;
@@ -573,9 +1095,21 @@
 
 .featureImageWrapper2 {
   animation-delay: -4s;
-  max-width: 28rem;
+  max-width: 21rem;
 
   @include featureImageWrapper;
+
+  @include breakpoints.breakpoint(sm) {
+    max-width: 21.8rem;
+  }
+
+  @include breakpoints.breakpoint(md) {
+    max-width: 25rem;
+  }
+
+  @include breakpoints.breakpoint(xl) {
+    max-width: 27rem;
+  }
 
   @include breakpoints.breakpoint(xxl) {
     max-width: 32rem;
@@ -588,11 +1122,26 @@
   align-items: center;
   box-shadow: 0 0.3rem 0.3rem var(--shadow-light);
   display: flex;
-  height: 90%;
+  height: 80%;
   justify-content: center;
-  width: 90%;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 80%;
+  z-index: 1;
 
   @include mixins.fireGradientBackground;
+
+  @include breakpoints.breakpoint(lg) {
+    height: 86%;
+    max-height: auto;
+    width: 86%;
+  }
+
+  @include breakpoints.breakpoint(xl) {
+    height: 90%;
+    width: 90%;
+  }
 }
 
 .featureBattleIcePortal {
@@ -624,12 +1173,17 @@
 
 .featureBattleCard2Wrapper {
   animation: featureBattleCard2Animation 10s ease-in-out infinite alternate;
-  height: 20rem;
+  height: 15rem;
   left: -5rem;
   position: absolute;
   top: -2rem;
-  width: 20rem;
+  width: 15rem;
   z-index: 2;
+
+  @include breakpoints.breakpoint(lg) {
+    height: 18rem;
+    width: 18rem;
+  }
 
   @include breakpoints.breakpoint(xxl) {
     height: 22rem;
@@ -650,11 +1204,16 @@
 .featureBattleCard3Wrapper {
   animation: featureBattleCard3Animation 9s ease-in-out infinite alternate;
   bottom: -3rem;
-  height: 21.6rem;
+  height: 17rem;
   position: absolute;
   right: -7rem;
-  width: 21.6rem;
+  width: 17rem;
   z-index: 2;
+
+  @include breakpoints.breakpoint(lg) {
+    height: 20rem;
+    width: 20rem;
+  }
 
   @include breakpoints.breakpoint(xxl) {
     height: 24rem;
@@ -663,9 +1222,21 @@
 }
 
 .featureImageWrapper3 {
-  max-width: 27rem;
+  max-width: 22.2rem;
 
   @include featureImageWrapper;
+
+  @include breakpoints.breakpoint(sm) {
+    max-width: 25rem;
+  }
+
+  @include breakpoints.breakpoint(md) {
+    max-width: 22rem;
+  }
+
+  @include breakpoints.breakpoint(lg) {
+    max-width: 27rem;
+  }
 
   @include breakpoints.breakpoint(xxl) {
     max-width: 30rem;
@@ -675,14 +1246,40 @@
 .storeLogosWrapper {
   align-items: center;
   display: flex;
-  margin-bottom: 8rem;
+  margin-bottom: 5rem;
 
   > * {
-    margin-right: 2rem;
+    margin-right: 1.2rem;
 
     &:last-child {
       margin-right: 0;
     }
+  }
+
+  @include breakpoints.breakpoint(sm) {
+    > * {
+      margin-right: 1.6rem;
+
+      &:last-child {
+        margin-right: 0;
+      }
+    }
+  }
+
+  @include breakpoints.breakpoint(lg) {
+    margin-bottom: 6rem;
+
+    > * {
+      margin-right: 2rem;
+
+      &:last-child {
+        margin-right: 0;
+      }
+    }
+  }
+
+  @include breakpoints.breakpoint(xl) {
+    margin-bottom: 8rem;
   }
 
   @include breakpoints.breakpoint(xxl) {
@@ -691,9 +1288,19 @@
 }
 
 .googlePlayLogoWrapper {
-  height: 4rem;
+  height: 3.4rem;
   position: relative;
-  width: 16rem;
+  width: 12.8rem;
+
+  @include breakpoints.breakpoint(sm) {
+    height: 3.6rem;
+    width: 13.4rem;
+  }
+
+  @include breakpoints.breakpoint(lg) {
+    height: 4rem;
+    width: 16rem;
+  }
 
   @include breakpoints.breakpoint(xxl) {
     height: 5rem;
@@ -702,10 +1309,20 @@
 }
 
 .appStoreLogoWrapper {
-  height: 4rem;
+  height: 3.4rem;
   position: relative;
   top: -0.4rem;
-  width: 13rem;
+  width: 11.2rem;
+
+  @include breakpoints.breakpoint(sm) {
+    height: 3.6rem;
+    width: 12rem;
+  }
+
+  @include breakpoints.breakpoint(lg) {
+    height: 4rem;
+    width: 13rem;
+  }
 
   @include breakpoints.breakpoint(xxl) {
     height: 5rem;
@@ -714,10 +1331,22 @@
 }
 
 .tokenSection {
-  padding: 5rem 0;
+  padding: 2.2rem 0;
   position: relative;
 
   @include mixins.iceGradientBackground;
+
+  @include breakpoints.breakpoint(md) {
+    padding: 3.6rem 0;
+  }
+
+  @include breakpoints.breakpoint(lg) {
+    padding: 4.4rem 0;
+  }
+
+  @include breakpoints.breakpoint(xl) {
+    padding: 5rem 0;
+  }
 
   @include breakpoints.breakpoint(xxl) {
     padding: 6.4rem 0;
@@ -725,35 +1354,75 @@
 }
 
 .tokenSectionBackground {
-  clip-path: polygon(0% 0%, 100% 0%, 95% 100%, 0% 100%);
-  height: 100%;
+  clip-path: polygon(0% 0%, 100% 0%, 100% 92.5%, 0% 100%);
+  height: 35%;
   left: 0;
   position: absolute;
   top: 0;
-  width: calc((100% - var(--max-content-width)) / 2 + var(--max-content-width) / 3.5);
+  width: 100%;
 
   @include mixins.fireGradientBackground;
+
+  @include breakpoints.breakpoint(md) {
+    clip-path: polygon(0% 0%, 100% 0%, 95% 100%, 0% 100%);
+    height: 100%;
+    width: calc((100% - var(--max-content-width)) / 2 + var(--max-content-width) / 3.5);
+  }
 }
 
 .tokenSectionContent {
   display: flex;
-  justify-content: space-between;
-  padding: 0 4rem;
+  flex-direction: column;
+  padding: 0 1rem;
   width: var(--max-content-width);
   z-index: 1;
+
+  @include breakpoints.breakpoint(md) {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  @include breakpoints.breakpoint(lg) {
+    padding: 0 4rem;
+  }
 }
 
 .tokenMetric {
   color: var(--contrast-text);
   display: flex;
   flex-direction: column;
+  margin-bottom: 2.2rem;
   text-align: center;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+
+  @include breakpoints.breakpoint(md) {
+    margin-bottom: 0;
+  }
 }
 
 .tokenValue {
-  font-size: 7.4rem;
+  font-size: 5.6rem;
 
   @include mixins.bernhardGothic;
+
+  @include breakpoints.breakpoint(sm) {
+    font-size: 6rem;
+  }
+
+  @include breakpoints.breakpoint(md) {
+    font-size: 5.6rem;
+  }
+
+  @include breakpoints.breakpoint(lg) {
+    font-size: 6.6rem;
+  }
+
+  @include breakpoints.breakpoint(xl) {
+    font-size: 7.4rem;
+  }
 
   @include breakpoints.breakpoint(xxl) {
     font-size: 8.6rem;
@@ -768,7 +1437,23 @@
   align-items: center;
   display: flex;
   flex-direction: column;
-  padding: 10rem 0 8rem;
+  padding: 4rem 0;
+
+  @include breakpoints.breakpoint(sm) {
+    padding: 3.8rem 0 4rem;
+  }
+
+  @include breakpoints.breakpoint(md) {
+    padding: 4.8rem 0 4rem;
+  }
+
+  @include breakpoints.breakpoint(lg) {
+    padding: 6.4rem 0 5.2rem;
+  }
+
+  @include breakpoints.breakpoint(xl) {
+    padding: 10rem 0 8rem;
+  }
 
   @include breakpoints.breakpoint(xxl) {
     padding: 12rem 0 10rem;
@@ -780,12 +1465,72 @@
   display: flex;
   justify-content: space-between;
   width: 100%;
+
+  button {
+    display: none;
+  }
+
+  @include breakpoints.breakpoint(sm) {
+    button {
+      display: inline;
+    }
+  }
 }
 
 .roadmap {
-  margin: 5.6rem 0 18rem;
+  left: 1.4rem;
+  margin: 2.1rem 0 0.8rem;
   position: relative;
-  width: 88%;
+  width: 100%;
+
+  svg {
+    left: 3rem;
+    position: absolute;
+    top: 1.4rem;
+    transform: rotate(90deg);
+    transform-origin: 0 0;
+    width: 30rem;
+
+    path {
+      stroke-width: 1.2rem !important;
+    }
+  }
+
+  @include breakpoints.breakpoint(sm) {
+    left: 0;
+    margin: 6.4rem 0 13.8rem;
+    width: 108%;
+
+    svg {
+      display: inline;
+      left: 0;
+      position: static;
+      top: 0;
+      transform: rotate(0);
+      width: auto;
+
+      path {
+        stroke-width: 0.8rem !important;
+      }
+    }
+  }
+
+  @include breakpoints.breakpoint(md) {
+    margin: 5.6rem 0 16.2rem;
+    width: 88%;
+  }
+
+  @include breakpoints.breakpoint(lg) {
+    svg {
+      path {
+        stroke-width: 0.6rem !important;
+      }
+    }
+  }
+
+  @include breakpoints.breakpoint(xl) {
+    margin: 5.6rem 0 18rem;
+  }
 
   @include breakpoints.breakpoint(xxl) {
     margin: 6rem 0 22rem;
@@ -813,9 +1558,36 @@
 
 .roadmapPointScaler {
   animation: roadmapPointScalerAnimation 5s ease-in-out infinite;
-  height: 3rem;
+  height: 2rem;
+  position: absolute;
   transform-origin: 100 100%;
-  width: 3rem;
+  width: 2rem;
+
+  @include breakpoints.breakpoint(sm) {
+    height: 2.2rem;
+    position: static;
+    width: 2.2rem;
+  }
+
+  @include breakpoints.breakpoint(md) {
+    height: 2.4rem;
+    width: 2.4rem;
+  }
+
+  @include breakpoints.breakpoint(lg) {
+    height: 2.6rem;
+    width: 2.6rem;
+  }
+
+  @include breakpoints.breakpoint(xl) {
+    height: 2.8rem;
+    width: 2.8rem;
+  }
+
+  @include breakpoints.breakpoint(xxl) {
+    height: 3rem;
+    width: 3rem;
+  }
 }
 
 @keyframes roadmapPointAnimation1 {
@@ -838,18 +1610,20 @@
 }
 
 .roadmapPointWrapper {
-  align-items: center;
   display: flex;
   flex-direction: column;
-  position: absolute;
-  transform: translateX(-40%);
-  transform-origin: 50% 0%;
-  transition: transform 0.15s ease-in-out;
+  margin-bottom: 1.4rem;
+  position: relative;
   z-index: 1;
 
+  .roadmapPointScaler {
+    top: 1.4rem;
+  }
+
   &:nth-of-type(1) {
-    left: 10%;
-    top: 48%;
+    .roadmapPointScaler {
+      left: 1.6rem;
+    }
 
     .roadmapPoint {
       @include mixins.fireGradientBackground;
@@ -857,11 +1631,9 @@
   }
 
   &:nth-of-type(2) {
-    left: 36.6%;
-    top: 50%;
-
     .roadmapPointScaler {
       animation-delay: -3.75s;
+      left: 1rem;
     }
 
     .roadmapPoint {
@@ -872,11 +1644,9 @@
   }
 
   &:nth-of-type(3) {
-    left: 63.3%;
-    top: 22%;
-
     .roadmapPointScaler {
       animation-delay: -2.5s;
+      left: 2.3rem;
     }
 
     .roadmapPoint {
@@ -887,11 +1657,9 @@
   }
 
   &:nth-of-type(4) {
-    left: 90%;
-    top: 25%;
-
     .roadmapPointScaler {
       animation-delay: -1.25s;
+      left: 1.6rem;
     }
 
     .roadmapPoint {
@@ -900,16 +1668,77 @@
       @include mixins.iceGradientBackground;
     }
   }
+
+  @include breakpoints.breakpoint(sm) {
+    align-items: center;
+    margin-bottom: 0;
+    position: absolute;
+    transform: translateX(-40%);
+    transform-origin: 50% 0%;
+
+    .roadmapPointScaler {
+      left: 0;
+      top: 0;
+    }
+
+    &:nth-of-type(1) {
+      left: 10%;
+      top: 48%;
+    }
+
+    &:nth-of-type(2) {
+      left: 36.6%;
+      top: 50%;
+    }
+
+    &:nth-of-type(3) {
+      left: 63.3%;
+      top: 22%;
+    }
+
+    &:nth-of-type(4) {
+      left: 86.5%;
+      top: 20%;
+    }
+  }
+
+  @include breakpoints.breakpoint(md) {
+    &:nth-of-type(4) {
+      left: 90%;
+      top: 25%;
+    }
+  }
 }
 
 .roadmapPointText {
+  margin-left: 0.4rem;
   position: relative;
+
+  @include breakpoints.breakpoint(sm) {
+    margin-left: 0;
+  }
 }
 
 .roadmapPointTextHeading {
-  font-size: 2.4rem;
+  font-size: 2rem;
   font-weight: bolder;
-  margin-bottom: 0.8rem;
+  margin-bottom: 0.6rem;
+  margin-left: 5rem;
+
+  @include breakpoints.breakpoint(sm) {
+    font-size: 1.8rem;
+    margin-bottom: 0.6rem;
+    margin-left: 0;
+  }
+
+  @include breakpoints.breakpoint(md) {
+    font-size: 2.2rem;
+    margin-bottom: 0.8rem;
+  }
+
+  @include breakpoints.breakpoint(xl) {
+    font-size: 2.4rem;
+  }
 
   @include breakpoints.breakpoint(xxl) {
     font-size: 2.6rem;
@@ -918,13 +1747,32 @@
 }
 
 .roadmapPointTextItems {
-  font-size: 1.6rem;
-  padding-left: 1.6rem;
+  font-size: 1.4rem;
+  padding-left: 6.5rem;
 
   /* stylelint-disable-next-line no-descending-specificity */
   > li {
-    margin-bottom: 0.6rem;
+    margin-bottom: 0.4rem;
     white-space: nowrap;
+  }
+
+  @include breakpoints.breakpoint(sm) {
+    font-size: 1.2rem;
+    padding-left: 1.2rem;
+  }
+
+  @include breakpoints.breakpoint(md) {
+    font-size: 1.4rem;
+    padding-left: 1.4rem;
+
+    > li {
+      margin-bottom: 0.6rem;
+    }
+  }
+
+  @include breakpoints.breakpoint(xl) {
+    font-size: 1.6rem;
+    padding-left: 1.6rem;
   }
 
   @include breakpoints.breakpoint(xxl) {
@@ -933,11 +1781,28 @@
   }
 }
 
+.roadmapMobileCTAWrapper {
+  margin-bottom: 4.8rem;
+  width: 100%;
+
+  button {
+    width: 100%;
+  }
+
+  @include breakpoints.breakpoint(sm) {
+    display: none;
+  }
+}
+
 .footerTopBorder {
-  height: 0.5rem;
+  height: 0.4rem;
   width: 100%;
 
   @include mixins.iceGradientBackground;
+
+  @include breakpoints.breakpoint(md) {
+    height: 0.5rem;
+  }
 
   @include breakpoints.breakpoint(xxl) {
     height: 0.6rem;
@@ -945,27 +1810,65 @@
 }
 
 .footerContent {
-  align-items: center;
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
   max-width: var(--max-content-width);
-  padding: 3.8rem 0 6rem;
+  padding: 1.6rem 0 6.4rem;
   width: 100%;
 
   nav > ul {
-    align-items: center;
     color: var(--contrast-text);
     display: flex;
+    flex-direction: column;
     justify-content: space-between;
     list-style-type: none;
+    margin-top: 1.8rem;
 
     /* stylelint-disable-next-line no-descending-specificity */
     li {
-      font-size: 1.5rem;
-      margin: 0 2.4rem;
+      font-size: 1.4rem;
+      margin: 0.8rem 0;
 
       &:hover {
         opacity: 0.8;
+      }
+    }
+  }
+
+  @include breakpoints.breakpoint(md) {
+    align-items: center;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 2.6rem 0 4.8rem;
+
+    nav > ul {
+      align-items: center;
+      flex-direction: row;
+      margin-top: 0;
+
+      li {
+        margin: 0 1rem;
+      }
+    }
+  }
+
+  @include breakpoints.breakpoint(lg) {
+    padding: 3rem 0 5rem;
+
+    nav > ul {
+      li {
+        margin: 0 1.8rem;
+      }
+    }
+  }
+
+  @include breakpoints.breakpoint(xl) {
+    padding: 3.8rem 0 6rem;
+
+    nav > ul {
+      li {
+        font-size: 1.5rem;
+        margin: 0 2.4rem;
       }
     }
   }
@@ -988,9 +1891,14 @@
 }
 
 .footerLogoWrapper {
-  height: 10rem;
+  height: 8.6rem;
   position: relative;
-  width: 10rem;
+  width: 8.6rem;
+
+  @include breakpoints.breakpoint(lg) {
+    height: 10rem;
+    width: 10rem;
+  }
 
   @include breakpoints.breakpoint(xxl) {
     height: 11rem;
@@ -999,25 +1907,51 @@
 }
 
 .footerSocials {
+  position: absolute;
+  right: 6%;
+  top: 2.6rem;
   transform: scale(0.95);
   transform-origin: 50% 50%;
+
+  @include breakpoints.breakpoint(md) {
+    position: static;
+  }
 }
 
 .footerContact {
   color: var(--ice-gradient-light);
-  font-size: 1.4rem;
+  font-size: 1.2rem;
 
   &:hover {
     text-decoration: underline;
   }
+
+  @include breakpoints.breakpoint(lg) {
+    font-size: 1.3rem;
+  }
+
+  @include breakpoints.breakpoint(xl) {
+    font-size: 1.4rem;
+  }
 }
 
 .footerCopyright {
-  bottom: 2rem;
+  bottom: 1.5rem;
   color: var(--contrast-text);
-  font-size: 1.2rem;
-  left: 50%;
+  font-size: 1.1rem;
   opacity: 0.75;
   position: absolute;
-  transform: translateX(-50%);
+  right: 6%;
+
+  @include breakpoints.breakpoint(md) {
+    bottom: 1.7rem;
+    left: 50%;
+    right: auto;
+    transform: translateX(-50%);
+  }
+
+  @include breakpoints.breakpoint(lg) {
+    bottom: 2rem;
+    font-size: 1.2rem;
+  }
 }

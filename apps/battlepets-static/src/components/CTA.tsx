@@ -3,8 +3,6 @@ import styles from './cta.module.scss'
 import { Input } from './Input'
 import { Socials } from './Socials'
 
-import type React from 'react'
-
 interface CTAProps {
   heading: string
   buttonText: string

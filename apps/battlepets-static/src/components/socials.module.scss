@@ -13,13 +13,18 @@
 }
 
 .socialButtonWrapper {
-  height: 5rem;
+  height: 4.5rem;
   position: relative;
   transition: transform 0.15s ease-out;
-  width: 5rem;
+  width: 4.5rem;
 
   &:hover {
     transform: scale(1.08);
+  }
+
+  @include breakpoints.breakpoint(lg) {
+    height: 5rem;
+    width: 5rem;
   }
 
   @include breakpoints.breakpoint(xxl) {

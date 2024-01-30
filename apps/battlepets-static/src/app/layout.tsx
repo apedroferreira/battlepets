@@ -2,7 +2,6 @@ import { Sora } from 'next/font/google'
 
 import type { Metadata } from 'next'
 
-import 'modern-normalize/modern-normalize.css'
 import './globals.scss'
 
 const sora = Sora({ subsets: ['latin'] })
