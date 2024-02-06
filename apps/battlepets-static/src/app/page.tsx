@@ -25,6 +25,8 @@ import token from '../../public/images/token.png'
 
 import styles from './page.module.scss'
 
+import type { StaticImport } from 'next/dist/shared/lib/get-img-props'
+
 const TOKEN_METRICS: { value: string; caption: React.ReactNode }[] = [
   {
     value: '10M',
@@ -52,21 +54,21 @@ const ROADMAP_POINTS: { heading: string; items: React.ReactNode[] }[] = [
       <strong>Airdrop</strong>,
       <strong>Public Sale</strong>,
       <>
-        <strong>$BPETS</strong> Launch
+        <strong>$BPETS</strong> Listing
       </>,
     ],
   },
   {
     heading: 'Q2-Q3 2024',
-    items: ['BattlePets DAO', 'Create Series 1 cards', 'App development'],
+    items: ['BattlePets DAO', 'Create Series 1 cards', 'Game development'],
   },
   {
     heading: 'Q4 2024',
-    items: ['Beta App launch'],
+    items: ['Beta Game launch'],
   },
   {
     heading: 'Q1 2025',
-    items: ['Public App launch'],
+    items: ['Public Game launch'],
   },
 ]
 /* eslint-enable react/jsx-key */
@@ -115,7 +117,7 @@ const Home = () => (
                 <span className={globalStyles.fireText}>public sale</span> at an exclusive price!
               </p>
               <form className={styles.heroSignUpForm}>
-                <Input type="email" placeholder="Enter your email" />
+                <Input type="email" placeholder="Your email" />
                 <Button variant="fire">I&apos;m in!</Button>
               </form>
             </div>
@@ -123,7 +125,7 @@ const Home = () => (
               <div className={globalStyles.captionContainer}>
                 <p className={globalStyles.captionText}>Soon on</p>
                 <div className={styles.solanaLogoWrapper}>
-                  <Image src={solanaLogo} alt="Solana logo" fill style={{ objectFit: 'contain' }} />
+                  <Image src={solanaLogo as StaticImport} alt="Solana logo" fill style={{ objectFit: 'contain' }} />
                 </div>
               </div>
               <Socials />
@@ -208,10 +210,20 @@ const Home = () => (
               <p className={globalStyles.captionText}>BattlePets will be available on</p>
               <div className={styles.storeLogosWrapper}>
                 <div className={styles.googlePlayLogoWrapper}>
-                  <Image src={googlePlayLogo} alt="Google Play logo" fill style={{ objectFit: 'contain' }} />
+                  <Image
+                    src={googlePlayLogo as StaticImport}
+                    alt="Google Play logo"
+                    fill
+                    style={{ objectFit: 'contain' }}
+                  />
                 </div>
                 <div className={styles.appStoreLogoWrapper}>
-                  <Image src={appStoreLogo} alt="Apple App Store logo" fill style={{ objectFit: 'contain' }} />
+                  <Image
+                    src={appStoreLogo as StaticImport}
+                    alt="Apple App Store logo"
+                    fill
+                    style={{ objectFit: 'contain' }}
+                  />
                 </div>
               </div>
             </div>

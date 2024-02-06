@@ -4,7 +4,7 @@ import fs from 'fs/promises'
 import path from 'path'
 
 import { createMetadataAccountV3 } from '@metaplex-foundation/mpl-token-metadata'
-import { createGenericFile, createSignerFromKeypair, none } from '@metaplex-foundation/umi'
+import { createGenericFile, createSignerFromKeypair } from '@metaplex-foundation/umi'
 import { createUmi } from '@metaplex-foundation/umi-bundle-defaults'
 import { createBundlrUploader } from '@metaplex-foundation/umi-uploader-bundlr'
 import { fromWeb3JsKeypair, fromWeb3JsPublicKey } from '@metaplex-foundation/umi-web3js-adapters'
@@ -14,15 +14,15 @@ import { getKeypairFromEnvironment } from '@solana-developers/helpers'
 import bs58 from 'bs58'
 import 'colors'
 
-import { TOKEN_DESCRIPTION, TOKEN_NAME, TOKEN_SYMBOL } from 'common/constants'
-import { executeScript } from 'utils/scriptUtils'
+import { TOKEN_DESCRIPTION, TOKEN_NAME, TOKEN_SYMBOL } from '@/common/constants'
+import { executeScript } from '@/utils/scriptUtils'
 import {
   getConnection,
   getEndpoint,
   getURLCluster,
   getUploaderAddress,
   getUploaderProviderUrl,
-} from 'utils/solanaUtils'
+} from '@/utils/solanaUtils'
 
 const setMetadata = async (): Promise<void> => {
   if (!process.env.WALLET_SECRET_KEY) {

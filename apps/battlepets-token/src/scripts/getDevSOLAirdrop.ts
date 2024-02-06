@@ -5,8 +5,8 @@ import { getKeypairFromEnvironment, requestAndConfirmAirdrop } from '@solana-dev
 import yargs from 'yargs'
 import 'colors'
 
-import { executeScript } from 'utils/scriptUtils'
-import { getConnection } from 'utils/solanaUtils'
+import { executeScript } from '@/utils/scriptUtils'
+import { getConnection } from '@/utils/solanaUtils'
 
 const parser = yargs(process.argv.slice(2)).options({
   amount: { type: 'number' },
@@ -27,7 +27,7 @@ const getDevSOLAirdrop = async (): Promise<void> => {
 
   await requestAndConfirmAirdrop(connection, receiverAccount.publicKey, amount * web3.LAMPORTS_PER_SOL)
 
-  console.log(`${amount} SOL airdropped!`.green)
+  console.log(`${amount} SOL airdrop requested!`.green)
 }
 
 executeScript(getDevSOLAirdrop)

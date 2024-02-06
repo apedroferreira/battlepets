@@ -5,8 +5,8 @@ import * as web3 from '@solana/web3.js'
 import { getKeypairFromEnvironment } from '@solana-developers/helpers'
 import 'colors'
 
-import { executeScript } from 'utils/scriptUtils'
-import { getConnection, getURLCluster } from 'utils/solanaUtils'
+import { executeScript } from '@/utils/scriptUtils'
+import { getConnection, getURLCluster } from '@/utils/solanaUtils'
 
 const revokeMintAuthority = async (): Promise<void> => {
   if (!process.env.WALLET_SECRET_KEY) {

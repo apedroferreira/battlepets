@@ -8,10 +8,10 @@ import { getKeypairFromEnvironment } from '@solana-developers/helpers'
 import csvToJson from 'csvtojson'
 import 'colors'
 
-import { INITIAL_TOKEN_DISTRIBUTION, TOKEN_AMOUNT } from 'common/constants'
-import { TokenDistribution } from 'common/enums'
-import { executeScript } from 'utils/scriptUtils'
-import { getConnection, getTokenAmount, getURLCluster } from 'utils/solanaUtils'
+import { INITIAL_TOKEN_DISTRIBUTION, TOKEN_AMOUNT } from '@/common/constants'
+import { TokenDistribution } from '@/common/enums'
+import { executeScript } from '@/utils/scriptUtils'
+import { getConnection, getTokenAmount, getURLCluster } from '@/utils/solanaUtils'
 
 const sendAirdrop = async (): Promise<void> => {
   if (!process.env.WALLET_SECRET_KEY) {
@@ -39,12 +39,14 @@ const sendAirdrop = async (): Promise<void> => {
     senderAccount.publicKey
   )
 
-  const airdropReceiversData = await csvToJson().fromFile(path.resolve(__dirname, './scriptsData/airdropAddresses.csv'))
+  const airdropReceiversData = (await csvToJson().fromFile(
+    path.resolve(__dirname, './scriptsData/airdropAddresses.csv')
+  )) as { address: string }[]
 
   const validReceiverTokenAddresses: [web3.PublicKey, web3.PublicKey][] = await Promise.all(
     airdropReceiversData
       .map(airdropReceiverData => {
-        const receiverAddress = airdropReceiverData['address']
+        const receiverAddress = airdropReceiverData.address
 
         if (!receiverAddress) {
           throw new Error('Missing receiver address!')

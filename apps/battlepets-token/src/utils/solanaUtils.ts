@@ -1,6 +1,6 @@
 import * as web3 from '@solana/web3.js'
 
-import { TOKEN_DECIMALS } from 'common/constants'
+import { TOKEN_DECIMALS } from '@/common/constants'
 
 export const getEndpoint = () => web3.clusterApiUrl('devnet')
 

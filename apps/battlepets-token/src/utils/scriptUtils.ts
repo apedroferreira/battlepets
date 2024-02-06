@@ -3,11 +3,11 @@ import 'colors'
 
 import { getFileNameFromPath } from './generalUtils'
 
-export const terminateScript = async (
+export const terminateScript = (
   omitTerminationMessage = false,
   hasError = false,
-  scriptName = getFileNameFromPath(getCallerFile())
-): Promise<void> => {
+  scriptName = getFileNameFromPath(getCallerFile() as string)
+) => {
   if (!omitTerminationMessage) {
     const scriptNameInMessage = scriptName ? `"${scriptName}"` : ''
     if (hasError) {
@@ -21,8 +21,8 @@ export const terminateScript = async (
 
 export const executeScript = async (
   runScript: () => void | Promise<void>,
-  scriptName = getFileNameFromPath(getCallerFile())
-): Promise<void> => {
+  scriptName = getFileNameFromPath(getCallerFile() as string)
+) => {
   let hasError = false
   try {
     await runScript()
@@ -30,6 +30,6 @@ export const executeScript = async (
     console.error(((error as Error).message || (error as Error).name).red)
     hasError = true
   } finally {
-    await terminateScript(false, hasError, scriptName)
+    terminateScript(false, hasError, scriptName)
   }
 }

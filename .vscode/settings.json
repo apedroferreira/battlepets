@@ -1,6 +1,10 @@
 {
   "eslint.workingDirectories": [
     {
+      "directory": "apps/battlepets-sale-portal",
+      "changeProcessCWD": true
+    },
+    {
       "directory": "apps/battlepets-static",
       "changeProcessCWD": true
     },

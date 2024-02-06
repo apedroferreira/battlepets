@@ -5,7 +5,7 @@
   border-image-slice: 1;
   border-image-source: linear-gradient(135deg, var(--ice-gradient-light) 0%, var(--ice-gradient-dark) 100%);
   border-width: 0.3rem;
-  box-shadow: 0 0.2rem 0.3rem var(--shadow-light) ease-out;
+  box-shadow: 0 0.2rem 0.3rem var(--shadow-light);
   font-size: 1.6rem;
   padding: 1.4rem 1.8rem;
   transition: box-shadow 0.2s;

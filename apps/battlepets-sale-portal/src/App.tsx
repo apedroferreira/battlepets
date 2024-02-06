@@ -1,0 +1,402 @@
+import * as anchor from '@coral-xyz/anchor'
+import { useAnchorWallet, useConnection, useWallet } from '@solana/wallet-adapter-react'
+import { WalletMultiButton } from '@solana/wallet-adapter-react-ui'
+import { useCallback, useEffect, useMemo, useState } from 'react'
+
+import bpetsLogo from '@/assets/bpetslogo.avif'
+import logo from '@/assets/logo.png'
+import solLogo from '@/assets/sollogo.avif'
+import {
+  FUND_RAISER_PUBLIC_KEY,
+  HARD_CAP_SOL_AMOUNT,
+  MAX_ALLOCATION_SOL_AMOUNT,
+  MIN_ALLOCATION_SOL_AMOUNT,
+  SALE_ENDS_AT_TIMESTAMP,
+  SALE_PROGRAM_ID,
+  SOFT_CAP_SOL_AMOUNT,
+  SOLANA_DECIMALS,
+  SOL_BPETS_EXCHANGE_RATE,
+} from '@/common/constants'
+import { ToastType } from '@/common/enums'
+import { LiveTime } from '@/components/LiveTime'
+import { Loader } from '@/components/Loader'
+import { useToast } from '@/hooks/useToast'
+import { escapeRegExp, formatLargeStatNumber } from '@/utils/generalUtils'
+import { encodePDASeed } from '@/utils/solanaUtils'
+
+import idl from '../battlepets_public_sale.json'
+
+import type { BattlepetsPublicSale } from '../types/battlepets_public_sale'
+
+import '@/App.css'
+
+const INPUT_REGEX = RegExp('^\\d*(?:\\\\[.])?\\d*$')
+
+// @TODO: Responsive, test on phones w/ wallet and everything
+// @TODO: Airdrop script don't work as expected. Rate limited now, but then we can see what number it returns to see if we can improve script more at least.
+
+export const App: React.FC = () => {
+  const { connection } = useConnection()
+  const { connected: isConnected, publicKey } = useWallet()
+  const anchorWallet = useAnchorWallet()
+
+  const { showToast, toastTarget } = useToast()
+
+  const [isSaleOpen, setIsSaleOpen] = useState(false)
+
+  const [currentAllocation, setCurrentAllocation] = useState(0)
+  const [totalAllocation, setTotalAllocation] = useState(0)
+
+  const [SOLAmount, setSOLAmount] = useState('')
+  const SOLAmountNumber = useMemo(() => +parseFloat(Number(SOLAmount).toFixed(SOLANA_DECIMALS)), [SOLAmount])
+  const [SOLAmountErrorMessage, setSOLAmountErrorMessage] = useState('')
+
+  const remainingAllocation = useMemo(
+    () => Math.min(MAX_ALLOCATION_SOL_AMOUNT - currentAllocation, HARD_CAP_SOL_AMOUNT - totalAllocation),
+    [currentAllocation, totalAllocation]
+  )
+  const remainingAllocationText = useMemo(
+    () => (+parseFloat(remainingAllocation.toFixed(SOLANA_DECIMALS))).toString(),
+    [remainingAllocation]
+  )
+
+  const [saleProgram, setSaleProgram] = useState<anchor.Program<BattlepetsPublicSale>>()
+
+  const [isLoadingSale, setIsLoadingSale] = useState(true)
+  const [isLoadingSaleAllocation, setIsLoadingSaleAllocation] = useState(true)
+  const [isLoadingAddAllocation, setIsLoadingAddAllocation] = useState(false)
+
+  const getSalePda = useCallback((program: anchor.Program<BattlepetsPublicSale>) => {
+    const [salePda] = anchor.web3.PublicKey.findProgramAddressSync([encodePDASeed('global')], program.programId)
+    return salePda
+  }, [])
+
+  const getSaleAllocationPda = useCallback(
+    (program: anchor.Program<BattlepetsPublicSale>) => {
+      if (publicKey) {
+        const [saleAllocationPda] = anchor.web3.PublicKey.findProgramAddressSync(
+          [publicKey.toBuffer()],
+          program.programId
+        )
+        return saleAllocationPda
+      }
+    },
+    [publicKey]
+  )
+
+  const refreshSale = useCallback(
+    async (program: anchor.Program<BattlepetsPublicSale>) => {
+      const salePda = getSalePda(program)
+
+      try {
+        const saleAccount = await program.account.saleState.fetchNullable(salePda)
+
+        if (saleAccount) {
+          setIsSaleOpen(saleAccount.open as boolean)
+          setTotalAllocation(Number(saleAccount.amount) / anchor.web3.LAMPORTS_PER_SOL)
+        }
+      } catch (error) {
+        showToast({ message: (error as Error).message, type: ToastType.ERROR })
+        setIsLoadingSale(false)
+        throw error
+      }
+
+      setIsLoadingSale(false)
+    },
+    [getSalePda, showToast]
+  )
+
+  const refreshSaleAllocation = useCallback(
+    async (program: anchor.Program<BattlepetsPublicSale>) => {
+      const saleAllocationPda = getSaleAllocationPda(program)
+
+      if (saleAllocationPda) {
+        try {
+          const saleAllocationAccount = await program.account.saleAllocationState.fetchNullable(saleAllocationPda)
+
+          if (saleAllocationAccount) {
+            setCurrentAllocation(Number(saleAllocationAccount.amount) / anchor.web3.LAMPORTS_PER_SOL)
+          } else {
+            setCurrentAllocation(0)
+          }
+        } catch (error) {
+          showToast({ message: (error as Error).message, type: ToastType.ERROR })
+          setIsLoadingSaleAllocation(false)
+          throw error
+        }
+
+        setIsLoadingSaleAllocation(false)
+      }
+    },
+    [getSaleAllocationPda, showToast]
+  )
+
+  useEffect(() => {
+    if (saleProgram) {
+      const salePda = getSalePda(saleProgram)
+
+      const saleChangeSubscriptionId = connection.onAccountChange(salePda, () => {
+        refreshSale(saleProgram)
+      })
+
+      return () => {
+        connection.removeAccountChangeListener(saleChangeSubscriptionId)
+      }
+    }
+  }, [connection, getSalePda, refreshSale, saleProgram])
+
+  useEffect(() => {
+    const provider = new anchor.AnchorProvider(connection, anchorWallet!, {})
+    anchor.setProvider(provider)
+
+    const program = new anchor.Program(idl as anchor.Idl as BattlepetsPublicSale, SALE_PROGRAM_ID, provider)
+    setSaleProgram(program)
+
+    refreshSaleAllocation(program)
+    refreshSale(program)
+  }, [anchorWallet, connection, refreshSaleAllocation, refreshSale])
+
+  const handleSOLAmountChange = useCallback(
+    (event: React.ChangeEvent<HTMLInputElement>) => {
+      const amount = event.target.value.replace(/,/g, '.')
+
+      if (amount === '' || INPUT_REGEX.test(escapeRegExp(amount))) {
+        const amountNumber = Number(amount)
+
+        const isOverMaxAllocation = currentAllocation + amountNumber > MAX_ALLOCATION_SOL_AMOUNT
+        const isOverHardCap = totalAllocation + amountNumber > HARD_CAP_SOL_AMOUNT
+
+        if (amount && amountNumber && currentAllocation + amountNumber < MIN_ALLOCATION_SOL_AMOUNT) {
+          setSOLAmountErrorMessage(`SOL amount must not be under min. allocation of ${MIN_ALLOCATION_SOL_AMOUNT}.`)
+        } else if (
+          amount &&
+          isOverMaxAllocation &&
+          (!isOverHardCap || MAX_ALLOCATION_SOL_AMOUNT - currentAllocation <= HARD_CAP_SOL_AMOUNT - totalAllocation)
+        ) {
+          setSOLAmountErrorMessage(
+            `SOL amount must not go over max. allocation of ${MAX_ALLOCATION_SOL_AMOUNT} (${formatLargeStatNumber(MAX_ALLOCATION_SOL_AMOUNT - currentAllocation)} SOL left).`
+          )
+        } else if (amount && isOverHardCap) {
+          setSOLAmountErrorMessage(
+            `SOL amount must not go over total sale allocation of ${HARD_CAP_SOL_AMOUNT} (${formatLargeStatNumber(HARD_CAP_SOL_AMOUNT - totalAllocation)} SOL left).`
+          )
+        } else {
+          setSOLAmountErrorMessage('')
+        }
+
+        setSOLAmount(amount)
+      }
+    },
+    [currentAllocation, totalAllocation]
+  )
+
+  const handleMaxClick = useCallback(() => {
+    setSOLAmountErrorMessage('')
+    setSOLAmount(remainingAllocationText)
+  }, [remainingAllocationText])
+
+  const handleFormSubmit = useCallback(
+    (event: React.FormEvent<HTMLFormElement>) => {
+      const runSubmit = async () => {
+        if (saleProgram) {
+          setIsLoadingAddAllocation(true)
+
+          const lamports = new anchor.BN(SOLAmountNumber * anchor.web3.LAMPORTS_PER_SOL)
+
+          try {
+            await saleProgram.methods
+              .addSaleAllocation(lamports)
+              .accounts({
+                saleAllocation: getSaleAllocationPda(saleProgram),
+                sale: getSalePda(saleProgram),
+                fundRaiser: FUND_RAISER_PUBLIC_KEY,
+              })
+              .rpc()
+          } catch (error) {
+            showToast({ message: (error as Error).message, type: ToastType.ERROR })
+            setIsLoadingAddAllocation(false)
+            throw error
+          }
+
+          const BPETSAmount = formatLargeStatNumber(SOLAmountNumber * SOL_BPETS_EXCHANGE_RATE)
+
+          await refreshSaleAllocation(saleProgram)
+
+          showToast({ message: `🎉 You’ve reserved ${BPETSAmount} BPETS!`, type: ToastType.SUCCESS })
+          setSOLAmount('')
+          setIsLoadingAddAllocation(false)
+        }
+      }
+
+      event.preventDefault()
+
+      runSubmit()
+    },
+    [SOLAmountNumber, getSaleAllocationPda, getSalePda, refreshSaleAllocation, saleProgram, showToast]
+  )
+
+  useEffect(() => {
+    if (!isConnected) {
+      setCurrentAllocation(0)
+    }
+  }, [isConnected, publicKey])
+
+  const hasSaleEnded = Date.now() > SALE_ENDS_AT_TIMESTAMP || totalAllocation >= HARD_CAP_SOL_AMOUNT
+
+  return (
+    <>
+      <header>
+        <a href="https://battlepets.app" target="_blank" rel="noreferrer">
+          <img src={logo} className="logo" alt="BattlePets logo" />
+        </a>
+        <WalletMultiButton />
+      </header>
+      <main>
+        <h1 className="h1">BattlePets Public Sale</h1>
+        <div className="progress-bar-wrapper">
+          <label className="label" htmlFor="progress-bar">
+            Total sale progress:
+          </label>
+          <div id="progress-bar" className="progress-bar">
+            <div
+              className="progress-bar-progress"
+              style={{ transform: `scaleX(${totalAllocation / HARD_CAP_SOL_AMOUNT})` }}
+            />
+            <div className="progress-bar-values">
+              <span className="fire-text">{isLoadingSale ? '…' : formatLargeStatNumber(totalAllocation)}</span>/
+              <span className="ice-text">{formatLargeStatNumber(HARD_CAP_SOL_AMOUNT)}</span> SOL
+            </div>
+            <div
+              className="soft-cap-marker"
+              style={{ width: `${(SOFT_CAP_SOL_AMOUNT / HARD_CAP_SOL_AMOUNT) * 100}%` }}
+            />
+            <div
+              className="soft-cap-marker-label"
+              style={{ left: `${(SOFT_CAP_SOL_AMOUNT / HARD_CAP_SOL_AMOUNT) * 100}%` }}
+            >
+              🎯 Soft cap{totalAllocation >= SOFT_CAP_SOL_AMOUNT ? ' reached!' : ''} (
+              {formatLargeStatNumber(SOFT_CAP_SOL_AMOUNT)} SOL)
+            </div>
+            <div className="progress-bar-timer">
+              {isLoadingSale && 'Loading. Please wait…'}
+              {hasSaleEnded && !isLoadingSale && 'Sale has ended.'}
+              {!hasSaleEnded &&
+                !isLoadingSale &&
+                (isSaleOpen ? (
+                  <>
+                    Sale ends in:{' '}
+                    <span className="fire-text">
+                      <LiveTime timestamp={SALE_ENDS_AT_TIMESTAMP} />
+                    </span>
+                  </>
+                ) : (
+                  'Sale is closed.'
+                ))}
+            </div>
+            {isLoadingSale && (
+              <div className="progress-bar-loader">
+                <Loader />
+              </div>
+            )}
+          </div>
+        </div>
+        <div className="conversion">
+          1 <img src={solLogo} className="token-logo" alt="Solana token logo" />
+          SOL =&nbsp;
+          {formatLargeStatNumber(SOL_BPETS_EXCHANGE_RATE)}{' '}
+          <img src={bpetsLogo} className="token-logo" alt="BPETS token logo" />
+          BPETS
+        </div>
+        {isSaleOpen && !hasSaleEnded && (
+          <>
+            <p className="conversion-note">Min. allocation: {formatLargeStatNumber(MIN_ALLOCATION_SOL_AMOUNT)} SOL</p>
+            <p className="conversion-note">Max. allocation: {formatLargeStatNumber(MAX_ALLOCATION_SOL_AMOUNT)} SOL</p>
+          </>
+        )}
+        {isSaleOpen && !hasSaleEnded && currentAllocation < MAX_ALLOCATION_SOL_AMOUNT && (
+          <form className="form" onSubmit={handleFormSubmit}>
+            <div className="input-wrapper">
+              <label className="label" htmlFor="amount">
+                SOL amount to buy:
+              </label>
+              <input
+                className={`input ${SOLAmountErrorMessage ? 'input-error' : ''}`}
+                id="amount"
+                name="amount"
+                inputMode="decimal"
+                autoComplete="off"
+                autoCorrect="off"
+                type="text"
+                pattern="^[0-9]*[.,]?[0-9]*$"
+                placeholder="0"
+                minLength={1}
+                maxLength={79}
+                spellCheck="false"
+                value={SOLAmount}
+                onChange={handleSOLAmountChange}
+                disabled={isLoadingAddAllocation}
+              />
+              {SOLAmountErrorMessage && <div className="input-error-box">{SOLAmountErrorMessage}</div>}
+              {!isLoadingAddAllocation &&
+                currentAllocation + remainingAllocation >= MIN_ALLOCATION_SOL_AMOUNT &&
+                SOLAmount !== remainingAllocationText && (
+                  <button className="max-amount-button" type="button" onClick={handleMaxClick}>
+                    Max: {formatLargeStatNumber(remainingAllocation)}
+                  </button>
+                )}
+            </div>
+            {isConnected ? (
+              <button
+                className="button"
+                disabled={!SOLAmountNumber || Boolean(SOLAmountErrorMessage) || isLoadingAddAllocation}
+              >
+                {isLoadingAddAllocation ? (
+                  <>
+                    <div className="button-loader">
+                      <Loader />
+                    </div>
+                    Reserving BPETS…
+                  </>
+                ) : (
+                  <>
+                    Reserve {formatLargeStatNumber(SOLAmountNumber * SOL_BPETS_EXCHANGE_RATE)}{' '}
+                    <img src={bpetsLogo} className="token-logo-small" alt="BPETS token logo" />
+                    BPETS
+                  </>
+                )}
+              </button>
+            ) : (
+              <WalletMultiButton />
+            )}
+          </form>
+        )}
+        {isConnected &&
+          (isLoadingSaleAllocation ? (
+            <div className="allocation-loader">
+              <Loader />
+            </div>
+          ) : (
+            <div className="allocation-wrapper">
+              <label className="label" htmlFor="allocation">
+                Your current allocation:
+              </label>
+              <div id="allocation" className="allocation">
+                <span className={currentAllocation > 0 ? 'ice-text' : 'fire-text'}>
+                  {formatLargeStatNumber(currentAllocation)} SOL (
+                  {formatLargeStatNumber(currentAllocation * SOL_BPETS_EXCHANGE_RATE)} BPETS)
+                </span>
+              </div>
+              {currentAllocation > 0 && (
+                <p className="allocation-note">
+                  ✅ You will receive{' '}
+                  <strong>{formatLargeStatNumber(currentAllocation * SOL_BPETS_EXCHANGE_RATE)} BPETS</strong> once the
+                  token is listed!
+                </p>
+              )}
+            </div>
+          ))}
+        {toastTarget}
+      </main>
+    </>
+  )
+}

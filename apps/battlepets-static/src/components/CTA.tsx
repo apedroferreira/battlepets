@@ -17,7 +17,7 @@ export const CTA: React.FC<CTAProps> = ({ buttonText, buttonVariant, heading }) 
       an exclusive price!
     </p>
     <form className={styles.ctaSignUpForm}>
-      <Input type="email" placeholder="Enter your email" />
+      <Input type="email" placeholder="Your email" />
       <Button variant={buttonVariant}>{buttonText}</Button>
     </form>
     <Socials />

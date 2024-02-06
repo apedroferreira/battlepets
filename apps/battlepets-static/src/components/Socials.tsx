@@ -9,6 +9,8 @@ import xLogo from '../../public/images/xlogo.svg'
 
 import styles from './socials.module.scss'
 
+import type { StaticImport } from 'next/dist/shared/lib/get-img-props'
+
 interface SocialsProps {
   hideCaption?: boolean
 }
@@ -22,10 +24,10 @@ export const Socials: React.FC<SocialsProps> = ({ hideCaption = false }) => {
         rel="noopener noreferrer nofollow"
         className={styles.socialButtonWrapper}
       >
-        <Image src={telegramLogo} alt="Telegram logo" fill style={{ objectFit: 'contain' }} />
+        <Image src={telegramLogo as StaticImport} alt="Telegram logo" fill style={{ objectFit: 'contain' }} />
       </Link>
       <Link href={X_URL} target="_blank" rel="noopener noreferrer nofollow" className={styles.socialButtonWrapper}>
-        <Image src={xLogo} alt="X logo" fill style={{ objectFit: 'contain' }} />
+        <Image src={xLogo as StaticImport} alt="X logo" fill style={{ objectFit: 'contain' }} />
       </Link>
     </div>
   )

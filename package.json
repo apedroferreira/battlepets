@@ -9,7 +9,7 @@
   "scripts": {
     "yarn:update": "yarn set version stable",
     "clean": "lerna clean --yes",
-    "reset:lite": "yarn cache clean && yarn clean && rm -rf node_modules && yarn install",
+    "reset": "yarn cache clean && yarn clean && rm -rf node_modules && yarn install",
     "reset:hard": "yarn cache clean && yarn clean && rm -rf node_modules yarn.lock && yarn install",
     "build": "turbo run build",
     "format": "turbo run format",
@@ -20,7 +20,7 @@
     "g:prettier": "cd $INIT_CWD && prettier",
     "g:stylelint": "cd $INIT_CWD && stylelint",
     "g:lint-staged": "cd $INIT_CWD && lint-staged",
-    "precommit": "turbo run precommit --concurrency=1 --since=HEAD --no-deps",
+    "precommit": "turbo run precommit --scope=\"*\" --concurrency=1 --since=HEAD --no-deps",
     "preinstall": "npx -y only-allow yarn",
     "postinstall": "${SKIP_POSTINSTALL:-false} == true || husky install"
   },
@@ -28,6 +28,7 @@
     "node": ">=20.11.0"
   },
   "devDependencies": {
+    "@types/eslint": "^8.56.2",
     "@types/node": "^20.11.0",
     "@typescript-eslint/eslint-plugin": "^6.18.1",
     "@typescript-eslint/parser": "^6.18.1",
@@ -44,7 +45,7 @@
     "stylelint": "^16.1.0",
     "stylelint-config-standard-scss": "^13.0.0",
     "stylelint-order": "^6.0.4",
-    "turbo": "^1.11.3",
+    "turbo": "^1.12.2",
     "typescript": "^5.3.3"
   },
   "packageManager": "yarn@4.0.2"

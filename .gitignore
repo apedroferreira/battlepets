@@ -1,5 +1,3 @@
-# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
-
 # dependencies
 node_modules/
 /.pnp
@@ -62,3 +60,21 @@ next-env.d.ts
 # token scripts data
 **/scripts/scriptsData/*
 !**/scripts/scriptsData/*.example.*
+
+# logs
+logs
+*.log
+pnpm-debug.log*
+lerna-debug.log*
+
+dist
+dist-ssr
+*.local
+
+# editor directories and files
+.idea
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?

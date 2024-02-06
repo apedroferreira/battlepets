@@ -4,10 +4,10 @@
 @use '../common/keyframes';
 
 .headerContent {
-  align-items: center;
+  align-items: flex-start;
   display: flex;
   justify-content: space-between;
-  margin-top: 0.4rem;
+  margin-top: 1rem;
   max-width: 94%;
   width: 100%;
 
@@ -42,7 +42,6 @@
   }
 
   @include breakpoints.breakpoint(sm) {
-    margin-top: 0.6rem;
     max-width: var(--max-content-width);
   }
 
@@ -280,15 +279,15 @@
 }
 
 .solanaLogoWrapper {
-  height: 10.8rem;
-  margin-top: -3rem;
+  height: 11rem;
+  margin-top: -3.2rem;
   position: relative;
-  width: 10.8rem;
+  width: 11rem;
 
   @include breakpoints.breakpoint(sm) {
-    height: 12rem;
+    height: 12.1rem;
     margin-top: -3.8rem;
-    width: 12rem;
+    width: 12.1rem;
   }
 
   @include breakpoints.breakpoint(lg) {
