@@ -176,11 +176,14 @@
 }
 
 .heroContent {
-  max-width: 47.2rem;
+  display: flex;
+  flex-direction: column;
+  max-width: 52rem;
   position: relative;
-  z-index: 1;
+  z-index: 2;
 
   @include breakpoints.breakpoint(md) {
+    align-items: flex-start;
     max-width: 44.4rem;
   }
 
@@ -723,6 +726,12 @@
   @include mixins.fireGradientBackground;
 
   @include breakpoints.breakpoint(md) {
+    background-image: linear-gradient(
+      180deg,
+      var(--fire-gradient-light) 0%,
+      var(--fire-gradient-dark) 75%,
+      var(--transparent) 92.5%
+    );
     clip-path: polygon(87.5% 0%, 91% 0%, 87.5% 92.5%, 80% 92.5%);
     max-width: #{variables.$max-content-width}em;
     transform-origin: top center;
@@ -745,14 +754,20 @@
   left: 50%;
   opacity: 0.2;
   pointer-events: none;
-  transform-origin: top center;
 
   @include introBackground;
   @include mixins.iceGradientBackground;
 
   @include breakpoints.breakpoint(md) {
+    background-image: linear-gradient(
+      180deg,
+      var(--ice-gradient-light) 0%,
+      var(--ice-gradient-dark) 75%,
+      var(--transparent) 92.5%
+    );
     clip-path: polygon(82.5% 0%, 86% 0%, 77.5% 92.5%, 70% 92.5%);
     max-width: #{variables.$max-content-width}em;
+    transform-origin: top center;
   }
 
   @include breakpoints.breakpoint(lg) {
@@ -903,7 +918,7 @@
   display: flex;
   flex-direction: column;
   margin-bottom: 2rem;
-  margin-top: 1.6rem;
+  margin-top: 1.8rem;
 
   @include breakpoints.breakpoint(sm) {
     margin-bottom: 2.8rem;
@@ -977,7 +992,7 @@
   display: flex;
   flex: 1;
   flex-direction: column;
-  margin-bottom: 1.8rem;
+  margin-bottom: 3rem;
   max-width: 47.2rem;
 
   > h5 {
@@ -989,8 +1004,6 @@
   }
 
   @include breakpoints.breakpoint(sm) {
-    margin-bottom: 2rem;
-
     > h5 {
       margin-bottom: 0.6rem;
     }
@@ -1471,7 +1484,7 @@
 
   @include breakpoints.breakpoint(sm) {
     button {
-      display: inline;
+      display: flex;
     }
   }
 }
@@ -1794,16 +1807,12 @@
 }
 
 .footerTopBorder {
-  height: 0.4rem;
+  height: 0.5rem;
   width: 100%;
 
   @include mixins.iceGradientBackground;
 
   @include breakpoints.breakpoint(md) {
-    height: 0.5rem;
-  }
-
-  @include breakpoints.breakpoint(xxl) {
     height: 0.6rem;
   }
 }

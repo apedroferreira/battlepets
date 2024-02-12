@@ -7,7 +7,7 @@
     "dev": "vite",
     "build": "tsc && vite build",
     "format": "yarn g:prettier --write '*/**/*.{js,jsx,ts,tsx,md,json}'",
-    "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0 && yarn g:stylelint \"**/*.css\"",
+    "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0 && yarn g:stylelint \"**/*.{css,scss}\"",
     "preview": "vite preview",
     "precommit": "yarn g:lint-staged"
   },
@@ -37,6 +37,7 @@
     "eslint-plugin-react": "^7.33.2",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.5",
+    "sass": "^1.70.0",
     "vite": "^5.0.8"
   }
 }

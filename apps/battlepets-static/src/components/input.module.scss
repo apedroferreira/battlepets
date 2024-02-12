@@ -1,4 +1,9 @@
 @use '../common/breakpoints' as breakpoints;
+@use '../common/keyframes';
+
+.inputWrapper {
+  position: relative;
+}
 
 .input {
   border: 1rem solid;
@@ -7,12 +12,21 @@
   border-width: 0.3rem;
   box-shadow: 0 0.2rem 0.3rem var(--shadow-light);
   font-size: 1.6rem;
-  padding: 1.4rem 1.8rem;
-  transition: box-shadow 0.2s;
+  padding: 1.6rem 1.8rem;
+  transition:
+    box-shadow 0.2s,
+    background-color 0.1s linear;
+  width: 100%;
 
   &:hover,
   &:focus {
     box-shadow: 0 0 0.8rem 0.4rem var(--ice-glow);
+  }
+
+  &:disabled {
+    background-color: #f8f8f8;
+    box-shadow: 0 0.2rem 0.3rem var(--shadow-light);
+    cursor: not-allowed;
   }
 
   @include breakpoints.breakpoint(lg) {
@@ -24,4 +38,62 @@
     font-size: 2rem;
     padding: 1.8rem 2.2rem;
   }
+}
+
+.inputError {
+  border-color: var(--error);
+  border-image-source: none;
+  box-shadow: 0 0 1rem 0.5rem var(--error-glow);
+
+  &:hover,
+  &:focus {
+    box-shadow: 0 0 1rem 0.5rem var(--error-glow);
+  }
+}
+
+.inputErrorBox {
+  align-items: center;
+  animation: slideInVerticalAnimation 0.25s ease-out 0s forwards;
+  background-color: var(--error);
+  box-shadow: 0 0 1rem 0.5rem var(--error-glow);
+  color: var(--contrast-text);
+  display: flex;
+  font-size: 1.6rem;
+  font-weight: bold;
+  left: 0;
+  line-height: 1.33;
+  opacity: 0;
+  padding: 1.2rem 1.4rem;
+  position: absolute;
+  top: calc(100% + 0.3rem);
+  width: 100%;
+  z-index: 3;
+
+  @include breakpoints.breakpoint(xxl) {
+    font-size: 1.8rem;
+  }
+}
+
+.inputErrorIcon {
+  fill: var(--contrast-text);
+  height: 2.2rem;
+  margin-right: 0.6rem;
+  position: relative;
+  top: -0.1rem;
+  width: 2.2rem;
+
+  @include breakpoints.breakpoint(sm) {
+    height: 2.4rem;
+    margin-right: 0.8rem;
+    width: 2.4rem;
+  }
+
+  @include breakpoints.breakpoint(xxl) {
+    height: 2.6rem;
+    width: 2.6rem;
+  }
+}
+
+.inputErrorText {
+  flex: 1;
 }

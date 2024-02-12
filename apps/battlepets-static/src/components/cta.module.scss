@@ -39,7 +39,7 @@
   @include mixins.signUpForm;
 
   @include breakpoints.breakpoint(sm) {
-    > input {
+    div:has(> input) {
       flex: 1;
     }
   }
@@ -47,25 +47,13 @@
   @include breakpoints.breakpoint(md) {
     max-width: 100%;
     width: auto;
-
-    > input {
-      width: 34rem;
-    }
   }
 
   @include breakpoints.breakpoint(lg) {
     margin-bottom: 2.8rem;
-
-    > input {
-      width: 40rem;
-    }
   }
 
   @include breakpoints.breakpoint(xxl) {
     margin-bottom: 3rem;
-
-    > input {
-      width: 42rem;
-    }
   }
 }

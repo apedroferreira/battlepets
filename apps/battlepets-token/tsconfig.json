@@ -3,8 +3,9 @@
   "compilerOptions": {
     "module": "commonjs",
     "moduleResolution": "node",
+    "baseUrl": "src",
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": ["./*"]
     }
   },
   "include": ["src", ".eslintrc.js"]

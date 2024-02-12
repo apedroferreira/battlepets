@@ -1,13 +1,12 @@
-/** @type {import('next').NextConfig} */
-
 const withBundleAnalyzer = require('@next/bundle-analyzer')({
   enabled: process.env.ANALYZE === 'true',
 })
 
+/** @type {import('next').NextConfig} */
 const nextConfig = {
   redirects: () => [
     {
-      source: '/:path(.{1,})', // this will redirect any other paths to `/`
+      source: '/:path((?!api).{1,})',
       destination: '/',
       permanent: false,
     },

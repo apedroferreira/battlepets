@@ -1,25 +1,35 @@
-import { Button, ButtonProps } from './Button'
 import styles from './cta.module.scss'
-import { Input } from './Input'
+import { EmailForm, EmailFormProps } from './EmailForm'
 import { Socials } from './Socials'
 
-interface CTAProps {
+interface CTAProps extends EmailFormProps {
   heading: string
-  buttonText: string
-  buttonVariant?: ButtonProps['variant']
 }
 
-export const CTA: React.FC<CTAProps> = ({ buttonText, buttonVariant, heading }) => (
+export const CTA: React.FC<CTAProps> = ({
+  buttonText,
+  buttonVariant,
+  email,
+  hasSignedUp,
+  heading,
+  onEmailChange,
+  onSuccess,
+}) => (
   <>
     <h4>{heading}</h4>
     <p className={styles.ctaText}>
       Join the waitlist to get the <strong>$BPETS airdrop</strong> and sign up for our <strong>public sale</strong> at
       an exclusive price!
     </p>
-    <form className={styles.ctaSignUpForm}>
-      <Input type="email" placeholder="Your email" />
-      <Button variant={buttonVariant}>{buttonText}</Button>
-    </form>
+    <EmailForm
+      className={styles.ctaSignUpForm}
+      email={email}
+      onEmailChange={onEmailChange}
+      hasSignedUp={hasSignedUp}
+      onSuccess={onSuccess}
+      buttonVariant={buttonVariant}
+      buttonText={buttonText}
+    />
     <Socials />
   </>
 )

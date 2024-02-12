@@ -1,0 +1,14 @@
+@keyframes loaderAnimation {
+  to {
+    transform: rotate(1turn);
+  }
+}
+
+.loader {
+  animation: loaderAnimation 1s infinite linear;
+  aspect-ratio: 1;
+  border: 0.8rem solid var(--ice-glow);
+  border-radius: 50%;
+  border-right-color: var(--fire-gradient-dark);
+  width: 100%;
+}

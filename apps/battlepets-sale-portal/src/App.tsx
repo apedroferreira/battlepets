@@ -4,11 +4,13 @@ import { WalletMultiButton } from '@solana/wallet-adapter-react-ui'
 import { useCallback, useEffect, useMemo, useState } from 'react'
 
 import bpetsLogo from '@/assets/bpetslogo.avif'
+import inputErrorIcon from '@/assets/inputerroricon.svg'
 import logo from '@/assets/logo.png'
 import solLogo from '@/assets/sollogo.avif'
 import {
   FUND_RAISER_PUBLIC_KEY,
   HARD_CAP_SOL_AMOUNT,
+  HOME_URL,
   MAX_ALLOCATION_SOL_AMOUNT,
   MIN_ALLOCATION_SOL_AMOUNT,
   SALE_ENDS_AT_TIMESTAMP,
@@ -28,12 +30,9 @@ import idl from '../battlepets_public_sale.json'
 
 import type { BattlepetsPublicSale } from '../types/battlepets_public_sale'
 
-import '@/App.css'
+import '@/App.scss'
 
 const INPUT_REGEX = RegExp('^\\d*(?:\\\\[.])?\\d*$')
-
-// @TODO: Responsive, test on phones w/ wallet and everything
-// @TODO: Airdrop script don't work as expected. Rate limited now, but then we can see what number it returns to see if we can improve script more at least.
 
 export const App: React.FC = () => {
   const { connection } = useConnection()
@@ -44,7 +43,9 @@ export const App: React.FC = () => {
 
   const [isSaleOpen, setIsSaleOpen] = useState(false)
 
-  const [currentAllocation, setCurrentAllocation] = useState(0)
+  const [currentAllocation, setCurrentAllocation] = useState<number | null>(null)
+  const adjustedCurrentAllocation = currentAllocation ?? 0
+
   const [totalAllocation, setTotalAllocation] = useState(0)
 
   const [SOLAmount, setSOLAmount] = useState('')
@@ -52,8 +53,8 @@ export const App: React.FC = () => {
   const [SOLAmountErrorMessage, setSOLAmountErrorMessage] = useState('')
 
   const remainingAllocation = useMemo(
-    () => Math.min(MAX_ALLOCATION_SOL_AMOUNT - currentAllocation, HARD_CAP_SOL_AMOUNT - totalAllocation),
-    [currentAllocation, totalAllocation]
+    () => Math.min(MAX_ALLOCATION_SOL_AMOUNT - adjustedCurrentAllocation, HARD_CAP_SOL_AMOUNT - totalAllocation),
+    [adjustedCurrentAllocation, totalAllocation]
   )
   const remainingAllocationText = useMemo(
     () => (+parseFloat(remainingAllocation.toFixed(SOLANA_DECIMALS))).toString(),
@@ -156,38 +157,50 @@ export const App: React.FC = () => {
     refreshSale(program)
   }, [anchorWallet, connection, refreshSaleAllocation, refreshSale])
 
+  const validateSOLAmount = useCallback(
+    (amount: string) => {
+      const amountNumber = Number(amount)
+
+      const isOverMaxAllocation = adjustedCurrentAllocation + amountNumber > MAX_ALLOCATION_SOL_AMOUNT
+      const isOverHardCap = totalAllocation + amountNumber > HARD_CAP_SOL_AMOUNT
+
+      if (
+        amount &&
+        amountNumber &&
+        currentAllocation !== null &&
+        adjustedCurrentAllocation + amountNumber < MIN_ALLOCATION_SOL_AMOUNT
+      ) {
+        setSOLAmountErrorMessage(`SOL amount must not be under min. allocation of ${MIN_ALLOCATION_SOL_AMOUNT}.`)
+      } else if (
+        amount &&
+        isOverMaxAllocation &&
+        (!isOverHardCap ||
+          MAX_ALLOCATION_SOL_AMOUNT - adjustedCurrentAllocation <= HARD_CAP_SOL_AMOUNT - totalAllocation)
+      ) {
+        setSOLAmountErrorMessage(
+          `SOL amount must not go over max. allocation of ${MAX_ALLOCATION_SOL_AMOUNT}${adjustedCurrentAllocation > 0 ? ` (${formatLargeStatNumber(MAX_ALLOCATION_SOL_AMOUNT - adjustedCurrentAllocation)} SOL left)` : ''}.`
+        )
+      } else if (amount && isOverHardCap) {
+        setSOLAmountErrorMessage(
+          `SOL amount must not go over total sale allocation of ${HARD_CAP_SOL_AMOUNT} (${formatLargeStatNumber(HARD_CAP_SOL_AMOUNT - totalAllocation)} SOL left).`
+        )
+      } else {
+        setSOLAmountErrorMessage('')
+      }
+    },
+    [adjustedCurrentAllocation, currentAllocation, totalAllocation]
+  )
+
   const handleSOLAmountChange = useCallback(
     (event: React.ChangeEvent<HTMLInputElement>) => {
       const amount = event.target.value.replace(/,/g, '.')
 
       if (amount === '' || INPUT_REGEX.test(escapeRegExp(amount))) {
-        const amountNumber = Number(amount)
-
-        const isOverMaxAllocation = currentAllocation + amountNumber > MAX_ALLOCATION_SOL_AMOUNT
-        const isOverHardCap = totalAllocation + amountNumber > HARD_CAP_SOL_AMOUNT
-
-        if (amount && amountNumber && currentAllocation + amountNumber < MIN_ALLOCATION_SOL_AMOUNT) {
-          setSOLAmountErrorMessage(`SOL amount must not be under min. allocation of ${MIN_ALLOCATION_SOL_AMOUNT}.`)
-        } else if (
-          amount &&
-          isOverMaxAllocation &&
-          (!isOverHardCap || MAX_ALLOCATION_SOL_AMOUNT - currentAllocation <= HARD_CAP_SOL_AMOUNT - totalAllocation)
-        ) {
-          setSOLAmountErrorMessage(
-            `SOL amount must not go over max. allocation of ${MAX_ALLOCATION_SOL_AMOUNT} (${formatLargeStatNumber(MAX_ALLOCATION_SOL_AMOUNT - currentAllocation)} SOL left).`
-          )
-        } else if (amount && isOverHardCap) {
-          setSOLAmountErrorMessage(
-            `SOL amount must not go over total sale allocation of ${HARD_CAP_SOL_AMOUNT} (${formatLargeStatNumber(HARD_CAP_SOL_AMOUNT - totalAllocation)} SOL left).`
-          )
-        } else {
-          setSOLAmountErrorMessage('')
-        }
-
+        validateSOLAmount(amount)
         setSOLAmount(amount)
       }
     },
-    [currentAllocation, totalAllocation]
+    [validateSOLAmount]
   )
 
   const handleMaxClick = useCallback(() => {
@@ -237,16 +250,21 @@ export const App: React.FC = () => {
 
   useEffect(() => {
     if (!isConnected) {
-      setCurrentAllocation(0)
+      setCurrentAllocation(null)
     }
-  }, [isConnected, publicKey])
+    validateSOLAmount(SOLAmount)
+  }, [SOLAmount, isConnected, validateSOLAmount])
+
+  useEffect(() => {
+    validateSOLAmount
+  }, [totalAllocation, validateSOLAmount])
 
   const hasSaleEnded = Date.now() > SALE_ENDS_AT_TIMESTAMP || totalAllocation >= HARD_CAP_SOL_AMOUNT
 
   return (
     <>
       <header>
-        <a href="https://battlepets.app" target="_blank" rel="noreferrer">
+        <a href={HOME_URL} target="_blank" rel="noreferrer">
           <img src={logo} className="logo" alt="BattlePets logo" />
         </a>
         <WalletMultiButton />
@@ -313,12 +331,13 @@ export const App: React.FC = () => {
             <p className="conversion-note">Max. allocation: {formatLargeStatNumber(MAX_ALLOCATION_SOL_AMOUNT)} SOL</p>
           </>
         )}
-        {isSaleOpen && !hasSaleEnded && currentAllocation < MAX_ALLOCATION_SOL_AMOUNT && (
+        {isSaleOpen && !hasSaleEnded && adjustedCurrentAllocation < MAX_ALLOCATION_SOL_AMOUNT && (
           <form className="form" onSubmit={handleFormSubmit}>
             <div className="input-wrapper">
               <label className="label" htmlFor="amount">
                 SOL amount to buy:
               </label>
+              <img src={solLogo} className="input-icon" alt="Solana token logo" />
               <input
                 className={`input ${SOLAmountErrorMessage ? 'input-error' : ''}`}
                 id="amount"
@@ -336,9 +355,14 @@ export const App: React.FC = () => {
                 onChange={handleSOLAmountChange}
                 disabled={isLoadingAddAllocation}
               />
-              {SOLAmountErrorMessage && <div className="input-error-box">{SOLAmountErrorMessage}</div>}
+              {SOLAmountErrorMessage && (
+                <div className="input-error-box">
+                  <img src={inputErrorIcon} className="input-error-icon" />
+                  <div className="input-error-text">{SOLAmountErrorMessage}</div>
+                </div>
+              )}
               {!isLoadingAddAllocation &&
-                currentAllocation + remainingAllocation >= MIN_ALLOCATION_SOL_AMOUNT &&
+                adjustedCurrentAllocation + remainingAllocation >= MIN_ALLOCATION_SOL_AMOUNT &&
                 SOLAmount !== remainingAllocationText && (
                   <button className="max-amount-button" type="button" onClick={handleMaxClick}>
                     Max: {formatLargeStatNumber(remainingAllocation)}
@@ -381,16 +405,16 @@ export const App: React.FC = () => {
                 Your current allocation:
               </label>
               <div id="allocation" className="allocation">
-                <span className={currentAllocation > 0 ? 'ice-text' : 'fire-text'}>
-                  {formatLargeStatNumber(currentAllocation)} SOL (
-                  {formatLargeStatNumber(currentAllocation * SOL_BPETS_EXCHANGE_RATE)} BPETS)
+                <span className={adjustedCurrentAllocation > 0 ? 'ice-text' : 'fire-text'}>
+                  {formatLargeStatNumber(adjustedCurrentAllocation)} SOL (
+                  {formatLargeStatNumber(adjustedCurrentAllocation * SOL_BPETS_EXCHANGE_RATE)} BPETS)
                 </span>
               </div>
-              {currentAllocation > 0 && (
+              {adjustedCurrentAllocation > 0 && (
                 <p className="allocation-note">
                   ✅ You will receive{' '}
-                  <strong>{formatLargeStatNumber(currentAllocation * SOL_BPETS_EXCHANGE_RATE)} BPETS</strong> once the
-                  token is listed!
+                  <strong>{formatLargeStatNumber(adjustedCurrentAllocation * SOL_BPETS_EXCHANGE_RATE)} BPETS</strong>{' '}
+                  once the token is listed!
                 </p>
               )}
             </div>

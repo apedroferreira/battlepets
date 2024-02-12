@@ -48,14 +48,14 @@
 
 .revealedSectionVisible {
   .slideInOnReveal1 {
-    animation: slideInHorizontalAnimation 0.25s ease-out 0s forwards;
+    animation: slideInHorizontalAnimationLeft 0.25s ease-out 0s forwards;
   }
 
   .slideInOnReveal2 {
-    animation: slideInHorizontalAnimation 0.25s ease-out 0.15s forwards;
+    animation: slideInHorizontalAnimationLeft 0.25s ease-out 0.15s forwards;
   }
 
   .slideInOnReveal3 {
-    animation: slideInHorizontalAnimation 0.25s ease-out 0.3s forwards;
+    animation: slideInHorizontalAnimationLeft 0.25s ease-out 0.3s forwards;
   }
 }

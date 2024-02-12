@@ -85,7 +85,7 @@
   display: flex;
   flex-direction: column;
 
-  input {
+  div:has(> input) {
     margin-bottom: 0.4rem;
     width: 100%;
   }
@@ -97,7 +97,7 @@
   @include breakpoints.breakpoint(sm) {
     flex-direction: row;
 
-    input {
+    div:has(> input) {
       flex: 1;
       margin-bottom: 0;
       margin-right: 0.4rem;
@@ -110,6 +110,20 @@
   }
 
   @include breakpoints.breakpoint(md) {
-    margin-right: 0.8rem;
+    div:has(> input) {
+      width: 34rem;
+    }
+  }
+
+  @include breakpoints.breakpoint(lg) {
+    div:has(> input) {
+      width: 40rem;
+    }
+  }
+
+  @include breakpoints.breakpoint(xxl) {
+    div:has(> input) {
+      width: 42rem;
+    }
   }
 }

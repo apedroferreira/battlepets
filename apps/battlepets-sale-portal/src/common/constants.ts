@@ -18,3 +18,5 @@ export const FUND_RAISER_PUBLIC_KEY = new anchor.web3.PublicKey(
 )
 
 export const SALE_ENDS_AT_TIMESTAMP = Number(import.meta.env.VITE_SALE_ENDS_AT_TIMESTAMP)
+
+export const HOME_URL = 'https://battlepets.app'

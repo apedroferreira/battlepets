@@ -8,7 +8,7 @@ import ReactDOM from 'react-dom/client'
 import { App } from '@/App.tsx'
 import { getEndpoint } from '@/utils/solanaUtils'
 
-import '@/index.css'
+import '@/index.scss'
 
 window.Buffer = buffer.Buffer
 

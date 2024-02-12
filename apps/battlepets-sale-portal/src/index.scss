@@ -1,0 +1,114 @@
+@use 'sass:math';
+@use '../node_modules/modern-normalize/modern-normalize.css';
+@use '@solana/wallet-adapter-react-ui/styles.css';
+@use './common/variables' as variables;
+@use './common/breakpoints' as breakpoints;
+
+:root {
+  --max-content-width: min(88%, #{variables.$max-content-width}em);
+  --min-content-width: #{variables.$min-content-width}em;
+  --transparent: rgb(255 255 255 / 0%);
+  --body-text: #202020;
+  --contrast-text: #fff;
+  --fire-gradient-light: #de1a1a;
+  --fire-gradient-dark: #bf1616;
+  --ice-gradient-light: #20bcb8;
+  --ice-gradient-dark: #16807d;
+  --background-gradient-fire: #ffede6;
+  --background-gradient-ice: #e8fffd;
+  --shadow-light: rgb(0 0 0 / 10%);
+  --fire-glow: rgb(191 22 22 / 20%);
+  --ice-glow: rgb(32 188 184 / 30%);
+  --fire-gradient-faded-light: #e7524d;
+  --fire-gradient-faded-dark: #ce4d4a;
+  --ice-gradient-faded-light: #5fc9c6;
+  --ice-gradient-faded-dark: #519a96;
+  --error: #ef1a1a;
+  --error-glow: rgb(239 26 26 / 35%);
+  --footer-gradient-light: #c22b2b;
+  --footer-gradient-dark: #8a1010;
+
+  background: linear-gradient(135deg, var(--background-gradient-fire), var(--background-gradient-ice));
+  color: var(--body-text);
+  color-scheme: light dark;
+  font-family: Sora, sans-serif;
+}
+
+a {
+  text-decoration: inherit;
+}
+
+html,
+body {
+  min-width: var(--min-content-width);
+  overflow-x: hidden;
+  width: 100vw;
+}
+
+html {
+  font-size: 62.5%;
+  scroll-behavior: smooth !important;
+}
+
+body {
+  display: flex;
+  font-size: #{math.div(variables.$base-font-size, 10)}rem;
+  margin: 0;
+  min-height: 100vh;
+}
+
+header {
+  align-items: flex-start;
+  display: flex;
+  justify-content: space-between;
+  left: 50%;
+  max-width: 96%;
+  min-width: var(--min-content-width);
+  padding-top: 1rem;
+  position: absolute;
+  top: 0;
+  transform: translateX(-50%);
+  width: 100vw;
+  z-index: 99;
+
+  @include breakpoints.breakpoint(sm) {
+    max-width: var(--max-content-width);
+  }
+
+  @include breakpoints.breakpoint(xl) {
+    padding-top: 1.6rem;
+  }
+
+  @include breakpoints.breakpoint(xxl) {
+    padding-top: 2.6rem;
+  }
+}
+
+main {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  max-width: var(--max-content-width);
+  padding: 10.4rem 0;
+  width: 100%;
+
+  @include breakpoints.breakpoint(sm) {
+    padding: 11.6rem 0;
+  }
+
+  @include breakpoints.breakpoint(md) {
+    padding: 11.8rem 0;
+  }
+
+  @include breakpoints.breakpoint(lg) {
+    padding: 12.2rem 0;
+  }
+
+  @include breakpoints.breakpoint(xl) {
+    padding: 12.6rem 0;
+  }
+
+  @include breakpoints.breakpoint(xxl) {
+    padding: 16rem 0;
+  }
+}

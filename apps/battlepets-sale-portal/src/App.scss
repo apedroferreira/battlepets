@@ -1,0 +1,818 @@
+@use './common/mixins' as mixins;
+@use './common/variables' as variables;
+@use './common/breakpoints' as breakpoints;
+@use './common/keyframes';
+
+.fire-text {
+  @include mixins.fire-text;
+}
+
+.ice-text {
+  @include mixins.ice-text;
+}
+
+.toast-wrapper {
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  left: 0;
+  pointer-events: none;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  z-index: 99;
+
+  .toast-enter {
+    opacity: 0;
+    transform: translateY(-9rem);
+  }
+
+  .toast-enter-active {
+    opacity: 1;
+    transform: translateY(0);
+    transition:
+      opacity 0.3s ease,
+      transform 0.3s ease;
+  }
+
+  .toast-exit {
+    opacity: 1;
+  }
+
+  .toast-exit-active {
+    opacity: 0;
+    transform: translateY(-9rem);
+    transition:
+      opacity 0.3s ease,
+      transform 0.3s ease;
+  }
+}
+
+.toast {
+  backface-visibility: hidden;
+  color: var(--contrast-text);
+  font-size: 1.4rem;
+  font-weight: bold;
+  line-height: 1.5;
+  max-width: min(48rem, 88%);
+  min-width: 30rem;
+  padding: 1.3rem 2.8rem;
+  pointer-events: auto;
+  position: relative;
+  text-align: center;
+  top: 1.5rem;
+
+  &.toast-success {
+    background-color: var(--ice-gradient-light);
+    box-shadow: 0 0 0.8rem 0.4rem var(--ice-glow);
+  }
+
+  &.toast-error {
+    background-color: var(--error);
+    box-shadow: 0 0 0.8rem 0.4rem var(--error-glow);
+  }
+
+  @include breakpoints.breakpoint(sm) {
+    font-size: 1.6rem;
+    padding: 1.6rem 4rem;
+    top: 2rem;
+  }
+
+  @include breakpoints.breakpoint(xxl) {
+    top: 3rem;
+  }
+}
+
+.live-time {
+  display: inline-block;
+}
+
+@keyframes loader-animation {
+  to {
+    transform: rotate(1turn);
+  }
+}
+
+.loader {
+  animation: loader-animation 1s infinite linear;
+  aspect-ratio: 1;
+  border: 0.8rem solid var(--ice-glow);
+  border-radius: 50%;
+  border-right-color: var(--fire-gradient-dark);
+  width: 100%;
+}
+
+#root {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+h1.h1 {
+  font-size: 3.4rem;
+  margin: 0 0 2rem;
+  text-align: center;
+
+  @include mixins.bernhard-gothic;
+
+  @include breakpoints.breakpoint(sm) {
+    font-size: 4.6rem;
+  }
+
+  @include breakpoints.breakpoint(md) {
+    font-size: 5.6rem;
+  }
+
+  @include breakpoints.breakpoint(lg) {
+    font-size: 6.6rem;
+    margin-bottom: 3rem;
+  }
+
+  @include breakpoints.breakpoint(xl) {
+    font-size: 6.8rem;
+    margin: 0 0 3.2rem;
+  }
+
+  @include breakpoints.breakpoint(xxl) {
+    font-size: 8rem;
+    margin: 0 0 3.8rem;
+  }
+}
+
+button.button,
+button.wallet-adapter-button-trigger {
+  align-items: center;
+  border: 0.3rem solid var(--contrast-text);
+  border-radius: 0;
+  box-shadow: 0 0.2rem 0.3rem var(--shadow-light);
+  color: var(--contrast-text);
+  cursor: pointer;
+  display: flex;
+  font-size: 2rem;
+  height: auto;
+  justify-content: center;
+  line-height: 1.15;
+  min-width: 22.8rem;
+  padding: 1.4rem 2.2rem;
+  text-transform: uppercase;
+  transition:
+    box-shadow 0.2s ease-out,
+    transform 0.1s ease-out;
+  white-space: nowrap;
+
+  @include mixins.bernhard-gothic;
+  @include mixins.ice-gradient-background;
+
+  &:hover {
+    box-shadow: 0 0 0.8rem 0.4rem var(--ice-glow);
+    transform: scale(1.015);
+  }
+
+  &:disabled {
+    background-image: linear-gradient(135deg, var(--ice-gradient-faded-light) 0%, var(--ice-gradient-faded-dark) 100%);
+    box-shadow: 0 0.2rem 0.3rem var(--shadow-light);
+    cursor: not-allowed;
+    transform: scale(1);
+  }
+
+  i.wallet-adapter-button-start-icon > img {
+    height: 2.8rem;
+    position: relative;
+    top: -0.2rem;
+    width: 2.8rem;
+  }
+
+  @include breakpoints.breakpoint(sm) {
+    font-size: 2.2rem;
+    min-width: 26.8rem;
+    padding: 1.4rem 3.8rem;
+  }
+
+  @include breakpoints.breakpoint(xxl) {
+    font-size: 2.4rem;
+    min-width: 29rem;
+    padding: 1.6rem 4.2rem;
+  }
+}
+
+.button-loader {
+  animation: scale-in-animation 0.15s ease-out 0s forwards;
+  aspect-ratio: 1;
+  display: inline-block;
+  height: 1.8rem;
+  margin-right: 0.6rem;
+  opacity: 0;
+  position: relative;
+  top: 0.3rem;
+
+  .loader {
+    border-width: 0.4rem;
+  }
+
+  @include breakpoints.breakpoint(sm) {
+    height: 2rem;
+
+    .loader {
+      border-width: 0.5rem;
+    }
+  }
+
+  @include breakpoints.breakpoint(xxl) {
+    height: 2.2rem;
+
+    .loader {
+      border-width: 0.6rem;
+    }
+  }
+}
+
+.input-wrapper {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+input.input {
+  border: 0.3rem solid;
+  border-image-slice: 1;
+  border-image-source: linear-gradient(135deg, var(--ice-gradient-light) 0%, var(--ice-gradient-dark) 100%);
+  border-width: 0.3rem;
+  box-shadow: 0 0.2rem 0.3rem var(--shadow-light);
+  font-size: 2rem;
+  padding: 2rem 1.8rem 2rem 4.1rem;
+  transition:
+    box-shadow 0.2s,
+    background-color 0.1s linear;
+
+  &:hover,
+  &:focus {
+    box-shadow: 0 0 0.8rem 0.4rem var(--ice-glow);
+  }
+
+  &:disabled {
+    background-color: #f8f8f8;
+    box-shadow: 0 0.2rem 0.3rem var(--shadow-light);
+    cursor: not-allowed;
+  }
+
+  @include breakpoints.breakpoint(sm) {
+    padding: 2.2rem 2rem 2.2rem 4.2rem;
+  }
+
+  @include breakpoints.breakpoint(lg) {
+    font-size: 2.2rem;
+    padding-left: 4.3rem;
+  }
+
+  @include breakpoints.breakpoint(xxl) {
+    font-size: 2.4rem;
+    padding-left: 4.4rem;
+  }
+}
+
+.input-icon {
+  border-radius: 100%;
+  height: 2.6rem;
+  left: 1.3rem;
+  position: absolute;
+  top: 4.25rem;
+  width: 2.6rem;
+  z-index: 1;
+
+  @include breakpoints.breakpoint(sm) {
+    height: 2.8rem;
+    left: 1.2rem;
+    top: 4.45rem;
+    width: 2.8rem;
+  }
+
+  @include breakpoints.breakpoint(md) {
+    top: 4.6rem;
+  }
+
+  @include breakpoints.breakpoint(lg) {
+    top: 4.7rem;
+  }
+
+  @include breakpoints.breakpoint(xxl) {
+    top: 4.85rem;
+  }
+}
+
+input.input-error {
+  border-color: var(--error);
+  border-image-source: none;
+  box-shadow: 0 0 1rem 0.5rem var(--error-glow);
+
+  &:hover,
+  &:focus {
+    box-shadow: 0 0 1rem 0.5rem var(--error-glow);
+  }
+}
+
+.input-error-box {
+  align-items: center;
+  animation: slide-in-vertical-animation 0.25s ease-out 0s forwards;
+  background-color: var(--error);
+  box-shadow: 0 0 1rem 0.5rem var(--error-glow);
+  color: var(--contrast-text);
+  display: flex;
+  font-size: 1.4rem;
+  font-weight: bold;
+  left: 0;
+  line-height: 1.3;
+  opacity: 0;
+  padding: 1.2rem 1.4rem;
+  position: absolute;
+  top: calc(100% + 0.2rem);
+  width: 100%;
+  z-index: 3;
+
+  @include breakpoints.breakpoint(sm) {
+    font-size: 1.6rem;
+    top: calc(100% + 0.3rem);
+  }
+}
+
+.input-error-icon {
+  height: 2rem;
+  margin-right: 0.6rem;
+  position: relative;
+  top: -0.1rem;
+  width: 2rem;
+
+  @include breakpoints.breakpoint(sm) {
+    height: 2.2rem;
+    margin-right: 0.8rem;
+    width: 2.2rem;
+  }
+}
+
+.input-error-text {
+  flex: 1;
+}
+
+label.label {
+  display: inline-block;
+  font-size: 1.4rem;
+  font-weight: bold;
+  margin-bottom: 0.6rem;
+
+  @include breakpoints.breakpoint(md) {
+    font-size: 1.6rem;
+  }
+}
+
+form.form {
+  align-items: center;
+  animation: long-slide-in-vertical-animation 0.25s ease-out 0.2s forwards;
+  display: flex;
+  flex-direction: column;
+  margin-top: 1.6rem;
+  max-width: 100%;
+  min-width: min(100%, 42rem);
+  opacity: 0;
+  z-index: 1;
+
+  .input-wrapper {
+    margin-bottom: 0.2rem;
+    width: 100%;
+  }
+
+  button.button {
+    display: inline-block;
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .wallet-adapter-dropdown {
+    min-width: 100%;
+  }
+
+  button.button,
+  button.wallet-adapter-button-trigger {
+    min-width: 100%;
+    padding-bottom: 1.8rem;
+    padding-top: 1.8rem;
+
+    @include mixins.fire-gradient-background;
+
+    &:hover {
+      box-shadow: 0 0 0.8rem 0.4rem var(--fire-glow);
+    }
+
+    &:disabled {
+      background-image: linear-gradient(
+        135deg,
+        var(--fire-gradient-faded-light) 0%,
+        var(--fire-gradient-faded-dark) 100%
+      );
+      box-shadow: 0 0.2rem 0.3rem var(--shadow-light);
+    }
+  }
+
+  @include breakpoints.breakpoint(md) {
+    align-items: flex-end;
+    flex-direction: row;
+    min-width: 51rem;
+
+    .input-wrapper {
+      margin-bottom: 0;
+      margin-right: 0.4rem;
+      width: 26.2rem;
+    }
+
+    .wallet-adapter-dropdown {
+      min-width: 33.4rem;
+    }
+
+    button.button,
+    button.wallet-adapter-button-trigger {
+      min-width: 33.4rem;
+      padding-bottom: 2.2rem;
+      padding-top: 2.2rem;
+    }
+  }
+
+  @include breakpoints.breakpoint(lg) {
+    min-width: 54rem;
+
+    button.button,
+    button.wallet-adapter-button-trigger {
+      min-width: 36.2rem;
+    }
+  }
+
+  @include breakpoints.breakpoint(xxl) {
+    margin-top: 1.6rem;
+    min-width: 56rem;
+
+    button.button,
+    button.wallet-adapter-button-trigger {
+      min-width: 36.2rem;
+    }
+  }
+}
+
+.logo {
+  width: 8.2rem;
+
+  @include breakpoints.breakpoint(sm) {
+    width: 9.2rem;
+  }
+
+  @include breakpoints.breakpoint(lg) {
+    width: 9.6rem;
+  }
+
+  @include breakpoints.breakpoint(xl) {
+    width: 10rem;
+  }
+
+  @include breakpoints.breakpoint(xxl) {
+    width: 11rem;
+  }
+}
+
+.progress-bar-wrapper {
+  margin-bottom: 8.8rem;
+  max-width: 96%;
+
+  label.label {
+    margin-bottom: 0.6rem;
+  }
+
+  @include breakpoints.breakpoint(sm) {
+    margin-bottom: 5.2rem;
+  }
+
+  @include breakpoints.breakpoint(md) {
+    margin-bottom: 5.6rem;
+  }
+
+  @include breakpoints.breakpoint(lg) {
+    margin-bottom: 6rem;
+  }
+
+  @include breakpoints.breakpoint(xxl) {
+    margin-bottom: 6.8rem;
+  }
+}
+
+.progress-bar {
+  background-color: var(--ice-glow);
+  box-shadow: 0 0.2rem 0.3rem var(--shadow-light);
+  height: 2.8rem;
+  max-width: 100%;
+  position: relative;
+  width: 72rem;
+
+  @include breakpoints.breakpoint(sm) {
+    height: 3rem;
+  }
+
+  @include breakpoints.breakpoint(xxl) {
+    height: 3.6rem;
+    width: 80rem;
+  }
+}
+
+@keyframes progress-bar-progress-background-animation {
+  to {
+    background-position: 200% center;
+  }
+}
+
+.progress-bar-progress {
+  height: 100%;
+  left: 0;
+  position: absolute;
+  top: 0;
+  transform-origin: 0 50%;
+  transition: transform 0.5s ease;
+  width: 100%;
+
+  @include mixins.animated-fire-gradient-background;
+}
+
+.progress-bar-values {
+  font-size: 2.2rem;
+  position: absolute;
+  right: 0;
+  top: calc(100% + 2.2rem);
+  z-index: 2;
+
+  @include mixins.bernhard-gothic;
+
+  @include breakpoints.breakpoint(sm) {
+    font-size: 2.4rem;
+    top: -2.8rem;
+  }
+
+  @include breakpoints.breakpoint(xxl) {
+    font-size: 2.6rem;
+    top: -3.2rem;
+  }
+}
+
+.soft-cap-marker {
+  border-right: 0.2rem solid var(--contrast-text);
+  height: 100%;
+  left: 0;
+  opacity: 0.5;
+  position: absolute;
+  top: 0;
+}
+
+.soft-cap-marker-label {
+  font-size: 0.95rem;
+  position: absolute;
+  top: calc(100% + 0.6rem);
+  transform: translateX(-50%);
+
+  @include breakpoints.breakpoint(sm) {
+    font-size: 1.2rem;
+  }
+}
+
+.progress-bar-timer {
+  font-size: 1.4rem;
+  position: absolute;
+  right: 0;
+  top: calc(100% + 5rem);
+  z-index: 1;
+
+  .live-time {
+    text-align: right;
+    width: 9.6rem;
+  }
+
+  @include breakpoints.breakpoint(sm) {
+    font-size: 1.6rem;
+    top: calc(100% + 0.6rem);
+
+    .live-time {
+      width: 10.8rem;
+    }
+  }
+}
+
+@keyframes progress-bar-loader-animation {
+  from {
+    opacity: 0;
+    transform: translate(calc(100% + 0.4rem), -50%) scale(0);
+  }
+
+  to {
+    opacity: 1;
+    transform: translate(calc(100% + 0.4rem), -50%) scale(1);
+  }
+}
+
+.progress-bar-loader {
+  animation: progress-bar-loader-animation 0.25s ease-out 0.3s forwards;
+  aspect-ratio: 1;
+  height: 72%;
+  opacity: 0;
+  position: absolute;
+  right: 0.1rem;
+  top: 50%;
+  transform: translate(calc(100% + 0.4rem), -50%) scale(0);
+  transform-origin: 50% 50%;
+
+  .loader {
+    border-width: 0.6rem;
+  }
+
+  @include breakpoints.breakpoint(sm) {
+    height: 90%;
+    right: 0;
+  }
+
+  @include breakpoints.breakpoint(xxl) {
+    .loader {
+      border-width: 0.8rem;
+    }
+  }
+}
+
+.conversion {
+  align-items: center;
+  display: flex;
+  font-size: 2.6rem;
+  margin-bottom: 0.1rem;
+  text-align: center;
+
+  @include mixins.bernhard-gothic;
+
+  @include breakpoints.breakpoint(sm) {
+    font-size: 3rem;
+    margin-bottom: 0;
+  }
+
+  @include breakpoints.breakpoint(md) {
+    font-size: 3.2rem;
+  }
+
+  @include breakpoints.breakpoint(xxl) {
+    font-size: 3.6rem;
+  }
+}
+
+.conversion-note {
+  animation: long-slide-in-vertical-animation 0.25s ease-out 0s forwards;
+  font-size: 1.4rem;
+  margin: 0.3rem 0;
+  opacity: 0;
+
+  @include breakpoints.breakpoint(sm) {
+    font-size: 1.6rem;
+    margin: 0.4rem 0;
+  }
+}
+
+.token-logo {
+  border-radius: 100%;
+  height: 2.6rem;
+  margin: 0 0.6rem;
+  position: relative;
+  top: -0.25rem;
+  width: 2.6rem;
+
+  @include breakpoints.breakpoint(sm) {
+    height: 3.2rem;
+    width: 3.2rem;
+  }
+
+  @include breakpoints.breakpoint(xxl) {
+    height: 3.6rem;
+    width: 3.6rem;
+  }
+}
+
+.token-logo-small {
+  border-radius: 100%;
+  height: 1.8rem;
+  margin: 0 0.4rem;
+  position: relative;
+  top: 0.25rem;
+  width: 1.8rem;
+
+  @include breakpoints.breakpoint(sm) {
+    height: 2rem;
+    width: 2rem;
+  }
+
+  @include breakpoints.breakpoint(xxl) {
+    height: 2.2rem;
+    width: 2.2rem;
+  }
+}
+
+.max-amount-button {
+  background-color: var(--transparent);
+  border: none;
+  color: var(--ice-gradient-dark);
+  cursor: pointer;
+  font-size: 1.2rem;
+  font-weight: bold;
+  position: absolute;
+  right: 0.4rem;
+  top: calc(100% - 2.2rem);
+  transition:
+    color 0.1s ease-in-out,
+    text-shadow 0.1s ease-in-out;
+  z-index: 1;
+
+  &:hover {
+    color: var(--ice-gradient-light);
+    text-shadow: 0 0 0.8rem var(--ice-glow);
+  }
+
+  @include breakpoints.breakpoint(sm) {
+    font-size: 1.4rem;
+    top: calc(100% - 2.4rem);
+  }
+}
+
+.allocation-wrapper {
+  align-items: center;
+  animation: long-slide-in-vertical-animation 0.25s ease-out 0.25s forwards;
+  display: flex;
+  flex-direction: column;
+  margin-top: 3rem;
+  opacity: 0;
+
+  @include breakpoints.breakpoint(sm) {
+    margin-top: 3.2rem;
+  }
+
+  @include breakpoints.breakpoint(lg) {
+    margin-top: 3.6rem;
+  }
+
+  @include breakpoints.breakpoint(xxl) {
+    margin-top: 4rem;
+  }
+}
+
+.allocation {
+  align-items: center;
+  display: flex;
+  font-size: 3rem;
+  text-align: center;
+
+  @include mixins.bernhard-gothic;
+
+  > span {
+    transition: background-image 0.3s ease;
+  }
+
+  @include breakpoints.breakpoint(sm) {
+    font-size: 3.2rem;
+  }
+
+  @include breakpoints.breakpoint(md) {
+    font-size: 3.4rem;
+  }
+
+  @include breakpoints.breakpoint(lg) {
+    font-size: 3.8rem;
+  }
+
+  @include breakpoints.breakpoint(xxl) {
+    font-size: 4.2rem;
+  }
+}
+
+.allocation-note {
+  font-size: 1.4rem;
+  line-height: 1.5;
+  margin: 0.4rem 0;
+  text-align: center;
+
+  @include breakpoints.breakpoint(sm) {
+    font-size: 1.6rem;
+  }
+}
+
+.allocation-loader {
+  animation: scale-in-animation 0.25s ease-out 0.3s forwards;
+  aspect-ratio: 1;
+  margin-top: 3.6rem;
+  opacity: 0;
+  transform: scale(0);
+  transform-origin: 50% 50%;
+  width: 5rem;
+
+  @include breakpoints.breakpoint(sm) {
+    margin-top: 4rem;
+    width: 5.4rem;
+  }
+
+  @include breakpoints.breakpoint(xxl) {
+    width: 6rem;
+  }
+}

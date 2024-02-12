@@ -56,7 +56,6 @@ const setMetadata = async (): Promise<void> => {
     timeout: 60000,
   })
 
-  // eslint-disable-next-line security/detect-non-literal-fs-filename
   const tokenImageBuffer = await fs.readFile(path.resolve(__dirname, './scriptsAssets/token.png'))
   const tokenImageFile = createGenericFile(tokenImageBuffer, 'bpetstoken.png')
 

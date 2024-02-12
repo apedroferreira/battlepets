@@ -1,5 +1,6 @@
 @use '../common/mixins' as mixins;
 @use '../common/breakpoints' as breakpoints;
+@use '../common/keyframes';
 
 .button {
   align-items: center;
@@ -10,7 +11,7 @@
   display: flex;
   font-size: 2rem;
   justify-content: center;
-  padding: 1.2rem 2.2rem;
+  padding: 1.4rem 2.2rem;
   text-transform: uppercase;
   transition:
     box-shadow 0.2s ease-out,
@@ -23,12 +24,12 @@
     transform: scale(1.015);
   }
 
-  @include breakpoints.breakpoint(sm) {
-    font-size: 2.2rem;
-    padding: 1.4rem 3.8rem;
+  &:disabled {
+    cursor: not-allowed;
+    transform: scale(1);
   }
 
-  @include breakpoints.breakpoint(lg) {
+  @include breakpoints.breakpoint(sm) {
     font-size: 2.2rem;
     padding: 1.4rem 3.8rem;
   }
@@ -39,11 +40,52 @@
   }
 }
 
+.buttonLoader {
+  animation: scaleInAnimation 0.15s ease-out 0s forwards;
+  aspect-ratio: 1;
+  display: inline-block;
+  height: 1.8rem;
+  margin-right: 0.6rem;
+  opacity: 0;
+  position: relative;
+  top: -0.2rem;
+
+  > div {
+    border-width: 0.4rem;
+  }
+
+  @include breakpoints.breakpoint(sm) {
+    height: 2rem;
+
+    > div {
+      border-width: 0.5rem;
+    }
+  }
+
+  @include breakpoints.breakpoint(xxl) {
+    height: 2.2rem;
+
+    > div {
+      border-width: 0.6rem;
+    }
+  }
+}
+
 .iceButton {
   @include mixins.iceGradientBackground;
 
+  .buttonLoader > div {
+    border-color: var(--fire-glow);
+    border-right-color: var(--ice-gradient-dark);
+  }
+
   &:hover {
     box-shadow: 0 0 0.8rem 0.4rem var(--ice-glow);
+  }
+
+  &:disabled {
+    background-image: linear-gradient(135deg, var(--ice-gradient-faded-light) 0%, var(--ice-gradient-faded-dark) 100%);
+    box-shadow: 0 0.2rem 0.3rem var(--shadow-light);
   }
 }
 
@@ -52,5 +94,14 @@
 
   &:hover {
     box-shadow: 0 0 0.8rem 0.4rem var(--fire-glow);
+  }
+
+  &:disabled {
+    background-image: linear-gradient(
+      135deg,
+      var(--fire-gradient-faded-light) 0%,
+      var(--fire-gradient-faded-dark) 100%
+    );
+    box-shadow: 0 0.2rem 0.3rem var(--shadow-light);
   }
 }

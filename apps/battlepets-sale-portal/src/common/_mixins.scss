@@ -1,0 +1,81 @@
+@use './breakpoints' as breakpoints;
+
+@mixin bernhard-gothic {
+  font-family: bernhard-gothic-urw, sans-serif;
+  font-style: normal;
+  font-weight: 700;
+}
+
+@mixin fill-space {
+  height: 100%;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 100%;
+}
+
+@mixin fire-gradient-background($angle: 135deg) {
+  background-image: linear-gradient($angle, var(--fire-gradient-light) 0%, var(--fire-gradient-dark) 100%);
+}
+
+@mixin ice-gradient-background($angle: 135deg) {
+  background-image: linear-gradient($angle, var(--ice-gradient-light) 0%, var(--ice-gradient-dark) 100%);
+}
+
+@keyframes gradient-background-image-animation {
+  to {
+    background-position: 200% center;
+  }
+}
+
+@mixin animated-gradient-background-image($duration: 3s) {
+  animation: gradient-background-image-animation $duration linear infinite;
+  background-size: 200% auto;
+}
+
+@mixin animated-fire-gradient-background($angle: 135deg, $duration: 3s) {
+  background-image: linear-gradient(
+    $angle,
+    var(--fire-gradient-light) 20%,
+    var(--fire-gradient-dark) 40%,
+    var(--fire-gradient-dark) 60%,
+    var(--fire-gradient-light) 80%
+  );
+
+  @include animated-gradient-background-image($duration);
+}
+
+@mixin animated-ice-gradient-background($angle: 135deg, $duration: 3s) {
+  background-image: linear-gradient(
+    $angle,
+    var(--ice-gradient-light) 20%,
+    var(--ice-gradient-dark) 40%,
+    var(--ice-gradient-dark) 60%,
+    var(--ice-gradient-light) 80%
+  );
+
+  @include animated-gradient-background-image($duration);
+}
+
+@mixin gradient-text {
+  /* stylelint-disable-next-line property-no-vendor-prefix */
+  -webkit-background-clip: text;
+  background-clip: text;
+  font-weight: bold;
+  -webkit-text-fill-color: transparent;
+  -moz-text-fill-color: transparent;
+}
+
+@mixin fire-text {
+  color: var(--fire-gradient-dark);
+
+  @include gradient-text;
+  @include animated-fire-gradient-background(-45deg);
+}
+
+@mixin ice-text {
+  color: var(--ice-gradient-dark);
+
+  @include gradient-text;
+  @include animated-ice-gradient-background(-45deg);
+}

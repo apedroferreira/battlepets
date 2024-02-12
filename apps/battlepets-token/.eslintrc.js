@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
 const path = require('path')
 
 module.exports = {
@@ -18,8 +19,5 @@ module.exports = {
       map: [['@', path.resolve(__dirname, './src')]],
       extensions: ['.js', '.jsx', '.ts', '.d.ts', '.tsx'],
     },
-  },
-  rules: {
-    '@typescript-eslint/no-var-requires': 0,
   },
 }
