@@ -1,6 +1,7 @@
 import * as anchor from '@coral-xyz/anchor'
 import { useAnchorWallet, useConnection, useWallet } from '@solana/wallet-adapter-react'
 import { WalletMultiButton } from '@solana/wallet-adapter-react-ui'
+import saleIdl from 'battlepets-shared/idls/battlepets_public_sale.json'
 import { useCallback, useEffect, useMemo, useState } from 'react'
 
 import bpetsLogo from '@/assets/bpetslogo.avif'
@@ -10,6 +11,7 @@ import solLogo from '@/assets/sollogo.avif'
 import {
   FUND_RAISER_PUBLIC_KEY,
   HARD_CAP_SOL_AMOUNT,
+  HAS_PROCESSED_SALE_END,
   HOME_URL,
   MAX_ALLOCATION_SOL_AMOUNT,
   MIN_ALLOCATION_SOL_AMOUNT,
@@ -26,9 +28,7 @@ import { useToast } from '@/hooks/useToast'
 import { escapeRegExp, formatLargeStatNumber } from '@/utils/generalUtils'
 import { encodePDASeed } from '@/utils/solanaUtils'
 
-import idl from '../battlepets_public_sale.json'
-
-import type { BattlepetsPublicSale } from '../types/battlepets_public_sale'
+import type { BattlepetsPublicSale } from 'battlepets-shared/types/battlepets_public_sale'
 
 import '@/App.scss'
 
@@ -150,7 +150,7 @@ export const App: React.FC = () => {
     const provider = new anchor.AnchorProvider(connection, anchorWallet!, {})
     anchor.setProvider(provider)
 
-    const program = new anchor.Program(idl as anchor.Idl as BattlepetsPublicSale, SALE_PROGRAM_ID, provider)
+    const program = new anchor.Program(saleIdl as anchor.Idl as BattlepetsPublicSale, SALE_PROGRAM_ID, provider)
     setSaleProgram(program)
 
     refreshSaleAllocation(program)
@@ -260,17 +260,18 @@ export const App: React.FC = () => {
   }, [totalAllocation, validateSOLAmount])
 
   const hasSaleEnded = Date.now() > SALE_ENDS_AT_TIMESTAMP || totalAllocation >= HARD_CAP_SOL_AMOUNT
+  const isSoftCapReached = totalAllocation >= SOFT_CAP_SOL_AMOUNT
 
   return (
     <>
       <header>
         <a href={HOME_URL} target="_blank" rel="noreferrer">
-          <img src={logo} className="logo" alt="BattlePets logo" />
+          <img src={logo} className="logo" alt="Battlepets logo" />
         </a>
         <WalletMultiButton />
       </header>
       <main>
-        <h1 className="h1">BattlePets Public Sale</h1>
+        <h1 className="h1">Battlepets Public Sale</h1>
         <div className="progress-bar-wrapper">
           <label className="label" htmlFor="progress-bar">
             Total sale progress:
@@ -292,8 +293,7 @@ export const App: React.FC = () => {
               className="soft-cap-marker-label"
               style={{ left: `${(SOFT_CAP_SOL_AMOUNT / HARD_CAP_SOL_AMOUNT) * 100}%` }}
             >
-              🎯 Soft cap{totalAllocation >= SOFT_CAP_SOL_AMOUNT ? ' reached!' : ''} (
-              {formatLargeStatNumber(SOFT_CAP_SOL_AMOUNT)} SOL)
+              🎯 Soft cap{isSoftCapReached ? ' reached!' : ''} ({formatLargeStatNumber(SOFT_CAP_SOL_AMOUNT)} SOL)
             </div>
             <div className="progress-bar-timer">
               {isLoadingSale && 'Loading. Please wait…'}
@@ -322,7 +322,7 @@ export const App: React.FC = () => {
           1 <img src={solLogo} className="token-logo" alt="Solana token logo" />
           SOL =&nbsp;
           {formatLargeStatNumber(SOL_BPETS_EXCHANGE_RATE)}{' '}
-          <img src={bpetsLogo} className="token-logo" alt="BPETS token logo" />
+          <img src={bpetsLogo} className="token-logo bpets-token-logo" alt="BPETS token logo" />
           BPETS
         </div>
         {isSaleOpen && !hasSaleEnded && (
@@ -402,7 +402,7 @@ export const App: React.FC = () => {
           ) : (
             <div className="allocation-wrapper">
               <label className="label" htmlFor="allocation">
-                Your current allocation:
+                Your {isSaleOpen ? 'current ' : ''}allocation:
               </label>
               <div id="allocation" className="allocation">
                 <span className={adjustedCurrentAllocation > 0 ? 'ice-text' : 'fire-text'}>
@@ -412,9 +412,34 @@ export const App: React.FC = () => {
               </div>
               {adjustedCurrentAllocation > 0 && (
                 <p className="allocation-note">
-                  ✅ You will receive{' '}
-                  <strong>{formatLargeStatNumber(adjustedCurrentAllocation * SOL_BPETS_EXCHANGE_RATE)} BPETS</strong>{' '}
-                  once the token is listed!
+                  {isSaleOpen || isSoftCapReached ? (
+                    <>
+                      ✅{' '}
+                      {HAS_PROCESSED_SALE_END ? (
+                        <>
+                          You have been sent{' '}
+                          <strong>
+                            {formatLargeStatNumber(adjustedCurrentAllocation * SOL_BPETS_EXCHANGE_RATE)} BPETS
+                          </strong>
+                          !
+                        </>
+                      ) : (
+                        <>
+                          You will receive{' '}
+                          <strong>
+                            {formatLargeStatNumber(adjustedCurrentAllocation * SOL_BPETS_EXCHANGE_RATE)} BPETS
+                          </strong>{' '}
+                          once the token is listed!
+                        </>
+                      )}
+                    </>
+                  ) : (
+                    <>
+                      😔 The sale did not reach the soft cap of {SOFT_CAP_SOL_AMOUNT} SOL, so{' '}
+                      <strong>{formatLargeStatNumber(adjustedCurrentAllocation)} SOL</strong>{' '}
+                      {HAS_PROCESSED_SALE_END ? 'have been returned to you' : 'will be returned to you soon'}.
+                    </>
+                  )}
                 </p>
               )}
             </div>

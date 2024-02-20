@@ -1,0 +1,85 @@
+import 'dotenv/config'
+
+import fs from 'fs/promises'
+import path from 'path'
+
+import * as anchor from '@coral-xyz/anchor'
+import NodeWallet from '@coral-xyz/anchor/dist/cjs/nodewallet'
+import { getKeypairFromEnvironment } from '@solana-developers/helpers'
+import saleIdl from 'battlepets-shared/idls/battlepets_public_sale.json'
+import { stringify as csvStringify } from 'csv-stringify'
+import { sort } from 'ramda'
+import yargs from 'yargs'
+import 'colors'
+
+import { executeScript } from '@/utils/scriptUtils'
+import { getConnection } from '@/utils/solanaUtils'
+
+import type { BattlepetsPublicSale } from 'battlepets-shared/types/battlepets_public_sale'
+
+const getSaleSnapshotFilePath = (id?: string) =>
+  path.resolve(__dirname, `./scriptsData/snapshots/${Date.now()}_sale${id ? `_${id}` : ''}.csv`)
+
+const argv = yargs(process.argv.slice(2)).options({
+  id: { type: 'string' },
+  minSOLAmount: { type: 'number' },
+})
+
+const takeSaleSnapshot = async (): Promise<void> => {
+  const { id, minSOLAmount = 0 } = await argv.parse()
+
+  if (!process.env.WALLET_SECRET_KEY) {
+    throw new Error('Must set secret key!')
+  }
+
+  if (!process.env.SALE_PROGRAM_ID) {
+    throw new Error('Must set sale program ID!')
+  }
+
+  const connection = getConnection()
+
+  const publicSaleAccount = getKeypairFromEnvironment('WALLET_SECRET_KEY')
+
+  const provider = new anchor.AnchorProvider(connection, new NodeWallet(publicSaleAccount), {})
+  anchor.setProvider(provider)
+
+  const saleProgram = new anchor.Program(
+    saleIdl as anchor.Idl as BattlepetsPublicSale,
+    process.env.SALE_PROGRAM_ID,
+    provider
+  )
+
+  const [salePda] = anchor.web3.PublicKey.findProgramAddressSync([Buffer.from('global')], saleProgram.programId)
+
+  const { open: isSaleOpen } = await saleProgram.account.saleState.fetch(salePda)
+
+  if (isSaleOpen) {
+    throw new Error('Sale must be closed before taking snapshot!')
+  }
+
+  const saleAllocations = await saleProgram.account.saleAllocationState.all()
+
+  const eligibleAccounts = sort(
+    (a, b) => b.amount - a.amount,
+    saleAllocations
+      .map(allocation => ({
+        address: allocation.account.contributor.toString(),
+        amount: Number(allocation.account.amount) / anchor.web3.LAMPORTS_PER_SOL,
+      }))
+      .filter(account => account.amount >= minSOLAmount)
+  )
+
+  const eligibleAccountsCsv = csvStringify(eligibleAccounts, {
+    columns: ['address', 'amount'],
+    header: true,
+  })
+
+  const saleSnapshotFilePath = getSaleSnapshotFilePath(id)
+
+  // eslint-disable-next-line security/detect-non-literal-fs-filename
+  await fs.writeFile(saleSnapshotFilePath, eligibleAccountsCsv)
+
+  console.log(`Sale snapshot taken and saved at ${path.relative(__dirname, saleSnapshotFilePath)}!`.green)
+}
+
+executeScript(takeSaleSnapshot)

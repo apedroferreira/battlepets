@@ -58,8 +58,8 @@ next-env.d.ts
 .turbo
 
 # token scripts data
-**/scripts/scriptsData/*
-!**/scripts/scriptsData/*.example.*
+**/scripts/scriptsData/**/*.*
+!**/scripts/scriptsData/**/*.example.*
 
 # logs
 logs

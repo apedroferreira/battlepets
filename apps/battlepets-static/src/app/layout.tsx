@@ -7,7 +7,7 @@ import './globals.scss'
 const sora = Sora({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: 'BattlePets',
+  title: 'Battlepets',
   description: 'Collect pets, battle and earn in this deck builder, auto battler mobile game!',
 }
 

@@ -1,0 +1,81 @@
+import 'dotenv/config'
+
+import { bs58 } from '@coral-xyz/anchor/dist/cjs/utils/bytes'
+import { createMetadataAccountV3 } from '@metaplex-foundation/mpl-token-metadata'
+import { createSignerFromKeypair } from '@metaplex-foundation/umi'
+import { createUmi } from '@metaplex-foundation/umi-bundle-defaults'
+import { fromWeb3JsKeypair, fromWeb3JsPublicKey } from '@metaplex-foundation/umi-web3js-adapters'
+import * as token from '@solana/spl-token'
+import * as web3 from '@solana/web3.js'
+import { getKeypairFromEnvironment } from '@solana-developers/helpers'
+import { getEndpoint } from 'battlepets-shared/utils/solanaUtils'
+import 'colors'
+
+import { CLUSTER, TOKEN_DESCRIPTION, TOKEN_NAME, TOKEN_SYMBOL } from '@/common/constants'
+import { executeScript } from '@/utils/scriptUtils'
+import { getConnection, getExplorerURLQueryString, uploadMetadata } from '@/utils/solanaUtils'
+
+const createTokenMetadata = async (): Promise<void> => {
+  if (!process.env.WALLET_SECRET_KEY) {
+    throw new Error('Must set secret key!')
+  }
+
+  if (!process.env.TOKEN_ADDRESS) {
+    throw new Error('Must set token address!')
+  }
+
+  const connection = getConnection()
+
+  const ownerAccount = getKeypairFromEnvironment('WALLET_SECRET_KEY')
+
+  const tokenPublicKey = new web3.PublicKey(process.env.TOKEN_ADDRESS)
+
+  const explorerURLQueryString = getExplorerURLQueryString()
+
+  const tokenMint = await token.getMint(connection, tokenPublicKey)
+
+  const umi = createUmi(getEndpoint(CLUSTER))
+
+  const umiKeypair = fromWeb3JsKeypair(ownerAccount)
+  const umiSigner = createSignerFromKeypair(umi, umiKeypair)
+  umi.identity = umiSigner
+  umi.payer = umiSigner
+
+  const tokenMintAddress = tokenMint.address
+
+  const metadataUri = await uploadMetadata(umi, 'token', {
+    name: TOKEN_NAME,
+    symbol: TOKEN_SYMBOL,
+    description: TOKEN_DESCRIPTION,
+  })
+
+  const { signature: createMetadataTransactionSignature } = await createMetadataAccountV3(umi, {
+    mint: fromWeb3JsPublicKey(tokenMintAddress),
+    mintAuthority: umiSigner,
+    payer: umiSigner,
+    updateAuthority: umiSigner,
+    data: {
+      name: TOKEN_NAME,
+      symbol: TOKEN_SYMBOL,
+      uri: metadataUri,
+      sellerFeeBasisPoints: 0,
+      creators: null,
+      collection: null,
+      uses: null,
+    },
+    isMutable: true,
+    collectionDetails: null,
+  }).sendAndConfirm(umi)
+
+  console.log(
+    `Create Metadata Token Transaction: https://explorer.solana.com/tx/${bs58.encode(createMetadataTransactionSignature)}${explorerURLQueryString}`
+      .cyan
+  )
+
+  console.log(
+    `Token Metadata: https://explorer.solana.com/address/${tokenMintAddress.toString()}/metadata${explorerURLQueryString}`
+      .green
+  )
+}
+
+executeScript(createTokenMetadata)

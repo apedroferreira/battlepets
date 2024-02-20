@@ -2,17 +2,18 @@ import * as buffer from 'buffer'
 
 import { ConnectionProvider, WalletProvider } from '@solana/wallet-adapter-react'
 import { WalletModalProvider } from '@solana/wallet-adapter-react-ui'
+import { getEndpoint } from 'battlepets-shared/utils/solanaUtils'
 import React, { useMemo } from 'react'
 import ReactDOM from 'react-dom/client'
 
 import { App } from '@/App.tsx'
-import { getEndpoint } from '@/utils/solanaUtils'
+import { CLUSTER } from '@/common/constants'
 
 import '@/index.scss'
 
 window.Buffer = buffer.Buffer
 
-const endpoint = getEndpoint()
+const endpoint = getEndpoint(CLUSTER)
 
 // eslint-disable-next-line react-refresh/only-export-components
 const Main: React.FC = () => {

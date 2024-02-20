@@ -1489,47 +1489,54 @@
   }
 }
 
+.roadmapWrapper {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 0.4rem;
+  overflow-x: auto;
+  padding: 0 7.8%;
+  width: 100vw;
+
+  @include breakpoints.breakpoint(sm) {
+    margin-bottom: 2.8rem;
+  }
+
+  @include breakpoints.breakpoint(md) {
+    align-items: center;
+    margin-bottom: 0;
+    overflow-x: visible;
+    padding: 0;
+    width: 100%;
+  }
+}
+
 .roadmap {
-  left: 1.4rem;
-  margin: 2.1rem 0 0.8rem;
+  margin: 2.8rem 0 11.6rem;
   position: relative;
-  width: 100%;
+  width: 80rem;
 
   svg {
-    left: 3rem;
-    position: absolute;
-    top: 1.4rem;
-    transform: rotate(90deg);
-    transform-origin: 0 0;
-    width: 30rem;
-
     path {
-      stroke-width: 1.2rem !important;
+      stroke-width: 0.8rem !important;
+    }
+
+    path:nth-child(1) {
+      stroke: var(--body-text);
+    }
+
+    path:nth-child(2) {
+      stroke: var(--fire-gradient-light);
     }
   }
 
   @include breakpoints.breakpoint(sm) {
-    left: 0;
-    margin: 6.4rem 0 13.8rem;
-    width: 108%;
-
-    svg {
-      display: inline;
-      left: 0;
-      position: static;
-      top: 0;
-      transform: rotate(0);
-      width: auto;
-
-      path {
-        stroke-width: 0.8rem !important;
-      }
-    }
+    margin-top: 6.2rem;
   }
 
   @include breakpoints.breakpoint(md) {
     margin: 5.6rem 0 16.2rem;
-    width: 88%;
+    min-width: 0;
+    width: 100%;
   }
 
   @include breakpoints.breakpoint(lg) {
@@ -1546,7 +1553,6 @@
 
   @include breakpoints.breakpoint(xxl) {
     margin: 6rem 0 22rem;
-    width: 100%;
   }
 }
 
@@ -1571,13 +1577,11 @@
 .roadmapPointScaler {
   animation: roadmapPointScalerAnimation 5s ease-in-out infinite;
   height: 2rem;
-  position: absolute;
-  transform-origin: 100 100%;
+  transform-origin: 100% 100%;
   width: 2rem;
 
   @include breakpoints.breakpoint(sm) {
     height: 2.2rem;
-    position: static;
     width: 2.2rem;
   }
 
@@ -1622,20 +1626,16 @@
 }
 
 .roadmapPointWrapper {
+  align-items: center;
   display: flex;
   flex-direction: column;
-  margin-bottom: 1.4rem;
-  position: relative;
+  position: absolute;
+  transform: translateX(-40%);
   z-index: 1;
 
-  .roadmapPointScaler {
-    top: 1.4rem;
-  }
-
   &:nth-of-type(1) {
-    .roadmapPointScaler {
-      left: 1.6rem;
-    }
+    left: 10%;
+    top: 48%;
 
     .roadmapPoint {
       @include mixins.fireGradientBackground;
@@ -1643,9 +1643,11 @@
   }
 
   &:nth-of-type(2) {
+    left: 36.6%;
+    top: 50%;
+
     .roadmapPointScaler {
       animation-delay: -3.75s;
-      left: 1rem;
     }
 
     .roadmapPoint {
@@ -1656,9 +1658,11 @@
   }
 
   &:nth-of-type(3) {
+    left: 63.3%;
+    top: 22%;
+
     .roadmapPointScaler {
       animation-delay: -2.5s;
-      left: 2.3rem;
     }
 
     .roadmapPoint {
@@ -1669,48 +1673,17 @@
   }
 
   &:nth-of-type(4) {
+    left: 86.5%;
+    top: 22.5%;
+
     .roadmapPointScaler {
       animation-delay: -1.25s;
-      left: 1.6rem;
     }
 
     .roadmapPoint {
       animation-delay: -3.75s;
 
       @include mixins.iceGradientBackground;
-    }
-  }
-
-  @include breakpoints.breakpoint(sm) {
-    align-items: center;
-    margin-bottom: 0;
-    position: absolute;
-    transform: translateX(-40%);
-    transform-origin: 50% 0%;
-
-    .roadmapPointScaler {
-      left: 0;
-      top: 0;
-    }
-
-    &:nth-of-type(1) {
-      left: 10%;
-      top: 48%;
-    }
-
-    &:nth-of-type(2) {
-      left: 36.6%;
-      top: 50%;
-    }
-
-    &:nth-of-type(3) {
-      left: 63.3%;
-      top: 22%;
-    }
-
-    &:nth-of-type(4) {
-      left: 86.5%;
-      top: 20%;
     }
   }
 
@@ -1723,30 +1696,13 @@
 }
 
 .roadmapPointText {
-  margin-left: 0.4rem;
   position: relative;
-
-  @include breakpoints.breakpoint(sm) {
-    margin-left: 0;
-  }
 }
 
 .roadmapPointTextHeading {
-  font-size: 2rem;
+  font-size: 2.2rem;
   font-weight: bolder;
-  margin-bottom: 0.6rem;
-  margin-left: 5rem;
-
-  @include breakpoints.breakpoint(sm) {
-    font-size: 1.8rem;
-    margin-bottom: 0.6rem;
-    margin-left: 0;
-  }
-
-  @include breakpoints.breakpoint(md) {
-    font-size: 2.2rem;
-    margin-bottom: 0.8rem;
-  }
+  margin-bottom: 0.8rem;
 
   @include breakpoints.breakpoint(xl) {
     font-size: 2.4rem;
@@ -1760,26 +1716,12 @@
 
 .roadmapPointTextItems {
   font-size: 1.4rem;
-  padding-left: 6.5rem;
+  padding-left: 1.4rem;
 
   /* stylelint-disable-next-line no-descending-specificity */
   > li {
-    margin-bottom: 0.4rem;
+    margin-bottom: 0.6rem;
     white-space: nowrap;
-  }
-
-  @include breakpoints.breakpoint(sm) {
-    font-size: 1.2rem;
-    padding-left: 1.2rem;
-  }
-
-  @include breakpoints.breakpoint(md) {
-    font-size: 1.4rem;
-    padding-left: 1.4rem;
-
-    > li {
-      margin-bottom: 0.6rem;
-    }
   }
 
   @include breakpoints.breakpoint(xl) {

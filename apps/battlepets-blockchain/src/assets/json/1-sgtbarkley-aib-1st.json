@@ -1,0 +1,46 @@
+{
+  "name": "Sgt. Barkley",
+  "description": "A seasoned sharpshooter with unwavering loyalty.",
+  "attributes": [
+    {
+      "trait_type": "Rarity",
+      "value": "Common"
+    },
+    {
+      "trait_type": "Variant",
+      "value": "AI Base"
+    },
+    {
+      "trait_type": "First Editions",
+      "value": "Yes"
+    },
+    {
+      "trait_type": "Series",
+      "value": "Series 1"
+    },
+    {
+      "trait_type": "Cost",
+      "value": 1
+    },
+    {
+      "trait_type": "Health",
+      "value": 1
+    },
+    {
+      "trait_type": "Attack",
+      "value": 2
+    },
+    {
+      "trait_type": "Ability",
+      "value": "Attacks twice in each turn."
+    },
+    {
+      "trait_type": "Species",
+      "value": "Dog"
+    },
+    {
+      "trait_type": "Pet Number",
+      "value": 1
+    }
+  ]
+}

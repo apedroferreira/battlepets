@@ -9,7 +9,11 @@
       "changeProcessCWD": true
     },
     {
-      "directory": "apps/battlepets-token",
+      "directory": "apps/battlepets-blockchain",
+      "changeProcessCWD": true
+    },
+    {
+      "directory": "packages/battlepets-shared",
       "changeProcessCWD": true
     }
   ],

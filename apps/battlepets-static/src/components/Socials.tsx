@@ -35,7 +35,7 @@ export const Socials: React.FC<SocialsProps> = ({ hideCaption = false }) => {
   return hideCaption ? (
     socialButtons
   ) : (
-    <div className={globalStyles.captionContainer}>
+    <div className={globalStyles.captionWrapper}>
       <p className={globalStyles.captionText}>Join the community!</p>
       {socialButtons}
     </div>

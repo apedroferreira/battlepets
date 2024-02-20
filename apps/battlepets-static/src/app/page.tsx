@@ -63,7 +63,7 @@ const ROADMAP_POINTS: { heading: string; items: React.ReactNode[] }[] = [
   },
   {
     heading: 'Q2-Q3 2024',
-    items: ['BattlePets DAO', 'Create Series 1 cards', 'Game development'],
+    items: ['Battlepets DAO', 'Create Series 1 cards', 'Game development'],
   },
   {
     heading: 'Q4 2024',
@@ -94,7 +94,7 @@ const Home = () => {
         <div className={styles.headerContent}>
           <div className={styles.headerLeft}>
             <Link href="/" className={styles.headerLogoWrapper}>
-              <Image src={logo} alt="BattlePets logo" fill style={{ objectFit: 'contain' }} />
+              <Image src={logo} alt="Battlepets logo" fill style={{ objectFit: 'contain' }} />
             </Link>
             <nav>
               <ul>
@@ -142,7 +142,7 @@ const Home = () => {
                 />
               </div>
               <div className={`${styles.heroCaptions} ${globalStyles.slideInOnReveal3}`}>
-                <div className={globalStyles.captionContainer}>
+                <div className={globalStyles.captionWrapper}>
                   <p className={globalStyles.captionText}>Soon on</p>
                   <div className={styles.solanaLogoWrapper}>
                     <Image src={solanaLogo as StaticImport} alt="Solana logo" fill style={{ objectFit: 'contain' }} />
@@ -193,7 +193,7 @@ const Home = () => {
                 <div className={styles.feature}>
                   <div className={styles.featureBackground} />
                   <div className={styles.featureImageWrapper1}>
-                    <Image src={card1} alt="BattlePets card" fill style={{ objectFit: 'contain' }} />
+                    <Image src={card1} alt="Battlepets card" fill style={{ objectFit: 'contain' }} />
                   </div>
                   <h5>Collect</h5>
                   <p>Collect NFT battle cards with different pets and rarities to build your deck!</p>
@@ -226,8 +226,8 @@ const Home = () => {
                   </p>
                 </div>
               </div>
-              <div className={globalStyles.captionContainer}>
-                <p className={globalStyles.captionText}>BattlePets will be available on</p>
+              <div className={globalStyles.captionWrapper}>
+                <p className={globalStyles.captionText}>Battlepets will be available on</p>
                 <div className={styles.storeLogosWrapper}>
                   <div className={styles.googlePlayLogoWrapper}>
                     <Image
@@ -279,31 +279,39 @@ const Home = () => {
                 <Button>Read Litepaper</Button>
               </Link>
             </div>
-            <div className={styles.roadmap}>
-              <svg viewBox="0 0 1280 160" xmlns="http://www.w3.org/2000/svg">
-                <path
-                  d="M 0 60 Q 320 120, 640 60 T 1280 60"
-                  stroke="black"
-                  strokeWidth={6}
-                  strokeOpacity={0.75}
-                  fill="transparent"
-                />
-              </svg>
-              {ROADMAP_POINTS.map(({ heading, items }) => (
-                <div key={heading} className={styles.roadmapPointWrapper}>
-                  <div className={styles.roadmapPointScaler}>
-                    <div className={styles.roadmapPoint} />
+            <div className={styles.roadmapWrapper}>
+              <div className={styles.roadmap}>
+                <svg viewBox="0 0 1280 160" xmlns="http://www.w3.org/2000/svg">
+                  <path
+                    d="M 0 60 Q 320 120, 640 60 T 1280 60"
+                    strokeWidth={6}
+                    strokeOpacity={0.85}
+                    fill="transparent"
+                  />
+                  <path
+                    d="M 0 60 Q 320 120, 640 60 T 1280 60"
+                    strokeWidth={6}
+                    strokeOpacity={0.85}
+                    fill="transparent"
+                    strokeDasharray="128 1280"
+                  />
+                </svg>
+                {ROADMAP_POINTS.map(({ heading, items }) => (
+                  <div key={heading} className={styles.roadmapPointWrapper}>
+                    <div className={styles.roadmapPointScaler}>
+                      <div className={styles.roadmapPoint} />
+                    </div>
+                    <div className={styles.roadmapPointText}>
+                      <p className={styles.roadmapPointTextHeading}>{heading}</p>
+                      <ul className={styles.roadmapPointTextItems}>
+                        {items.map((item, itemIndex) => (
+                          <li key={itemIndex}>{item}</li>
+                        ))}
+                      </ul>
+                    </div>
                   </div>
-                  <div className={styles.roadmapPointText}>
-                    <p className={styles.roadmapPointTextHeading}>{heading}</p>
-                    <ul className={styles.roadmapPointTextItems}>
-                      {items.map((item, itemIndex) => (
-                        <li key={itemIndex}>{item}</li>
-                      ))}
-                    </ul>
-                  </div>
-                </div>
-              ))}
+                ))}
+              </div>
             </div>
             <div className={styles.roadmapMobileCTAWrapper}>
               <Link href={LITEPAPER_URL} target="_blank" rel="noopener noreferrer nofollow">
@@ -327,7 +335,7 @@ const Home = () => {
         <div className={styles.footerContent}>
           <div className={styles.footerLeft}>
             <Link href="/" className={styles.footerLogoWrapper}>
-              <Image src={logo} alt="BattlePets logo" fill style={{ objectFit: 'contain' }} />
+              <Image src={logo} alt="Battlepets logo" fill style={{ objectFit: 'contain' }} />
             </Link>
             <Link
               href={`mailto:${CONTACT_EMAIL}`}
@@ -363,7 +371,7 @@ const Home = () => {
             <Socials hideCaption />
           </div>
         </div>
-        <div className={styles.footerCopyright}>© {new Date().getFullYear()} BattlePets. All rights reserved.</div>
+        <div className={styles.footerCopyright}>© {new Date().getFullYear()} Battlepets. All rights reserved.</div>
       </footer>
     </>
   )

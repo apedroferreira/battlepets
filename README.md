@@ -1,3 +1,3 @@
-# BattlePets
+# Battlepets
 
-Welcome to the BattlePets repository.
+Welcome to the Battlepets repository.
