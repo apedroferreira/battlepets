@@ -3963,6 +3963,7 @@ __metadata:
     react-dom: "npm:^18.2.0"
     sass: "npm:^1.69.7"
     sharp: "npm:^0.33.1"
+    yet-another-react-lightbox: "npm:^3.17.0"
   languageName: unknown
   linkType: soft
 
@@ -12599,6 +12600,16 @@ __metadata:
     y18n: "npm:^5.0.5"
     yargs-parser: "npm:^20.2.2"
   checksum: b1dbfefa679848442454b60053a6c95d62f2d2e21dd28def92b647587f415969173c6e99a0f3bab4f1b67ee8283bf735ebe3544013f09491186ba9e8a9a2b651
+  languageName: node
+  linkType: hard
+
+"yet-another-react-lightbox@npm:^3.17.0":
+  version: 3.17.0
+  resolution: "yet-another-react-lightbox@npm:3.17.0"
+  peerDependencies:
+    react: ">=16.8.0"
+    react-dom: ">=16.8.0"
+  checksum: 2bb8ae37f40f25b58a19d73d0eb1f03b8fb9e8f9d5a0083b6868a81bbb1161a033787db350ecf85a2fd19270eb3edc1c9586add290521812d9ac03ea40bc4aa1
   languageName: node
   linkType: hard
 

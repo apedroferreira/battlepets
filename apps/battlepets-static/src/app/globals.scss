@@ -1,6 +1,7 @@
 @use 'sass:math';
 @use 'sass:color';
 @use '../../node_modules/modern-normalize/modern-normalize.css';
+@use '../../node_modules/yet-another-react-lightbox/dist/styles.css';
 @use '../common/mixins' as mixins;
 @use '../common/variables' as variables;
 @use '../common/breakpoints' as breakpoints;
@@ -15,17 +16,25 @@
   --fire-gradient-dark: #bf1616;
   --ice-gradient-light: #20bcb8;
   --ice-gradient-dark: #16807d;
+  --energy-gradient-light: #7a00b8;
+  --energy-gradient-dark: #360052;
+  --promo-gradient-light: #ffb903;
+  --promo-gradient-dark: #f2133e;
   --background-gradient-fire: #ffede6;
   --background-gradient-ice: #e8fffd;
   --shadow-light: rgb(0 0 0 / 10%);
   --fire-glow: rgb(191 22 22 / 20%);
   --ice-glow: rgb(32 188 184 / 30%);
+  --promo-glow: rgb(242 19 62 / 30%);
   --fire-glow-strong: rgb(191 22 22 / 50%);
   --ice-glow-strong: rgb(32 188 184 / 60%);
+  --energy-glow-strong: rgb(255 0 255 / 60%);
   --fire-gradient-faded-light: #e7524d;
   --fire-gradient-faded-dark: #ce4d4a;
   --ice-gradient-faded-light: #5fc9c6;
   --ice-gradient-faded-dark: #519a96;
+  --promo-gradient-faded-light: #ffc652;
+  --promo-gradient-faded-dark: #f75167;
   --error: #ef1a1a;
   --error-glow: rgb(239 26 26 / 35%);
   --footer-gradient-light: #c22b2b;
@@ -158,8 +167,8 @@ h3 {
 
 h4 {
   font-size: 3.4rem;
-  line-height: 1;
-  max-width: calc(#{variables.$max-content-width}em * 0.8);
+  line-height: 1.15;
+  max-width: min(88vw, calc(#{variables.$max-content-width}em * 0.8));
   text-align: center;
 
   @include breakpoints.breakpoint(sm) {
@@ -220,7 +229,7 @@ section {
   align-items: center;
   display: flex;
   flex-direction: column;
-  width: 100%;
+  width: 100vw;
 }
 
 footer {

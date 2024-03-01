@@ -4,7 +4,7 @@ import { EMAIL_REGEX } from '@/common/constants'
 
 import { Button, ButtonProps } from './Button'
 import styles from './emailForm.module.scss'
-import { Input } from './Input'
+import { Input, InputProps } from './Input'
 
 const SIGN_UP_URL = '/api/signup'
 
@@ -19,6 +19,7 @@ export interface EmailFormProps extends React.FormHTMLAttributes<HTMLFormElement
   onEmailChange: (event: React.ChangeEvent<HTMLInputElement>) => void
   hasSignedUp?: boolean
   onSuccess: () => void
+  inputVariant?: InputProps['variant']
   buttonText: React.ReactNode
   buttonVariant?: ButtonProps['variant']
 }
@@ -28,6 +29,7 @@ export const EmailForm: React.FC<EmailFormProps> = ({
   buttonVariant,
   email,
   hasSignedUp = false,
+  inputVariant,
   onEmailChange,
   onSuccess,
   ...rest
@@ -113,7 +115,7 @@ export const EmailForm: React.FC<EmailFormProps> = ({
   }, [submitErrorMessage])
 
   return hasSignedUp ? (
-    <div className={`${rest.className} ${styles.formSuccessBox} `}>
+    <div className={`${rest.className ?? ''} ${styles.formSuccessBox} `}>
       {checkmarkIcon}
       <div className={styles.formSuccessText}>You’re in! We’ll keep you updated!</div>
     </div>
@@ -127,6 +129,7 @@ export const EmailForm: React.FC<EmailFormProps> = ({
         placeholder="Your email"
         value={email}
         onChange={onEmailChange}
+        variant={inputVariant}
         errorMessage={hasSubmitted ? emailErrorMessage || submitErrorMessage : ''}
         disabled={isSubmitting}
       />

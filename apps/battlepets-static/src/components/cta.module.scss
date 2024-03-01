@@ -57,3 +57,37 @@
     margin-bottom: 3rem;
   }
 }
+
+.ctaImageWrapper {
+  height: 39rem;
+  margin: -5.4rem 0 -1.8rem;
+  position: relative;
+  width: 39rem;
+
+  @include breakpoints.breakpoint(sm) {
+    height: 42rem;
+    width: 41rem;
+  }
+
+  @include breakpoints.breakpoint(md) {
+    height: 48rem;
+    margin: -6.4rem 0 -1.8rem;
+    width: 48rem;
+  }
+
+  @include breakpoints.breakpoint(lg) {
+    height: 52rem;
+    margin: -5.8rem 0 -1.8rem;
+    width: 52rem;
+  }
+
+  @include breakpoints.breakpoint(xl) {
+    height: 56rem;
+    margin: -5.4rem 0 -1.8rem;
+    width: 56rem;
+  }
+
+  @include breakpoints.breakpoint(xxl) {
+    margin: -4.6rem 0 -1.4rem;
+  }
+}

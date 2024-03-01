@@ -5,24 +5,24 @@ import globalStyles from '@/common/global.module.scss'
 export const RevealedSection: React.FC<React.HTMLAttributes<HTMLDivElement>> = ({ className, ...rest }) => {
   const sectionRef = useRef<HTMLDivElement>(null)
 
-  const [isIntersecting, setIsIntersecting] = useState(false)
+  const [hasIntersected, setHasIntersected] = useState(false)
 
   useEffect(() => {
-    if (sectionRef.current) {
+    if (sectionRef.current && !hasIntersected) {
       const observer = new IntersectionObserver(([entry]) => {
-        setIsIntersecting(entry.isIntersecting)
+        setHasIntersected(entry.isIntersecting)
       })
       observer.observe(sectionRef.current)
 
       return () => observer.disconnect()
     }
-  }, [])
+  }, [hasIntersected])
 
   return (
     <section
       {...rest}
       ref={sectionRef}
-      className={`${className} ${isIntersecting ? globalStyles.revealedSectionVisible : ''}`}
+      className={`${className ?? ''} ${hasIntersected ? globalStyles.revealedSectionVisible : ''}`}
     />
   )
 }

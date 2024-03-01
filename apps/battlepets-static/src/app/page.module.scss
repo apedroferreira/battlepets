@@ -1,3 +1,4 @@
+@use 'sass:string';
 @use '../common/mixins' as mixins;
 @use '../common/variables' as variables;
 @use '../common/breakpoints' as breakpoints;
@@ -129,10 +130,13 @@
 
 @mixin mainBackground {
   background: linear-gradient(135deg, var(--background-gradient-fire), var(--background-gradient-ice));
+  margin-bottom: -3rem;
+  padding-bottom: 3rem;
 }
 
 .intro {
   position: relative;
+  width: 100vw;
 
   @include mainBackground;
 }
@@ -357,7 +361,11 @@
   }
 }
 
-.heroIceDecorationWrapper {
+.heroIceDecoration {
+  background-image: url('../../public/images/icedecoration.png');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
   height: 18rem;
   left: -12rem;
   position: absolute;
@@ -458,7 +466,11 @@
   }
 }
 
-.heroFireDecorationWrapper {
+.heroFireDecoration {
+  background-image: url('../../public/images/firedecoration.png');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
   height: 14rem;
   left: 15rem;
   position: absolute;
@@ -721,6 +733,7 @@
   opacity: 0.2;
   pointer-events: none;
   transform-origin: 50% 50%;
+  width: 100vw;
 
   @include introBackground;
   @include mixins.fireGradientBackground;
@@ -754,6 +767,7 @@
   left: 50%;
   opacity: 0.2;
   pointer-events: none;
+  width: 100vw;
 
   @include introBackground;
   @include mixins.iceGradientBackground;
@@ -891,58 +905,52 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  padding-bottom: 3.4rem;
+  padding-bottom: 5rem;
 
   @include breakpoints.breakpoint(sm) {
-    padding-bottom: 4rem;
+    padding-bottom: 6.8rem;
   }
 
   @include breakpoints.breakpoint(md) {
-    padding: 0 1rem 4rem;
+    padding: 0 1rem 8rem;
   }
 
   @include breakpoints.breakpoint(lg) {
-    padding: 0 3.6rem 4.4rem;
+    padding: 0 3.6rem 9.6rem;
   }
 
   @include breakpoints.breakpoint(xl) {
-    padding: 0 6rem 5rem;
+    padding: 0 6rem 11.6rem;
   }
 
   @include breakpoints.breakpoint(xxl) {
-    padding-bottom: 7rem;
+    padding-bottom: 17.8rem;
   }
 }
 
 .features {
   display: flex;
   flex-direction: column;
-  margin-bottom: 2rem;
   margin-top: 1.8rem;
 
   @include breakpoints.breakpoint(sm) {
-    margin-bottom: 2.8rem;
     margin-top: 2.4rem;
   }
 
   @include breakpoints.breakpoint(md) {
     flex-direction: row;
-    margin-bottom: 4rem;
   }
 
   @include breakpoints.breakpoint(lg) {
-    margin-bottom: 5.8rem;
     margin-top: 4.4rem;
     max-width: 100%;
   }
 
   @include breakpoints.breakpoint(xl) {
-    margin-bottom: 6.6rem;
     margin-top: 5rem;
   }
 
   @include breakpoints.breakpoint(xxl) {
-    margin-bottom: 8rem;
     margin-top: 6rem;
   }
 }
@@ -1060,7 +1068,7 @@
   align-self: center;
   animation: featureImageAnimation 8s ease-in-out infinite alternate;
   height: 25rem;
-  margin-bottom: -0.5rem;
+  margin: 0 auto -0.5rem;
   position: relative;
   width: 100%;
 
@@ -1107,15 +1115,19 @@
 
 .featureImageWrapper2 {
   animation-delay: -4s;
-  max-width: 21rem;
+  max-width: 20.4rem;
 
   @include featureImageWrapper;
 
   @include breakpoints.breakpoint(sm) {
-    max-width: 21.8rem;
+    max-width: 21rem;
   }
 
   @include breakpoints.breakpoint(md) {
+    max-width: 22rem;
+  }
+
+  @include breakpoints.breakpoint(lg) {
     max-width: 25rem;
   }
 
@@ -1255,10 +1267,166 @@
   }
 }
 
+.gamePreview {
+  align-items: center;
+  background: linear-gradient(0deg, var(--energy-gradient-light), var(--energy-gradient-dark));
+  box-shadow: inset 0 0 20rem 2rem var(--energy-glow-strong);
+  clip-path: polygon(0% 2.5%, 100% 0%, 100% 100%, 0% 97.5%);
+  color: var(--contrast-text);
+  display: flex;
+  flex-direction: column;
+  margin: 0 -12rem;
+  position: relative;
+  width: calc(100vw + 24rem);
+  z-index: 1;
+
+  &::before {
+    @include mixins.fillSpace;
+
+    background-image: url('../../public/images/electricdecoration.png');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    content: '';
+    height: 60%;
+    top: 20%;
+  }
+}
+
+.gamePreviewSectionContent {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  padding: 5.6rem 1rem;
+
+  @include breakpoints.breakpoint(sm) {
+    padding: 6.8rem 1rem;
+  }
+
+  @include breakpoints.breakpoint(lg) {
+    padding: 7rem 3.6rem;
+  }
+
+  @include breakpoints.breakpoint(xl) {
+    padding: 8.4rem 6rem;
+  }
+
+  @include breakpoints.breakpoint(xxl) {
+    padding: 10rem 6rem 8.4rem;
+  }
+}
+
+@mixin animatedScreenshotPanel($translateZ: 0) {
+  $animation-name: string.unique-id() !global;
+
+  @keyframes #{$animation-name} {
+    0% {
+      box-shadow: 0 0 7rem var(--energy-glow-strong);
+      transform: rotate3d(1, 1, 0, 5deg) translateZ($translateZ);
+    }
+
+    25% {
+      box-shadow: 0 0 9rem var(--energy-glow-strong);
+      transform: rotate3d(1, -1, 0, 5deg) translateZ($translateZ);
+    }
+
+    50% {
+      box-shadow: 0 0 7rem var(--energy-glow-strong);
+      transform: rotate3d(-1, -1, 0, 5deg) translateZ($translateZ);
+    }
+
+    75% {
+      box-shadow: 0 0 9rem var(--energy-glow-strong);
+      transform: rotate3d(-1, 1, 0, 5deg) translateZ($translateZ);
+    }
+
+    100% {
+      box-shadow: 0 0 7rem var(--energy-glow-strong);
+      transform: rotate3d(1, 1, 0, 5deg) translateZ($translateZ);
+    }
+  }
+
+  animation: $animation-name 20s ease-in-out infinite;
+}
+
+.screenshot {
+  @include animatedScreenshotPanel;
+
+  margin-bottom: 4rem;
+  margin-top: 3.4rem;
+  transform-origin: 50% 50%;
+  z-index: 1;
+
+  &::before {
+    @include mixins.fillSpace;
+    @include animatedScreenshotPanel(1rem);
+
+    background: linear-gradient(135deg, var(--energy-gradient-dark), var(--energy-gradient-light));
+    content: '';
+    left: 0.6rem;
+    top: 0.6rem;
+
+    @include breakpoints.breakpoint(md) {
+      left: 0.8rem;
+      top: 0.8rem;
+    }
+  }
+
+  &::after {
+    @include mixins.fillSpace;
+    @include animatedScreenshotPanel(2rem);
+
+    background: linear-gradient(135deg, var(--energy-gradient-light), var(--energy-gradient-dark));
+    content: '';
+    left: -0.6rem;
+    top: -0.6rem;
+    z-index: -1;
+
+    @include breakpoints.breakpoint(md) {
+      left: -0.8rem;
+      top: -0.8rem;
+    }
+  }
+
+  @include breakpoints.breakpoint(sm) {
+    margin-top: 4.4rem;
+  }
+
+  @include breakpoints.breakpoint(lg) {
+    margin-bottom: 5.2rem;
+  }
+}
+
+.screenshotImageWrapper {
+  cursor: pointer;
+  height: calc(88vw * (750 / 1334));
+  position: relative;
+  width: 88vw;
+
+  @include breakpoints.breakpoint(md) {
+    height: calc(68rem * (750 / 1334));
+    width: 68rem;
+  }
+
+  @include breakpoints.breakpoint(lg) {
+    height: calc(88rem * (750 / 1334));
+    width: 88rem;
+  }
+
+  @include breakpoints.breakpoint(xl) {
+    height: calc(98rem * (750 / 1334));
+    width: 98rem;
+  }
+
+  @include breakpoints.breakpoint(xxl) {
+    height: calc(106rem * (750 / 1334));
+    width: 106rem;
+  }
+}
+
 .storeLogosWrapper {
   align-items: center;
   display: flex;
-  margin-bottom: 5rem;
 
   > * {
     margin-right: 1.2rem;
@@ -1279,8 +1447,6 @@
   }
 
   @include breakpoints.breakpoint(lg) {
-    margin-bottom: 6rem;
-
     > * {
       margin-right: 2rem;
 
@@ -1288,14 +1454,6 @@
         margin-right: 0;
       }
     }
-  }
-
-  @include breakpoints.breakpoint(xl) {
-    margin-bottom: 8rem;
-  }
-
-  @include breakpoints.breakpoint(xxl) {
-    margin-bottom: 10rem;
   }
 }
 
@@ -1339,6 +1497,117 @@
   @include breakpoints.breakpoint(xxl) {
     height: 5rem;
     width: 14rem;
+  }
+}
+
+.gameCTA {
+  margin-top: -3rem;
+  padding-top: 3rem;
+  position: relative;
+
+  @include mainBackground;
+
+  &::after {
+    @include mixins.fillSpace;
+
+    background-image: url('../../public/images/promodecoration.png');
+    background-position: bottom -1rem center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    content: '';
+    left: 50%;
+    margin: 0 auto;
+    max-width: calc(var(--max-content-width) * 1.2);
+    opacity: 0.55;
+    transform: translateX(-50%);
+    width: 120%;
+
+    @include breakpoints.breakpoint(sm) {
+      background-position: bottom -2rem center;
+      width: 100%;
+    }
+
+    @include breakpoints.breakpoint(md) {
+      background-position: bottom -3rem center;
+    }
+
+    @include breakpoints.breakpoint(lg) {
+      background-position: bottom -8rem center;
+    }
+
+    @include breakpoints.breakpoint(xl) {
+      background-position: bottom -10rem center;
+    }
+
+    @include breakpoints.breakpoint(xxl) {
+      background-position: bottom -12rem center;
+    }
+  }
+}
+
+.gameCTASectionContent {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  padding: 5rem 0 4rem;
+  z-index: 1;
+
+  @include breakpoints.breakpoint(sm) {
+    padding: 5.2rem 0 4rem;
+  }
+
+  @include breakpoints.breakpoint(md) {
+    padding: 6rem 1rem 4rem;
+  }
+
+  @include breakpoints.breakpoint(lg) {
+    padding: 6.4rem 3.6rem 4.4rem;
+  }
+
+  @include breakpoints.breakpoint(xl) {
+    padding: 7.2rem 6rem 5rem;
+  }
+
+  @include breakpoints.breakpoint(xxl) {
+    padding-bottom: 7rem;
+    padding-top: 8.8rem;
+  }
+}
+
+@keyframes promoCardImageWrapperAnimation {
+  from {
+    transform: rotate(-1deg);
+  }
+
+  to {
+    transform: rotate(1deg);
+  }
+}
+
+@keyframes promoCardImageDecorationAnimation {
+  from {
+    transform: rotate(0deg) scale(1.05);
+  }
+
+  to {
+    transform: rotate(360deg) scale(1.05);
+  }
+}
+
+.promoCardImageWrapper {
+  animation: promoCardImageWrapperAnimation 8s ease-in-out infinite alternate;
+
+  &::after {
+    @include mixins.fillSpace;
+
+    animation: promoCardImageDecorationAnimation 64s linear infinite;
+    background-image: url('../../public/images/promocarddecoration.png');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    content: '';
+    opacity: 0.75;
+    z-index: -1;
   }
 }
 
@@ -1417,8 +1686,7 @@
 
 .tokenValue {
   font-size: 5.6rem;
-
-  @include mixins.bernhardGothic;
+  font-weight: 800;
 
   @include breakpoints.breakpoint(sm) {
     font-size: 6rem;
@@ -1574,10 +1842,14 @@
   }
 }
 
+.roadmapPointOnReveal {
+  transform-origin: 0 0;
+}
+
 .roadmapPointScaler {
   animation: roadmapPointScalerAnimation 5s ease-in-out infinite;
   height: 2rem;
-  transform-origin: 100% 100%;
+  transform-origin: 50% 50%;
   width: 2rem;
 
   @include breakpoints.breakpoint(sm) {
@@ -1701,7 +1973,7 @@
 
 .roadmapPointTextHeading {
   font-size: 2.2rem;
-  font-weight: bolder;
+  font-weight: 800;
   margin-bottom: 0.8rem;
 
   @include breakpoints.breakpoint(xl) {

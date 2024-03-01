@@ -12,10 +12,11 @@ import styles from './socials.module.scss'
 import type { StaticImport } from 'next/dist/shared/lib/get-img-props'
 
 interface SocialsProps {
+  className?: string
   hideCaption?: boolean
 }
 
-export const Socials: React.FC<SocialsProps> = ({ hideCaption = false }) => {
+export const Socials: React.FC<SocialsProps> = ({ className, hideCaption = false }) => {
   const socialButtons = (
     <div className={styles.socialButtonsWrapper}>
       <Link
@@ -35,7 +36,7 @@ export const Socials: React.FC<SocialsProps> = ({ hideCaption = false }) => {
   return hideCaption ? (
     socialButtons
   ) : (
-    <div className={globalStyles.captionWrapper}>
+    <div className={`${className ?? ''} ${globalStyles.captionWrapper}`}>
       <p className={globalStyles.captionText}>Join the community!</p>
       {socialButtons}
     </div>

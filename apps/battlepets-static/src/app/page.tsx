@@ -2,7 +2,10 @@
 
 import Image from 'next/image'
 import Link from 'next/link'
-import { useState } from 'react'
+import { useCallback, useState } from 'react'
+import { Lightbox } from 'yet-another-react-lightbox'
+import LightboxFullscreen from 'yet-another-react-lightbox/plugins/fullscreen'
+import LightboxZoom from 'yet-another-react-lightbox/plugins/zoom'
 
 import { CONTACT_EMAIL, LITEPAPER_URL } from '@/common/constants'
 import globalStyles from '@/common/global.module.scss'
@@ -19,10 +22,10 @@ import battlePet3 from '../../public/images/battlepet3.png'
 import card1 from '../../public/images/card1.png'
 import card2 from '../../public/images/card2.png'
 import card3 from '../../public/images/card3.png'
-import fireDecoration from '../../public/images/firedecoration.png'
 import googlePlayLogo from '../../public/images/googleplaylogo.svg'
-import iceDecoration from '../../public/images/icedecoration.png'
 import logo from '../../public/images/logo.png'
+import promoCard from '../../public/images/promocard.png'
+import screenshot from '../../public/images/screenshot.png'
 import solanaLogo from '../../public/images/solanalogo.svg'
 import token from '../../public/images/token.png'
 
@@ -80,13 +83,19 @@ const Home = () => {
   const [email, setEmail] = useState('')
   const [hasSignedUp, setHasSignedUp] = useState(false)
 
-  const handleEmailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setEmail(event.target.value)
-  }
+  const [isLightboxOpen, setIsLightboxOpen] = useState(false)
 
-  const handleSignUpSuccess = () => {
+  const handleEmailChange = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
+    setEmail(event.target.value)
+  }, [])
+
+  const handleSignUpSuccess = useCallback(() => {
     setHasSignedUp(true)
-  }
+  }, [])
+
+  const handleToggleLightbox = useCallback(() => {
+    setIsLightboxOpen(previousIsLightboxOpen => !previousIsLightboxOpen)
+  }, [])
 
   return (
     <>
@@ -121,11 +130,11 @@ const Home = () => {
           <div className={styles.introIceBackground} />
           <RevealedSection className={styles.hero}>
             <div className={styles.sectionContent}>
-              <h1 className={globalStyles.slideInOnReveal1}>
+              <h1>
                 <span className={globalStyles.fireText}>Ready</span> To{' '}
                 <span className={globalStyles.iceText}>Battle</span>?
               </h1>
-              <div className={`${styles.heroContent} ${globalStyles.slideInOnReveal2}`}>
+              <div className={styles.heroContent}>
                 <p className={styles.heroText}>
                   Join the waitlist to get the <strong>$BPETS</strong>{' '}
                   <span className={globalStyles.iceText}>airdrop</span> and sign up for our{' '}
@@ -141,7 +150,7 @@ const Home = () => {
                   buttonText="I’m in!"
                 />
               </div>
-              <div className={`${styles.heroCaptions} ${globalStyles.slideInOnReveal3}`}>
+              <div className={styles.heroCaptions}>
                 <div className={globalStyles.captionWrapper}>
                   <p className={globalStyles.captionText}>Soon on</p>
                   <div className={styles.solanaLogoWrapper}>
@@ -156,77 +165,95 @@ const Home = () => {
               <div className={styles.heroPortalsSquare2} />
               <div className={styles.heroPortalsSquare3} />
               <div className={styles.heroIceImageWrapper}>
-                <div className={styles.heroIceDecorationWrapper}>
-                  <Image src={iceDecoration} alt="Ice decoration" fill style={{ objectFit: 'contain' }} />
-                </div>
+                <div className={styles.heroIceDecoration} />
                 <div className={styles.heroIcePortal}>
                   <div className={styles.heroIcePortalScene} />
                 </div>
               </div>
               <div className={styles.heroFireImageWrapper}>
-                <div className={styles.heroFireDecorationWrapper}>
-                  <Image src={fireDecoration} alt="Fire decoration" fill style={{ objectFit: 'contain' }} />
-                </div>
+                <div className={styles.heroFireDecoration} />
                 <div className={styles.heroFirePortal}>
                   <div className={styles.heroFirePortalScene} />
                 </div>
               </div>
               <div className={styles.heroPet1Wrapper}>
-                <Image src={battlePet1} alt="Samurai BattlePet" fill style={{ objectFit: 'contain' }} />
+                <Image src={battlePet1} alt="Samurai Battlepet" fill style={{ objectFit: 'contain' }} />
               </div>
               <div className={styles.heroPet2Wrapper}>
-                <Image src={battlePet2} alt="Soldier BattlePet" fill style={{ objectFit: 'contain' }} />
+                <Image src={battlePet2} alt="Soldier Battlepet" fill style={{ objectFit: 'contain' }} />
               </div>
               <div className={styles.heroPet3Wrapper}>
-                <Image src={battlePet3} alt="Secret Agent BattlePet" fill style={{ objectFit: 'contain' }} />
+                <Image src={battlePet3} alt="Secret Agent Battlepet" fill style={{ objectFit: 'contain' }} />
               </div>
             </div>
           </RevealedSection>
           <RevealedSection>
             <div id="game" className={styles.sectionTarget} />
             <div className={`${styles.sectionContent} ${styles.featuresSectionContent}`}>
-              <h2>
+              <h2 className={globalStyles.slideInVerticalOnReveal1}>
                 <span className={globalStyles.fireText}>Play to earn</span> in a deck builder,{' '}
                 <span className={globalStyles.iceText}>auto battler</span> game!
               </h2>
               <div className={styles.features}>
                 <div className={styles.feature}>
                   <div className={styles.featureBackground} />
-                  <div className={styles.featureImageWrapper1}>
-                    <Image src={card1} alt="Battlepets card" fill style={{ objectFit: 'contain' }} />
+                  <div className={globalStyles.scaleInOnReveal1}>
+                    <div className={styles.featureImageWrapper1}>
+                      <Image src={card1} alt="Ice Wizard Battlepet Card" fill style={{ objectFit: 'contain' }} />
+                    </div>
                   </div>
-                  <h5>Collect</h5>
-                  <p>Collect NFT battle cards with different pets and rarities to build your deck!</p>
+                  <h5 className={globalStyles.slideInVerticalOnReveal1}>Collect</h5>
+                  <p className={globalStyles.slideInVerticalOnReveal1}>
+                    Collect NFT battle cards with different pets and rarities to build your deck!
+                  </p>
                 </div>
                 <div className={styles.feature}>
                   <div className={styles.featureBackground} />
-                  <div className={styles.featureImageWrapper2}>
-                    <div className={styles.featureBattleFirePortal}>
-                      <div className={styles.featureBattleIcePortal} />
-                      <div className={styles.featureBattlePortalScene} />
-                      <div className={styles.featureBattleCard2Wrapper}>
-                        <Image src={card2} alt="Soldier BattlePet card" fill style={{ objectFit: 'contain' }} />
-                      </div>
-                      <div className={styles.featureBattleCard3Wrapper}>
-                        <Image src={card3} alt="Samurai BattlePet card" fill style={{ objectFit: 'contain' }} />
+                  <div className={globalStyles.scaleInOnReveal2}>
+                    <div className={styles.featureImageWrapper2}>
+                      <div className={styles.featureBattleFirePortal}>
+                        <div className={styles.featureBattleIcePortal} />
+                        <div className={styles.featureBattlePortalScene} />
+                        <div className={styles.featureBattleCard2Wrapper}>
+                          <Image src={card2} alt="Soldier Battlepet Card" fill style={{ objectFit: 'contain' }} />
+                        </div>
+                        <div className={styles.featureBattleCard3Wrapper}>
+                          <Image src={card3} alt="Samurai Battlepet Card" fill style={{ objectFit: 'contain' }} />
+                        </div>
                       </div>
                     </div>
                   </div>
-                  <h5>Battle</h5>
-                  <p>Battle against other players to win rewards, including new cards!</p>
+                  <h5 className={globalStyles.slideInVerticalOnReveal2}>Battle</h5>
+                  <p className={globalStyles.slideInVerticalOnReveal2}>
+                    Battle against other players to win rewards, including new cards!
+                  </p>
                 </div>
                 <div className={styles.feature}>
                   <div className={styles.featureBackground} />
-                  <div className={styles.featureImageWrapper3}>
-                    <Image src={token} alt="$BPETS token" fill style={{ objectFit: 'contain' }} />
+                  <div className={globalStyles.scaleInOnReveal3}>
+                    <div className={styles.featureImageWrapper3}>
+                      <Image src={token} alt="$BPETS token" fill style={{ objectFit: 'contain' }} />
+                    </div>
                   </div>
-                  <h5>Invest</h5>
-                  <p>
+                  <h5 className={globalStyles.slideInVerticalOnReveal3}>Invest</h5>
+                  <p className={globalStyles.slideInVerticalOnReveal3}>
                     Invest in the game and get exclusive benefits with the <strong>$BPETS</strong> token!
                   </p>
                 </div>
               </div>
-              <div className={globalStyles.captionWrapper}>
+            </div>
+          </RevealedSection>
+        </div>
+        <div className={styles.gamePreview}>
+          <RevealedSection>
+            <div className={`${styles.sectionContent} ${styles.gamePreviewSectionContent}`}>
+              <h4 className={globalStyles.slideInVerticalOnReveal1}>Coming Soon To Your Mobile Devices!</h4>
+              <div className={styles.screenshot}>
+                <div className={styles.screenshotImageWrapper} onClick={handleToggleLightbox}>
+                  <Image src={screenshot} alt="Game Preview Screenshot" fill style={{ objectFit: 'contain' }} />
+                </div>
+              </div>
+              <div className={`${globalStyles.captionWrapper} ${globalStyles.slideInVerticalOnReveal2}`}>
                 <p className={globalStyles.captionText}>Battlepets will be available on</p>
                 <div className={styles.storeLogosWrapper}>
                   <div className={styles.googlePlayLogoWrapper}>
@@ -247,12 +274,25 @@ const Home = () => {
                   </div>
                 </div>
               </div>
+            </div>
+          </RevealedSection>
+        </div>
+        <div className={styles.gameCTA}>
+          <RevealedSection>
+            <div className={`${styles.sectionContent} ${styles.gameCTASectionContent}`}>
               <CTA
-                heading="Get $BPETS early with a discount!"
+                heading="Get in the $BPETS sale and win a sale-only NFT!"
                 email={email}
                 onEmailChange={handleEmailChange}
+                image={{
+                  data: promoCard,
+                  alt: 'Fire Cat Battlepet Card',
+                  wrapperClassName: styles.promoCardImageWrapper,
+                }}
                 hasSignedUp={hasSignedUp}
                 onSuccess={handleSignUpSuccess}
+                inputVariant="promo"
+                buttonVariant="promo"
                 buttonText="Let me in!"
               />
             </div>
@@ -262,8 +302,11 @@ const Home = () => {
           <div id="token" className={styles.sectionTarget} />
           <div className={styles.tokenSectionBackground} />
           <div className={styles.tokenSectionContent}>
-            {TOKEN_METRICS.map(({ caption, value }) => (
-              <div key={value} className={styles.tokenMetric}>
+            {TOKEN_METRICS.map(({ caption, value }, index) => (
+              <div
+                key={value}
+                className={`${styles.tokenMetric} ${globalStyles[`scaleInOnReveal${index <= 2 ? index + 1 : 3}`]}`}
+              >
                 <div className={styles.tokenValue}>{value}</div>
                 <div className={globalStyles.captionText}>{caption}</div>
               </div>
@@ -274,7 +317,7 @@ const Home = () => {
           <div id="roadmap" className={styles.sectionTarget} />
           <div className={`${styles.sectionContent} ${styles.roadmapSectionContent}`}>
             <div className={styles.roadmapSectionHeader}>
-              <h3>Roadmap</h3>
+              <h3 className={globalStyles.slideInVerticalOnReveal1}>Roadmap</h3>
               <Link href={LITEPAPER_URL} target="_blank" rel="noopener noreferrer nofollow">
                 <Button>Read Litepaper</Button>
               </Link>
@@ -296,10 +339,12 @@ const Home = () => {
                     strokeDasharray="128 1280"
                   />
                 </svg>
-                {ROADMAP_POINTS.map(({ heading, items }) => (
+                {ROADMAP_POINTS.map(({ heading, items }, index) => (
                   <div key={heading} className={styles.roadmapPointWrapper}>
-                    <div className={styles.roadmapPointScaler}>
-                      <div className={styles.roadmapPoint} />
+                    <div className={`${styles.roadmapPointOnReveal} ${globalStyles[`scaleInOnReveal${index + 1}`]}`}>
+                      <div className={styles.roadmapPointScaler}>
+                        <div className={styles.roadmapPoint} />
+                      </div>
                     </div>
                     <div className={styles.roadmapPointText}>
                       <p className={styles.roadmapPointTextHeading}>{heading}</p>
@@ -373,6 +418,12 @@ const Home = () => {
         </div>
         <div className={styles.footerCopyright}>© {new Date().getFullYear()} Battlepets. All rights reserved.</div>
       </footer>
+      <Lightbox
+        open={isLightboxOpen}
+        close={handleToggleLightbox}
+        slides={[{ src: screenshot.src, alt: 'Game Preview Screenshot' }]}
+        plugins={[LightboxFullscreen, LightboxZoom]}
+      />
     </>
   )
 }

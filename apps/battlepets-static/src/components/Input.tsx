@@ -10,13 +10,17 @@ const errorIcon = (
   </svg>
 )
 
-interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
+export interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
+  variant?: 'ice' | 'promo'
   errorMessage?: string
 }
 
-export const Input: React.FC<InputProps> = ({ className, errorMessage = '', ...rest }) => (
+export const Input: React.FC<InputProps> = ({ className, errorMessage = '', variant = 'ice', ...rest }) => (
   <div className={styles.inputWrapper}>
-    <input {...rest} className={`${className} ${styles.input} ${errorMessage ? styles.inputError : ''}`} />
+    <input
+      {...rest}
+      className={`${className ?? ''} ${styles.input} ${variant === 'ice' ? styles.iceInput : ''} ${variant === 'promo' ? styles.promoInput : ''} ${errorMessage ? styles.inputError : ''}`}
+    />
     {errorMessage && (
       <div className={styles.inputErrorBox}>
         {errorIcon}

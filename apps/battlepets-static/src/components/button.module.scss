@@ -4,7 +4,7 @@
 
 .button {
   align-items: center;
-  border: 0.3rem solid var(--contrast-text);
+  border: 0.4rem solid var(--contrast-text);
   box-shadow: 0 0.2rem 0.3rem var(--shadow-light);
   color: var(--contrast-text);
   cursor: pointer;
@@ -101,6 +101,23 @@
       135deg,
       var(--fire-gradient-faded-light) 0%,
       var(--fire-gradient-faded-dark) 100%
+    );
+    box-shadow: 0 0.2rem 0.3rem var(--shadow-light);
+  }
+}
+
+.promoButton {
+  background-image: linear-gradient(135deg, var(--promo-gradient-light) 0%, var(--promo-gradient-dark) 100%);
+
+  &:hover {
+    box-shadow: 0 0 0.8rem 0.4rem var(--promo-glow);
+  }
+
+  &:disabled {
+    background-image: linear-gradient(
+      135deg,
+      var(--promo-gradient-faded-light) 0%,
+      var(--promo-gradient-faded-dark) 100%
     );
     box-shadow: 0 0.2rem 0.3rem var(--shadow-light);
   }

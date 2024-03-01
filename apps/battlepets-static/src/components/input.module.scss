@@ -1,5 +1,4 @@
 @use '../common/breakpoints' as breakpoints;
-@use '../common/keyframes';
 
 .inputWrapper {
   position: relative;
@@ -7,9 +6,8 @@
 
 .input {
   border: 1rem solid;
-  border-image-slice: 1;
-  border-image-source: linear-gradient(135deg, var(--ice-gradient-light) 0%, var(--ice-gradient-dark) 100%);
-  border-width: 0.3rem;
+  border-image-slice: 1 !important;
+  border-width: 0.4rem;
   box-shadow: 0 0.2rem 0.3rem var(--shadow-light);
   font-size: 1.6rem;
   padding: 1.6rem 1.8rem;
@@ -18,14 +16,8 @@
     background-color 0.1s linear;
   width: 100%;
 
-  &:hover,
-  &:focus {
-    box-shadow: 0 0 0.8rem 0.4rem var(--ice-glow);
-  }
-
   &:disabled {
     background-color: #f8f8f8;
-    box-shadow: 0 0.2rem 0.3rem var(--shadow-light);
     cursor: not-allowed;
   }
 
@@ -40,6 +32,32 @@
   }
 }
 
+.iceInput {
+  border-image-source: linear-gradient(135deg, var(--ice-gradient-light) 0%, var(--ice-gradient-dark) 100%);
+
+  &:hover,
+  &:focus {
+    box-shadow: 0 0 0.8rem 0.4rem var(--ice-glow);
+  }
+
+  &:disabled {
+    box-shadow: 0 0.2rem 0.3rem var(--shadow-light);
+  }
+}
+
+.promoInput {
+  border-image-source: linear-gradient(135deg, var(--promo-gradient-light) 0%, var(--promo-gradient-dark) 100%);
+
+  &:hover,
+  &:focus {
+    box-shadow: 0 0 0.8rem 0.4rem var(--promo-glow);
+  }
+
+  &:disabled {
+    box-shadow: 0 0.2rem 0.3rem var(--shadow-light);
+  }
+}
+
 .inputError {
   border-color: var(--error);
   border-image-source: none;
@@ -51,9 +69,21 @@
   }
 }
 
+@keyframes inputErrorBoxAnimation {
+  from {
+    opacity: 0;
+    transform: translateY(12%);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 .inputErrorBox {
   align-items: center;
-  animation: slideInVerticalAnimation 0.25s ease-out 0s forwards;
+  animation: inputErrorBoxAnimation 0.25s ease-out 0s forwards;
   background-color: var(--error);
   box-shadow: 0 0 1rem 0.5rem var(--error-glow);
   color: var(--contrast-text);
