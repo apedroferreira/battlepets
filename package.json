@@ -45,7 +45,7 @@
     "stylelint": "^16.1.0",
     "stylelint-config-standard-scss": "^13.0.0",
     "stylelint-order": "^6.0.4",
-    "turbo": "^1.12.2",
+    "turbo": "^1.12.4",
     "typescript": "^5.3.3"
   },
   "resolutions": {
