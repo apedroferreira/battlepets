@@ -1,0 +1,28 @@
+{
+  "name": "Battlepets",
+  "short_name": "Battlepets",
+  "description": "Collect pets, battle and earn in a deck-builder, auto-battler mobile game!",
+  "start_url": "/",
+  "display": "browser",
+  "theme_color": "#7a00b8",
+  "background_color": "#360052",
+  "icons": [
+    {
+      "src": "/favicon.ico",
+      "sizes": "256x256 64x64 32x32 16x16",
+      "type": "image/x-icon"
+    },
+    {
+      "src": "logo192.png",
+      "type": "image/png",
+      "sizes": "192x192",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "logo512.png",
+      "type": "image/png",
+      "sizes": "512x512",
+      "purpose": "any maskable"
+    }
+  ]
+}

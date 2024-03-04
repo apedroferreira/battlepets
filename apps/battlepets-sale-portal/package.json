@@ -6,6 +6,8 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
+    "postbuild": "yarn postbuild:headers",
+    "postbuild:headers": "cp _headers build/_headers",
     "format": "yarn g:prettier --write '*/**/*.{js,jsx,ts,tsx,md,json}'",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0 && yarn g:stylelint \"**/*.{css,scss}\"",
     "preview": "vite preview",

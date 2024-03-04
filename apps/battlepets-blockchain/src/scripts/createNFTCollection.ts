@@ -6,10 +6,11 @@ import { createSignerFromKeypair, generateSigner, percentAmount } from '@metaple
 import { createUmi } from '@metaplex-foundation/umi-bundle-defaults'
 import { fromWeb3JsKeypair } from '@metaplex-foundation/umi-web3js-adapters'
 import { getKeypairFromEnvironment } from '@solana-developers/helpers'
+import { BASE_URL } from 'battlepets-shared/constants'
 import { getEndpoint } from 'battlepets-shared/utils/solanaUtils'
 import 'colors'
 
-import { CLUSTER, NFT_COLLECTION_DESCRIPTION, NFT_COLLECTION_NAME, NFT_SYMBOL, WEBSITE_URL } from '@/common/constants'
+import { CLUSTER, NFT_COLLECTION_DESCRIPTION, NFT_COLLECTION_NAME, NFT_SYMBOL } from '@/common/constants'
 import { executeScript } from '@/utils/scriptUtils'
 import { getExplorerURLQueryString, uploadMetadata } from '@/utils/solanaUtils'
 
@@ -44,7 +45,7 @@ const createNFTCollection = async (): Promise<void> => {
       symbol: NFT_SYMBOL,
       description: NFT_COLLECTION_DESCRIPTION,
       seller_fee_basis_points: SELLER_FEE_BASIS_POINTS,
-      external_url: WEBSITE_URL,
+      external_url: BASE_URL,
     },
     true
   )

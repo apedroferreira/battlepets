@@ -191,8 +191,8 @@ const Home = () => {
             <div id="game" className={styles.sectionTarget} />
             <div className={`${styles.sectionContent} ${styles.featuresSectionContent}`}>
               <h2 className={globalStyles.slideInVerticalOnReveal1}>
-                <span className={globalStyles.fireText}>Play to earn</span> in a deck builder,{' '}
-                <span className={globalStyles.iceText}>auto battler</span> game!
+                <span className={globalStyles.fireText}>The best </span> deck-builder,{' '}
+                <span className={globalStyles.iceText}>auto-battler</span> game on the blockchain!
               </h2>
               <div className={styles.features}>
                 <div className={styles.feature}>

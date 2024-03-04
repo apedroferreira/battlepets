@@ -1,6 +1,7 @@
 import * as anchor from '@coral-xyz/anchor'
 import { useAnchorWallet, useConnection, useWallet } from '@solana/wallet-adapter-react'
 import { WalletMultiButton } from '@solana/wallet-adapter-react-ui'
+import { BASE_URL } from 'battlepets-shared/constants'
 import saleIdl from 'battlepets-shared/idls/battlepets_public_sale.json'
 import { useCallback, useEffect, useMemo, useState } from 'react'
 
@@ -12,10 +13,10 @@ import {
   FUND_RAISER_PUBLIC_KEY,
   HARD_CAP_SOL_AMOUNT,
   HAS_PROCESSED_SALE_END,
-  HOME_URL,
   MAX_ALLOCATION_SOL_AMOUNT,
   MIN_ALLOCATION_SOL_AMOUNT,
   SALE_ENDS_AT_TIMESTAMP,
+  SALE_NAME,
   SALE_PROGRAM_ID,
   SOFT_CAP_SOL_AMOUNT,
   SOLANA_DECIMALS,
@@ -265,13 +266,13 @@ export const App: React.FC = () => {
   return (
     <>
       <header>
-        <a href={HOME_URL} target="_blank" rel="noreferrer">
+        <a href={BASE_URL} target="_blank" rel="noreferrer">
           <img src={logo} className="logo" alt="Battlepets logo" />
         </a>
         <WalletMultiButton />
       </header>
       <main>
-        <h1 className="h1">Battlepets Public Sale</h1>
+        <h1 className="h1">{SALE_NAME}</h1>
         <div className="progress-bar-wrapper">
           <label className="label" htmlFor="progress-bar">
             Total sale progress:

@@ -14,6 +14,7 @@ import { createSignerFromKeypair, generateSigner, percentAmount, publicKey, some
 import { createUmi } from '@metaplex-foundation/umi-bundle-defaults'
 import { fromWeb3JsKeypair } from '@metaplex-foundation/umi-web3js-adapters'
 import { getKeypairFromEnvironment } from '@solana-developers/helpers'
+import { BASE_URL } from 'battlepets-shared/constants'
 import { getEndpoint } from 'battlepets-shared/utils/solanaUtils'
 import yargs from 'yargs'
 import 'colors'
@@ -25,7 +26,6 @@ import {
   NFT_SELLER_FEE_BASIS_POINTS,
   NFT_SERIES_NAMES,
   NFT_SYMBOL,
-  WEBSITE_URL,
 } from '@/common/constants'
 import { NFTSeries } from '@/common/enums'
 import { executeScript } from '@/utils/scriptUtils'
@@ -87,7 +87,7 @@ const createMasterNFT = async (): Promise<void> => {
     ...jsonFileMetadata,
     symbol: NFT_SYMBOL,
     seller_fee_basis_points: Number(percentAmount(NFT_SELLER_FEE_BASIS_POINTS).basisPoints),
-    external_url: WEBSITE_URL,
+    external_url: BASE_URL,
     collection: {
       name: NFT_SERIES_NAMES[series as NFTSeries],
       family: NFT_COLLECTION_NAME,

@@ -26,4 +26,4 @@ export const SALE_ENDS_AT_TIMESTAMP = Number(import.meta.env.VITE_SALE_ENDS_AT_T
 
 export const HAS_PROCESSED_SALE_END = Boolean(import.meta.env.VITE_HAS_PROCESSED_SALE_END === 'true')
 
-export const HOME_URL = 'https://battlepets.app'
+export const SALE_NAME = 'Battlepets Public Sale'

@@ -5,7 +5,7 @@
       "changeProcessCWD": true
     },
     {
-      "directory": "apps/battlepets-static",
+      "directory": "apps/battlepets-web",
       "changeProcessCWD": true
     },
     {

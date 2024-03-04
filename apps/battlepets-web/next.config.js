@@ -6,11 +6,6 @@ const withBundleAnalyzer = require('@next/bundle-analyzer')({
 const nextConfig = {
   redirects: () => [
     {
-      source: '/:path((?!api).{1,})',
-      destination: '/',
-      permanent: false,
-    },
-    {
       source: '/404',
       destination: '/',
       permanent: false,

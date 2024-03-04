@@ -2,8 +2,6 @@ import * as web3 from '@solana/web3.js'
 
 import { NFTSeries, TokenDistribution } from './enums'
 
-export const WEBSITE_URL = 'https://battlepets.io'
-
 export const CLUSTER: web3.Cluster | 'localnet' = (process.env.CLUSTER ?? 'localnet') as web3.Cluster | 'localnet'
 
 export const TOKEN_DECIMALS = 9
