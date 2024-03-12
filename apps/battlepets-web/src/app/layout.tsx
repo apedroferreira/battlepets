@@ -1,4 +1,6 @@
 import { GoogleAnalytics } from '@next/third-parties/google'
+import { Analytics } from '@vercel/analytics/react'
+import { SpeedInsights } from '@vercel/speed-insights/next'
 import { BASE_URL } from 'battlepets-shared/constants'
 import { Sora } from 'next/font/google'
 
@@ -43,6 +45,8 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => (
 
     <body className={sora.className}>{children}</body>
 
+    <Analytics />
+    <SpeedInsights />
     {GA_ID && <GoogleAnalytics gaId={GA_ID} />}
   </html>
 )
