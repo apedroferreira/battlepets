@@ -1,6 +1,6 @@
 {
   "name": "battlepets-blockchain",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "private": true,
   "scripts": {
     "run:script": "yarn g:ts-node -r tsconfig-paths/register --cwd ./src/scripts",
@@ -10,14 +10,14 @@
   },
   "dependencies": {
     "@coral-xyz/anchor": "^0.29.0",
-    "@metaplex-foundation/mpl-token-metadata": "^3.2.0",
+    "@metaplex-foundation/mpl-token-metadata": "^3.2.1",
     "@metaplex-foundation/umi": "^0.9.1",
     "@metaplex-foundation/umi-bundle-defaults": "^0.9.1",
     "@metaplex-foundation/umi-uploader-irys": "^0.9.1",
     "@metaplex-foundation/umi-web3js-adapters": "^0.9.1",
     "@solana-developers/helpers": "^1.5.1",
     "@solana/spl-token": "^0.4.1",
-    "@solana/web3.js": "^1.90.1",
+    "@solana/web3.js": "^1.91.0",
     "battlepets-shared": "workspace:^",
     "colors": "^1.4.0",
     "csv-stringify": "^6.4.6",
@@ -29,13 +29,13 @@
   },
   "devDependencies": {
     "@types/eslint": "^8.56.5",
-    "@types/node": "^20.11.24",
+    "@types/node": "^20.11.26",
     "@types/ramda": "^0.29.11",
     "@types/yargs": "^17.0.32",
     "eslint": "^8.57.0",
     "eslint-import-resolver-alias": "^1.1.2",
     "eslint-import-resolver-typescript": "^3.6.1",
     "eslint-plugin-import": "^2.29.1",
-    "typescript": "^5.3.3"
+    "typescript": "^5.4.2"
   }
 }
