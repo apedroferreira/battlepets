@@ -14,6 +14,12 @@
   width: 100%;
 }
 
+@mixin mainBackground {
+  background: linear-gradient(135deg, var(--background-gradient-fire), var(--background-gradient-ice));
+  margin-bottom: -3rem;
+  padding-bottom: 3rem;
+}
+
 @mixin fireGradientBackground($angle: 135deg) {
   background-image: linear-gradient($angle, var(--fire-gradient-light) 0%, var(--fire-gradient-dark) 100%);
 }
@@ -57,6 +63,18 @@
   @include animatedGradientBackgroundImage($duration);
 }
 
+@mixin animatedPromoGradientBackground($angle: 135deg, $duration: 3s) {
+  background-image: linear-gradient(
+    $angle,
+    var(--promo-gradient-light) 20%,
+    var(--promo-gradient-dark) 40%,
+    var(--promo-gradient-dark) 60%,
+    var(--promo-gradient-light) 80%
+  );
+
+  @include animatedGradientBackgroundImage($duration);
+}
+
 @mixin gradientText {
   /* stylelint-disable-next-line property-no-vendor-prefix */
   -webkit-background-clip: text;
@@ -70,22 +88,30 @@
   color: var(--fire-gradient-dark);
 
   @include gradientText;
-  @include animatedFireGradientBackground(-45deg);
+  @include animatedFireGradientBackground(90deg);
 }
 
 @mixin iceText {
   color: var(--ice-gradient-dark);
 
   @include gradientText;
-  @include animatedIceGradientBackground(-45deg);
+  @include animatedIceGradientBackground(90deg);
+}
+
+@mixin promoText {
+  color: var(--promo-gradient-dark);
+
+  @include gradientText;
+  @include animatedPromoGradientBackground(90deg);
 }
 
 @mixin signUpForm {
   align-items: center;
   display: flex;
   flex-direction: column;
+  z-index: 1;
 
-  div:has(> input) {
+  > div {
     margin-bottom: 0.4rem;
     width: 100%;
   }
@@ -97,7 +123,7 @@
   @include breakpoints.breakpoint(sm) {
     flex-direction: row;
 
-    div:has(> input) {
+    > div {
       flex: 1;
       margin-bottom: 0;
       margin-right: 0.4rem;
@@ -110,19 +136,19 @@
   }
 
   @include breakpoints.breakpoint(md) {
-    div:has(> input) {
-      width: 34rem;
+    > div {
+      width: 30rem;
     }
   }
 
   @include breakpoints.breakpoint(lg) {
-    div:has(> input) {
-      width: 40rem;
+    > div {
+      width: 38rem;
     }
   }
 
   @include breakpoints.breakpoint(xxl) {
-    div:has(> input) {
+    > div {
       width: 42rem;
     }
   }

@@ -9,9 +9,6 @@ import { IS_PROD_ENV, SENTRY_DSN, SENTRY_ENVIRONMENT } from '@/common/constants'
 Sentry.init({
   enabled: IS_PROD_ENV,
   dsn: SENTRY_DSN,
-  tracesSampleRate: 0.1,
-  replaysSessionSampleRate: 0.1,
-  environment: SENTRY_ENVIRONMENT,
   // You can remove this option if you're not planning to use the Sentry Session Replay feature:
   integrations: [
     // eslint-disable-next-line import/namespace
@@ -21,4 +18,7 @@ Sentry.init({
       blockAllMedia: true,
     }),
   ],
+  tracesSampleRate: 0.1,
+  replaysSessionSampleRate: 0.1,
+  environment: SENTRY_ENVIRONMENT,
 })

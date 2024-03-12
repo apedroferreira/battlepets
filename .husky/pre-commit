@@ -1,4 +1,1 @@
-#!/bin/sh
-. "$(dirname "$0")/_/husky.sh"
-
-yarn audit:ci && yarn lint && yarn precommit
+yarn audit:ci && yarn g:version:check && yarn lint && yarn precommit

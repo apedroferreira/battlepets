@@ -79,5 +79,6 @@ dist-ssr
 *.sln
 *.sw?
 
-# Sentry Config File
+# Sentry
 .sentryclirc
+.env.sentry-build-plugin

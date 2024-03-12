@@ -5,7 +5,7 @@ import { NFTSeries, TokenDistribution } from './enums'
 export const CLUSTER: web3.Cluster | 'localnet' = (process.env.CLUSTER ?? 'localnet') as web3.Cluster | 'localnet'
 
 export const TOKEN_DECIMALS = 9
-export const TOKEN_AMOUNT = 10000000
+export const TOKEN_AMOUNT = 100000000
 
 export const TOKEN_NAME = 'Battlepets'
 export const TOKEN_SYMBOL = 'BPETS'
@@ -26,7 +26,7 @@ export const INITIAL_TOKEN_DISTRIBUTION: Record<
   [TokenDistribution.RESERVE]: { allocation: 0.1, walletAddress: process.env.RESERVE_WALLET_ADDRESS },
 }
 
-export const SOL_TOKEN_EXCHANGE_RATE = 800
+export const SOL_TOKEN_EXCHANGE_RATE = 12500
 
 export const METAPLEX_FOUNDATION_RULE_SET_ADDRESS = 'eBJLFYPxJmMGKuFwpDWkzxZeUrad92kZRC5BJLpzyT9'
 
@@ -39,3 +39,7 @@ export const NFT_SERIES_NAMES = {
 
 export const NFT_SYMBOL = 'BPETS'
 export const NFT_SELLER_FEE_BASIS_POINTS = 5 // %
+
+export const MASTER_NFTS = {
+  '1-sgtbarkley-g-1st': '7XLsFrB7n9VUnpg95KG2Dz5q48PFWU3tMu7GKZYe1KK3',
+}

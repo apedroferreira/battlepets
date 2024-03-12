@@ -10,16 +10,16 @@ import { getEndpoint } from 'battlepets-shared/utils/solanaUtils'
 import yargs from 'yargs'
 import 'colors'
 
-import { CLUSTER } from '@/common/constants'
+import { CLUSTER, MASTER_NFTS } from '@/common/constants'
 import { executeScript } from '@/utils/scriptUtils'
 import { getExplorerURLQueryString } from '@/utils/solanaUtils'
 
 const argv = yargs(process.argv.slice(2)).options({
-  masterNFTAddress: { type: 'string', demandOption: true },
+  id: { type: 'string', choices: Object.keys(MASTER_NFTS), demandOption: true },
 })
 
 const verifyMasterNFTCollection = async (): Promise<void> => {
-  const { masterNFTAddress } = await argv.parse()
+  const { id } = await argv.parse()
 
   if (!process.env.WALLET_SECRET_KEY) {
     throw new Error('Must set secret key!')
@@ -45,6 +45,7 @@ const verifyMasterNFTCollection = async (): Promise<void> => {
   umi.identity = umiSigner
   umi.payer = umiSigner
 
+  const masterNFTAddress = MASTER_NFTS[id as keyof typeof MASTER_NFTS]
   const masterNFTPublicKey = publicKey(masterNFTAddress)
 
   const masterNFTMetadataAccount = findMetadataPda(umi, {

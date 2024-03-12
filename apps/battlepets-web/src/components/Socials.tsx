@@ -1,7 +1,7 @@
+import { TELEGRAM_URL, X_URL } from 'battlepets-shared/constants'
 import Image from 'next/image'
 import Link from 'next/link'
 
-import { TELEGRAM_URL, X_URL } from '@/common/constants'
 import globalStyles from '@/common/global.module.scss'
 
 import telegramLogo from '../../public/images/telegramlogo.svg'
@@ -25,10 +25,22 @@ export const Socials: React.FC<SocialsProps> = ({ className, hideCaption = false
         rel="noopener noreferrer nofollow"
         className={styles.socialButtonWrapper}
       >
-        <Image src={telegramLogo as StaticImport} alt="Telegram logo" fill style={{ objectFit: 'contain' }} />
+        <Image
+          src={telegramLogo as StaticImport}
+          alt="Telegram logo"
+          fill
+          style={{ objectFit: 'contain' }}
+          sizes="(max-width: 62em) 4.5rem, (max-width: 90.0625em) 5rem, 5.4rem"
+        />
       </Link>
       <Link href={X_URL} target="_blank" rel="noopener noreferrer nofollow" className={styles.socialButtonWrapper}>
-        <Image src={xLogo as StaticImport} alt="X logo" fill style={{ objectFit: 'contain' }} />
+        <Image
+          src={xLogo as StaticImport}
+          alt="X logo"
+          fill
+          style={{ objectFit: 'contain' }}
+          sizes="(max-width: 62em) 4.5rem, (max-width: 90.0625em) 5rem, 5.4rem"
+        />
       </Link>
     </div>
   )

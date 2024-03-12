@@ -8,6 +8,7 @@ import * as token from '@solana/spl-token'
 import * as web3 from '@solana/web3.js'
 import { LOCALNET_ENDPOINT } from 'battlepets-shared/constants'
 import { getEndpoint } from 'battlepets-shared/utils/solanaUtils'
+import { stringify as csvStringify } from 'csv-stringify'
 import csvToJson from 'csvtojson'
 
 import { CLUSTER, TOKEN_DECIMALS } from '@/common/constants'
@@ -112,29 +113,107 @@ export const multiSendTokens = async (
   return web3.sendAndConfirmTransaction(connection, transaction, [senderAccount])
 }
 
-export const getValidAirdropReceivers = async (airdropFileName: string) => {
+type AirdropReceiversData = {
+  address: string
+  status: 'pending' | 'sent' | 'duplicate' | 'invalidFormat' | 'notOnCurve'
+}[]
+
+export const getAirdropPendingReceivers = async (airdropFileName: string) => {
   const airdropAddressesFilePath = path.resolve(__dirname, `../scripts/scriptsData/input/${airdropFileName}.csv`)
 
-  const airdropReceiversData = (await csvToJson().fromFile(airdropAddressesFilePath)) as { address: string }[]
+  const airdropReceiversData = (await csvToJson().fromFile(airdropAddressesFilePath)) as AirdropReceiversData
 
-  return airdropReceiversData
-    .map(airdropReceiverData => {
-      const receiverAddress = airdropReceiverData.address
+  let processedReceiverAddresses: string[] = []
 
-      if (!receiverAddress) {
-        throw new Error('Missing receiver address!')
+  const updatedAirdropReceiversData = airdropReceiversData.map(airdropReceiverData => {
+    const { address: receiverAddress, status: receiverStatus } = airdropReceiverData
+
+    if (!receiverAddress) {
+      throw new Error('Missing receiver address!')
+    }
+    if (!receiverStatus) {
+      throw new Error('Missing receiver status!')
+    }
+
+    let newStatus = 'pending'
+
+    if (processedReceiverAddresses.includes(receiverAddress)) {
+      newStatus = 'duplicate'
+    }
+
+    processedReceiverAddresses = [...processedReceiverAddresses, receiverAddress]
+
+    if (receiverStatus !== 'pending') {
+      return airdropReceiverData
+    }
+
+    let receiverPublicKey = null
+    try {
+      receiverPublicKey = new web3.PublicKey(receiverAddress)
+    } catch (error) {
+      newStatus = 'invalidFormat'
+    }
+
+    if (receiverPublicKey && !web3.PublicKey.isOnCurve(receiverPublicKey)) {
+      newStatus = 'notOnCurve'
+    }
+
+    return {
+      address: receiverAddress,
+      status: newStatus,
+    }
+  })
+
+  const updatedAirdropReceiversCsv = csvStringify(updatedAirdropReceiversData, {
+    columns: ['address', 'status'],
+    header: true,
+  })
+
+  // eslint-disable-next-line security/detect-non-literal-fs-filename
+  await fs.writeFile(airdropAddressesFilePath, updatedAirdropReceiversCsv)
+
+  return updatedAirdropReceiversData
+    .filter(({ status: receiverStatus }) => receiverStatus === 'pending')
+    .map(({ address: receiverAddress }) => new web3.PublicKey(receiverAddress))
+}
+
+export const updateSuccessfulAirdropReceivers = async (
+  airdropFileName: string,
+  successfulReceiverAddresses: string[]
+) => {
+  const airdropAddressesFilePath = path.resolve(__dirname, `../scripts/scriptsData/input/${airdropFileName}.csv`)
+
+  const airdropReceiversData = (await csvToJson().fromFile(airdropAddressesFilePath)) as AirdropReceiversData
+
+  const updatedAirdropReceiversData = airdropReceiversData.map(airdropReceiverData => {
+    const { address: receiverAddress, status: receiverStatus } = airdropReceiverData
+
+    if (!receiverAddress) {
+      throw new Error('Missing receiver address!')
+    }
+    if (!receiverStatus) {
+      throw new Error('Missing receiver status!')
+    }
+
+    if (receiverStatus === 'pending' && successfulReceiverAddresses.includes(receiverAddress)) {
+      return {
+        address: receiverAddress,
+        status: 'sent',
       }
+    }
 
-      let receiverPublicKey = null
-      try {
-        receiverPublicKey = new web3.PublicKey(receiverAddress)
-      } catch (error) {
-        // Ignore invalid public keys
-      }
+    return airdropReceiverData
+  })
 
-      return receiverPublicKey
-    })
-    .filter(receiverPublicKey => receiverPublicKey && web3.PublicKey.isOnCurve(receiverPublicKey)) as web3.PublicKey[]
+  const updatedAirdropReceiversCsv = csvStringify(updatedAirdropReceiversData, {
+    columns: ['address', 'status'],
+    header: true,
+  })
+
+  // eslint-disable-next-line security/detect-non-literal-fs-filename
+  await fs.writeFile(airdropAddressesFilePath, updatedAirdropReceiversCsv)
+
+  return updatedAirdropReceiversData
 }
 
 const getUploaderAddress = () => (CLUSTER === 'mainnet-beta' ? 'https://node2.irys.xyz' : 'https://devnet.irys.xyz')

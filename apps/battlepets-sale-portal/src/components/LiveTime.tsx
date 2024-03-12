@@ -27,5 +27,5 @@ export const LiveTime: React.FC<LiveTimeProps> = ({ timestamp }) => {
     return () => clearInterval(updateInterval)
   }, [getValue])
 
-  return <span className="live-time">{value}</span>
+  return <span>{value}</span>
 }

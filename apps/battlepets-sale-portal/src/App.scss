@@ -3,12 +3,8 @@
 @use './common/breakpoints' as breakpoints;
 @use './common/keyframes';
 
-.fire-text {
-  @include mixins.fire-text;
-}
-
-.ice-text {
-  @include mixins.ice-text;
+.high-energy-text {
+  @include mixins.high-energy-text;
 }
 
 .toast-wrapper {
@@ -63,8 +59,8 @@
   top: 1.5rem;
 
   &.toast-success {
-    background-color: var(--ice-gradient-light);
-    box-shadow: 0 0 0.8rem 0.4rem var(--ice-glow);
+    background-color: var(--energy-gradient-light);
+    box-shadow: 0 0 0.8rem 0.4rem var(--energy-glow);
   }
 
   &.toast-error {
@@ -83,10 +79,6 @@
   }
 }
 
-.live-time {
-  display: inline-block;
-}
-
 @keyframes loader-animation {
   to {
     transform: rotate(1turn);
@@ -96,9 +88,9 @@
 .loader {
   animation: loader-animation 1s infinite linear;
   aspect-ratio: 1;
-  border: 0.8rem solid var(--ice-glow);
+  border: 0.8rem solid var(--energy-glow);
   border-radius: 50%;
-  border-right-color: var(--fire-gradient-dark);
+  border-right-color: var(--energy-gradient-dark);
   width: 100%;
 }
 
@@ -153,7 +145,6 @@ button.wallet-adapter-button-trigger {
   height: auto;
   justify-content: center;
   line-height: 1.15;
-  min-width: 22.8rem;
   padding: 1.4rem 2.2rem;
   text-transform: uppercase;
   transition:
@@ -162,15 +153,19 @@ button.wallet-adapter-button-trigger {
   white-space: nowrap;
 
   @include mixins.bernhard-gothic;
-  @include mixins.ice-gradient-background;
+  @include mixins.energy-gradient-background;
 
   &:hover {
-    box-shadow: 0 0 0.8rem 0.4rem var(--ice-glow);
+    box-shadow: 0 0 0.8rem 0.4rem var(--energy-glow);
     transform: scale(1.015);
   }
 
   &:disabled {
-    background-image: linear-gradient(135deg, var(--ice-gradient-faded-light) 0%, var(--ice-gradient-faded-dark) 100%);
+    background-image: linear-gradient(
+      135deg,
+      var(--energy-gradient-faded-light) 0%,
+      var(--energy-gradient-faded-dark) 100%
+    );
     box-shadow: 0 0.2rem 0.3rem var(--shadow-light);
     cursor: not-allowed;
     transform: scale(1);
@@ -207,6 +202,8 @@ button.wallet-adapter-button-trigger {
   top: 0.3rem;
 
   .loader {
+    border-color: var(--high-energy-gradient-dark);
+    border-right-color: var(--energy-gradient-dark);
     border-width: 0.4rem;
   }
 
@@ -236,8 +233,12 @@ button.wallet-adapter-button-trigger {
 input.input {
   border: 0.4rem solid;
   border-image-slice: 1;
-  border-image-source: linear-gradient(135deg, var(--ice-gradient-light) 0%, var(--ice-gradient-dark) 100%);
-  border-width: 0.3rem;
+  border-image-source: linear-gradient(
+    135deg,
+    var(--high-energy-gradient-light) 0%,
+    var(--high-energy-gradient-dark) 100%
+  );
+  border-width: 0.4rem;
   box-shadow: 0 0.2rem 0.3rem var(--shadow-light);
   font-size: 2rem;
   padding: 2rem 1.8rem 2rem 4.1rem;
@@ -247,7 +248,7 @@ input.input {
 
   &:hover,
   &:focus {
-    box-shadow: 0 0 0.8rem 0.4rem var(--ice-glow);
+    box-shadow: 0 0 0.8rem 0.4rem var(--energy-glow);
   }
 
   &:disabled {
@@ -276,28 +277,10 @@ input.input {
   height: 2.6rem;
   left: 1.3rem;
   position: absolute;
-  top: 4.25rem;
+  top: calc(50% + 1.1rem);
+  transform: translateY(-50%);
   width: 2.6rem;
   z-index: 1;
-
-  @include breakpoints.breakpoint(sm) {
-    height: 2.8rem;
-    left: 1.2rem;
-    top: 4.45rem;
-    width: 2.8rem;
-  }
-
-  @include breakpoints.breakpoint(md) {
-    top: 4.6rem;
-  }
-
-  @include breakpoints.breakpoint(lg) {
-    top: 4.7rem;
-  }
-
-  @include breakpoints.breakpoint(xxl) {
-    top: 4.85rem;
-  }
 }
 
 input.input-error {
@@ -357,6 +340,7 @@ label.label {
   display: inline-block;
   font-size: 1.4rem;
   font-weight: bold;
+  height: 1.8rem;
   margin-bottom: 0.6rem;
 
   @include breakpoints.breakpoint(md) {
@@ -397,17 +381,18 @@ form.form {
     padding-bottom: 1.8rem;
     padding-top: 1.8rem;
 
-    @include mixins.fire-gradient-background;
+    @include mixins.high-energy-gradient-background;
 
     &:hover {
-      box-shadow: 0 0 0.8rem 0.4rem var(--fire-glow);
+      box-shadow: 0 0 0.8rem 0.4rem var(--energy-glow);
     }
 
     &:disabled {
       background-image: linear-gradient(
         135deg,
-        var(--fire-gradient-faded-light) 0%,
-        var(--fire-gradient-faded-dark) 100%
+        var(--high-energy-gradient-faded-light) 0%,
+
+        var(--high-energy-gradient-faded-dark) 100%
       );
       box-shadow: 0 0.2rem 0.3rem var(--shadow-light);
     }
@@ -456,8 +441,8 @@ form.form {
   }
 }
 
-.logo {
-  width: 8.2rem;
+.header-logo {
+  width: 8.6rem;
 
   @include breakpoints.breakpoint(sm) {
     width: 9.2rem;
@@ -502,7 +487,7 @@ form.form {
 }
 
 .progress-bar {
-  background-color: var(--ice-glow);
+  background-color: var(--energy-glow-weak);
   box-shadow: 0 0.2rem 0.3rem var(--shadow-light);
   height: 2.8rem;
   max-width: 100%;
@@ -534,7 +519,7 @@ form.form {
   transition: transform 0.5s ease;
   width: 100%;
 
-  @include mixins.animated-fire-gradient-background;
+  @include mixins.animated-high-energy-gradient-background;
 }
 
 .progress-bar-values {
@@ -584,18 +569,23 @@ form.form {
   top: calc(100% + 5rem);
   z-index: 1;
 
-  .live-time {
-    text-align: right;
-    width: 9.6rem;
-  }
-
   @include breakpoints.breakpoint(sm) {
     font-size: 1.6rem;
     top: calc(100% + 0.6rem);
+  }
+}
 
-    .live-time {
-      width: 10.8rem;
-    }
+.progress-bar-time {
+  display: flex;
+}
+
+.progress-bar-time-counter {
+  display: inline-block;
+  text-align: right;
+  width: 9.6rem;
+
+  @include breakpoints.breakpoint(sm) {
+    width: 10.8rem;
   }
 }
 
@@ -693,7 +683,7 @@ form.form {
 }
 
 .bpets-token-logo {
-  box-shadow: 0 0 0.3rem 0.15rem var(--fire-glow);
+  box-shadow: 0 0 0.3rem 0.15rem var(--energy-glow);
 }
 
 .token-logo-small {
@@ -718,26 +708,27 @@ form.form {
 .max-amount-button {
   background-color: var(--transparent);
   border: none;
-  color: var(--ice-gradient-dark);
+  color: var(--energy-gradient-dark);
   cursor: pointer;
   font-size: 1.2rem;
   font-weight: bold;
+  padding: 0.2rem;
   position: absolute;
-  right: 0.4rem;
-  top: calc(100% - 2.2rem);
+  right: 0.8rem;
+  top: calc(100% - 2.3rem);
   transition:
     color 0.1s ease-in-out,
     text-shadow 0.1s ease-in-out;
   z-index: 1;
 
   &:hover {
-    color: var(--ice-gradient-light);
-    text-shadow: 0 0 0.8rem var(--ice-glow);
+    color: var(--energy-gradient-light);
+    text-shadow: 0 0 0.8rem var(--energy-glow);
   }
 
   @include breakpoints.breakpoint(sm) {
     font-size: 1.4rem;
-    top: calc(100% - 2.4rem);
+    top: calc(100% - 2.5rem);
   }
 }
 
@@ -818,5 +809,189 @@ form.form {
 
   @include breakpoints.breakpoint(xxl) {
     width: 6rem;
+  }
+}
+
+.footer-top-border {
+  height: 0.5rem;
+  width: 100%;
+
+  @include mixins.energy-gradient-background;
+
+  @include breakpoints.breakpoint(md) {
+    height: 0.6rem;
+  }
+}
+
+.footer-content {
+  display: flex;
+  flex-direction: column;
+  max-width: var(--max-content-width);
+  padding: 1.6rem 0 6.4rem;
+  width: 100%;
+
+  nav > ul {
+    color: var(--contrast-text);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    list-style-type: none;
+    margin-top: 1.8rem;
+    padding: 0;
+
+    /* stylelint-disable-next-line no-descending-specificity */
+    li {
+      font-size: 1.4rem;
+      margin: 0.8rem 0;
+
+      &:hover {
+        opacity: 0.8;
+      }
+    }
+  }
+
+  @include breakpoints.breakpoint(md) {
+    align-items: center;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 2.6rem 0 4.8rem;
+
+    nav > ul {
+      align-items: center;
+      flex-direction: row;
+      margin-top: 0;
+
+      li {
+        margin: 0 1rem;
+      }
+    }
+  }
+
+  @include breakpoints.breakpoint(lg) {
+    padding: 3rem 0 5rem;
+
+    nav > ul {
+      li {
+        margin: 0 1.8rem;
+      }
+    }
+  }
+
+  @include breakpoints.breakpoint(xl) {
+    padding: 3.8rem 0 6rem;
+
+    nav > ul {
+      li {
+        font-size: 1.5rem;
+        margin: 0 2.4rem;
+      }
+    }
+  }
+
+  @include breakpoints.breakpoint(xxl) {
+    padding: 5.26rem 0 7.2rem;
+
+    nav > ul {
+      li {
+        font-size: 1.6rem;
+        margin: 0 2.8rem;
+      }
+    }
+  }
+}
+
+.footer-left {
+  display: flex;
+  flex-direction: column;
+}
+
+.footer-logo {
+  position: relative;
+  width: 8.6rem;
+
+  @include breakpoints.breakpoint(lg) {
+    width: 10rem;
+  }
+
+  @include breakpoints.breakpoint(xxl) {
+    width: 11rem;
+  }
+}
+
+.footer-socials {
+  display: flex;
+  position: absolute;
+  right: 6%;
+  top: 2.6rem;
+
+  > * {
+    margin-right: 1.4rem;
+
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+
+  @include breakpoints.breakpoint(md) {
+    position: static;
+  }
+}
+
+.social-button {
+  height: 4.3rem;
+  position: relative;
+  transition: transform 0.15s ease-out;
+  width: 4.3rem;
+
+  &:hover {
+    transform: scale(1.08);
+  }
+
+  @include breakpoints.breakpoint(lg) {
+    height: 4.8rem;
+    width: 4.8rem;
+  }
+
+  @include breakpoints.breakpoint(xxl) {
+    height: 5.2rem;
+    width: 5.2rem;
+  }
+}
+
+.footer-contact {
+  color: var(--energy-gradient-light);
+  font-size: 1.2rem;
+
+  &:hover {
+    text-decoration: underline;
+  }
+
+  @include breakpoints.breakpoint(lg) {
+    font-size: 1.3rem;
+  }
+
+  @include breakpoints.breakpoint(xl) {
+    font-size: 1.4rem;
+  }
+}
+
+.footer-copyright {
+  bottom: 1.5rem;
+  color: var(--contrast-text);
+  font-size: 1.1rem;
+  opacity: 0.75;
+  position: absolute;
+  right: 6%;
+
+  @include breakpoints.breakpoint(md) {
+    bottom: 1.7rem;
+    left: 50%;
+    right: auto;
+    transform: translateX(-50%);
+  }
+
+  @include breakpoints.breakpoint(lg) {
+    bottom: 2rem;
+    font-size: 1.2rem;
   }
 }

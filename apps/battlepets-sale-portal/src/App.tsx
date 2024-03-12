@@ -1,14 +1,16 @@
 import * as anchor from '@coral-xyz/anchor'
 import { useAnchorWallet, useConnection, useWallet } from '@solana/wallet-adapter-react'
 import { WalletMultiButton } from '@solana/wallet-adapter-react-ui'
-import { BASE_URL } from 'battlepets-shared/constants'
+import { BASE_URL, CONTACT_EMAIL, LITEPAPER_URL, TELEGRAM_URL, X_URL } from 'battlepets-shared/constants'
 import saleIdl from 'battlepets-shared/idls/battlepets_public_sale.json'
 import { useCallback, useEffect, useMemo, useState } from 'react'
 
-import bpetsLogo from '@/assets/bpetslogo.avif'
+import bpetsLogo from '@/assets/bpetslogo.png'
 import inputErrorIcon from '@/assets/inputerroricon.svg'
 import logo from '@/assets/logo.png'
-import solLogo from '@/assets/sollogo.avif'
+import solLogo from '@/assets/sollogo.png'
+import telegramLogo from '@/assets/telegramlogo.svg'
+import xLogo from '@/assets/xlogo.svg'
 import {
   FUND_RAISER_PUBLIC_KEY,
   HARD_CAP_SOL_AMOUNT,
@@ -267,7 +269,7 @@ export const App: React.FC = () => {
     <>
       <header>
         <a href={BASE_URL} target="_blank" rel="noreferrer">
-          <img src={logo} className="logo" alt="Battlepets logo" />
+          <img src={logo} className="header-logo" alt="Battlepets logo" />
         </a>
         <WalletMultiButton />
       </header>
@@ -283,8 +285,8 @@ export const App: React.FC = () => {
               style={{ transform: `scaleX(${totalAllocation / HARD_CAP_SOL_AMOUNT})` }}
             />
             <div className="progress-bar-values">
-              <span className="fire-text">{isLoadingSale ? '…' : formatLargeStatNumber(totalAllocation)}</span>/
-              <span className="ice-text">{formatLargeStatNumber(HARD_CAP_SOL_AMOUNT)}</span> SOL
+              <span className="high-energy-text">{isLoadingSale ? '…' : formatLargeStatNumber(totalAllocation)}</span>/
+              <span>{formatLargeStatNumber(HARD_CAP_SOL_AMOUNT)}</span> SOL
             </div>
             <div
               className="soft-cap-marker"
@@ -302,12 +304,14 @@ export const App: React.FC = () => {
               {!hasSaleEnded &&
                 !isLoadingSale &&
                 (isSaleOpen ? (
-                  <>
-                    Sale ends in:{' '}
-                    <span className="fire-text">
-                      <LiveTime timestamp={SALE_ENDS_AT_TIMESTAMP} />
-                    </span>
-                  </>
+                  <div className="progress-bar-time">
+                    <div>Sale ends in:&nbsp;</div>
+                    <div className="progress-bar-time-counter">
+                      <span className="high-energy-text">
+                        <LiveTime timestamp={SALE_ENDS_AT_TIMESTAMP} />
+                      </span>
+                    </div>
+                  </div>
                 ) : (
                   'Sale is closed.'
                 ))}
@@ -406,7 +410,7 @@ export const App: React.FC = () => {
                 Your {isSaleOpen ? 'current ' : ''}allocation:
               </label>
               <div id="allocation" className="allocation">
-                <span className={adjustedCurrentAllocation > 0 ? 'ice-text' : 'fire-text'}>
+                <span className="high-energy-text">
                   {formatLargeStatNumber(adjustedCurrentAllocation)} SOL (
                   {formatLargeStatNumber(adjustedCurrentAllocation * SOL_BPETS_EXCHANGE_RATE)} BPETS)
                 </span>
@@ -447,6 +451,62 @@ export const App: React.FC = () => {
           ))}
         {toastTarget}
       </main>
+      <footer>
+        <div className="footer-top-border" />
+        <div className="footer-content">
+          <div className="footer-left">
+            <a href={BASE_URL} target="_blank" rel="noreferrer">
+              <img src={logo} className="footer-logo" alt="Battlepets logo" />
+            </a>
+            <a
+              href={`mailto:${CONTACT_EMAIL}`}
+              target="_blank"
+              rel="noopener noreferrer nofollow"
+              className="footer-contact"
+            >
+              {CONTACT_EMAIL}
+            </a>
+          </div>
+          <nav>
+            <ul>
+              <li>
+                <a href={BASE_URL} target="_blank" rel="noreferrer">
+                  Home
+                </a>
+              </li>
+              <li>
+                <a href={`${BASE_URL}#game`} target="_blank" rel="noreferrer">
+                  Game
+                </a>
+              </li>
+              <li>
+                <a href={`${BASE_URL}#token`} target="_blank" rel="noreferrer">
+                  Token
+                </a>
+              </li>
+              <li>
+                <a href={`${BASE_URL}#roadmap`} target="_blank" rel="noreferrer">
+                  Roadmap
+                </a>
+              </li>
+              <li>
+                <a href={LITEPAPER_URL} target="_blank" rel="noopener noreferrer nofollow">
+                  Litepaper
+                </a>
+              </li>
+            </ul>
+          </nav>
+          <div className="footer-socials">
+            <a href={TELEGRAM_URL} target="_blank" rel="noopener noreferrer nofollow">
+              <img src={telegramLogo} className="social-button" alt="Telegram logo" />
+            </a>
+            <a href={X_URL} target="_blank" rel="noopener noreferrer nofollow">
+              <img src={xLogo} className="social-button" alt="X logo" />
+            </a>
+          </div>
+        </div>
+        <div className="footer-copyright">© {new Date().getFullYear()} Battlepets. All rights reserved.</div>
+      </footer>
     </>
   )
 }

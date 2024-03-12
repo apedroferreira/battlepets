@@ -33,8 +33,8 @@
   --fire-gradient-faded-dark: #ce4d4a;
   --ice-gradient-faded-light: #5fc9c6;
   --ice-gradient-faded-dark: #519a96;
-  --promo-gradient-faded-light: #ffc652;
-  --promo-gradient-faded-dark: #f75167;
+  --promo-gradient-faded-light: #ffc752;
+  --promo-gradient-faded-dark: #f75166;
   --error: #ef1a1a;
   --error-glow: rgb(239 26 26 / 35%);
   --footer-gradient-light: #c22b2b;
@@ -60,6 +60,7 @@ html {
 }
 
 body {
+  background-color: var(--energy-gradient-dark);
   color: var(--body-text);
   font-size: #{math.div(variables.$base-font-size, 10)}rem;
 }

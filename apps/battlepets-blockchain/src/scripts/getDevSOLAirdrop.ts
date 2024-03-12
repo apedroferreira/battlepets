@@ -39,9 +39,9 @@ const getDevSOLAirdrop = async (): Promise<void> => {
   )
 
   const solBalanceAfter = lamportsBalanceAfter / web3.LAMPORTS_PER_SOL
-  const solAidropped = (lamportsBalanceAfter - lamportsBalanceBefore) / web3.LAMPORTS_PER_SOL
+  const solAirdropped = (lamportsBalanceAfter - lamportsBalanceBefore) / web3.LAMPORTS_PER_SOL
 
-  console.log(`${solAidropped} SOL airdropped! Account now has ${solBalanceAfter} SOL.`.green)
+  console.log(`${solAirdropped} SOL airdropped! Account now has ${solBalanceAfter} SOL.`.green)
 }
 
 executeScript(getDevSOLAirdrop)

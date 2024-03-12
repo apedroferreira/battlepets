@@ -4,13 +4,17 @@ import * as web3 from '@solana/web3.js'
 export const SOLANA_DECIMALS = 9
 export const BPETS_DECIMALS = 9
 
-export const SOL_BPETS_EXCHANGE_RATE = 800
+export const SOL_BPETS_EXCHANGE_RATE = 12500
 
 export const MIN_ALLOCATION_SOL_AMOUNT = 0.1
-export const MAX_ALLOCATION_SOL_AMOUNT = 4
+export const MAX_ALLOCATION_SOL_AMOUNT = 120
 
-export const SOFT_CAP_SOL_AMOUNT = 3
-export const HARD_CAP_SOL_AMOUNT = 16
+export const SOFT_CAP_SOL_AMOUNT = 700
+export const HARD_CAP_SOL_AMOUNT = 2800
+
+export const SALE_NAME = 'Battlepets Public Sale'
+
+// Environment variables
 
 export const CLUSTER: web3.Cluster | 'localnet' = (import.meta.env.VITE_CLUSTER ?? 'localnet') as
   | web3.Cluster
@@ -26,4 +30,4 @@ export const SALE_ENDS_AT_TIMESTAMP = Number(import.meta.env.VITE_SALE_ENDS_AT_T
 
 export const HAS_PROCESSED_SALE_END = Boolean(import.meta.env.VITE_HAS_PROCESSED_SALE_END === 'true')
 
-export const SALE_NAME = 'Battlepets Public Sale'
+export const SENTRY_DSN = (import.meta.env.VITE_SENTRY_DSN as string) ?? ''

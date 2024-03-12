@@ -2,23 +2,23 @@
 
 @mixin breakpoint($point) {
   @if $point == sm {
-    @media (width >= #{variables.$breakpoint-sm}em) {
+    @media (min-width: #{variables.$breakpoint-sm}em) {
       @content;
     }
   } @else if $point == md {
-    @media (width >= #{variables.$breakpoint-md}em) {
+    @media (min-width: #{variables.$breakpoint-md}em) {
       @content;
     }
   } @else if $point == lg {
-    @media (width >= #{variables.$breakpoint-lg}em) {
+    @media (min-width: #{variables.$breakpoint-lg}em) {
       @content;
     }
   } @else if $point == xl {
-    @media (width > #{variables.$breakpoint-xl}em) {
+    @media (min-width: #{variables.$breakpoint-xl - 1}em) {
       @content;
     }
   } @else if $point == xxl {
-    @media (width > #{variables.$breakpoint-xxl}em) {
+    @media (min-width: #{variables.$breakpoint-xxl - 1}em) {
       @content;
     }
   }

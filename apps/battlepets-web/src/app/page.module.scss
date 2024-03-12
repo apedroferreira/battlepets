@@ -47,6 +47,8 @@
   }
 
   @include breakpoints.breakpoint(md) {
+    align-items: center;
+
     nav > ul {
       display: flex;
     }
@@ -128,17 +130,11 @@
   visibility: hidden;
 }
 
-@mixin mainBackground {
-  background: linear-gradient(135deg, var(--background-gradient-fire), var(--background-gradient-ice));
-  margin-bottom: -3rem;
-  padding-bottom: 3rem;
-}
-
 .intro {
   position: relative;
   width: 100vw;
 
-  @include mainBackground;
+  @include mixins.mainBackground;
 }
 
 .hero {
@@ -175,7 +171,7 @@
 
   @include breakpoints.breakpoint(xxl) {
     padding-bottom: 26rem;
-    padding-top: 24rem;
+    padding-top: 22rem;
   }
 }
 
@@ -208,6 +204,7 @@
   font-size: 1.6rem;
   line-height: 1.5;
   margin-top: 0.4rem;
+  text-align: center;
 
   span {
     animation-delay: -1.5s;
@@ -215,6 +212,7 @@
 
   @include breakpoints.breakpoint(md) {
     margin-top: 0.6rem;
+    text-align: left;
   }
 
   @include breakpoints.breakpoint(lg) {
@@ -341,7 +339,7 @@
   }
 
   @include breakpoints.breakpoint(xxl) {
-    top: 0;
+    top: -1rem;
   }
 }
 
@@ -621,7 +619,7 @@
   @include breakpoints.breakpoint(md) {
     height: 17.4rem;
     left: 11rem;
-    top: 14.6rem;
+    top: 14.8rem;
     width: 17.4rem;
   }
 
@@ -690,26 +688,38 @@
   }
 }
 
+.introBackgroundWrapper {
+  @include mixins.fillSpace;
+
+  left: 50%;
+  max-width: #{variables.$max-content-width}em;
+  opacity: 0.2;
+  pointer-events: none;
+  top: -2rem;
+  transform: translateX(-50%);
+  width: 100vw;
+}
+
 @keyframes backgroundElementAnimation {
   from {
-    transform: translate(-50%, -2rem) rotate(-0.25deg);
+    transform: rotate3d(0, 0, -0.25deg);
   }
 
   to {
-    transform: translate(-50%, -2rem) rotate(0.25deg);
+    transform: rotate3d(0, 0, 0.25deg);
   }
 }
 
-@mixin introBackground {
+@mixin introMobileBackground {
   height: 30rem;
 
   @include breakpoints.breakpoint(sm) {
     height: 36rem;
   }
+}
 
-  @include breakpoints.breakpoint(md) {
-    height: 108rem;
-  }
+@mixin introBackground {
+  height: 108rem;
 
   @include breakpoints.breakpoint(lg) {
     height: 134.4rem;
@@ -724,30 +734,54 @@
   }
 }
 
-.introFireBackground {
+.introMobileFireBackground {
   @include mixins.fillSpace;
 
   animation: backgroundElementAnimation 6s ease-in-out infinite alternate;
   clip-path: polygon(0% 84%, 100% 68%, 100% 80%, 0% 93%);
-  left: 50%;
-  opacity: 0.2;
-  pointer-events: none;
   transform-origin: 50% 50%;
-  width: 100vw;
 
-  @include introBackground;
+  @include introMobileBackground;
   @include mixins.fireGradientBackground;
 
   @include breakpoints.breakpoint(md) {
-    background-image: linear-gradient(
-      180deg,
-      var(--fire-gradient-light) 0%,
-      var(--fire-gradient-dark) 75%,
-      var(--transparent) 92.5%
-    );
-    clip-path: polygon(87.5% 0%, 91% 0%, 87.5% 92.5%, 80% 92.5%);
-    max-width: #{variables.$max-content-width}em;
-    transform-origin: top center;
+    display: none;
+  }
+}
+
+.introMobileIceBackground {
+  @include mixins.fillSpace;
+
+  animation: backgroundElementAnimation 8s ease-in-out infinite alternate;
+  clip-path: polygon(0% 66%, 100% 52.5%, 100% 64%, 0% 77%);
+  transform-origin: 50% 50%;
+
+  @include introMobileBackground;
+  @include mixins.iceGradientBackground;
+
+  @include breakpoints.breakpoint(md) {
+    display: none;
+  }
+}
+
+.introFireBackground {
+  @include mixins.fillSpace;
+
+  animation: backgroundElementAnimation 6s ease-in-out infinite alternate;
+  background-image: linear-gradient(
+    180deg,
+    var(--fire-gradient-light) 0%,
+    var(--fire-gradient-dark) 75%,
+    var(--transparent) 92.5%
+  );
+  clip-path: polygon(87.5% 0%, 91% 0%, 87.5% 92.5%, 80% 92.5%);
+  display: none;
+  transform-origin: top center;
+
+  @include introBackground;
+
+  @include breakpoints.breakpoint(md) {
+    display: inline;
   }
 
   @include breakpoints.breakpoint(lg) {
@@ -763,25 +797,20 @@
   @include mixins.fillSpace;
 
   animation: backgroundElementAnimation 8s ease-in-out infinite alternate;
-  clip-path: polygon(0% 66%, 100% 52.5%, 100% 64%, 0% 77%);
-  left: 50%;
-  opacity: 0.2;
-  pointer-events: none;
-  width: 100vw;
+  background-image: linear-gradient(
+    180deg,
+    var(--ice-gradient-light) 0%,
+    var(--ice-gradient-dark) 75%,
+    var(--transparent) 92.5%
+  );
+  clip-path: polygon(82.5% 0%, 86% 0%, 77.5% 92.5%, 70% 92.5%);
+  display: none;
+  transform-origin: top center;
 
   @include introBackground;
-  @include mixins.iceGradientBackground;
 
   @include breakpoints.breakpoint(md) {
-    background-image: linear-gradient(
-      180deg,
-      var(--ice-gradient-light) 0%,
-      var(--ice-gradient-dark) 75%,
-      var(--transparent) 92.5%
-    );
-    clip-path: polygon(82.5% 0%, 86% 0%, 77.5% 92.5%, 70% 92.5%);
-    max-width: #{variables.$max-content-width}em;
-    transform-origin: top center;
+    display: inline;
   }
 
   @include breakpoints.breakpoint(lg) {
@@ -806,8 +835,8 @@
 
   @include breakpoints.breakpoint(md) {
     height: 4rem;
-    left: 7rem;
-    top: 11rem;
+    left: 9rem;
+    top: 14rem;
     width: 4rem;
   }
 
@@ -843,7 +872,7 @@
 
   @include breakpoints.breakpoint(md) {
     left: 16.5rem;
-    top: 8rem;
+    top: 9.5rem;
   }
 
   @include breakpoints.breakpoint(lg) {
@@ -960,7 +989,6 @@
 
   animation: backgroundElementAnimation 6s ease-in-out infinite alternate;
   content: '';
-  left: 50%;
   transform-origin: 50% 50%;
 }
 
@@ -1322,27 +1350,27 @@
   @keyframes #{$animation-name} {
     0% {
       box-shadow: 0 0 7rem var(--energy-glow-strong);
-      transform: rotate3d(1, 1, 0, 5deg) translateZ($translateZ);
+      transform: rotate3d(1, 1, 0, 5deg) translateZ($translateZ) perspective($translateZ);
     }
 
     25% {
       box-shadow: 0 0 9rem var(--energy-glow-strong);
-      transform: rotate3d(1, -1, 0, 5deg) translateZ($translateZ);
+      transform: rotate3d(1, -1, 0, 5deg) translateZ($translateZ) perspective($translateZ);
     }
 
     50% {
       box-shadow: 0 0 7rem var(--energy-glow-strong);
-      transform: rotate3d(-1, -1, 0, 5deg) translateZ($translateZ);
+      transform: rotate3d(-1, -1, 0, 5deg) translateZ($translateZ) perspective($translateZ);
     }
 
     75% {
       box-shadow: 0 0 9rem var(--energy-glow-strong);
-      transform: rotate3d(-1, 1, 0, 5deg) translateZ($translateZ);
+      transform: rotate3d(-1, 1, 0, 5deg) translateZ($translateZ) perspective($translateZ);
     }
 
     100% {
       box-shadow: 0 0 7rem var(--energy-glow-strong);
-      transform: rotate3d(1, 1, 0, 5deg) translateZ($translateZ);
+      transform: rotate3d(1, 1, 0, 5deg) translateZ($translateZ) perspective($translateZ);
     }
   }
 
@@ -1359,12 +1387,13 @@
 
   &::before {
     @include mixins.fillSpace;
-    @include animatedScreenshotPanel(1rem);
+    @include animatedScreenshotPanel(-1rem);
 
     background: linear-gradient(135deg, var(--energy-gradient-dark), var(--energy-gradient-light));
     content: '';
     left: 0.6rem;
     top: 0.6rem;
+    transform-origin: 50% 50%;
 
     @include breakpoints.breakpoint(md) {
       left: 0.8rem;
@@ -1374,12 +1403,13 @@
 
   &::after {
     @include mixins.fillSpace;
-    @include animatedScreenshotPanel(2rem);
+    @include animatedScreenshotPanel(-2rem);
 
     background: linear-gradient(135deg, var(--energy-gradient-light), var(--energy-gradient-dark));
     content: '';
     left: -0.6rem;
     top: -0.6rem;
+    transform-origin: 50% 50%;
     z-index: -1;
 
     @include breakpoints.breakpoint(md) {
@@ -1420,7 +1450,7 @@
 
   @include breakpoints.breakpoint(xxl) {
     height: calc(106rem * (750 / 1334));
-    width: 106rem;
+    width: 104rem;
   }
 }
 
@@ -1505,7 +1535,7 @@
   padding-top: 3rem;
   position: relative;
 
-  @include mainBackground;
+  @include mixins.mainBackground;
 
   &::after {
     @include mixins.fillSpace;
@@ -1710,7 +1740,7 @@
 }
 
 .roadmapSection {
-  @include mainBackground;
+  @include mixins.mainBackground;
 }
 
 .roadmapSectionContent {
@@ -1746,13 +1776,13 @@
   justify-content: space-between;
   width: 100%;
 
-  button {
+  a {
     display: none;
   }
 
   @include breakpoints.breakpoint(sm) {
-    button {
-      display: flex;
+    a {
+      display: inline;
     }
   }
 }
@@ -1780,8 +1810,9 @@
 
 .roadmap {
   margin: 2.8rem 0 11.6rem;
+  min-width: 80rem;
   position: relative;
-  width: 80rem;
+  width: 125vw;
 
   svg {
     path {

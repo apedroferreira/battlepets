@@ -8,33 +8,36 @@
   --max-content-width: min(88%, #{variables.$max-content-width}em);
   --min-content-width: #{variables.$min-content-width}em;
   --transparent: rgb(255 255 255 / 0%);
-  --body-text: #202020;
+  --body-text: #fff;
   --contrast-text: #fff;
-  --fire-gradient-light: #de1a1a;
-  --fire-gradient-dark: #bf1616;
-  --ice-gradient-light: #20bcb8;
-  --ice-gradient-dark: #16807d;
-  --background-gradient-fire: #ffede6;
-  --background-gradient-ice: #e8fffd;
+  --energy-gradient-light: #de2cd5;
+  --energy-gradient-dark: #4e0075;
+  --high-energy-gradient-light: #f714be;
+  --high-energy-gradient-dark: #d000ff;
+  --background-gradient-dark: #360052;
+  --background-gradient-light: #7a00b8;
   --shadow-light: rgb(0 0 0 / 10%);
-  --fire-glow: rgb(191 22 22 / 20%);
-  --ice-glow: rgb(32 188 184 / 30%);
-  --fire-gradient-faded-light: #e7524d;
-  --fire-gradient-faded-dark: #ce4d4a;
-  --ice-gradient-faded-light: #5fc9c6;
-  --ice-gradient-faded-dark: #519a96;
+  --energy-glow-weak: rgb(255 0 255 / 20%);
+  --energy-glow: rgb(255 0 255 / 30%);
+  --energy-gradient-faded-light: #e75dde;
+  --energy-gradient-faded-dark: #723a91;
+  --high-energy-gradient-faded-light: #fb53cc;
+  --high-energy-gradient-faded-dark: #db4fff;
   --error: #ef1a1a;
   --error-glow: rgb(239 26 26 / 35%);
-  --footer-gradient-light: #c22b2b;
-  --footer-gradient-dark: #8a1010;
+  --footer-gradient-light: #420063;
+  --footer-gradient-dark: #300047;
 
-  background: linear-gradient(135deg, var(--background-gradient-fire), var(--background-gradient-ice));
   color: var(--body-text);
   color-scheme: light dark;
+  display: flex;
+  flex-direction: column;
   font-family: Sora, sans-serif;
+  z-index: 1;
 }
 
 a {
+  color: inherit;
   text-decoration: inherit;
 }
 
@@ -51,6 +54,8 @@ html {
 }
 
 body {
+  background: radial-gradient(circle at center, var(--background-gradient-light), var(--background-gradient-dark));
+  background-color: var(--background-gradient-dark);
   display: flex;
   font-size: #{math.div(variables.$base-font-size, 10)}rem;
   margin: 0;
@@ -63,7 +68,6 @@ header {
   justify-content: space-between;
   left: 50%;
   max-width: 96%;
-  min-width: var(--min-content-width);
   padding-top: 1rem;
   position: absolute;
   top: 0;
@@ -73,6 +77,15 @@ header {
 
   @include breakpoints.breakpoint(sm) {
     max-width: var(--max-content-width);
+    min-width: var(--min-content-width);
+  }
+
+  @include breakpoints.breakpoint(sm) {
+    padding-top: 1.2rem;
+  }
+
+  @include breakpoints.breakpoint(md) {
+    padding-top: 1.4rem;
   }
 
   @include breakpoints.breakpoint(xl) {
@@ -87,28 +100,42 @@ header {
 main {
   align-items: center;
   display: flex;
+  flex: 1;
   flex-direction: column;
   max-width: var(--max-content-width);
-  padding: 10.4rem 0;
+  min-height: 82rem;
+  padding: 11.4rem 0;
   width: 100%;
 
   @include breakpoints.breakpoint(sm) {
-    padding: 11.6rem 0;
-  }
-
-  @include breakpoints.breakpoint(md) {
-    padding: 11.8rem 0;
-  }
-
-  @include breakpoints.breakpoint(lg) {
-    padding: 12.2rem 0;
-  }
-
-  @include breakpoints.breakpoint(xl) {
+    min-height: 82rem;
     padding: 12.6rem 0;
   }
 
+  @include breakpoints.breakpoint(md) {
+    min-height: 76rem;
+  }
+
+  @include breakpoints.breakpoint(lg) {
+    min-height: 80rem;
+    padding: 13.4rem 0;
+  }
+
+  @include breakpoints.breakpoint(xl) {
+    padding: 14rem 0 0;
+  }
+
   @include breakpoints.breakpoint(xxl) {
+    min-height: 86rem;
     padding: 16rem 0;
   }
+}
+
+footer {
+  align-items: center;
+  background-image: linear-gradient(135deg, var(--footer-gradient-dark) 0%, var(--footer-gradient-light) 100%);
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  width: 100%;
 }

@@ -7,6 +7,7 @@ import { EmailForm, EmailFormProps } from './EmailForm'
 import { Socials } from './Socials'
 
 interface CTAProps extends EmailFormProps {
+  ctaText: React.ReactNode
   heading: string
   image?: {
     data: StaticImageData
@@ -18,6 +19,7 @@ interface CTAProps extends EmailFormProps {
 export const CTA: React.FC<CTAProps> = ({
   buttonText,
   buttonVariant,
+  ctaText,
   email,
   hasSignedUp,
   heading,
@@ -28,14 +30,17 @@ export const CTA: React.FC<CTAProps> = ({
 }) => (
   <>
     <h4 className={globalStyles.slideInVerticalOnReveal1}>{heading}</h4>
-    <p className={`${styles.ctaText} ${globalStyles.slideInVerticalOnReveal2}`}>
-      Join the waitlist to get the <strong>$BPETS airdrop</strong> and sign up for our <strong>public sale</strong> at
-      an exclusive price!
-    </p>
+    <p className={`${styles.ctaText} ${globalStyles.slideInVerticalOnReveal2}`}>{ctaText}</p>
     {image && (
       <div className={globalStyles.scaleInOnReveal2}>
         <div className={`${styles.ctaImageWrapper} ${image.wrapperClassName ?? ''}`}>
-          <Image src={image.data} alt={image.alt} fill style={{ objectFit: 'contain' }} />
+          <Image
+            src={image.data}
+            alt={image.alt}
+            fill
+            style={{ objectFit: 'contain' }}
+            sizes="(max-width: 36em) 39rem, (max-width: 48.375em) 41rem, (max-width: 62em) 44rem, (max-width: 75.0625em) 50rem, 54rem"
+          />
         </div>
       </div>
     )}

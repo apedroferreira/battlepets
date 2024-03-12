@@ -8,10 +8,13 @@ import ReactDOM from 'react-dom/client'
 
 import { App } from '@/App.tsx'
 import { CLUSTER } from '@/common/constants'
+import { initializeSentry } from '@/utils/monitoringUtils'
 
 import '@/index.scss'
 
 window.Buffer = buffer.Buffer
+
+initializeSentry()
 
 const endpoint = getEndpoint(CLUSTER)
 

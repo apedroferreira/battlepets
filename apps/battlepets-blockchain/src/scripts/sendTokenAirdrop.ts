@@ -10,10 +10,11 @@ import { INITIAL_TOKEN_DISTRIBUTION, TOKEN_AMOUNT } from '@/common/constants'
 import { TokenDistribution } from '@/common/enums'
 import { executeScript } from '@/utils/scriptUtils'
 import {
+  getAirdropPendingReceivers,
   getConnection,
   getExplorerURLQueryString,
-  getValidAirdropReceivers,
   multiSendTokens,
+  updateSuccessfulAirdropReceivers,
 } from '@/utils/solanaUtils'
 
 const argv = yargs(process.argv.slice(2)).options({
@@ -41,12 +42,12 @@ const sendTokenAirdrop = async (): Promise<void> => {
 
   const tokenMint = await token.getMint(connection, tokenPublicKey)
 
-  const validReceiverPublicKeys = await getValidAirdropReceivers(fileName)
+  const pendingReceiverPublicKeys = await getAirdropPendingReceivers(fileName)
 
   const airdropAmount = TOKEN_AMOUNT * INITIAL_TOKEN_DISTRIBUTION[TokenDistribution.AIRDROP].allocation
-  const individualAirdropAmount = airdropAmount / validReceiverPublicKeys.length
+  const individualAirdropAmount = airdropAmount / pendingReceiverPublicKeys.length
 
-  const validReceivers = validReceiverPublicKeys.map(publicKey => ({
+  const pendingReceivers = pendingReceiverPublicKeys.map(publicKey => ({
     publicKey,
     amount: individualAirdropAmount,
   }))
@@ -55,7 +56,12 @@ const sendTokenAirdrop = async (): Promise<void> => {
     connection,
     senderAccount,
     tokenMint.address,
-    validReceivers
+    pendingReceivers
+  )
+
+  await updateSuccessfulAirdropReceivers(
+    fileName,
+    pendingReceivers.map(({ publicKey }) => publicKey.toString())
   )
 
   console.log(

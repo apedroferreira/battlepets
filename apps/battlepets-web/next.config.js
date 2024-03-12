@@ -5,13 +5,6 @@ const { withSentryConfig } = require('@sentry/nextjs')
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  redirects: () => [
-    {
-      source: '/404',
-      destination: '/',
-      permanent: false,
-    },
-  ],
   headers: () => [
     {
       source: '/:path*',
@@ -51,8 +44,8 @@ const sentryConfig = {
 
   // Suppresses source map uploading logs during build
   silent: true,
-  org: 'battlepets',
-  project: 'battlepets-web',
+  org: process.env.SENTRY_ORG,
+  project: process.env.SENTRY_PROJECT,
 }
 
 const sentryOptions = {

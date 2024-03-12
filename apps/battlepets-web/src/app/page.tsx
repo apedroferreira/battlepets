@@ -1,5 +1,6 @@
 'use client'
 
+import { CONTACT_EMAIL, LITEPAPER_URL } from 'battlepets-shared/constants'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useCallback, useState } from 'react'
@@ -7,7 +8,6 @@ import { Lightbox } from 'yet-another-react-lightbox'
 import LightboxFullscreen from 'yet-another-react-lightbox/plugins/fullscreen'
 import LightboxZoom from 'yet-another-react-lightbox/plugins/zoom'
 
-import { CONTACT_EMAIL, LITEPAPER_URL } from '@/common/constants'
 import globalStyles from '@/common/global.module.scss'
 import { Button } from '@/components/Button'
 import { CTA } from '@/components/CTA'
@@ -35,46 +35,46 @@ import type { StaticImport } from 'next/dist/shared/lib/get-img-props'
 
 const TOKEN_METRICS: { value: string; caption: React.ReactNode }[] = [
   {
-    value: '10M',
+    value: '100M',
     caption: (
       <>
-        Total <strong>$BPETS</strong> supply
+        Max <strong>$BPETS</strong> supply
       </>
     ),
   },
   {
-    value: '$0.12',
-    caption: 'Public sale price',
+    value: '$0.012',
+    caption: 'Est. Public sale price',
   },
   {
     value: '$696K',
-    caption: 'Public sale market cap',
+    caption: 'Est. Public sale market cap',
   },
 ]
 
 /* eslint-disable react/jsx-key */
 const ROADMAP_POINTS: { heading: string; items: React.ReactNode[] }[] = [
   {
-    heading: 'Q1 2024',
+    heading: 'Q1-Q2 2024',
     items: [
       <strong>Airdrop</strong>,
       <strong>Public Sale</strong>,
       <>
-        <strong>$BPETS</strong> Listing
+        <strong>$BPETS</strong> Token Launch
       </>,
     ],
   },
   {
     heading: 'Q2-Q3 2024',
-    items: ['Battlepets DAO', 'Create Series 1 cards', 'Game development'],
+    items: ['Battlepets DAO', 'Create Starter Cards', 'Battlepets NFT Store', 'Game Development'],
   },
   {
     heading: 'Q4 2024',
-    items: ['Beta Game launch'],
+    items: ['Beta Game Launch'],
   },
   {
     heading: 'Q1 2025',
-    items: ['Public Game launch'],
+    items: ['Public Game Launch'],
   },
 ]
 /* eslint-enable react/jsx-key */
@@ -103,7 +103,14 @@ const Home = () => {
         <div className={styles.headerContent}>
           <div className={styles.headerLeft}>
             <Link href="/" className={styles.headerLogoWrapper}>
-              <Image src={logo} alt="Battlepets logo" fill style={{ objectFit: 'contain' }} />
+              <Image
+                src={logo}
+                alt="Battlepets logo"
+                fill
+                style={{ objectFit: 'contain' }}
+                sizes="(max-width: 36em) 8.6rem, (max-width: 62em) 9.2rem, (max-width: 75.0625em) 9.6rem, (max-width: 90.0625em) 10rem, 11rem"
+                priority
+              />
             </Link>
             <nav>
               <ul>
@@ -126,8 +133,12 @@ const Home = () => {
       </header>
       <main>
         <div className={styles.intro}>
-          <div className={styles.introFireBackground} />
-          <div className={styles.introIceBackground} />
+          <div className={styles.introBackgroundWrapper}>
+            <div className={styles.introMobileFireBackground} />
+            <div className={styles.introMobileIceBackground} />
+            <div className={styles.introFireBackground} />
+            <div className={styles.introIceBackground} />
+          </div>
           <RevealedSection className={styles.hero}>
             <div className={styles.sectionContent}>
               <h1>
@@ -138,7 +149,7 @@ const Home = () => {
                 <p className={styles.heroText}>
                   Join the waitlist to get the <strong>$BPETS</strong>{' '}
                   <span className={globalStyles.iceText}>airdrop</span> and sign up for our{' '}
-                  <span className={globalStyles.fireText}>public sale</span> at an exclusive price!
+                  <span className={globalStyles.fireText}>public sale</span> at pre-launch price!
                 </p>
                 <EmailForm
                   className={styles.heroSignUpForm}
@@ -154,7 +165,14 @@ const Home = () => {
                 <div className={globalStyles.captionWrapper}>
                   <p className={globalStyles.captionText}>Soon on</p>
                   <div className={styles.solanaLogoWrapper}>
-                    <Image src={solanaLogo as StaticImport} alt="Solana logo" fill style={{ objectFit: 'contain' }} />
+                    <Image
+                      src={solanaLogo as StaticImport}
+                      alt="Solana logo"
+                      fill
+                      style={{ objectFit: 'contain' }}
+                      sizes="(max-width: 36em) 11rem, (max-width: 62em) 12.1rem, (max-width: 90.0625em) 14rem, 16rem"
+                      priority
+                    />
                   </div>
                 </div>
                 <Socials />
@@ -177,13 +195,34 @@ const Home = () => {
                 </div>
               </div>
               <div className={styles.heroPet1Wrapper}>
-                <Image src={battlePet1} alt="Samurai Battlepet" fill style={{ objectFit: 'contain' }} />
+                <Image
+                  src={battlePet1}
+                  alt="Samurai Battlepet"
+                  fill
+                  style={{ objectFit: 'contain' }}
+                  sizes="(max-width: 48.375em) 23rem, (max-width: 62em) 28rem, (max-width: 75.0625em) 38rem, (max-width: 90.0625em) 42rem, 45rem"
+                  priority
+                />
               </div>
               <div className={styles.heroPet2Wrapper}>
-                <Image src={battlePet2} alt="Soldier Battlepet" fill style={{ objectFit: 'contain' }} />
+                <Image
+                  src={battlePet2}
+                  alt="Soldier Battlepet"
+                  fill
+                  style={{ objectFit: 'contain' }}
+                  sizes="(max-width: 48.375em) 15.8rem, (max-width: 62em) 17.4rem, (max-width: 75.0625em) 23.4rem, (max-width: 90.0625em) 27rem, 30rem"
+                  priority
+                />
               </div>
               <div className={styles.heroPet3Wrapper}>
-                <Image src={battlePet3} alt="Secret Agent Battlepet" fill style={{ objectFit: 'contain' }} />
+                <Image
+                  src={battlePet3}
+                  alt="Secret Agent Battlepet"
+                  fill
+                  style={{ objectFit: 'contain' }}
+                  sizes="(max-width: 48.375em) 21.6rem, (max-width: 62em) 23.6rem, (max-width: 75.0625em) 32rem, (max-width: 90.0625em) 38rem, 41rem"
+                  priority
+                />
               </div>
             </div>
           </RevealedSection>
@@ -192,14 +231,20 @@ const Home = () => {
             <div className={`${styles.sectionContent} ${styles.featuresSectionContent}`}>
               <h2 className={globalStyles.slideInVerticalOnReveal1}>
                 <span className={globalStyles.fireText}>The best </span> deck-builder,{' '}
-                <span className={globalStyles.iceText}>auto-battler</span> game on the blockchain!
+                <span className={globalStyles.iceText}>auto&#8209;battler</span> game in crypto!
               </h2>
               <div className={styles.features}>
                 <div className={styles.feature}>
                   <div className={styles.featureBackground} />
                   <div className={globalStyles.scaleInOnReveal1}>
                     <div className={styles.featureImageWrapper1}>
-                      <Image src={card1} alt="Ice Wizard Battlepet Card" fill style={{ objectFit: 'contain' }} />
+                      <Image
+                        src={card1}
+                        alt="Ice Wizard Battlepet Card"
+                        fill
+                        style={{ objectFit: 'contain' }}
+                        sizes="(max-width: 48.375em) 100vw, 33vw"
+                      />
                     </div>
                   </div>
                   <h5 className={globalStyles.slideInVerticalOnReveal1}>Collect</h5>
@@ -215,29 +260,47 @@ const Home = () => {
                         <div className={styles.featureBattleIcePortal} />
                         <div className={styles.featureBattlePortalScene} />
                         <div className={styles.featureBattleCard2Wrapper}>
-                          <Image src={card2} alt="Soldier Battlepet Card" fill style={{ objectFit: 'contain' }} />
+                          <Image
+                            src={card2}
+                            alt="Soldier Battlepet Card"
+                            fill
+                            style={{ objectFit: 'contain' }}
+                            sizes="(max-width: 62em) 15rem, (max-width: 90.0625em) 18rem, 22rem"
+                          />
                         </div>
                         <div className={styles.featureBattleCard3Wrapper}>
-                          <Image src={card3} alt="Samurai Battlepet Card" fill style={{ objectFit: 'contain' }} />
+                          <Image
+                            src={card3}
+                            alt="Samurai Battlepet Card"
+                            fill
+                            style={{ objectFit: 'contain' }}
+                            sizes="(max-width: 62em) 17rem, (max-width: 90.0625em) 20rem, 24rem"
+                          />
                         </div>
                       </div>
                     </div>
                   </div>
                   <h5 className={globalStyles.slideInVerticalOnReveal2}>Battle</h5>
                   <p className={globalStyles.slideInVerticalOnReveal2}>
-                    Battle against other players to win rewards, including new cards!
+                    Battle against other players to win rewards, including new NFTs!
                   </p>
                 </div>
                 <div className={styles.feature}>
                   <div className={styles.featureBackground} />
                   <div className={globalStyles.scaleInOnReveal3}>
                     <div className={styles.featureImageWrapper3}>
-                      <Image src={token} alt="$BPETS token" fill style={{ objectFit: 'contain' }} />
+                      <Image
+                        src={token}
+                        alt="$BPETS token"
+                        fill
+                        style={{ objectFit: 'contain' }}
+                        sizes="(max-width: 48.375em) 100vw, 33vw"
+                      />
                     </div>
                   </div>
-                  <h5 className={globalStyles.slideInVerticalOnReveal3}>Invest</h5>
+                  <h5 className={globalStyles.slideInVerticalOnReveal3}>Engage</h5>
                   <p className={globalStyles.slideInVerticalOnReveal3}>
-                    Invest in the game and get exclusive benefits with the <strong>$BPETS</strong> token!
+                    Influence the game and get exclusive benefits with the <strong>$BPETS</strong> token!
                   </p>
                 </div>
               </div>
@@ -248,9 +311,17 @@ const Home = () => {
           <RevealedSection>
             <div className={`${styles.sectionContent} ${styles.gamePreviewSectionContent}`}>
               <h4 className={globalStyles.slideInVerticalOnReveal1}>Coming Soon To Your Mobile Devices!</h4>
-              <div className={styles.screenshot}>
-                <div className={styles.screenshotImageWrapper} onClick={handleToggleLightbox}>
-                  <Image src={screenshot} alt="Game Preview Screenshot" fill style={{ objectFit: 'contain' }} />
+              <div className={globalStyles.slowScaleInOnReveal}>
+                <div className={styles.screenshot}>
+                  <div className={styles.screenshotImageWrapper} onClick={handleToggleLightbox}>
+                    <Image
+                      src={screenshot}
+                      alt="Game Preview Screenshot"
+                      fill
+                      style={{ objectFit: 'contain' }}
+                      sizes="(max-width: 48.375em) 88vw, (max-width: 62em) 68rem, (max-width: 75.0625em) 88rem, (max-width: 90.0625em) 98rem, 104rem"
+                    />
+                  </div>
                 </div>
               </div>
               <div className={`${globalStyles.captionWrapper} ${globalStyles.slideInVerticalOnReveal2}`}>
@@ -262,6 +333,7 @@ const Home = () => {
                       alt="Google Play logo"
                       fill
                       style={{ objectFit: 'contain' }}
+                      sizes="(max-width: 36em) 12.8rem, (max-width: 75.0625em) 13.4rem, (max-width: 90.0625em) 16rem, 17rem"
                     />
                   </div>
                   <div className={styles.appStoreLogoWrapper}>
@@ -270,6 +342,7 @@ const Home = () => {
                       alt="Apple App Store logo"
                       fill
                       style={{ objectFit: 'contain' }}
+                      sizes="(max-width: 36em) 11.2rem, (max-width: 75.0625em) 12rem, (max-width: 90.0625em) 13rem, 14rem"
                     />
                   </div>
                 </div>
@@ -282,6 +355,13 @@ const Home = () => {
             <div className={`${styles.sectionContent} ${styles.gameCTASectionContent}`}>
               <CTA
                 heading="Get in the $BPETS sale and win a sale-only NFT!"
+                ctaText={
+                  <>
+                    Sign up below for the <strong>$BPETS airdrop</strong> and <strong>public sale</strong> at
+                    pre&#8209;launch price, where you also get a{' '}
+                    <span className={globalStyles.promoText}>limited&#8209;edition</span> <strong>Hellcat</strong>!
+                  </>
+                }
                 email={email}
                 onEmailChange={handleEmailChange}
                 image={{
@@ -365,6 +445,12 @@ const Home = () => {
             </div>
             <CTA
               heading="Want to stay in the loop?"
+              ctaText={
+                <>
+                  Join the waitlist to get the <strong>$BPETS airdrop</strong> and sign up for our{' '}
+                  <strong>public sale</strong> at pre-launch price!
+                </>
+              }
               email={email}
               onEmailChange={handleEmailChange}
               hasSignedUp={hasSignedUp}
@@ -380,7 +466,13 @@ const Home = () => {
         <div className={styles.footerContent}>
           <div className={styles.footerLeft}>
             <Link href="/" className={styles.footerLogoWrapper}>
-              <Image src={logo} alt="Battlepets logo" fill style={{ objectFit: 'contain' }} />
+              <Image
+                src={logo}
+                alt="Battlepets logo"
+                fill
+                style={{ objectFit: 'contain' }}
+                sizes="(max-width: 62em) 8.6rem, (max-width: 90.0625em) 10rem, 11rem"
+              />
             </Link>
             <Link
               href={`mailto:${CONTACT_EMAIL}`}

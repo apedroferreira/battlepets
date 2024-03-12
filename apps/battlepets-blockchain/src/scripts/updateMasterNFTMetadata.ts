@@ -13,21 +13,20 @@ import { getEndpoint } from 'battlepets-shared/utils/solanaUtils'
 import yargs from 'yargs'
 import 'colors'
 
-import { CLUSTER, NFT_SELLER_FEE_BASIS_POINTS, NFT_SYMBOL } from '@/common/constants'
+import { CLUSTER, MASTER_NFTS, NFT_SELLER_FEE_BASIS_POINTS, NFT_SYMBOL } from '@/common/constants'
 import { executeScript } from '@/utils/scriptUtils'
 import { getExplorerURLQueryString, uploadMetadata } from '@/utils/solanaUtils'
 
 import type { RequiredFields } from 'battlepets-shared/utils/typeUtils'
 
 const argv = yargs(process.argv.slice(2)).options({
-  masterNFTAddress: { type: 'string', demandOption: true },
-  id: { type: 'string', demandOption: true },
+  id: { type: 'string', choices: Object.keys(MASTER_NFTS), demandOption: true },
   skipImageUpload: { type: 'boolean' },
   skipJsonUpload: { type: 'boolean' },
 })
 
 const updateMasterNFTMetadata = async (): Promise<void> => {
-  const { id, masterNFTAddress, skipImageUpload = false, skipJsonUpload = false } = await argv.parse()
+  const { id, skipImageUpload = false, skipJsonUpload = false } = await argv.parse()
 
   if (!process.env.WALLET_SECRET_KEY) {
     throw new Error('Must set secret key!')
@@ -66,6 +65,7 @@ const updateMasterNFTMetadata = async (): Promise<void> => {
   umi.identity = umiSigner
   umi.payer = umiSigner
 
+  const masterNFTAddress = MASTER_NFTS[id as keyof typeof MASTER_NFTS]
   const masterNFTPublicKey = publicKey(masterNFTAddress)
 
   const jsonMetadata = {
