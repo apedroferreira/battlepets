@@ -17,6 +17,9 @@ export const metadata: Metadata = {
   title: 'Battlepets',
   description:
     'Collect pet NFTs, battle and win rewards in a deck-builder, auto-battler mobile game on the blockchain!',
+  alternates: {
+    canonical: '/',
+  },
   openGraph: {
     title: 'Battlepets',
     description:

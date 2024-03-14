@@ -1,6 +1,6 @@
 import * as Sentry from '@sentry/react'
 
-import { SENTRY_DSN } from '@/common/constants'
+import { SENTRY_DSN, SENTRY_ENVIRONMENT } from '@/common/constants'
 
 export const initializeSentry = (): void => {
   Sentry.init({
@@ -16,6 +16,6 @@ export const initializeSentry = (): void => {
     tracesSampleRate: 0.1,
     tracePropagationTargets: ['localhost', /^https:\/\/battlepets\.io/],
     replaysSessionSampleRate: 0.1,
-    environment: import.meta.env.MODE,
+    environment: SENTRY_ENVIRONMENT,
   })
 }

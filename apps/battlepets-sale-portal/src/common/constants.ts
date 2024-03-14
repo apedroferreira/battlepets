@@ -30,4 +30,7 @@ export const SALE_ENDS_AT_TIMESTAMP = Number(import.meta.env.VITE_SALE_ENDS_AT_T
 
 export const HAS_PROCESSED_SALE_END = Boolean(import.meta.env.VITE_HAS_PROCESSED_SALE_END === 'true')
 
+export const IS_STAGING = Boolean(import.meta.env.VITE_IS_STAGING === 'true')
+
 export const SENTRY_DSN = (import.meta.env.VITE_SENTRY_DSN as string) ?? ''
+export const SENTRY_ENVIRONMENT = IS_STAGING ? 'staging' : import.meta.env.MODE
