@@ -66,7 +66,7 @@ const ROADMAP_POINTS: { heading: string; items: React.ReactNode[] }[] = [
   },
   {
     heading: 'Q2-Q3 2024',
-    items: ['Battlepets DAO', 'Create Starter Cards', 'Battlepets NFT Store', 'Game Development'],
+    items: ['Battlepets DAO', 'Create Starter Cards', 'Battlepets NFT Web Store', 'Game Development'],
   },
   {
     heading: 'Q4 2024',
