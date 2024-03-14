@@ -276,10 +276,8 @@ export const App: React.FC = () => {
       <main>
         <h1 className="h1">{SALE_NAME}</h1>
         <div className="progress-bar-wrapper">
-          <label className="label" htmlFor="progress-bar">
-            Total sale progress:
-          </label>
-          <div id="progress-bar" className="progress-bar">
+          <label className="label">Total sale progress:</label>
+          <div className="progress-bar">
             <div
               className="progress-bar-progress"
               style={{ transform: `scaleX(${totalAllocation / HARD_CAP_SOL_AMOUNT})` }}
@@ -406,10 +404,8 @@ export const App: React.FC = () => {
             </div>
           ) : (
             <div className="allocation-wrapper">
-              <label className="label" htmlFor="allocation">
-                Your {isSaleOpen ? 'current ' : ''}allocation:
-              </label>
-              <div id="allocation" className="allocation">
+              <label className="label">Your {isSaleOpen ? 'current ' : ''}allocation:</label>
+              <div className="allocation">
                 <span className="high-energy-text">
                   {formatLargeStatNumber(adjustedCurrentAllocation)} SOL (
                   {formatLargeStatNumber(adjustedCurrentAllocation * SOL_BPETS_EXCHANGE_RATE)} BPETS)
