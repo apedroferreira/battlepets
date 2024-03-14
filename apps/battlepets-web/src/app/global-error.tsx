@@ -32,7 +32,7 @@ const GlobalError = ({ error }: GlobalErrorProps) => {
           <h3>Something Went Wrong</h3>
           <p>There was an unexpected error…</p>
           <Link href="/">
-            <Button>Go To Home Page</Button>
+            <Button asDiv>Go To Home Page</Button>
           </Link>
         </div>
       </body>

@@ -110,6 +110,7 @@ const Home = () => {
                 style={{ objectFit: 'contain' }}
                 sizes="(max-width: 36em) 8.6rem, (max-width: 62em) 9.2rem, (max-width: 75.0625em) 9.6rem, (max-width: 90.0625em) 10rem, 11rem"
                 priority
+                unoptimized
               />
             </Link>
             <nav>
@@ -127,7 +128,7 @@ const Home = () => {
             </nav>
           </div>
           <Link href={LITEPAPER_URL} target="_blank" rel="noopener noreferrer nofollow">
-            <Button>Read Litepaper</Button>
+            <Button asDiv>Read Litepaper</Button>
           </Link>
         </div>
       </header>
@@ -170,7 +171,6 @@ const Home = () => {
                       alt="Solana logo"
                       fill
                       style={{ objectFit: 'contain' }}
-                      sizes="(max-width: 36em) 11rem, (max-width: 62em) 12.1rem, (max-width: 90.0625em) 14rem, 16rem"
                       priority
                     />
                   </div>
@@ -311,16 +311,18 @@ const Home = () => {
           <RevealedSection>
             <div className={`${styles.sectionContent} ${styles.gamePreviewSectionContent}`}>
               <h4 className={globalStyles.slideInVerticalOnReveal1}>Coming Soon To Your Mobile Devices!</h4>
-              <div className={globalStyles.slowScaleInOnReveal}>
-                <div className={styles.screenshot}>
-                  <div className={styles.screenshotImageWrapper} onClick={handleToggleLightbox}>
-                    <Image
-                      src={screenshot}
-                      alt="Game Preview Screenshot"
-                      fill
-                      style={{ objectFit: 'contain' }}
-                      sizes="(max-width: 48.375em) 88vw, (max-width: 62em) 68rem, (max-width: 75.0625em) 88rem, (max-width: 90.0625em) 98rem, 104rem"
-                    />
+              <div className={styles.screenshotWrapper}>
+                <div className={globalStyles.slowScaleInOnReveal}>
+                  <div className={styles.screenshot}>
+                    <div className={styles.screenshotImageWrapper} onClick={handleToggleLightbox}>
+                      <Image
+                        src={screenshot}
+                        alt="Game Preview Screenshot"
+                        fill
+                        style={{ objectFit: 'contain' }}
+                        sizes="(max-width: 48.375em) 88vw, (max-width: 62em) 68rem, (max-width: 75.0625em) 88rem, (max-width: 90.0625em) 98rem, 104rem"
+                      />
+                    </div>
                   </div>
                 </div>
               </div>
@@ -333,7 +335,6 @@ const Home = () => {
                       alt="Google Play logo"
                       fill
                       style={{ objectFit: 'contain' }}
-                      sizes="(max-width: 36em) 12.8rem, (max-width: 75.0625em) 13.4rem, (max-width: 90.0625em) 16rem, 17rem"
                     />
                   </div>
                   <div className={styles.appStoreLogoWrapper}>
@@ -342,7 +343,6 @@ const Home = () => {
                       alt="Apple App Store logo"
                       fill
                       style={{ objectFit: 'contain' }}
-                      sizes="(max-width: 36em) 11.2rem, (max-width: 75.0625em) 12rem, (max-width: 90.0625em) 13rem, 14rem"
                     />
                   </div>
                 </div>
@@ -399,7 +399,7 @@ const Home = () => {
             <div className={styles.roadmapSectionHeader}>
               <h3 className={globalStyles.slideInVerticalOnReveal1}>Roadmap</h3>
               <Link href={LITEPAPER_URL} target="_blank" rel="noopener noreferrer nofollow">
-                <Button>Read Litepaper</Button>
+                <Button asDiv>Read Litepaper</Button>
               </Link>
             </div>
             <div className={styles.roadmapWrapper}>
@@ -440,7 +440,7 @@ const Home = () => {
             </div>
             <div className={styles.roadmapMobileCTAWrapper}>
               <Link href={LITEPAPER_URL} target="_blank" rel="noopener noreferrer nofollow">
-                <Button>Read Litepaper</Button>
+                <Button asDiv>Read Litepaper</Button>
               </Link>
             </div>
             <CTA

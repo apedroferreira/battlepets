@@ -8,7 +8,7 @@ const NotFound = () => (
     <h3>Page Not Found</h3>
     <p>The page you’re looking for does not exist…</p>
     <Link href="/">
-      <Button>Go To Home Page</Button>
+      <Button asDiv>Go To Home Page</Button>
     </Link>
   </div>
 )

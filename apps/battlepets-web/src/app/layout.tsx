@@ -46,10 +46,13 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => (
       <link rel="stylesheet" href="https://use.typekit.net/bjy5uxp.css" />
     </head>
 
-    <body className={sora.className}>{children}</body>
+    <body className={sora.className}>
+      {children}
 
-    <Analytics />
-    <SpeedInsights />
+      <Analytics />
+      <SpeedInsights />
+    </body>
+
     {GA_ID && <GoogleAnalytics gaId={GA_ID} />}
   </html>
 )
