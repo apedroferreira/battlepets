@@ -1734,7 +1734,7 @@
 .tokenValue {
   font-size: 5.6rem;
   font-weight: 800;
-  text-shadow: 0 0.3rem 0.6rem var(--shadow-medium);
+  text-shadow: 0 0.2rem 0.3rem var(--shadow-strong);
 
   @include breakpoints.breakpoint(sm) {
     font-size: 6rem;
@@ -2082,7 +2082,6 @@
     flex-direction: column;
     justify-content: space-between;
     list-style-type: none;
-    margin-top: 1.8rem;
 
     /* stylelint-disable-next-line no-descending-specificity */
     li {
@@ -2104,7 +2103,6 @@
     nav > ul {
       align-items: center;
       flex-direction: row;
-      margin-top: 0;
 
       li {
         margin: 0 1rem;

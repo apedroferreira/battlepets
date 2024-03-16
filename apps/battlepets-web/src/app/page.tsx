@@ -1,6 +1,6 @@
 'use client'
 
-import { CONTACT_EMAIL, LITEPAPER_URL } from 'battlepets-shared/constants'
+import { CONTACT_EMAIL, LITEPAPER_URL, STATUS_URL } from 'battlepets-shared/constants'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useCallback, useState } from 'react'
@@ -508,7 +508,7 @@ const Home = () => {
           <nav>
             <ul>
               <li>
-                <Link href="#top">Back to top</Link>
+                <Link href="#top">Top</Link>
               </li>
               <li>
                 <Link href="#game">Game</Link>
@@ -522,6 +522,11 @@ const Home = () => {
               <li>
                 <Link href={LITEPAPER_URL} target="_blank" rel="noopener noreferrer nofollow">
                   Litepaper
+                </Link>
+              </li>
+              <li>
+                <Link href={STATUS_URL} target="_blank" rel="noopener noreferrer nofollow">
+                  Status
                 </Link>
               </li>
             </ul>

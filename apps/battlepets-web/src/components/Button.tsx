@@ -33,9 +33,7 @@ export const Button: React.FC<ButtonProps> = ({
   )
 
   return asDiv ? (
-    <div {...(buttonProps as HTMLAttributes<HTMLDivElement>)} role="button">
-      {buttonContent}
-    </div>
+    <div {...(buttonProps as HTMLAttributes<HTMLDivElement>)}>{buttonContent}</div>
   ) : (
     <button {...buttonProps}>{buttonContent}</button>
   )

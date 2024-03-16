@@ -1,7 +1,7 @@
 import * as anchor from '@coral-xyz/anchor'
 import { useAnchorWallet, useConnection, useWallet } from '@solana/wallet-adapter-react'
 import { WalletMultiButton } from '@solana/wallet-adapter-react-ui'
-import { BASE_URL, CONTACT_EMAIL, LITEPAPER_URL, TELEGRAM_URL, X_URL } from 'battlepets-shared/constants'
+import { BASE_URL, CONTACT_EMAIL, LITEPAPER_URL, STATUS_URL, TELEGRAM_URL, X_URL } from 'battlepets-shared/constants'
 import saleIdl from 'battlepets-shared/idls/battlepets_public_sale.json'
 import { useCallback, useEffect, useMemo, useState } from 'react'
 
@@ -493,6 +493,11 @@ export const App: React.FC = () => {
               <li>
                 <a href={LITEPAPER_URL} target="_blank" rel="noopener noreferrer nofollow">
                   Litepaper
+                </a>
+              </li>
+              <li>
+                <a href={STATUS_URL} target="_blank" rel="noopener noreferrer nofollow">
+                  Status
                 </a>
               </li>
             </ul>
