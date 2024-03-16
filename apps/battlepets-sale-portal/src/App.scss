@@ -441,22 +441,34 @@ form.form {
   }
 }
 
-.header-logo {
+.header-logo-wrapper {
+  height: 7.6rem;
   width: 8.6rem;
 
+  /* stylelint-disable-next-line no-descending-specificity */
+  > img {
+    height: 100%;
+    object-fit: contain;
+    width: 100%;
+  }
+
   @include breakpoints.breakpoint(sm) {
+    height: 8.1rem;
     width: 9.2rem;
   }
 
   @include breakpoints.breakpoint(lg) {
+    height: 8.5rem;
     width: 9.6rem;
   }
 
   @include breakpoints.breakpoint(xl) {
+    height: 8.8rem;
     width: 10rem;
   }
 
   @include breakpoints.breakpoint(xxl) {
+    height: 9.7rem;
     width: 11rem;
   }
 }
@@ -905,15 +917,25 @@ form.form {
   flex-direction: column;
 }
 
-.footer-logo {
+.footer-logo-wrapper {
+  height: 7.6rem;
   position: relative;
   width: 8.6rem;
 
+  /* stylelint-disable-next-line no-descending-specificity */
+  > img {
+    height: 100%;
+    object-fit: contain;
+    width: 100%;
+  }
+
   @include breakpoints.breakpoint(lg) {
+    height: 8.8rem;
     width: 10rem;
   }
 
   @include breakpoints.breakpoint(xxl) {
+    height: 9.7rem;
     width: 11rem;
   }
 }
@@ -961,6 +983,7 @@ form.form {
 .footer-contact {
   color: var(--energy-gradient-light);
   font-size: 1.2rem;
+  margin-top: 0.4rem;
 
   &:hover {
     text-decoration: underline;

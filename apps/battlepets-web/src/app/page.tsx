@@ -16,6 +16,8 @@ import { RevealedSection } from '@/components/RevealedSection'
 import { Socials } from '@/components/Socials'
 
 import appStoreLogo from '../../public/images/appstorelogo.svg'
+import background1 from '../../public/images/background1.png'
+import background2 from '../../public/images/background2.png'
 import battlePet1 from '../../public/images/battlepet1.png'
 import battlePet2 from '../../public/images/battlepet2.png'
 import battlePet3 from '../../public/images/battlepet3.png'
@@ -185,13 +187,33 @@ const Home = () => {
               <div className={styles.heroIceImageWrapper}>
                 <div className={styles.heroIceDecoration} />
                 <div className={styles.heroIcePortal}>
-                  <div className={styles.heroIcePortalScene} />
+                  <div className={styles.heroIcePortalScene}>
+                    <Image
+                      src={background1}
+                      alt="Japanese Temple Background"
+                      fill
+                      style={{ objectFit: 'contain' }}
+                      sizes="(max-width: 48.375em) 13.2rem, (max-width: 62em) 16.6rem, (max-width: 75.0625em) 22.2rem, 25.3rem"
+                      priority
+                      placeholder="blur"
+                    />
+                  </div>
                 </div>
               </div>
               <div className={styles.heroFireImageWrapper}>
                 <div className={styles.heroFireDecoration} />
                 <div className={styles.heroFirePortal}>
-                  <div className={styles.heroFirePortalScene} />
+                  <div className={styles.heroFirePortalScene}>
+                    <Image
+                      src={background2}
+                      alt="Forest Background"
+                      fill
+                      style={{ objectFit: 'contain' }}
+                      sizes="(max-width: 48.375em) 16.6rem, (max-width: 62em) 18.2rem, (max-width: 75.0625em) 24.5rem, (max-width: 90.0625em) 29.3rem, 33.2rem"
+                      priority
+                      placeholder="blur"
+                    />
+                  </div>
                 </div>
               </div>
               <div className={styles.heroPet1Wrapper}>

@@ -262,14 +262,17 @@ export const App: React.FC = () => {
     validateSOLAmount
   }, [totalAllocation, validateSOLAmount])
 
-  const hasSaleEnded = Date.now() > SALE_ENDS_AT_TIMESTAMP || totalAllocation >= HARD_CAP_SOL_AMOUNT
+  const hasSaleEnded =
+    !SALE_ENDS_AT_TIMESTAMP || Date.now() > SALE_ENDS_AT_TIMESTAMP || totalAllocation >= HARD_CAP_SOL_AMOUNT
   const isSoftCapReached = totalAllocation >= SOFT_CAP_SOL_AMOUNT
 
   return (
     <>
       <header>
         <a href={BASE_URL} target="_blank" rel="noreferrer">
-          <img src={logo} className="header-logo" alt="Battlepets logo" />
+          <div className="header-logo-wrapper">
+            <img src={logo} alt="Battlepets logo" />
+          </div>
         </a>
         <WalletMultiButton />
       </header>
@@ -452,7 +455,9 @@ export const App: React.FC = () => {
         <div className="footer-content">
           <div className="footer-left">
             <a href={BASE_URL} target="_blank" rel="noreferrer">
-              <img src={logo} className="footer-logo" alt="Battlepets logo" />
+              <div className="footer-logo-wrapper">
+                <img src={logo} alt="Battlepets logo" />
+              </div>
             </a>
             <a
               href={`mailto:${CONTACT_EMAIL}`}

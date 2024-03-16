@@ -23,6 +23,7 @@
   --background-gradient-fire: #ffede6;
   --background-gradient-ice: #e8fffd;
   --shadow-light: rgb(0 0 0 / 10%);
+  --shadow-medium: rgb(0 0 0 / 30%);
   --fire-glow: rgb(191 22 22 / 20%);
   --ice-glow: rgb(32 188 184 / 30%);
   --promo-glow: rgb(242 19 62 / 30%);
@@ -116,6 +117,7 @@ h2 {
 
   > span {
     animation-delay: -2.3s;
+    background-size: 150% auto;
   }
 
   @include breakpoints.breakpoint(sm) {

@@ -208,6 +208,7 @@
 
   span {
     animation-delay: -1.5s;
+    background-size: 150% auto;
   }
 
   @include breakpoints.breakpoint(md) {
@@ -437,15 +438,12 @@
 
   @include breakpoints.breakpoint(xxl) {
     height: 38rem;
-    width: 32rem;
   }
 }
 
 .heroIcePortalScene {
-  background-image: url('../../public/images/background1.png');
-  background-position: center;
-  background-size: cover;
   height: 79%;
+  position: relative;
   width: 79%;
 }
 
@@ -550,10 +548,8 @@
 }
 
 .heroFirePortalScene {
-  background-image: url('../../public/images/background2.png');
-  background-position: center;
-  background-size: cover;
   height: 79%;
+  position: relative;
   width: 79%;
 }
 
@@ -871,6 +867,7 @@
   left: calc(50% - 1.5rem);
   position: absolute;
   top: 5.2rem;
+  transform: rotate(22.5deg);
   width: 3rem;
 
   @include mixins.fireGradientBackground;
@@ -906,6 +903,7 @@
   left: calc(50% + 3.3rem);
   position: absolute;
   top: 7rem;
+  transform: rotate(306deg);
   width: 2.6rem;
 
   @include mixins.iceGradientBackground;
@@ -1353,7 +1351,7 @@
 }
 
 .screenshotWrapper {
-  margin-bottom: 4rem;
+  margin-bottom: 5rem;
   margin-top: 3.4rem;
 
   @include breakpoints.breakpoint(sm) {
@@ -1361,7 +1359,7 @@
   }
 
   @include breakpoints.breakpoint(lg) {
-    margin-bottom: 5.2rem;
+    margin-bottom: 6.2rem;
   }
 }
 
@@ -1736,6 +1734,7 @@
 .tokenValue {
   font-size: 5.6rem;
   font-weight: 800;
+  text-shadow: 0 0.3rem 0.6rem var(--shadow-medium);
 
   @include breakpoints.breakpoint(sm) {
     font-size: 6rem;
