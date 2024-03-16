@@ -2082,6 +2082,7 @@
     flex-direction: column;
     justify-content: space-between;
     list-style-type: none;
+    margin-top: 1.8rem;
 
     /* stylelint-disable-next-line no-descending-specificity */
     li {
@@ -2103,6 +2104,7 @@
     nav > ul {
       align-items: center;
       flex-direction: row;
+      margin-top: 0;
 
       li {
         margin: 0 1rem;
