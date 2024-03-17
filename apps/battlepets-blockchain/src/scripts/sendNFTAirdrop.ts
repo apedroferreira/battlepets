@@ -1,5 +1,3 @@
-import 'dotenv/config'
-
 import { bs58 } from '@coral-xyz/anchor/dist/cjs/utils/bytes'
 import {
   TokenStandard,
@@ -9,14 +7,7 @@ import {
   transferV1,
   updateV1,
 } from '@metaplex-foundation/mpl-token-metadata'
-import {
-  RpcConfirmTransactionResult,
-  TransactionBuilder,
-  TransactionSignature,
-  createSignerFromKeypair,
-  generateSigner,
-  publicKey,
-} from '@metaplex-foundation/umi'
+import { TransactionBuilder, createSignerFromKeypair, generateSigner, publicKey } from '@metaplex-foundation/umi'
 import { createUmi } from '@metaplex-foundation/umi-bundle-defaults'
 import { fromWeb3JsKeypair, fromWeb3JsPublicKey } from '@metaplex-foundation/umi-web3js-adapters'
 import { getKeypairFromEnvironment } from '@solana-developers/helpers'
@@ -24,6 +15,10 @@ import { pluralize } from 'battlepets-shared/utils/generalUtils'
 import { getEndpoint } from 'battlepets-shared/utils/solanaUtils'
 import yargs from 'yargs'
 import 'colors'
+
+// eslint-disable-next-line import/order
+import { initializeEnv } from 'initializeEnv'
+initializeEnv()
 
 import { CLUSTER, MASTER_NFTS } from '@/common/constants'
 import { executeScript } from '@/utils/scriptUtils'
@@ -70,14 +65,14 @@ const sendNFTAirdrop = async (): Promise<void> => {
 
   const masterEditionSupply = Number(masterEdition.supply)
 
-  const pendingReceiverPublicKeys = await getAirdropPendingReceivers(fileName)
+  const pendingReceivers = await getAirdropPendingReceivers(fileName)
 
   const firstCopyMint = generateSigner(umi)
 
   const nftAirdropTransactions: { transaction: TransactionBuilder; receiverAddresses: string[] }[] = []
 
   let currentTransactionIndex = 0
-  for (let copyIndex = 0; copyIndex < pendingReceiverPublicKeys.length; copyIndex++) {
+  for (let copyIndex = 0; copyIndex < pendingReceivers.length; copyIndex++) {
     const editionMint = copyIndex === 0 ? firstCopyMint : generateSigner(umi)
 
     const printNFTInstruction = printV2(umi, {
@@ -93,7 +88,7 @@ const sendNFTAirdrop = async (): Promise<void> => {
       mint: editionMint.publicKey,
       authority: umiSigner,
       tokenOwner: umiSigner.publicKey,
-      destinationOwner: fromWeb3JsPublicKey(pendingReceiverPublicKeys[copyIndex]),
+      destinationOwner: fromWeb3JsPublicKey(pendingReceivers[copyIndex].publicKey),
       tokenStandard: TokenStandard.ProgrammableNonFungible,
     })
 
@@ -112,7 +107,7 @@ const sendNFTAirdrop = async (): Promise<void> => {
         transferNFTInstruction,
         updateNFTPrimarySaleInstruction,
       ]),
-      receiverAddresses: [...currentTransaction.receiverAddresses, pendingReceiverPublicKeys[copyIndex].toString()],
+      receiverAddresses: [...currentTransaction.receiverAddresses, pendingReceivers[copyIndex].publicKey.toString()],
     }
 
     if ((copyIndex + 1) % MAX_AIRDROPS_PER_TRANSACTION === 0) {
@@ -128,38 +123,30 @@ const sendNFTAirdrop = async (): Promise<void> => {
     })
   )
 
-  const successfulTransactions = transactionResults
-    .filter(result => result.status === 'fulfilled')
-    .map(
-      result =>
-        (
-          result as PromiseFulfilledResult<{
-            result: {
-              signature: TransactionSignature
-              result: RpcConfirmTransactionResult
-            }
-            receiverAddresses: string[]
-          }>
-        ).value
-    )
-
-  const successfulAirdroppedAddresses = successfulTransactions.flatMap(({ receiverAddresses }) => receiverAddresses)
-
-  await updateSuccessfulAirdropReceivers(fileName, successfulAirdroppedAddresses)
+  const { failedTransactionReasons, successfulTransactions } = await updateSuccessfulAirdropReceivers(
+    fileName,
+    transactionResults
+  )
 
   const transactionCount = transactionResults.length
   const successfulTransactionCount = successfulTransactions.length
   const failedTransactionCount = transactionCount - successfulTransactionCount
 
-  console.log(`NFTs airdropped in ${pluralize(transactionCount, 'transaction')}:`.cyan)
+  if (transactionCount > 0) {
+    console.log(`NFT airdrop in ${pluralize(transactionCount, 'transaction')}:`.cyan)
+  } else {
+    console.log('No transactions to make!'.cyan)
+  }
+
   if (successfulTransactionCount > 0) {
     console.log(`${pluralize(successfulTransactionCount, 'transaction')} successful.`.green)
   }
   if (failedTransactionCount > 0) {
     console.log(`${pluralize(failedTransactionCount, 'transaction')} failed.`.red)
+    console.error(`${failedTransactionReasons[0]}`.red)
   }
 
-  if (successfulTransactionCount >= 1) {
+  if (successfulTransactions.length > 0) {
     const [
       {
         result: { signature: nftAirdropFirstTransactionSignature },
@@ -167,7 +154,7 @@ const sendNFTAirdrop = async (): Promise<void> => {
     ] = successfulTransactions
 
     console.log(
-      `Airdrop First Successful Transaction: https://explorer.solana.com/tx/${bs58.encode(nftAirdropFirstTransactionSignature)}${explorerURLQueryString}`
+      `Airdrop NFT First Successful Transaction: https://explorer.solana.com/tx/${bs58.encode(nftAirdropFirstTransactionSignature)}${explorerURLQueryString}`
         .cyan
     )
 

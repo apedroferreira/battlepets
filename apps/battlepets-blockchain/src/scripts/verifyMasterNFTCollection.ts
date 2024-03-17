@@ -1,5 +1,3 @@
-import 'dotenv/config'
-
 import { bs58 } from '@coral-xyz/anchor/dist/cjs/utils/bytes'
 import { findMetadataPda, mplTokenMetadata, verifyCollectionV1 } from '@metaplex-foundation/mpl-token-metadata'
 import { createSignerFromKeypair, publicKey } from '@metaplex-foundation/umi'
@@ -9,6 +7,10 @@ import { getKeypairFromEnvironment } from '@solana-developers/helpers'
 import { getEndpoint } from 'battlepets-shared/utils/solanaUtils'
 import yargs from 'yargs'
 import 'colors'
+
+// eslint-disable-next-line import/order
+import { initializeEnv } from 'initializeEnv'
+initializeEnv()
 
 import { CLUSTER, MASTER_NFTS } from '@/common/constants'
 import { executeScript } from '@/utils/scriptUtils'

@@ -8,6 +8,7 @@
   ],
   "scripts": {
     "yarn:update": "yarn set version stable",
+    "brew": "brew bundle",
     "clean": "lerna clean --yes",
     "reset": "yarn cache clean && yarn clean && rm -rf node_modules && yarn install",
     "reset:hard": "yarn cache clean && yarn clean && rm -rf node_modules yarn.lock && yarn install",

@@ -1,0 +1,27 @@
+{
+  "entries": {
+    "tap": {
+      "hashicorp/tap": {
+        "revision": "403a28546e01323f71a29d04683dca91edbc7245"
+      }
+    },
+    "brew": {
+      "vlt": {
+        "version": "1.0.0",
+        "bottle": false
+      }
+    }
+  },
+  "system": {
+    "macos": {
+      "sonoma": {
+        "HOMEBREW_VERSION": "4.2.12",
+        "HOMEBREW_PREFIX": "/usr/local",
+        "Homebrew/homebrew-core": "api",
+        "CLT": "15.1.0.0.1.1700200546",
+        "Xcode": "15.3",
+        "macOS": "14.2.1"
+      }
+    }
+  }
+}

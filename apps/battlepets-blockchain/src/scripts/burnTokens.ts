@@ -1,10 +1,12 @@
-import 'dotenv/config'
-
 import * as token from '@solana/spl-token'
 import * as web3 from '@solana/web3.js'
 import { getKeypairFromEnvironment } from '@solana-developers/helpers'
 import yargs from 'yargs'
 import 'colors'
+
+// eslint-disable-next-line import/order
+import { initializeEnv } from 'initializeEnv'
+initializeEnv()
 
 import { executeScript } from '@/utils/scriptUtils'
 import { getConnection, getExplorerURLQueryString, getTokenAmount } from '@/utils/solanaUtils'

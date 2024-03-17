@@ -1,9 +1,10 @@
 {
   "name": "battlepets-blockchain",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "private": true,
   "scripts": {
     "run:script": "yarn g:ts-node -r tsconfig-paths/register --cwd ./src/scripts",
+    "run:script:safe": "vlt login && REMOTE_SCRIPT_ENV=battlepets-blockchain-secrets yarn run:script",
     "format": "yarn g:prettier --write '*/**/*.{js,ts,md,json}'",
     "lint": "yarn eslint \"**/*.{js,ts}\" --fix",
     "precommit": "yarn g:lint-staged"

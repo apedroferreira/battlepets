@@ -1,8 +1,11 @@
-import 'dotenv/config'
-
 import yargs from 'yargs'
 import 'colors'
 
+// eslint-disable-next-line import/order
+import { initializeEnv } from 'initializeEnv'
+initializeEnv()
+
+// eslint-disable-next-line import/order
 import { executeScript } from '@/utils/scriptUtils'
 
 const argv = yargs(process.argv.slice(2)).options({

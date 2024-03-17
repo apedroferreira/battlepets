@@ -1,9 +1,11 @@
-import 'dotenv/config'
-
 import * as web3 from '@solana/web3.js'
 import { getKeypairFromEnvironment, requestAndConfirmAirdrop } from '@solana-developers/helpers'
 import yargs from 'yargs'
 import 'colors'
+
+// eslint-disable-next-line import/order
+import { initializeEnv } from 'initializeEnv'
+initializeEnv()
 
 import { executeScript } from '@/utils/scriptUtils'
 import { getConnection } from '@/utils/solanaUtils'

@@ -1,6 +1,6 @@
 {
   "name": "battlepets-shared",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "private": true,
   "scripts": {
     "format": "yarn g:prettier --write '*/**/*.{js,ts,md,json}'",

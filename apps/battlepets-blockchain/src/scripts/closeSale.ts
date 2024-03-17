@@ -1,10 +1,12 @@
-import 'dotenv/config'
-
 import * as anchor from '@coral-xyz/anchor'
 import NodeWallet from '@coral-xyz/anchor/dist/cjs/nodewallet'
 import { getKeypairFromEnvironment } from '@solana-developers/helpers'
 import saleIdl from 'battlepets-shared/idls/battlepets_public_sale.json'
 import 'colors'
+
+// eslint-disable-next-line import/order
+import { initializeEnv } from 'initializeEnv'
+initializeEnv()
 
 import { executeScript } from '@/utils/scriptUtils'
 import { getConnection, getExplorerURLQueryString } from '@/utils/solanaUtils'

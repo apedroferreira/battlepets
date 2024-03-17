@@ -1,9 +1,11 @@
-import 'dotenv/config'
-
 import * as token from '@solana/spl-token'
 import * as web3 from '@solana/web3.js'
 import { getKeypairFromEnvironment } from '@solana-developers/helpers'
 import 'colors'
+
+// eslint-disable-next-line import/order
+import { initializeEnv } from 'initializeEnv'
+initializeEnv()
 
 import { INITIAL_TOKEN_DISTRIBUTION, TOKEN_AMOUNT, TOKEN_DECIMALS } from '@/common/constants'
 import { TokenDistribution } from '@/common/enums'
@@ -68,12 +70,18 @@ const createToken = async (): Promise<void> => {
     }
   )
 
-  const initialDistributionTransactionSignature = await multiSendTokens(
+  const transactionResults = await multiSendTokens(
     connection,
     ownerAccount,
     tokenMintAddress,
     initialDistributionReceivers
   )
+
+  if (transactionResults[0].status === 'rejected') {
+    throw new Error(transactionResults[0].reason as string)
+  }
+
+  const initialDistributionTransactionSignature = transactionResults[0].value.result
 
   console.log(
     `Initial Distribution Token Transaction: https://explorer.solana.com/tx/${initialDistributionTransactionSignature}${explorerURLQueryString}`

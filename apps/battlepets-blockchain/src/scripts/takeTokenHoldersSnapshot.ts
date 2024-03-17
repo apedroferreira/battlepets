@@ -1,5 +1,3 @@
-import 'dotenv/config'
-
 import fs from 'fs/promises'
 import path from 'path'
 
@@ -10,6 +8,10 @@ import { sort } from 'ramda'
 import yargs from 'yargs'
 import 'colors'
 
+// eslint-disable-next-line import/order
+import { initializeEnv } from 'initializeEnv'
+initializeEnv()
+
 import { executeScript } from '@/utils/scriptUtils'
 import { getConnection, getTokenUIAmount } from '@/utils/solanaUtils'
 
@@ -19,10 +21,11 @@ const getSnapshotFilePath = (id?: string) =>
 const argv = yargs(process.argv.slice(2)).options({
   id: { type: 'string' },
   minAmount: { type: 'number' },
+  maxAccountCount: { type: 'number' },
 })
 
 const takeTokenHoldersSnapshot = async (): Promise<void> => {
-  const { id, minAmount = 0 } = await argv.parse()
+  const { id, maxAccountCount = Infinity, minAmount = 0 } = await argv.parse()
 
   if (!process.env.TOKEN_ADDRESS) {
     throw new Error('Must set token address!')
@@ -60,7 +63,7 @@ const takeTokenHoldersSnapshot = async (): Promise<void> => {
         }
       })
       .filter(account => account.amount > 0 && account.amount >= minAmount)
-  )
+  ).slice(0, maxAccountCount)
 
   const eligibleAccountsCsv = csvStringify(eligibleAccounts, {
     columns: ['address', 'amount'],

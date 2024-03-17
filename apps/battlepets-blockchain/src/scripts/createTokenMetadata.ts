@@ -1,5 +1,3 @@
-import 'dotenv/config'
-
 import { bs58 } from '@coral-xyz/anchor/dist/cjs/utils/bytes'
 import { createMetadataAccountV3 } from '@metaplex-foundation/mpl-token-metadata'
 import { createSignerFromKeypair } from '@metaplex-foundation/umi'
@@ -10,6 +8,10 @@ import * as web3 from '@solana/web3.js'
 import { getKeypairFromEnvironment } from '@solana-developers/helpers'
 import { getEndpoint } from 'battlepets-shared/utils/solanaUtils'
 import 'colors'
+
+// eslint-disable-next-line import/order
+import { initializeEnv } from 'initializeEnv'
+initializeEnv()
 
 import { CLUSTER, TOKEN_DESCRIPTION, TOKEN_NAME, TOKEN_SYMBOL } from '@/common/constants'
 import { executeScript } from '@/utils/scriptUtils'

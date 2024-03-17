@@ -1,5 +1,3 @@
-import 'dotenv/config'
-
 import fs from 'fs/promises'
 import path from 'path'
 
@@ -11,6 +9,10 @@ import { stringify as csvStringify } from 'csv-stringify'
 import { sort } from 'ramda'
 import yargs from 'yargs'
 import 'colors'
+
+// eslint-disable-next-line import/order
+import { initializeEnv } from 'initializeEnv'
+initializeEnv()
 
 import { executeScript } from '@/utils/scriptUtils'
 import { getConnection } from '@/utils/solanaUtils'

@@ -1,5 +1,3 @@
-import 'dotenv/config'
-
 import fs from 'fs/promises'
 import path from 'path'
 
@@ -12,6 +10,10 @@ import { BASE_URL } from 'battlepets-shared/constants'
 import { getEndpoint } from 'battlepets-shared/utils/solanaUtils'
 import yargs from 'yargs'
 import 'colors'
+
+// eslint-disable-next-line import/order
+import { initializeEnv } from 'initializeEnv'
+initializeEnv()
 
 import { CLUSTER, MASTER_NFTS, NFT_SELLER_FEE_BASIS_POINTS, NFT_SYMBOL } from '@/common/constants'
 import { executeScript } from '@/utils/scriptUtils'

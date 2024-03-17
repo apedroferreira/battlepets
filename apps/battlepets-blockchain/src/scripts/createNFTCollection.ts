@@ -1,5 +1,3 @@
-import 'dotenv/config'
-
 import { bs58 } from '@coral-xyz/anchor/dist/cjs/utils/bytes'
 import { createNft, mplTokenMetadata } from '@metaplex-foundation/mpl-token-metadata'
 import { createSignerFromKeypair, generateSigner, percentAmount } from '@metaplex-foundation/umi'
@@ -9,6 +7,10 @@ import { getKeypairFromEnvironment } from '@solana-developers/helpers'
 import { BASE_URL } from 'battlepets-shared/constants'
 import { getEndpoint } from 'battlepets-shared/utils/solanaUtils'
 import 'colors'
+
+// eslint-disable-next-line import/order
+import { initializeEnv } from 'initializeEnv'
+initializeEnv()
 
 import { CLUSTER, NFT_COLLECTION_DESCRIPTION, NFT_COLLECTION_NAME, NFT_SYMBOL } from '@/common/constants'
 import { executeScript } from '@/utils/scriptUtils'

@@ -1,26 +1,34 @@
-import 'dotenv/config'
-
-import * as anchor from '@coral-xyz/anchor'
-import NodeWallet from '@coral-xyz/anchor/dist/cjs/nodewallet'
 import * as token from '@solana/spl-token'
 import * as web3 from '@solana/web3.js'
 import { getKeypairFromEnvironment } from '@solana-developers/helpers'
-import saleIdl from 'battlepets-shared/idls/battlepets_public_sale.json'
+import { pluralize } from 'battlepets-shared/utils/generalUtils'
+import yargs from 'yargs'
 import 'colors'
+
+// eslint-disable-next-line import/order
+import { initializeEnv } from 'initializeEnv'
+initializeEnv()
 
 import { SOL_TOKEN_EXCHANGE_RATE } from '@/common/constants'
 import { executeScript } from '@/utils/scriptUtils'
-import { getConnection, getExplorerURLQueryString, multiSendTokens } from '@/utils/solanaUtils'
+import {
+  getAirdropPendingReceivers,
+  getConnection,
+  getExplorerURLQueryString,
+  multiSendTokens,
+  updateSuccessfulAirdropReceivers,
+} from '@/utils/solanaUtils'
 
-import type { BattlepetsPublicSale } from 'battlepets-shared/types/battlepets_public_sale'
+const argv = yargs(process.argv.slice(2)).options({
+  fileName: { type: 'string', demandOption: true },
+  maxReceiversPerTransaction: { type: 'number' },
+})
 
 const distributeSale = async (): Promise<void> => {
+  const { fileName, maxReceiversPerTransaction = Infinity } = await argv.parse()
+
   if (!process.env.WALLET_SECRET_KEY) {
     throw new Error('Must set secret key!')
-  }
-
-  if (!process.env.SALE_PROGRAM_ID) {
-    throw new Error('Must set sale program ID!')
   }
 
   if (!process.env.TOKEN_ADDRESS) {
@@ -31,47 +39,59 @@ const distributeSale = async (): Promise<void> => {
 
   const publicSaleAccount = getKeypairFromEnvironment('WALLET_SECRET_KEY')
 
-  const provider = new anchor.AnchorProvider(connection, new NodeWallet(publicSaleAccount), {})
-  anchor.setProvider(provider)
-
-  const saleProgram = new anchor.Program(
-    saleIdl as anchor.Idl as BattlepetsPublicSale,
-    process.env.SALE_PROGRAM_ID,
-    provider
-  )
-
-  const [salePda] = anchor.web3.PublicKey.findProgramAddressSync([Buffer.from('global')], saleProgram.programId)
-
   const tokenPublicKey = new web3.PublicKey(process.env.TOKEN_ADDRESS)
 
   const explorerURLQueryString = getExplorerURLQueryString()
 
-  const { open: isSaleOpen } = await saleProgram.account.saleState.fetch(salePda)
-
-  if (isSaleOpen) {
-    throw new Error('Sale must be closed before distribution!')
-  }
-
   const tokenMint = await token.getMint(connection, tokenPublicKey)
 
-  const saleAllocations = await saleProgram.account.saleAllocationState.all()
+  const pendingReceivers = await getAirdropPendingReceivers(fileName, ['amount'])
 
-  const saleReceivers = saleAllocations.map(allocation => ({
-    publicKey: allocation.account.contributor,
-    amount: (Number(allocation.account.amount) / anchor.web3.LAMPORTS_PER_SOL) * SOL_TOKEN_EXCHANGE_RATE,
+  const pendingReceiversWithAmount = pendingReceivers.map(({ amount = 0, publicKey }) => ({
+    publicKey,
+    amount: Number(amount) * SOL_TOKEN_EXCHANGE_RATE,
   }))
 
-  const saleDistributionTransactionSignature = await multiSendTokens(
+  const transactionResults = await multiSendTokens(
     connection,
     publicSaleAccount,
     tokenMint.address,
-    saleReceivers
+    pendingReceiversWithAmount,
+    maxReceiversPerTransaction
   )
 
-  console.log(
-    `Sale Distribution Token Transaction: https://explorer.solana.com/tx/${saleDistributionTransactionSignature}${explorerURLQueryString}`
-      .green
+  const { failedTransactionReasons, successfulTransactions } = await updateSuccessfulAirdropReceivers(
+    fileName,
+    transactionResults,
+    ['amount']
   )
+
+  const transactionCount = transactionResults.length
+  const successfulTransactionCount = successfulTransactions.length
+  const failedTransactionCount = transactionCount - successfulTransactionCount
+
+  if (transactionCount > 0) {
+    console.log(`Sale distribution in ${pluralize(transactionCount, 'transaction')}:`.cyan)
+  } else {
+    console.log('No transactions to make!'.cyan)
+  }
+
+  if (successfulTransactionCount > 0) {
+    console.log(`${pluralize(successfulTransactionCount, 'transaction')} successful.`.green)
+  }
+  if (failedTransactionCount > 0) {
+    console.log(`${pluralize(failedTransactionCount, 'transaction')} failed.`.red)
+    console.error(`${failedTransactionReasons[0]}`.red)
+  }
+
+  if (successfulTransactionCount > 0) {
+    const [{ result: distributeTokenFirstTransactionSignature }] = successfulTransactions
+
+    console.log(
+      `Distribute Token First Successful Transaction: https://explorer.solana.com/tx/${distributeTokenFirstTransactionSignature}${explorerURLQueryString}`
+        .cyan
+    )
+  }
 }
 
 executeScript(distributeSale)
