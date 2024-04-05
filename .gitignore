@@ -57,9 +57,10 @@ next-env.d.ts
 # turborepo
 .turbo
 
-# token scripts data
+# scripts data
 **/scripts/scriptsData/**/*.*
 !**/scripts/scriptsData/**/*.example.*
+**/scripts/emails/output/**/*.html
 
 # logs
 logs

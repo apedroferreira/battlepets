@@ -1,15 +1,15 @@
 {
   "name": "battlepets-sale-portal",
-  "version": "1.0.9",
+  "version": "1.0.10",
   "private": true,
   "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
-    "format": "yarn g:prettier --write '*/**/*.{js,jsx,ts,tsx,md,json}'",
-    "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0 && yarn g:stylelint \"**/*.{css,scss}\"",
+    "format": "prettier --write '*/**/*.{js,jsx,ts,tsx,md,json}'",
+    "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0 && stylelint \"**/*.{css,scss}\"",
     "preview": "vite preview",
-    "precommit": "yarn g:lint-staged"
+    "precommit": "lint-staged"
   },
   "dependencies": {
     "@coral-xyz/anchor": "^0.29.0",

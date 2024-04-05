@@ -208,7 +208,6 @@
 
   span {
     animation-delay: -1.5s;
-    background-size: 150% auto;
   }
 
   @include breakpoints.breakpoint(md) {

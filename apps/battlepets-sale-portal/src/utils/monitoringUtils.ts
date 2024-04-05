@@ -2,7 +2,7 @@ import * as Sentry from '@sentry/react'
 
 import { SENTRY_DSN, SENTRY_ENVIRONMENT } from '@/common/constants'
 
-export const initializeSentry = (): void => {
+export const initializeSentry = () => {
   Sentry.init({
     enabled: import.meta.env.PROD,
     dsn: SENTRY_DSN,

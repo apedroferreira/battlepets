@@ -1,11 +1,11 @@
 {
   "name": "battlepets-shared",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "private": true,
   "scripts": {
-    "format": "yarn g:prettier --write '*/**/*.{js,ts,md,json}'",
-    "lint": "yarn eslint \"**/*.{js,ts}\" --fix",
-    "precommit": "yarn g:lint-staged"
+    "format": "prettier --write '*/**/*.{js,ts,md,json}'",
+    "lint": "eslint \"**/*.{js,ts}\" --fix",
+    "precommit": "lint-staged"
   },
   "dependencies": {
     "@solana/web3.js": "^1.91.0"

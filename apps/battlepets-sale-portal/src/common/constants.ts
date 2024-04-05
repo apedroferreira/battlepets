@@ -1,4 +1,3 @@
-import * as anchor from '@coral-xyz/anchor'
 import * as web3 from '@solana/web3.js'
 
 export const SOLANA_DECIMALS = 9
@@ -12,19 +11,16 @@ export const MAX_ALLOCATION_SOL_AMOUNT = 120
 export const SOFT_CAP_SOL_AMOUNT = 700
 export const HARD_CAP_SOL_AMOUNT = 2800
 
-export const SALE_NAME = 'Battlepets Public Sale'
-
 // Environment variables
 
 export const CLUSTER: web3.Cluster | 'localnet' = (import.meta.env.VITE_CLUSTER ?? 'localnet') as
   | web3.Cluster
   | 'localnet'
 
-export const SALE_PROGRAM_ID = new anchor.web3.PublicKey((import.meta.env.VITE_SALE_PROGRAM_ID as string) ?? '')
+export const SALE_PROGRAM_ID = new web3.PublicKey((import.meta.env.VITE_SALE_PROGRAM_ID as string) ?? '')
+export const SALE_NAME = `Battlepets ${(import.meta.env.VITE_SALE_NAME as string) ?? 'Sale'}`
 
-export const FUND_RAISER_PUBLIC_KEY = new anchor.web3.PublicKey(
-  (import.meta.env.VITE_FUND_RAISER_ADDRESS as string) ?? ''
-)
+export const FUND_RAISER_PUBLIC_KEY = new web3.PublicKey((import.meta.env.VITE_FUND_RAISER_ADDRESS as string) ?? '')
 
 export const SALE_ENDS_AT_TIMESTAMP = Number(import.meta.env.VITE_SALE_ENDS_AT_TIMESTAMP)
 

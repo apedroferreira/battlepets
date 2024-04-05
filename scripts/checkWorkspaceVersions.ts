@@ -24,7 +24,7 @@ const argv = yargs(process.argv.slice(2)).options({
   project: { type: 'string' },
 })
 
-const runScript = async (): Promise<void> => {
+const runScript = async () => {
   const { project } = await argv.parse()
 
   console.log('Checking workspace versions…'.cyan)

@@ -1,0 +1,97 @@
+<mjml>
+  <mj-head>
+    <mj-attributes>
+      <mj-title>A very nice email.</mj-title>
+      <mj-preview>Preview content here.</mj-preview>
+      <mj-font name="Sora" href="https://fonts.googleapis.com/css2?family=Sora:wght@400;700&display=swap" />
+      <mj-text align="center" color="#202020" font-family="Sora, Helvetica Neue, Helvetica, sans-serif" />
+      <mj-section background-color="#fff" />
+      <mj-button
+        background-color="#7A00B8"
+        color="#fff"
+        font-size="20px"
+        font-weight="bold"
+        text-transform="uppercase"
+        inner-padding="20px 42px"
+      />
+    </mj-attributes>
+    <mj-style>
+      .heading-text { white-space: nowrap; } @media screen and (max-width: 480px) { .heading-text div { padding-top:
+      5px; font-size: 28px !important; } }
+    </mj-style>
+  </mj-head>
+
+  <mj-body background-color="#f8eeff">
+    <mj-hero
+      mode="fixed-height"
+      height="264px"
+      background-width="1388px"
+      background-height="768px"
+      background-url="https://imagedelivery.net/tQX6spJrZdgf00cBsxL4kQ/5f41ea14-97c8-4e86-23f9-1025fa4e1300/public"
+    >
+      <mj-text
+        css-class="heading-text"
+        padding-top="87px"
+        align="center"
+        color="#fff"
+        font-size="36px"
+        font-weight="bold"
+        >This is a <span style="color: #d000ff">very</span> nice email!</mj-text
+      >
+    </mj-hero>
+    <mj-section>
+      <mj-column padding-left="6.5%" padding-right="6.5%" padding-bottom="30px">
+        <mj-text font-size="16px" line-height="1.5" align="left">
+          <p>
+            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
+            industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and
+            scrambled it to make a type specimen book.
+          </p>
+          <p>
+            It has survived not only five centuries, but also the leap into electronic typesetting, remaining
+            essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem
+            Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions
+            of Lorem Ipsum.
+          </p></mj-text
+        >
+        <mj-button href="https://www.battlepets.io">Don't click me!</mj-button>
+      </mj-column>
+    </mj-section>
+    <mj-section background-color="#f8eeff" padding-bottom="4px">
+      <mj-group>
+        <mj-column>
+          <mj-image
+            href="https://t.me/battlepets_game"
+            alt="Telegram logo"
+            align="right"
+            width="44px"
+            padding-left="6px"
+            padding-right="6px"
+            src="https://imagedelivery.net/tQX6spJrZdgf00cBsxL4kQ/c5e8f177-28e1-4f92-3380-36f34a961d00/public"
+          />
+        </mj-column>
+        <mj-column>
+          <mj-image
+            href="https://twitter.com/battlepets_game"
+            alt="X logo"
+            align="left"
+            padding-left="6px"
+            padding-right="6px"
+            width="44px"
+            src="https://imagedelivery.net/tQX6spJrZdgf00cBsxL4kQ/aef63962-4b4b-47b0-b518-1110a8ebdd00/public"
+          />
+        </mj-column>
+      </mj-group>
+    </mj-section>
+    <mj-section background-color="#f8eeff" padding-top="0px" padding-bottom="40px">
+      <mj-column>
+        <mj-text color="#883fbc" font-size="12px" line-height="0.15"
+          >Sent by <a href="https://www.battlepets.io" style="color: #d000ff">Battlepets</a>.</mj-text
+        >
+        <mj-text color="#883fbc" font-size="12px" line-height="0.15"
+          >© 2024 Battlepets. All rights reserved. | {{{ pm:unsubscribe }}}</mj-text
+        >
+      </mj-column>
+    </mj-section>
+  </mj-body>
+</mjml>

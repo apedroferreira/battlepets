@@ -14,7 +14,7 @@ interface AuditResultsType {
   >
 }
 
-const runScript = async (): Promise<void> => {
+const runScript = async () => {
   console.log('Auditing unsafe dependencies…'.cyan)
 
   console.log('Checking unsafe dependency patches…'.cyan)

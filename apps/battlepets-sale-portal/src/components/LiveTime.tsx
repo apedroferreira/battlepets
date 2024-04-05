@@ -7,7 +7,7 @@ interface LiveTimeProps {
 }
 
 export const LiveTime: React.FC<LiveTimeProps> = ({ timestamp }) => {
-  const getValue = useCallback((): string => {
+  const getValue = useCallback(() => {
     const hoursLeft = getTimeDifferenceFromNow(timestamp, 'hours')
     const minutesLeft = getTimeDifferenceFromNow(timestamp, 'minute') - hoursLeft * 60
     const secondsLeft = getTimeDifferenceFromNow(timestamp, 'second') - hoursLeft * 60 * 60 - minutesLeft * 60

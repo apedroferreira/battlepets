@@ -40,29 +40,29 @@ const TOKEN_METRICS: { value: string; caption: React.ReactNode }[] = [
     value: '100M',
     caption: (
       <>
-        Max <strong>$BPETS</strong> supply
+        Max <strong>BPETS</strong> supply
       </>
     ),
   },
   {
     value: '$0.012',
-    caption: 'Est. Public sale price',
+    caption: 'Est. Presale price',
   },
   {
     value: '$696K',
-    caption: 'Est. Public sale market cap',
+    caption: 'Est. Presale market cap',
   },
 ]
 
 /* eslint-disable react/jsx-key */
 const ROADMAP_POINTS: { heading: string; items: React.ReactNode[] }[] = [
   {
-    heading: 'Q1-Q2 2024',
+    heading: 'Q2 2024',
     items: [
       <strong>Airdrop</strong>,
-      <strong>Public Sale</strong>,
+      <strong>BPETS Presale</strong>,
       <>
-        <strong>$BPETS</strong> Token Launch
+        <strong>BPETS</strong> Token Launch
       </>,
     ],
   },
@@ -150,7 +150,7 @@ const Home = () => {
               </h1>
               <div className={styles.heroContent}>
                 <p className={styles.heroText}>
-                  Join the waitlist to get the <strong>$BPETS</strong>{' '}
+                  Join the waitlist to get the <strong>BPETS</strong>{' '}
                   <span className={globalStyles.iceText}>airdrop</span> and sign up for our{' '}
                   <span className={globalStyles.fireText}>public sale</span> at pre-launch price!
                 </p>
@@ -313,7 +313,7 @@ const Home = () => {
                     <div className={styles.featureImageWrapper3}>
                       <Image
                         src={token}
-                        alt="$BPETS token"
+                        alt="BPETS token"
                         fill
                         style={{ objectFit: 'contain' }}
                         sizes="(max-width: 48.375em) 100vw, 33vw"
@@ -322,7 +322,7 @@ const Home = () => {
                   </div>
                   <h5 className={globalStyles.slideInVerticalOnReveal3}>Engage</h5>
                   <p className={globalStyles.slideInVerticalOnReveal3}>
-                    Influence the game and get exclusive benefits with the <strong>$BPETS</strong> token!
+                    Influence the game and get exclusive benefits with the <strong>BPETS</strong> token!
                   </p>
                 </div>
               </div>
@@ -376,10 +376,10 @@ const Home = () => {
           <RevealedSection>
             <div className={`${styles.sectionContent} ${styles.gameCTASectionContent}`}>
               <CTA
-                heading="Get in the $BPETS sale and win a sale-only NFT!"
+                heading="Get in the BPETS sale and win a sale-only NFT!"
                 ctaText={
                   <>
-                    Sign up below for the <strong>$BPETS airdrop</strong> and <strong>public sale</strong> at
+                    Sign up below for the <strong>BPETS airdrop</strong> and <strong>public sale</strong> at
                     pre&#8209;launch price, where you also get a{' '}
                     <span className={globalStyles.promoText}>limited&#8209;edition</span> <strong>Hellcat</strong>!
                   </>
@@ -469,7 +469,7 @@ const Home = () => {
               heading="Want to stay in the loop?"
               ctaText={
                 <>
-                  Join the waitlist to get the <strong>$BPETS airdrop</strong> and sign up for our{' '}
+                  Join the waitlist to get the <strong>BPETS airdrop</strong> and sign up for our{' '}
                   <strong>public sale</strong> at pre-launch price!
                 </>
               }

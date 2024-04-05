@@ -1,1 +1,1 @@
-yarn audit:ci && yarn g:version:check && yarn lint && yarn precommit
+yarn audit:ci && yarn version:check && yarn lint && yarn precommit

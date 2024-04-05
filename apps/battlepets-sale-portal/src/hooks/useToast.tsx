@@ -25,7 +25,7 @@ export const useToast = (): UseToastPayload => {
 
   const [isVisible, setIsVisible] = useState(false)
 
-  const showToast = useCallback((props: DynamicToastProps, duration = DEFAULT_TOAST_DURATION): void => {
+  const showToast = useCallback((props: DynamicToastProps, duration = DEFAULT_TOAST_DURATION) => {
     const toastTimeout = toastTimeoutRef.current
 
     if (toastTimeout) {

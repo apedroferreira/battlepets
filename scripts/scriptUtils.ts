@@ -1,6 +1,6 @@
 import { exec } from 'child_process'
 
-export const executeScript = async (runScript: () => void | Promise<void>): Promise<void> => {
+export const executeScript = async (runScript: () => void | Promise<void>) => {
   try {
     await runScript()
   } catch (error) {
@@ -33,7 +33,7 @@ export interface Workspace {
   location: string
 }
 
-export const parseWorkspacesListResult = (result: string): Workspace[] =>
+export const parseWorkspacesListResult = (result: string) =>
   result !== ''
     ? result
         .trim()

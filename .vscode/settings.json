@@ -9,7 +9,7 @@
       "changeProcessCWD": true
     },
     {
-      "directory": "apps/battlepets-blockchain",
+      "directory": "apps/battlepets-scripts",
       "changeProcessCWD": true
     },
     {

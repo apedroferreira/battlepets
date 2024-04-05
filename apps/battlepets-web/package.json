@@ -1,15 +1,15 @@
 {
   "name": "battlepets-web",
-  "version": "1.0.10",
+  "version": "1.0.11",
   "private": true,
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "format": "yarn g:prettier --write '*/**/*.{js,jsx,ts,tsx,md,json}'",
-    "lint": "next lint && yarn g:stylelint \"**/*.{css,scss}\"",
+    "format": "prettier --write '*/**/*.{js,jsx,ts,tsx,md,json}'",
+    "lint": "next lint && stylelint \"**/*.{css,scss}\"",
     "analyze": "ANALYZE=true yarn build",
-    "precommit": "yarn g:lint-staged"
+    "precommit": "lint-staged"
   },
   "dependencies": {
     "@neondatabase/serverless": "^0.9.0",

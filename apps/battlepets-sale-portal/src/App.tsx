@@ -1,8 +1,9 @@
 import * as anchor from '@coral-xyz/anchor'
 import { useAnchorWallet, useConnection, useWallet } from '@solana/wallet-adapter-react'
 import { WalletMultiButton } from '@solana/wallet-adapter-react-ui'
+import * as web3 from '@solana/web3.js'
 import { BASE_URL, CONTACT_EMAIL, LITEPAPER_URL, STATUS_URL, TELEGRAM_URL, X_URL } from 'battlepets-shared/constants'
-import saleIdl from 'battlepets-shared/idls/battlepets_public_sale.json'
+import saleIdl from 'battlepets-shared/idls/battlepets_sale.json'
 import { useCallback, useEffect, useMemo, useState } from 'react'
 
 import bpetsLogo from '@/assets/bpetslogo.png'
@@ -31,7 +32,7 @@ import { useToast } from '@/hooks/useToast'
 import { escapeRegExp, formatLargeStatNumber } from '@/utils/generalUtils'
 import { encodePDASeed } from '@/utils/solanaUtils'
 
-import type { BattlepetsPublicSale } from 'battlepets-shared/types/battlepets_public_sale'
+import type { BattlepetsSale } from 'battlepets-shared/types/battlepets_sale'
 
 import '@/App.scss'
 
@@ -64,24 +65,21 @@ export const App: React.FC = () => {
     [remainingAllocation]
   )
 
-  const [saleProgram, setSaleProgram] = useState<anchor.Program<BattlepetsPublicSale>>()
+  const [saleProgram, setSaleProgram] = useState<anchor.Program<BattlepetsSale>>()
 
   const [isLoadingSale, setIsLoadingSale] = useState(true)
   const [isLoadingSaleAllocation, setIsLoadingSaleAllocation] = useState(true)
   const [isLoadingAddAllocation, setIsLoadingAddAllocation] = useState(false)
 
-  const getSalePda = useCallback((program: anchor.Program<BattlepetsPublicSale>) => {
-    const [salePda] = anchor.web3.PublicKey.findProgramAddressSync([encodePDASeed('global')], program.programId)
+  const getSalePda = useCallback((program: anchor.Program<BattlepetsSale>) => {
+    const [salePda] = web3.PublicKey.findProgramAddressSync([encodePDASeed('global')], program.programId)
     return salePda
   }, [])
 
   const getSaleAllocationPda = useCallback(
-    (program: anchor.Program<BattlepetsPublicSale>) => {
+    (program: anchor.Program<BattlepetsSale>) => {
       if (publicKey) {
-        const [saleAllocationPda] = anchor.web3.PublicKey.findProgramAddressSync(
-          [publicKey.toBuffer()],
-          program.programId
-        )
+        const [saleAllocationPda] = web3.PublicKey.findProgramAddressSync([publicKey.toBuffer()], program.programId)
         return saleAllocationPda
       }
     },
@@ -89,7 +87,7 @@ export const App: React.FC = () => {
   )
 
   const refreshSale = useCallback(
-    async (program: anchor.Program<BattlepetsPublicSale>) => {
+    async (program: anchor.Program<BattlepetsSale>) => {
       const salePda = getSalePda(program)
 
       try {
@@ -97,7 +95,7 @@ export const App: React.FC = () => {
 
         if (saleAccount) {
           setIsSaleOpen(saleAccount.open as boolean)
-          setTotalAllocation(Number(saleAccount.amount) / anchor.web3.LAMPORTS_PER_SOL)
+          setTotalAllocation(Number(saleAccount.amount) / web3.LAMPORTS_PER_SOL)
         }
       } catch (error) {
         showToast({ message: (error as Error).message, type: ToastType.ERROR })
@@ -111,7 +109,7 @@ export const App: React.FC = () => {
   )
 
   const refreshSaleAllocation = useCallback(
-    async (program: anchor.Program<BattlepetsPublicSale>) => {
+    async (program: anchor.Program<BattlepetsSale>) => {
       const saleAllocationPda = getSaleAllocationPda(program)
 
       if (saleAllocationPda) {
@@ -119,7 +117,7 @@ export const App: React.FC = () => {
           const saleAllocationAccount = await program.account.saleAllocationState.fetchNullable(saleAllocationPda)
 
           if (saleAllocationAccount) {
-            setCurrentAllocation(Number(saleAllocationAccount.amount) / anchor.web3.LAMPORTS_PER_SOL)
+            setCurrentAllocation(Number(saleAllocationAccount.amount) / web3.LAMPORTS_PER_SOL)
           } else {
             setCurrentAllocation(0)
           }
@@ -153,7 +151,7 @@ export const App: React.FC = () => {
     const provider = new anchor.AnchorProvider(connection, anchorWallet!, {})
     anchor.setProvider(provider)
 
-    const program = new anchor.Program(saleIdl as anchor.Idl as BattlepetsPublicSale, SALE_PROGRAM_ID, provider)
+    const program = new anchor.Program(saleIdl as anchor.Idl as BattlepetsSale, SALE_PROGRAM_ID, provider)
     setSaleProgram(program)
 
     refreshSaleAllocation(program)
@@ -217,7 +215,7 @@ export const App: React.FC = () => {
         if (saleProgram) {
           setIsLoadingAddAllocation(true)
 
-          const lamports = new anchor.BN(SOLAmountNumber * anchor.web3.LAMPORTS_PER_SOL)
+          const lamports = new anchor.BN(SOLAmountNumber * web3.LAMPORTS_PER_SOL)
 
           try {
             await saleProgram.methods
