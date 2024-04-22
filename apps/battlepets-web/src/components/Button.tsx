@@ -2,6 +2,7 @@ import { HTMLAttributes } from 'react'
 
 import styles from './button.module.scss'
 import { Loader } from './Loader'
+
 export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: 'fire' | 'ice' | 'promo'
   isLoading?: boolean

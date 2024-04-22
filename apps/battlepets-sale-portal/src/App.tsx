@@ -13,14 +13,12 @@ import solLogo from '@/assets/sollogo.png'
 import telegramLogo from '@/assets/telegramlogo.svg'
 import xLogo from '@/assets/xlogo.svg'
 import {
-  FUND_RAISER_PUBLIC_KEY,
   HARD_CAP_SOL_AMOUNT,
   HAS_PROCESSED_SALE_END,
   MAX_ALLOCATION_SOL_AMOUNT,
   MIN_ALLOCATION_SOL_AMOUNT,
   SALE_ENDS_AT_TIMESTAMP,
   SALE_NAME,
-  SALE_PROGRAM_ID,
   SOFT_CAP_SOL_AMOUNT,
   SOLANA_DECIMALS,
   SOL_BPETS_EXCHANGE_RATE,
@@ -94,7 +92,7 @@ export const App: React.FC = () => {
         const saleAccount = await program.account.saleState.fetchNullable(salePda)
 
         if (saleAccount) {
-          setIsSaleOpen(saleAccount.open as boolean)
+          setIsSaleOpen(saleAccount.open)
           setTotalAllocation(Number(saleAccount.amount) / web3.LAMPORTS_PER_SOL)
         }
       } catch (error) {
@@ -148,10 +146,10 @@ export const App: React.FC = () => {
   }, [connection, getSalePda, refreshSale, saleProgram])
 
   useEffect(() => {
-    const provider = new anchor.AnchorProvider(connection, anchorWallet!, {})
+    const provider = new anchor.AnchorProvider(connection, anchorWallet!)
     anchor.setProvider(provider)
 
-    const program = new anchor.Program(saleIdl as anchor.Idl as BattlepetsSale, SALE_PROGRAM_ID, provider)
+    const program = new anchor.Program(saleIdl as anchor.Idl as BattlepetsSale, provider)
     setSaleProgram(program)
 
     refreshSaleAllocation(program)
@@ -218,15 +216,9 @@ export const App: React.FC = () => {
           const lamports = new anchor.BN(SOLAmountNumber * web3.LAMPORTS_PER_SOL)
 
           try {
-            await saleProgram.methods
-              .addSaleAllocation(lamports)
-              .accounts({
-                saleAllocation: getSaleAllocationPda(saleProgram),
-                sale: getSalePda(saleProgram),
-                fundRaiser: FUND_RAISER_PUBLIC_KEY,
-              })
-              .rpc()
+            await saleProgram.methods.addSaleAllocation(lamports).accounts({}).rpc({ commitment: 'confirmed' })
           } catch (error) {
+            console.log(error)
             showToast({ message: (error as Error).message, type: ToastType.ERROR })
             setIsLoadingAddAllocation(false)
             throw error
@@ -246,7 +238,7 @@ export const App: React.FC = () => {
 
       runSubmit()
     },
-    [SOLAmountNumber, getSaleAllocationPda, getSalePda, refreshSaleAllocation, saleProgram, showToast]
+    [SOLAmountNumber, refreshSaleAllocation, saleProgram, showToast]
   )
 
   useEffect(() => {

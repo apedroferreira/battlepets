@@ -18,6 +18,8 @@
   --ice-gradient-dark: #16807d;
   --energy-gradient-light: #7a00b8;
   --energy-gradient-dark: #360052;
+  --high-energy-gradient-light: #de2cd5;
+  --high-energy-gradient-dark: #4e0075;
   --promo-gradient-light: #ffb903;
   --promo-gradient-dark: #f2133e;
   --background-gradient-fire: #ffede6;
@@ -87,24 +89,30 @@ h1 {
 
   @include breakpoints.breakpoint(sm) {
     font-size: 6rem;
+    height: 8.15rem;
     line-height: normal;
+    white-space: nowrap;
   }
 
   @include breakpoints.breakpoint(md) {
     font-size: 7.2rem;
+    height: 9.8rem;
     text-align: left;
   }
 
   @include breakpoints.breakpoint(lg) {
     font-size: 9rem;
+    height: 12.2rem;
   }
 
   @include breakpoints.breakpoint(xl) {
     font-size: 10rem;
+    height: 13.55rem;
   }
 
   @include breakpoints.breakpoint(xxl) {
     font-size: 12rem;
+    height: 16.3rem;
   }
 }
 

@@ -4,6 +4,11 @@
 @use '../common/breakpoints' as breakpoints;
 @use '../common/keyframes';
 
+.page {
+  overflow: hidden;
+  position: relative;
+}
+
 .headerContent {
   align-items: flex-start;
   display: flex;
@@ -1208,10 +1213,8 @@
 }
 
 .featureBattlePortalScene {
-  background-image: url('../../public/images/background3.png');
-  background-position: center;
-  background-size: cover;
   height: 85%;
+  position: relative;
   width: 85%;
   z-index: 1;
 }

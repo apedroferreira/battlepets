@@ -374,6 +374,7 @@ export const uploadMetadata = async (
             },
           }
         : {}),
+      ...(jsonMetadata.extensions ? { extensions: jsonMetadata.extensions } : {}),
     }
     const metadataJsonFile = createGenericFileFromJson(
       newJsonMetadata,

@@ -1,6 +1,6 @@
 {
   "name": "battlepets-sale-portal",
-  "version": "1.0.10",
+  "version": "1.1.0",
   "private": true,
   "type": "module",
   "scripts": {
@@ -12,12 +12,12 @@
     "precommit": "lint-staged"
   },
   "dependencies": {
-    "@coral-xyz/anchor": "^0.29.0",
-    "@sentry/react": "^7.106.1",
+    "@coral-xyz/anchor": "^0.30.0",
+    "@sentry/react": "^7.111.0",
     "@solana/wallet-adapter-base": "^0.9.23",
     "@solana/wallet-adapter-react": "^0.15.35",
     "@solana/wallet-adapter-react-ui": "^0.9.35",
-    "@solana/web3.js": "^1.91.0",
+    "@solana/web3.js": "^1.91.7",
     "battlepets-shared": "workspace:^",
     "dayjs": "^1.11.10",
     "modern-normalize": "^2.0.0",
@@ -26,22 +26,22 @@
     "react-transition-group": "^4.4.5"
   },
   "devDependencies": {
-    "@sentry/vite-plugin": "^2.14.3",
+    "@sentry/vite-plugin": "^2.16.1",
     "@types/bn.js": "^5.1.5",
-    "@types/eslint": "^8.56.5",
-    "@types/react": "^18.2.65",
-    "@types/react-dom": "^18.2.21",
+    "@types/eslint": "^8.56.10",
+    "@types/react": "^18.2.79",
+    "@types/react-dom": "^18.2.25",
     "@types/react-transition-group": "^4.4.10",
     "@vitejs/plugin-react-swc": "^3.6.0",
-    "eslint": "^8.57.0",
+    "eslint": "^8.56.0",
     "eslint-import-resolver-alias": "^1.1.2",
     "eslint-import-resolver-typescript": "^3.6.1",
     "eslint-plugin-import": "^2.29.1",
-    "eslint-plugin-react": "^7.34.0",
+    "eslint-plugin-react": "^7.34.1",
     "eslint-plugin-react-hooks": "^4.6.0",
-    "eslint-plugin-react-refresh": "^0.4.5",
-    "sass": "^1.71.1",
-    "typescript": "^5.4.2",
-    "vite": "^5.1.6"
+    "eslint-plugin-react-refresh": "^0.4.6",
+    "sass": "^1.75.0",
+    "typescript": "^5.4.5",
+    "vite": "^5.2.10"
   }
 }

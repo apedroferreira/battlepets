@@ -22,3 +22,7 @@ export const GA_ID = process.env.NEXT_PUBLIC_GA_ID
 
 export const SENTRY_DSN = process.env.NEXT_PUBLIC_SENTRY_DSN
 export const SENTRY_ENVIRONMENT = IS_STAGING ? 'staging' : NODE_ENV
+
+// Presentational
+
+export const BANNER_CONTENT = ''

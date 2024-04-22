@@ -19,18 +19,14 @@ const closeSale = async () => {
     throw new Error('Must set secret key!')
   }
 
-  if (!process.env.SALE_PROGRAM_ID) {
-    throw new Error('Must set sale program ID!')
-  }
-
   const connection = getConnection()
 
   const fundRaiserAccount = getKeypairFromEnvironment('WALLET_SECRET_KEY')
 
-  const provider = new anchor.AnchorProvider(connection, new NodeWallet(fundRaiserAccount), {})
+  const provider = new anchor.AnchorProvider(connection, new NodeWallet(fundRaiserAccount))
   anchor.setProvider(provider)
 
-  const saleProgram = new anchor.Program(saleIdl as anchor.Idl as BattlepetsSale, process.env.SALE_PROGRAM_ID, provider)
+  const saleProgram = new anchor.Program(saleIdl as anchor.Idl as BattlepetsSale, provider)
 
   const [salePda] = web3.PublicKey.findProgramAddressSync([Buffer.from('global')], saleProgram.programId)
 

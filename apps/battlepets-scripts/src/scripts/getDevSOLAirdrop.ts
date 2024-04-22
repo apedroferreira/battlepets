@@ -1,5 +1,5 @@
 import * as web3 from '@solana/web3.js'
-import { getKeypairFromEnvironment, requestAndConfirmAirdrop } from '@solana-developers/helpers'
+import { airdropIfRequired, getKeypairFromEnvironment } from '@solana-developers/helpers'
 import yargs from 'yargs'
 import 'colors'
 
@@ -34,10 +34,11 @@ const getDevSOLAirdrop = async () => {
 
   const lamportsBalanceBefore = await connection.getBalance(receiverAccount.publicKey)
 
-  const lamportsBalanceAfter = await requestAndConfirmAirdrop(
+  const lamportsBalanceAfter = await airdropIfRequired(
     connection,
     receiverAccount.publicKey,
-    amount * web3.LAMPORTS_PER_SOL
+    amount * web3.LAMPORTS_PER_SOL,
+    Infinity
   )
 
   const solBalanceAfter = lamportsBalanceAfter / web3.LAMPORTS_PER_SOL

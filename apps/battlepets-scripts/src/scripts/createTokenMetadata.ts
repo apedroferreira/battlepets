@@ -6,6 +6,7 @@ import { fromWeb3JsKeypair, fromWeb3JsPublicKey } from '@metaplex-foundation/umi
 import * as token from '@solana/spl-token'
 import * as web3 from '@solana/web3.js'
 import { getKeypairFromEnvironment } from '@solana-developers/helpers'
+import { BASE_URL, TELEGRAM_URL, X_URL } from 'battlepets-shared/constants'
 import { getEndpoint } from 'battlepets-shared/utils/solanaUtils'
 import 'colors'
 
@@ -49,6 +50,11 @@ const createTokenMetadata = async () => {
     name: TOKEN_NAME,
     symbol: TOKEN_SYMBOL,
     description: TOKEN_DESCRIPTION,
+    extensions: {
+      website: BASE_URL,
+      twitter: X_URL,
+      telegram: TELEGRAM_URL,
+    },
   })
 
   const { signature: createMetadataTransactionSignature } = await createMetadataAccountV3(umi, {

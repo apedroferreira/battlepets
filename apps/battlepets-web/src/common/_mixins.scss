@@ -28,6 +28,18 @@
   background-image: linear-gradient($angle, var(--ice-gradient-light) 0%, var(--ice-gradient-dark) 100%);
 }
 
+@mixin energyGradientBackground($angle: 135deg) {
+  background-image: linear-gradient($angle, var(--energy-gradient-light) 0%, var(--energy-gradient-dark) 100%);
+}
+
+@mixin highEnergyGradientBackground($angle: 135deg) {
+  background-image: linear-gradient(
+    $angle,
+    var(--high-energy-gradient-light) 0%,
+    var(--high-energy-gradient-dark) 100%
+  );
+}
+
 @keyframes gradientBackgroundImageAnimation {
   to {
     background-position: -200% center;

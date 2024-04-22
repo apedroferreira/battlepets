@@ -9,7 +9,8 @@ export const TOKEN_AMOUNT = 100000000
 
 export const TOKEN_NAME = 'Battlepets'
 export const TOKEN_SYMBOL = 'BPETS'
-export const TOKEN_DESCRIPTION = 'Official token of Battlepets.'
+export const TOKEN_DESCRIPTION =
+  'Official token of the Battlepets game. Collect pet NFTs, battle and win rewards in a deck-builder, auto-battler mobile game on Solana!'
 
 export const INITIAL_TOKEN_DISTRIBUTION: Record<
   TokenDistribution,

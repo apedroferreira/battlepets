@@ -1,0 +1,45 @@
+@use '../common/mixins' as mixins;
+@use '../common/breakpoints' as breakpoints;
+
+.banner {
+  border-bottom: 0.3rem solid var(--high-energy-gradient-light);
+  color: var(--contrast-text);
+  font-size: 1.6rem;
+  line-height: 1.5;
+  padding: 1.4rem 1.8rem;
+  position: relative;
+  text-align: center;
+  width: 100vw;
+  z-index: 99;
+
+  @include mixins.highEnergyGradientBackground;
+
+  a {
+    color: var(--high-energy-gradient-light);
+    font-weight: bold;
+    text-decoration: underline;
+    transition: color 0.1s ease-in-out;
+    white-space: nowrap;
+
+    &:hover {
+      color: var(--energy-glow-strong);
+    }
+  }
+
+  @include breakpoints.breakpoint(md) {
+    padding: 1.6rem;
+  }
+
+  @include breakpoints.breakpoint(lg) {
+    border-bottom-width: 0.4rem;
+    padding: 1.8rem;
+  }
+
+  @include breakpoints.breakpoint(xl) {
+    font-size: 1.8rem;
+  }
+
+  @include breakpoints.breakpoint(xxl) {
+    padding: 2rem;
+  }
+}

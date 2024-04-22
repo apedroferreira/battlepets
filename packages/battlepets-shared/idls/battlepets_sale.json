@@ -1,76 +1,53 @@
 {
-  "version": "0.1.0",
-  "name": "battlepets_sale",
+  "address": "4Cmeroq292g2tFfwTdhu8Sj9MZucrcyRYBTqNF9DsoRY",
+  "metadata": {
+    "name": "battlepets_sale",
+    "version": "0.1.0",
+    "spec": "0.1.0",
+    "description": "Created with Anchor"
+  },
   "instructions": [
     {
-      "name": "openSale",
+      "name": "add_sale_allocation",
+      "discriminator": [79, 249, 83, 234, 192, 135, 5, 42],
       "accounts": [
         {
-          "name": "sale",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "fundRaiser",
-          "isMut": true,
-          "isSigner": true
-        },
-        {
-          "name": "systemProgram",
-          "isMut": false,
-          "isSigner": false
-        }
-      ],
-      "args": []
-    },
-    {
-      "name": "closeSale",
-      "accounts": [
-        {
-          "name": "sale",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "fundRaiser",
-          "isMut": true,
-          "isSigner": true
-        },
-        {
-          "name": "systemProgram",
-          "isMut": false,
-          "isSigner": false
-        }
-      ],
-      "args": []
-    },
-    {
-      "name": "addSaleAllocation",
-      "accounts": [
-        {
-          "name": "saleAllocation",
-          "isMut": true,
-          "isSigner": false
+          "name": "sale_allocation",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "account",
+                "path": "contributor"
+              }
+            ]
+          }
         },
         {
           "name": "sale",
-          "isMut": true,
-          "isSigner": false
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [103, 108, 111, 98, 97, 108]
+              }
+            ]
+          }
         },
         {
           "name": "contributor",
-          "isMut": true,
-          "isSigner": true
+          "writable": true,
+          "signer": true
         },
         {
-          "name": "fundRaiser",
-          "isMut": true,
-          "isSigner": false
+          "name": "fund_raiser",
+          "writable": true,
+          "address": "E8R2i17Pzhy912JcwJ4mXinkv65KsUSHeGUZqjVGJczH"
         },
         {
-          "name": "systemProgram",
-          "isMut": false,
-          "isSigner": false
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
         }
       ],
       "args": [
@@ -79,40 +56,74 @@
           "type": "u64"
         }
       ]
+    },
+    {
+      "name": "close_sale",
+      "discriminator": [124, 201, 1, 146, 231, 103, 193, 152],
+      "accounts": [
+        {
+          "name": "sale",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [103, 108, 111, 98, 97, 108]
+              }
+            ]
+          }
+        },
+        {
+          "name": "fund_raiser",
+          "writable": true,
+          "signer": true,
+          "address": "E8R2i17Pzhy912JcwJ4mXinkv65KsUSHeGUZqjVGJczH"
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "open_sale",
+      "discriminator": [246, 220, 152, 93, 31, 43, 199, 143],
+      "accounts": [
+        {
+          "name": "sale",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [103, 108, 111, 98, 97, 108]
+              }
+            ]
+          }
+        },
+        {
+          "name": "fund_raiser",
+          "writable": true,
+          "signer": true,
+          "address": "E8R2i17Pzhy912JcwJ4mXinkv65KsUSHeGUZqjVGJczH"
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": []
     }
   ],
   "accounts": [
     {
-      "name": "SaleState",
-      "type": {
-        "kind": "struct",
-        "fields": [
-          {
-            "name": "open",
-            "type": "bool"
-          },
-          {
-            "name": "amount",
-            "type": "u64"
-          }
-        ]
-      }
+      "name": "SaleAllocationState",
+      "discriminator": [155, 135, 105, 204, 93, 212, 209, 127]
     },
     {
-      "name": "SaleAllocationState",
-      "type": {
-        "kind": "struct",
-        "fields": [
-          {
-            "name": "contributor",
-            "type": "publicKey"
-          },
-          {
-            "name": "amount",
-            "type": "u64"
-          }
-        ]
-      }
+      "name": "SaleState",
+      "discriminator": [21, 13, 249, 194, 208, 96, 243, 65]
     }
   ],
   "errors": [
@@ -135,6 +146,40 @@
       "code": 6003,
       "name": "MaxTotalAllocation",
       "msg": "Amount must not reach over total sale allocation"
+    }
+  ],
+  "types": [
+    {
+      "name": "SaleAllocationState",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "contributor",
+            "type": "pubkey"
+          },
+          {
+            "name": "amount",
+            "type": "u64"
+          }
+        ]
+      }
+    },
+    {
+      "name": "SaleState",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "open",
+            "type": "bool"
+          },
+          {
+            "name": "amount",
+            "type": "u64"
+          }
+        ]
+      }
     }
   ]
 }
