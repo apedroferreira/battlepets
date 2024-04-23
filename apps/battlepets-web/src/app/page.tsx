@@ -135,7 +135,9 @@ const Home = () => {
               </nav>
             </div>
             <Link href={LITEPAPER_URL} target="_blank" rel="noopener noreferrer nofollow">
-              <Button asDiv>Read Litepaper</Button>
+              <Button asDiv className={styles.headerActionButton}>
+                Read Litepaper
+              </Button>
             </Link>
           </div>
         </header>
