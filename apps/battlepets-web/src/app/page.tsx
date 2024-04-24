@@ -438,7 +438,9 @@ const Home = () => {
               <div className={styles.roadmapSectionHeader}>
                 <h3 className={globalStyles.slideInVerticalOnReveal1}>Roadmap</h3>
                 <Link href={LITEPAPER_URL} target="_blank" rel="noopener noreferrer nofollow">
-                  <Button asDiv>Read Litepaper</Button>
+                  <Button asDiv className={styles.headerActionButton}>
+                    Read Litepaper
+                  </Button>
                 </Link>
               </div>
               <div className={styles.roadmapWrapper}>

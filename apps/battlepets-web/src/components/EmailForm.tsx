@@ -116,8 +116,7 @@ export const EmailForm: React.FC<EmailFormProps> = ({
 
   return hasSignedUp ? (
     <div className={`${rest.className ?? ''} ${styles.formSuccessBox} `}>
-      {checkmarkIcon}
-      <div className={styles.formSuccessText}>You’re in! We’ll keep you updated!</div>
+      {checkmarkIcon} You’re in! We’ll keep you updated!
     </div>
   ) : (
     <form {...rest} onSubmit={handleSubmit} noValidate>
