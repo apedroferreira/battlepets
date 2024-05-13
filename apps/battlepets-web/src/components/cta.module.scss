@@ -5,7 +5,9 @@
 .ctaSignUpForm {
   margin-bottom: 2.4rem;
   max-width: 52rem;
+  position: relative;
   width: 100%;
+  z-index: 1;
 
   @include mixins.signUpForm;
 

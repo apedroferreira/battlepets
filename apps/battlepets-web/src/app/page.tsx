@@ -374,7 +374,9 @@ const Home = () => {
                     </div>
                   </div>
                 </div>
-                <div className={`${globalStyles.captionWrapper} ${globalStyles.slideInVerticalOnReveal2}`}>
+                <div
+                  className={`${styles.screenshotCaption} ${globalStyles.captionWrapper} ${globalStyles.slideInVerticalOnReveal2}`}
+                >
                   <p className={globalStyles.captionText}>Battlepets will be available on</p>
                   <div className={styles.storeLogosWrapper}>
                     <div className={styles.googlePlayLogoWrapper}>

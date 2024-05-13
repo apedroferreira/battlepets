@@ -1462,6 +1462,11 @@
   }
 }
 
+.screenshotCaption {
+  position: relative;
+  z-index: 1;
+}
+
 .storeLogosWrapper {
   align-items: center;
   display: flex;
