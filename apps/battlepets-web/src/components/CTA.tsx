@@ -7,8 +7,8 @@ import { EmailForm, EmailFormProps } from './EmailForm'
 import { Socials } from './Socials'
 
 interface CTAProps extends EmailFormProps {
+  heading: React.ReactNode
   ctaText: React.ReactNode
-  heading: string
   image?: {
     data: StaticImageData
     alt: string
@@ -30,7 +30,7 @@ export const CTA: React.FC<CTAProps> = ({
 }) => (
   <>
     <h4 className={globalStyles.slideInVerticalOnReveal1}>{heading}</h4>
-    <p className={`${styles.ctaText} ${globalStyles.slideInVerticalOnReveal2}`}>{ctaText}</p>
+    <p className={`${globalStyles.sectionText} ${globalStyles.slideInVerticalOnReveal2}`}>{ctaText}</p>
     {image && (
       <div className={globalStyles.scaleInOnReveal2}>
         <div className={`${styles.ctaImageWrapper} ${image.wrapperClassName ?? ''}`}>

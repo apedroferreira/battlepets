@@ -109,7 +109,8 @@ export const multiSendTokens = async (
     }))
   )
 
-  const multiSendTransactions: { transaction: web3.Transaction; receiverAddresses: string[] }[] = []
+  const multiSendTransactions: { transaction: web3.Transaction; receivers: { address: string; amount: number }[] }[] =
+    []
 
   let currentTransactionIndex = 0
   for (let receiverIndex = 0; receiverIndex < receivers.length; receiverIndex++) {
@@ -126,7 +127,7 @@ export const multiSendTokens = async (
 
     const currentTransaction = multiSendTransactions[currentTransactionIndex] ?? {
       transaction: new web3.Transaction(),
-      receiverAddresses: [],
+      receivers: [],
     }
 
     let sendTokenInstructions = [createTransferInstruction]
@@ -144,7 +145,7 @@ export const multiSendTokens = async (
 
     multiSendTransactions[currentTransactionIndex] = {
       transaction: currentTransaction.transaction.add(...sendTokenInstructions),
-      receiverAddresses: [...currentTransaction.receiverAddresses, publicKey.toString()],
+      receivers: [...currentTransaction.receivers, { address: publicKey.toString(), amount }],
     }
 
     if ((receiverIndex + 1) % maxReceiversPerTransaction === 0) {
@@ -153,10 +154,10 @@ export const multiSendTokens = async (
   }
 
   const transactionResults = await Promise.allSettled(
-    multiSendTransactions.map(async ({ receiverAddresses, transaction }) => {
+    multiSendTransactions.map(async ({ receivers, transaction }) => {
       const transactionResult = await web3.sendAndConfirmTransaction(connection, transaction, [senderAccount])
 
-      return { result: transactionResult, receiverAddresses }
+      return { result: transactionResult, receivers }
     })
   )
 
@@ -166,6 +167,7 @@ export const multiSendTokens = async (
 type AirdropReceivers<ExtraFields extends string[]> = ({
   address: string
   status: 'pending' | 'sent' | 'duplicate' | 'invalidFormat' | 'notOnCurve'
+  airdropAmount?: number
 } & Record<ExtraFields[number], string>)[]
 
 export const getAirdropPendingReceivers = async <ExtraFields extends string[]>(
@@ -179,7 +181,7 @@ export const getAirdropPendingReceivers = async <ExtraFields extends string[]>(
   let processedReceiverAddresses: string[] = []
 
   const updatedAirdropReceivers = airdropReceivers.map(airdropReceiver => {
-    const { address: receiverAddress, status: receiverStatus, ...extraData } = airdropReceiver
+    const { address: receiverAddress, airdropAmount, status: receiverStatus, ...extraData } = airdropReceiver
 
     if (!receiverAddress) {
       throw new Error('Missing receiver address!')
@@ -216,11 +218,12 @@ export const getAirdropPendingReceivers = async <ExtraFields extends string[]>(
       address: receiverAddress,
       ...extraData,
       status: newStatus,
+      airdropAmount,
     }
   })
 
   const updatedAirdropReceiversCsv = csvStringify(updatedAirdropReceivers, {
-    columns: ['address', ...extraFields, 'status'],
+    columns: ['address', ...extraFields, 'status', 'airdropAmount'],
     header: true,
   })
 
@@ -236,7 +239,7 @@ export const getAirdropPendingReceivers = async <ExtraFields extends string[]>(
 }
 
 export const updateSuccessfulAirdropReceivers = async <
-  AirdropTransactionResult extends { receiverAddresses: string[] },
+  AirdropTransactionResult extends { receivers: { address: string; amount: number }[] },
   ExtraFields extends string[],
 >(
   airdropFileName: string,
@@ -251,7 +254,7 @@ export const updateSuccessfulAirdropReceivers = async <
     .filter(result => result.status === 'rejected')
     .map(result => (result as PromiseRejectedResult).reason as string)
 
-  const successfulReceiverAddresses = successfulTransactions.flatMap(({ receiverAddresses }) => receiverAddresses)
+  const successfulReceivers = successfulTransactions.flatMap(({ receivers }) => receivers)
 
   const airdropAddressesFilePath = path.resolve(__dirname, `../scripts/scriptsData/input/${airdropFileName}.csv`)
 
@@ -267,11 +270,12 @@ export const updateSuccessfulAirdropReceivers = async <
       throw new Error('Missing receiver status!')
     }
 
-    if (receiverStatus === 'pending' && successfulReceiverAddresses.includes(receiverAddress)) {
+    if (receiverStatus === 'pending' && successfulReceivers.some(receiver => receiver.address === receiverAddress)) {
       return {
         address: receiverAddress,
         ...extraData,
         status: 'sent',
+        airdropAmount: successfulReceivers.find(receiver => receiver.address === receiverAddress)!.amount,
       }
     }
 
@@ -279,7 +283,7 @@ export const updateSuccessfulAirdropReceivers = async <
   })
 
   const updatedAirdropReceiversCsv = csvStringify(updatedAirdropReceivers, {
-    columns: ['address', ...extraFields, 'status'],
+    columns: ['address', ...extraFields, 'status', 'airdropAmount'],
     header: true,
   })
 
@@ -292,7 +296,8 @@ export const updateSuccessfulAirdropReceivers = async <
   }
 }
 
-const getUploaderAddress = () => (CLUSTER === 'mainnet-beta' ? 'https://node2.irys.xyz' : 'https://devnet.irys.xyz')
+const getUploaderAddress = () =>
+  CLUSTER === 'mainnet-beta' ? 'https://arweave.mainnet.irys.xyz' : 'https://arweave.devnet.irys.xyz'
 
 const getMutableUploadedFileUri = (uri: string) =>
   uri.replace('https://arweave.net', 'https://gateway.irys.xyz/mutable')

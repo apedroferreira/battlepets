@@ -44,20 +44,19 @@ const sendEmail = async () => {
   const contactsFilePath = path.resolve(__dirname, `../scripts/scriptsData/input/${fileName}.csv`)
   const contacts = (await csvToJson().fromFile(contactsFilePath)) as Contacts
 
-  const eligibleContacts = contacts
-    .map(contact => {
-      const { email, status } = contact
+  const eligibleContacts = contacts.filter(({ email, status }, index, self) => {
+    if (!email) {
+      throw new Error('Missing contact email!')
+    }
+    if (!status) {
+      throw new Error('Missing contact status!')
+    }
 
-      if (!email) {
-        throw new Error('Missing contact email!')
-      }
-      if (!status) {
-        throw new Error('Missing contact status!')
-      }
-
-      return contact
-    })
-    .filter(({ status }) => status === 'pending' || (retryFailedEmails && status === 'failed'))
+    return (
+      index === self.findIndex(contact => contact.email === email) &&
+      (status === 'pending' || (retryFailedEmails && status === 'failed'))
+    )
+  })
 
   const emailHtmlFilePath = path.resolve(__dirname, `../scripts/emails/output/${id}.html`)
   // eslint-disable-next-line security/detect-non-literal-fs-filename

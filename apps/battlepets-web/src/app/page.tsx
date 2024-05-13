@@ -63,23 +63,23 @@ const ROADMAP_POINTS: { heading: string; items: React.ReactNode[] }[] = [
     heading: 'Q2 2024',
     items: [
       <strong>Airdrop</strong>,
-      <strong>BPETS Presale</strong>,
+      <strong>BPETS presale</strong>,
       <>
-        <strong>BPETS</strong> Token Launch
+        <strong>BPETS</strong> token launch
       </>,
     ],
   },
   {
-    heading: 'Q2-Q3 2024',
-    items: ['Battlepets DAO', 'Create Starter Cards', 'Battlepets NFT Web Store', 'Game Development'],
-  },
-  {
-    heading: 'Q4 2024',
-    items: ['Beta Game Launch'],
+    heading: 'Q3-Q4 2024',
+    items: ['Battlepets DAO', 'Create starter cards', 'Battlepets NFT web store', 'Game development'],
   },
   {
     heading: 'Q1 2025',
-    items: ['Public Game Launch'],
+    items: ['Beta game launch'],
+  },
+  {
+    heading: 'Q2 2025',
+    items: ['Public game launch'],
   },
 ]
 /* eslint-enable react/jsx-key */
@@ -197,9 +197,9 @@ const Home = () => {
                     <div className={styles.heroIcePortalScene}>
                       <Image
                         src={background1}
-                        alt="Japanese Temple Background"
+                        alt="Futuristic City Background"
                         fill
-                        style={{ objectFit: 'cover' }}
+                        style={{ objectFit: 'cover', objectPosition: 'bottom center' }}
                         sizes="(max-width: 48.375em) 13.2rem, (max-width: 62em) 16.6rem, (max-width: 75.0625em) 22.2rem, 25.3rem"
                         priority
                         placeholder="blur"
@@ -213,9 +213,9 @@ const Home = () => {
                     <div className={styles.heroFirePortalScene}>
                       <Image
                         src={background2}
-                        alt="Forest Background"
+                        alt="Enchanted Forest Background"
                         fill
-                        style={{ objectFit: 'cover' }}
+                        style={{ objectFit: 'cover', objectPosition: 'bottom center' }}
                         sizes="(max-width: 48.375em) 16.6rem, (max-width: 62em) 18.2rem, (max-width: 75.0625em) 24.5rem, (max-width: 90.0625em) 29.3rem, 33.2rem"
                         priority
                         placeholder="blur"
@@ -226,30 +226,30 @@ const Home = () => {
                 <div className={styles.heroPet1Wrapper}>
                   <Image
                     src={battlePet1}
-                    alt="Samurai Battlepet"
+                    alt="Samurai Dog Battlepet"
                     fill
                     style={{ objectFit: 'contain' }}
-                    sizes="(max-width: 48.375em) 23rem, (max-width: 62em) 28rem, (max-width: 75.0625em) 38rem, (max-width: 90.0625em) 42rem, 45rem"
+                    sizes="(max-width: 48.375em) 19.55rem, (max-width: 62em) 23.8rem, (max-width: 75.0625em) 32.3rem, (max-width: 90.0625em) 35.7rem, 38.25rem"
                     priority
                   />
                 </div>
                 <div className={styles.heroPet2Wrapper}>
                   <Image
                     src={battlePet2}
-                    alt="Soldier Battlepet"
+                    alt="Roman Soldier Turtle Battlepet"
                     fill
                     style={{ objectFit: 'contain' }}
-                    sizes="(max-width: 48.375em) 15.8rem, (max-width: 62em) 17.4rem, (max-width: 75.0625em) 23.4rem, (max-width: 90.0625em) 27rem, 30rem"
+                    sizes="(max-width: 48.375em) 13.43rem, (max-width: 62em) 14.79rem, (max-width: 75.0625em) 19.89rem, (max-width: 90.0625em) 23.1rem, 25.5rem"
                     priority
                   />
                 </div>
                 <div className={styles.heroPet3Wrapper}>
                   <Image
                     src={battlePet3}
-                    alt="Secret Agent Battlepet"
+                    alt="Devil Cat Battlepet"
                     fill
                     style={{ objectFit: 'contain' }}
-                    sizes="(max-width: 48.375em) 21.6rem, (max-width: 62em) 23.6rem, (max-width: 75.0625em) 32rem, (max-width: 90.0625em) 38rem, 41rem"
+                    sizes="(max-width: 48.375em) 18.366rem, (max-width: 62em) 20.1rem, (max-width: 75.0625em) 27.2rem, (max-width: 90.0625em) 32.3rem, 34.85rem"
                     priority
                   />
                 </div>
@@ -269,7 +269,7 @@ const Home = () => {
                       <div className={styles.featureImageWrapper1}>
                         <Image
                           src={card1}
-                          alt="Ice Wizard Battlepet Card"
+                          alt="Ice Wizard Dog Battlepet Card"
                           fill
                           style={{ objectFit: 'contain' }}
                           sizes="(max-width: 48.375em) 100vw, 33vw"
@@ -292,7 +292,7 @@ const Home = () => {
                               src={background3}
                               alt="Battle Arena Background"
                               fill
-                              style={{ objectFit: 'cover' }}
+                              style={{ objectFit: 'cover', objectPosition: 'bottom center' }}
                               sizes="(max-width: 36em) 13.872rem, (max-width: 48.375em) 14.28rem, (max-width: 62em) 14.96rem, (max-width: 75.0625em) 18.275rem, (max-width: 90.0625em) 20.655rem, 24.48rem"
                               priority
                               placeholder="blur"
@@ -301,7 +301,7 @@ const Home = () => {
                           <div className={styles.featureBattleCard2Wrapper}>
                             <Image
                               src={card2}
-                              alt="Soldier Battlepet Card"
+                              alt="Hitman Dog Battlepet Card"
                               fill
                               style={{ objectFit: 'contain' }}
                               sizes="(max-width: 62em) 15rem, (max-width: 90.0625em) 18rem, 22rem"
@@ -310,7 +310,7 @@ const Home = () => {
                           <div className={styles.featureBattleCard3Wrapper}>
                             <Image
                               src={card3}
-                              alt="Samurai Battlepet Card"
+                              alt="Hacker Cat Battlepet Card"
                               fill
                               style={{ objectFit: 'contain' }}
                               sizes="(max-width: 62em) 17rem, (max-width: 90.0625em) 20rem, 24rem"
@@ -349,18 +349,27 @@ const Home = () => {
           <div className={styles.gamePreview}>
             <RevealedSection>
               <div className={`${styles.sectionContent} ${styles.gamePreviewSectionContent}`}>
-                <h4 className={globalStyles.slideInVerticalOnReveal1}>Coming Soon To Your Mobile Devices!</h4>
-                <div className={styles.screenshotWrapper}>
-                  <div className={globalStyles.slowScaleInOnReveal}>
-                    <div className={styles.screenshot}>
-                      <div className={styles.screenshotImageWrapper} onClick={handleToggleLightbox}>
-                        <Image
-                          src={screenshot}
-                          alt="Game Preview Screenshot"
-                          fill
-                          style={{ objectFit: 'contain' }}
-                          sizes="(max-width: 48.375em) 88vw, (max-width: 62em) 68rem, (max-width: 75.0625em) 88rem, (max-width: 90.0625em) 98rem, 104rem"
-                        />
+                <h4 className={globalStyles.slideInVerticalOnReveal1}>
+                  Coming soon, <span className={globalStyles.highEnergyText}>free-to-play</span> in any mobile device!
+                </h4>
+                <p className={`${globalStyles.sectionText} ${globalStyles.slideInVerticalOnReveal2}`}>
+                  Rank up in <span className={globalStyles.highEnergyText}>real-time</span> online battles and
+                  tournaments, or go on a quest in the offline rogue-lite{' '}
+                  <span className={globalStyles.highEnergyText}>adventure</span> mode!
+                </p>
+                <div className={styles.screenshotOuterWrapper}>
+                  <div className={styles.screenshotWrapper} onClick={handleToggleLightbox}>
+                    <div className={globalStyles.slowScaleInOnReveal}>
+                      <div className={styles.screenshot}>
+                        <div className={styles.screenshotImageWrapper}>
+                          <Image
+                            src={screenshot}
+                            alt="Game Preview Screenshot"
+                            fill
+                            style={{ objectFit: 'contain' }}
+                            sizes="(max-width: 48.375em) 88vw, (max-width: 62em) 68rem, (max-width: 75.0625em) 88rem, (max-width: 90.0625em) 98rem, 104rem"
+                          />
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -393,7 +402,12 @@ const Home = () => {
             <RevealedSection>
               <div className={`${styles.sectionContent} ${styles.gameCTASectionContent}`}>
                 <CTA
-                  heading="Get in the BPETS sale and win a sale-only NFT!"
+                  heading={
+                    <>
+                      Get in the <span className={globalStyles.promoText}>BPETS</span> sale and win a{' '}
+                      <span className={globalStyles.promoText}>sale-only</span> NFT!
+                    </>
+                  }
                   ctaText={
                     <>
                       Sign up below for the <strong>BPETS airdrop</strong> and <strong>public sale</strong> at
@@ -405,7 +419,7 @@ const Home = () => {
                   onEmailChange={handleEmailChange}
                   image={{
                     data: promoCard,
-                    alt: 'Fire Cat Battlepet Card',
+                    alt: 'Inferno Devil Cat Battlepet Card',
                     wrapperClassName: styles.promoCardImageWrapper,
                   }}
                   hasSignedUp={hasSignedUp}

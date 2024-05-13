@@ -3743,15 +3743,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/ramda@npm:^0.29.12":
-  version: 0.29.12
-  resolution: "@types/ramda@npm:0.29.12"
-  dependencies:
-    types-ramda: "npm:^0.29.10"
-  checksum: 10c0/38746faf9f5b633382c09fa19be146f37628b05964ac02b40cd458f8e3a62794e23efe48a20956ad83848a6cdb848229ee45452629cbf96659ee8536b2f01b9f
-  languageName: node
-  linkType: hard
-
 "@types/react-dom@npm:^18.2.25":
   version: 18.2.25
   resolution: "@types/react-dom@npm:18.2.25"
@@ -4837,7 +4828,6 @@ __metadata:
     "@types/html-minifier": "npm:^4.0.5"
     "@types/mjml": "npm:^4.7.4"
     "@types/node": "npm:^20.12.7"
-    "@types/ramda": "npm:^0.29.12"
     "@types/yargs": "npm:^17.0.32"
     battlepets-shared: "workspace:^"
     colors: "npm:^1.4.0"
@@ -4853,7 +4843,6 @@ __metadata:
     html-minifier: "npm:^4.0.0"
     mjml: "npm:^4.15.3"
     postmark: "npm:^4.0.2"
-    ramda: "npm:^0.29.1"
     telegram: "npm:^2.20.15"
     twitter-api-v2: "npm:^1.16.1"
     typescript: "npm:^5.4.5"
@@ -4889,6 +4878,7 @@ __metadata:
     eslint-config-next: "npm:14.2.2"
     modern-normalize: "npm:^2.0.0"
     next: "npm:14.2.2"
+    next-axiom: "npm:^1.1.1"
     react: "npm:^18.2.0"
     react-dom: "npm:^18.2.0"
     sass: "npm:^1.75.0"
@@ -11007,6 +10997,19 @@ __metadata:
   languageName: node
   linkType: hard
 
+"next-axiom@npm:^1.1.1":
+  version: 1.1.1
+  resolution: "next-axiom@npm:1.1.1"
+  dependencies:
+    remeda: "npm:^1.29.0"
+    whatwg-fetch: "npm:^3.6.2"
+  peerDependencies:
+    next: ">=13.4"
+    react: ">=18.0.0"
+  checksum: 10c0/5c3da6477f9761db55b65a76deff5974e08571f4ce84a9f3f252ba3b85632ecf68202e84c7aed89a2e988dd846d3ccd2f7557b657e895de7a9ed51748a38399e
+  languageName: node
+  linkType: hard
+
 "next-tick@npm:^1.1.0":
   version: 1.1.0
   resolution: "next-tick@npm:1.1.0"
@@ -12452,13 +12455,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"ramda@npm:^0.29.1":
-  version: 0.29.1
-  resolution: "ramda@npm:0.29.1"
-  checksum: 10c0/5de53a07400959c1a704c366ec52b1b8cd9a444dc1f9cdf17d607e0b9eeaa38cbaea309d43e59dbd7f36731ba977a64d40092555c0e7c2d4a41e8e922239c0ba
-  languageName: node
-  linkType: hard
-
 "randombytes@npm:^2.0.1":
   version: 2.1.0
   resolution: "randombytes@npm:2.1.0"
@@ -12732,6 +12728,13 @@ __metadata:
   version: 0.2.7
   resolution: "relateurl@npm:0.2.7"
   checksum: 10c0/c248b4e3b32474f116a804b537fa6343d731b80056fb506dffd91e737eef4cac6be47a65aae39b522b0db9d0b1011d1a12e288d82a109ecd94a5299d82f6573a
+  languageName: node
+  linkType: hard
+
+"remeda@npm:^1.29.0":
+  version: 1.61.0
+  resolution: "remeda@npm:1.61.0"
+  checksum: 10c0/dc9995e740adc93cddc31f814d9293f3fe327114fdab7fe9e4ac83d5607d63d05645662dec3280a6d9260105a848acfbc763c37ad8b0636f40805aab0cb4bf7e
   languageName: node
   linkType: hard
 
@@ -14287,13 +14290,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"ts-toolbelt@npm:^9.6.0":
-  version: 9.6.0
-  resolution: "ts-toolbelt@npm:9.6.0"
-  checksum: 10c0/838f9a2f0fe881d5065257a23b402c41315b33ff987b73db3e2b39fcb70640c4c7220e1ef118ed5676763543724fdbf4eda7b0e2c17acb667ed1401336af9f8c
-  languageName: node
-  linkType: hard
-
 "tsconfig-paths@npm:^3.15.0":
   version: 3.15.0
   resolution: "tsconfig-paths@npm:3.15.0"
@@ -14585,15 +14581,6 @@ __metadata:
   version: 0.0.6
   resolution: "typedarray@npm:0.0.6"
   checksum: 10c0/6005cb31df50eef8b1f3c780eb71a17925f3038a100d82f9406ac2ad1de5eb59f8e6decbdc145b3a1f8e5836e17b0c0002fb698b9fe2516b8f9f9ff602d36412
-  languageName: node
-  linkType: hard
-
-"types-ramda@npm:^0.29.10":
-  version: 0.29.10
-  resolution: "types-ramda@npm:0.29.10"
-  dependencies:
-    ts-toolbelt: "npm:^9.6.0"
-  checksum: 10c0/cc6439341a60a4f2b49e1ac447c8a0279f161464fd0a204abaa57e90e101772c0b1adc185a7c0715c3836c19594a9ec268c1e5c4394d0e409cb71d141def3963
   languageName: node
   linkType: hard
 
@@ -14935,6 +14922,13 @@ __metadata:
     utf-8-validate: "npm:^5.0.2"
     yaeti: "npm:^0.0.6"
   checksum: 10c0/a7e17d24edec685fdf055940ff9c6a15e726df5bb5e537382390bd1ab978fc8c0d71cd2842bb628e361d823aafd43934cc56aa5b979d08e52461be7da8d01eee
+  languageName: node
+  linkType: hard
+
+"whatwg-fetch@npm:^3.6.2":
+  version: 3.6.20
+  resolution: "whatwg-fetch@npm:3.6.20"
+  checksum: 10c0/fa972dd14091321d38f36a4d062298df58c2248393ef9e8b154493c347c62e2756e25be29c16277396046d6eaa4b11bd174f34e6403fff6aaca9fb30fa1ff46d
   languageName: node
   linkType: hard
 

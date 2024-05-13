@@ -55,9 +55,9 @@ const sendTokenAirdrop = async () => {
 
   const airdropAmount = (await connection.getTokenAccountBalance(senderTokenAccount.address)).value.uiAmount ?? 0
 
-  const totalWeight = pendingReceivers.reduce((acc, { weight }) => acc + Number(weight), 0)
+  const totalWeight = pendingReceivers.reduce((acc, { weight = 1 }) => acc + Number(weight), 0)
 
-  const pendingReceiversWithAmount = pendingReceivers.map(({ publicKey, weight }) => ({
+  const pendingReceiversWithAmount = pendingReceivers.map(({ publicKey, weight = 1 }) => ({
     publicKey,
     amount: (airdropAmount / totalWeight) * Number(weight),
   }))

@@ -4,7 +4,6 @@ import path from 'path'
 import * as token from '@solana/spl-token'
 import * as web3 from '@solana/web3.js'
 import { stringify as csvStringify } from 'csv-stringify'
-import { sort } from 'ramda'
 import yargs from 'yargs'
 import 'colors'
 
@@ -19,21 +18,18 @@ const getSnapshotFilePath = (id?: string) =>
   path.resolve(__dirname, `./scriptsData/output/${Date.now()}_holders${id ? `_${id}` : ''}.csv`)
 
 const argv = yargs(process.argv.slice(2)).options({
+  address: { type: 'string', demandOption: true },
   id: { type: 'string' },
   minAmount: { type: 'number' },
   maxAccountCount: { type: 'number' },
 })
 
 const takeTokenHoldersSnapshot = async () => {
-  const { id, maxAccountCount = Infinity, minAmount = 0 } = await argv.parse()
-
-  if (!process.env.TOKEN_ADDRESS) {
-    throw new Error('Must set token address!')
-  }
+  const { address, id, maxAccountCount = Infinity, minAmount = 0 } = await argv.parse()
 
   const connection = getConnection()
 
-  const tokenPublicKey = new web3.PublicKey(process.env.TOKEN_ADDRESS)
+  const tokenPublicKey = new web3.PublicKey(address)
 
   const tokenMint = await token.getMint(connection, tokenPublicKey)
 
@@ -51,9 +47,8 @@ const takeTokenHoldersSnapshot = async () => {
     ],
   })
 
-  const eligibleAccounts = sort(
-    (a, b) => b.amount - a.amount,
-    tokenAccounts
+  const eligibleAccounts = [
+    ...tokenAccounts
       .map(tokenAccount => {
         const tokenAccountData = token.AccountLayout.decode(tokenAccount.account.data)
 
@@ -62,8 +57,10 @@ const takeTokenHoldersSnapshot = async () => {
           amount: getTokenUIAmount(Number(tokenAccountData.amount)),
         }
       })
-      .filter(account => account.amount > 0 && account.amount >= minAmount)
-  ).slice(0, maxAccountCount)
+      .filter(account => account.amount > 0 && account.amount >= minAmount),
+  ]
+    .sort((a, b) => b.amount - a.amount)
+    .slice(0, maxAccountCount)
 
   const eligibleAccountsCsv = csvStringify(eligibleAccounts, {
     columns: ['address', 'amount'],

@@ -2,6 +2,7 @@ const withBundleAnalyzer = require('@next/bundle-analyzer')({
   enabled: process.env.ANALYZE === 'true',
 })
 const { withSentryConfig } = require('@sentry/nextjs')
+const { withAxiom } = require('next-axiom')
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
@@ -74,4 +75,4 @@ const sentryOptions = {
   automaticVercelMonitors: true,
 }
 
-module.exports = withSentryConfig(withBundleAnalyzer(nextConfig), sentryConfig, sentryOptions)
+module.exports = withAxiom(withSentryConfig(withBundleAnalyzer(nextConfig), sentryConfig, sentryOptions))

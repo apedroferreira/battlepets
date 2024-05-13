@@ -87,6 +87,18 @@
   @include animatedGradientBackgroundImage($duration);
 }
 
+@mixin animatedHighEnergyGradientTextBackground($angle: 135deg, $duration: 3s) {
+  background-image: linear-gradient(
+    $angle,
+    var(--high-energy-gradient-light) 20%,
+    var(--high-energy-text-gradient-dark) 40%,
+    var(--high-energy-text-gradient-dark) 60%,
+    var(--high-energy-gradient-light) 80%
+  );
+
+  @include animatedGradientBackgroundImage($duration);
+}
+
 @mixin gradientText {
   /* stylelint-disable-next-line property-no-vendor-prefix */
   -webkit-background-clip: text;
@@ -108,6 +120,13 @@
 
   @include gradientText;
   @include animatedIceGradientBackground(90deg);
+}
+
+@mixin highEnergyText {
+  color: var(--high-energy-gradient-light);
+
+  @include gradientText;
+  @include animatedHighEnergyGradientTextBackground(90deg);
 }
 
 @mixin promoText {

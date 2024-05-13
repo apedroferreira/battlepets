@@ -119,7 +119,13 @@ const sendNFTAirdrop = async () => {
     nftAirdropTransactions.map(async ({ receiverAddresses, transaction }) => {
       const transactionResult = await transaction.sendAndConfirm(umi)
 
-      return { result: transactionResult, receiverAddresses }
+      return {
+        result: transactionResult,
+        receivers: receiverAddresses.map(address => ({
+          address,
+          amount: 1,
+        })),
+      }
     })
   )
 

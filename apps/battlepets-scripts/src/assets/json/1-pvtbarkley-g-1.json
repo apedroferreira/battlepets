@@ -1,6 +1,6 @@
 {
-  "name": "Sgt. Barkley",
-  "description": "A seasoned soldier with unwavering loyalty.",
+  "name": "Private Barkley",
+  "description": "A loyal soldier, always ready to battle for what he believes in.",
   "attributes": [
     {
       "trait_type": "Rarity",
@@ -11,8 +11,8 @@
       "value": "Genesis"
     },
     {
-      "trait_type": "First Editions",
-      "value": "Yes"
+      "trait_type": "Edition",
+      "value": 1
     },
     {
       "trait_type": "Series",
@@ -35,8 +35,12 @@
       "value": "Attacks twice in each turn."
     },
     {
-      "trait_type": "Species",
+      "trait_type": "Category",
       "value": "Dog"
+    },
+    {
+      "trait_type": "Type",
+      "value": "Normal"
     },
     {
       "trait_type": "Pet Number",

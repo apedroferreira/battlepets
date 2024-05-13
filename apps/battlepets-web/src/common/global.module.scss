@@ -1,4 +1,5 @@
 @use './mixins' as mixins;
+@use './variables' as variables;
 @use './breakpoints' as breakpoints;
 @use './keyframes';
 
@@ -40,6 +41,10 @@
   @include mixins.iceText;
 }
 
+.highEnergyText {
+  @include mixins.highEnergyText;
+}
+
 .promoText {
   @include mixins.promoText;
 }
@@ -52,7 +57,6 @@
 
 .captionText {
   font-size: 1.2rem;
-  font-weight: 300;
   margin-bottom: 0.8rem;
   text-align: center;
   text-transform: uppercase;
@@ -71,6 +75,35 @@
 
   @include breakpoints.breakpoint(xxl) {
     font-size: 1.4rem;
+  }
+}
+
+.sectionText {
+  font-size: 1.6rem;
+  margin-bottom: 1.8rem;
+  margin-top: 1.4rem;
+  max-width: calc(#{variables.$max-content-width}em * 0.42);
+  text-align: center;
+
+  @include breakpoints.breakpoint(md) {
+    margin-bottom: 2.6rem;
+    margin-top: 2rem;
+  }
+
+  @include breakpoints.breakpoint(lg) {
+    font-size: 1.8rem;
+    margin-bottom: 2.8rem;
+    margin-top: 2.2rem;
+  }
+
+  @include breakpoints.breakpoint(xl) {
+    font-size: 2rem;
+    margin-bottom: 3.2rem;
+    margin-top: 2.4rem;
+  }
+
+  @include breakpoints.breakpoint(xxl) {
+    font-size: 2.2rem;
   }
 }
 

@@ -1,4 +1,5 @@
 import * as web3 from '@solana/web3.js'
+import { getRandomArrayElement } from 'battlepets-shared/utils/generalUtils'
 import yargs from 'yargs'
 import 'colors'
 
@@ -77,7 +78,7 @@ const getSOLPairTradingStats = async () => {
   )
 
   const timeframeMinBuys = timeframeBuys.filter(buy => buy.in_amount / web3.LAMPORTS_PER_SOL >= minBuyAmount)
-  const luckyBuy = timeframeMinBuys[Math.floor(Math.random() * timeframeMinBuys.length)]
+  const luckyBuy = getRandomArrayElement(timeframeMinBuys)
 
   if (timeframeBuys.length === 0) {
     console.log('No buys in the given timeframe!'.green)
@@ -85,10 +86,10 @@ const getSOLPairTradingStats = async () => {
 
   if (longestBuyStreak) {
     console.log(`Longest Buy Streak: ${longestBuyStreak.length}`.green)
-    for (let i = 0; i < longestBuyStreak.length; i++) {
-      const buy = longestBuyStreak[i]
+    for (let buyIndex = 0; buyIndex < longestBuyStreak.length; buyIndex++) {
+      const buy = longestBuyStreak[buyIndex]
       console.log(
-        `Streak Buy ${i + 1} (${buy.in_amount / web3.LAMPORTS_PER_SOL} SOL) (${defaultFormatDate(convertUnixToTimestamp(buy.onchain_timestamp))}): ${SOLSCAN_BASE_URL}/tx/${buy.tx_id}`
+        `Streak Buy ${buyIndex + 1} (${buy.in_amount / web3.LAMPORTS_PER_SOL} SOL) (${defaultFormatDate(convertUnixToTimestamp(buy.onchain_timestamp))}): ${SOLSCAN_BASE_URL}/tx/${buy.tx_id}`
           .green
       )
     }

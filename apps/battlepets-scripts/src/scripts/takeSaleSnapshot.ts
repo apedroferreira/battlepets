@@ -7,7 +7,6 @@ import * as web3 from '@solana/web3.js'
 import { getKeypairFromEnvironment } from '@solana-developers/helpers'
 import saleIdl from 'battlepets-shared/idls/battlepets_sale.json'
 import { stringify as csvStringify } from 'csv-stringify'
-import { sort } from 'ramda'
 import yargs from 'yargs'
 import 'colors'
 
@@ -54,15 +53,14 @@ const takeSaleSnapshot = async () => {
 
   const saleAllocations = await saleProgram.account.saleAllocationState.all()
 
-  const eligibleAccounts = sort(
-    (a, b) => b.amount - a.amount,
-    saleAllocations
+  const eligibleAccounts = [
+    ...saleAllocations
       .map(allocation => ({
         address: allocation.account.contributor.toString(),
         amount: Number(allocation.account.amount) / web3.LAMPORTS_PER_SOL,
       }))
-      .filter(account => account.amount >= minSOLAmount)
-  )
+      .filter(account => account.amount >= minSOLAmount),
+  ].sort((a, b) => b.amount - a.amount)
 
   const eligibleAccountsCsv = csvStringify(eligibleAccounts, {
     columns: ['address', 'amount'],
