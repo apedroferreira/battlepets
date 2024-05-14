@@ -43,7 +43,7 @@ export const NFT_SYMBOL = 'BPETS'
 export const NFT_SELLER_FEE_BASIS_POINTS = 5 // %
 
 export const MASTER_NFTS = {
-  '1-pvtbarkley-g-1': '9oBcE79id4trmWHLKF9pD2bVUTfRtKzpYGSoBGZsq1oD',
+  '1-pvtbarkley-gen-1': '9oBcE79id4trmWHLKF9pD2bVUTfRtKzpYGSoBGZsq1oD',
 }
 
 interface EmailData {

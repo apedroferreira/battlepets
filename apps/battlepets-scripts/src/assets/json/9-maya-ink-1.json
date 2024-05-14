@@ -1,0 +1,50 @@
+{
+  "name": "Maya",
+  "description": "In her tent in the dark deep sea, Maya performs ink rituals to cast terrible curses upon her opponents.",
+  "attributes": [
+    {
+      "trait_type": "Rarity",
+      "value": "Limited Edition"
+    },
+    {
+      "trait_type": "Variant",
+      "value": "Inkweaver"
+    },
+    {
+      "trait_type": "Edition",
+      "value": 1
+    },
+    {
+      "trait_type": "Series",
+      "value": "Series 1"
+    },
+    {
+      "trait_type": "Cost",
+      "value": 2
+    },
+    {
+      "trait_type": "Health",
+      "value": 4
+    },
+    {
+      "trait_type": "Attack",
+      "value": 2
+    },
+    {
+      "trait_type": "Ability",
+      "value": "Attack: applies Blind status."
+    },
+    {
+      "trait_type": "Category",
+      "value": "Squid"
+    },
+    {
+      "trait_type": "Type",
+      "value": "Water"
+    },
+    {
+      "trait_type": "Pet Number",
+      "value": 9
+    }
+  ]
+}

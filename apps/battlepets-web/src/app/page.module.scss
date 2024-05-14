@@ -1140,6 +1140,10 @@
 
   @include breakpoints.breakpoint(xxl) {
     max-width: 38rem;
+
+    img {
+      transform: scale(1.04);
+    }
   }
 }
 
@@ -1566,6 +1570,7 @@
     opacity: 0.55;
     transform: translateX(-50%);
     width: 120%;
+    z-index: -1;
 
     @include breakpoints.breakpoint(sm) {
       background-position: bottom -2rem center;

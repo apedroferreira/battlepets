@@ -118,6 +118,7 @@
 .scaleInOnReveal3,
 .scaleInOnReveal4 {
   opacity: 0;
+  will-change: opacity;
 }
 
 .slowScaleInOnReveal {

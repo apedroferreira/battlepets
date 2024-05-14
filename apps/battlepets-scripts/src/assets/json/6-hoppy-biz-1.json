@@ -1,0 +1,50 @@
+{
+  "name": "Hoppy",
+  "description": "After lots of job hopping, Hoppy got a job as a business analyst! To celebrate his first day, he brought his wife a blue 4-leaf clover he bought on the way home.",
+  "attributes": [
+    {
+      "trait_type": "Rarity",
+      "value": "Limited Edition"
+    },
+    {
+      "trait_type": "Variant",
+      "value": "Biz"
+    },
+    {
+      "trait_type": "Edition",
+      "value": 1
+    },
+    {
+      "trait_type": "Series",
+      "value": "Series 1"
+    },
+    {
+      "trait_type": "Cost",
+      "value": 1
+    },
+    {
+      "trait_type": "Health",
+      "value": 1
+    },
+    {
+      "trait_type": "Attack",
+      "value": 2
+    },
+    {
+      "trait_type": "Ability",
+      "value": "Preparation phase: can be moved to the same free slot in a different row."
+    },
+    {
+      "trait_type": "Category",
+      "value": "Frog"
+    },
+    {
+      "trait_type": "Type",
+      "value": "Normal"
+    },
+    {
+      "trait_type": "Pet Number",
+      "value": 6
+    }
+  ]
+}

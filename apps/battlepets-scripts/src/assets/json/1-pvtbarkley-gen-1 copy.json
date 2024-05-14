@@ -1,6 +1,6 @@
 {
   "name": "Private Barkley",
-  "description": "A loyal soldier, always ready to battle for what he believes in.",
+  "description": "A newly enlisted ambitious soldier, Private Barkley is ready to battle to prove himself!",
   "attributes": [
     {
       "trait_type": "Rarity",
@@ -32,7 +32,7 @@
     },
     {
       "trait_type": "Ability",
-      "value": "Attacks twice in each turn."
+      "value": "Attack: attacks again."
     },
     {
       "trait_type": "Category",

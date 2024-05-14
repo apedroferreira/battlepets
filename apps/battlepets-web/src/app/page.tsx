@@ -62,7 +62,7 @@ const ROADMAP_POINTS: { heading: string; items: React.ReactNode[] }[] = [
   {
     heading: 'Q2 2024',
     items: [
-      <strong>Airdrop</strong>,
+      <strong>BPETS airdrop</strong>,
       <strong>BPETS presale</strong>,
       <>
         <strong>BPETS</strong> token launch
@@ -414,7 +414,7 @@ const Home = () => {
                     <>
                       Sign up below for the <strong>BPETS airdrop</strong> and <strong>public sale</strong> at
                       pre&#8209;launch price, where you also get a{' '}
-                      <span className={globalStyles.promoText}>limited&#8209;edition</span> <strong>Hellcat</strong>!
+                      <span className={globalStyles.promoText}>limited edition</span> <strong>Hellcat</strong>!
                     </>
                   }
                   email={email}
