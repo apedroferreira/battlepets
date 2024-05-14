@@ -1,6 +1,6 @@
 {
   "name": "battlepets-scripts",
-  "version": "1.1.5",
+  "version": "1.1.6",
   "private": true,
   "scripts": {
     "run:script": "yarn g:ts-node -r tsconfig-paths/register --cwd ./src/scripts",
