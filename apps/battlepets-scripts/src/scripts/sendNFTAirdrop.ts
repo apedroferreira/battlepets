@@ -4,7 +4,6 @@ import {
   fetchMasterEditionFromSeeds,
   mplTokenMetadata,
   printV2,
-  transferV1,
   updateV1,
 } from '@metaplex-foundation/mpl-token-metadata'
 import { TransactionBuilder, createSignerFromKeypair, generateSigner, publicKey } from '@metaplex-foundation/umi'
@@ -20,7 +19,7 @@ import 'colors'
 import { initializeEnv } from 'initializeEnv'
 initializeEnv()
 
-import { CLUSTER, MASTER_NFTS } from '@/common/constants'
+import { CLUSTER, MASTER_NFTS, METAPLEX_FOUNDATION_RULE_SET_ADDRESS } from '@/common/constants'
 import { executeScript } from '@/utils/scriptUtils'
 import {
   getAirdropPendingReceivers,
@@ -28,7 +27,7 @@ import {
   updateSuccessfulAirdropReceivers,
 } from '@/utils/solanaUtils'
 
-const MAX_AIRDROPS_PER_TRANSACTION = 1
+const MAX_AIRDROPS_PER_TRANSACTION = 2
 
 const argv = yargs(process.argv.slice(2)).options({
   id: { type: 'string', choices: Object.keys(MASTER_NFTS), demandOption: true },
@@ -79,22 +78,15 @@ const sendNFTAirdrop = async () => {
       masterTokenAccountOwner: umiSigner,
       masterEditionMint: masterNFTPublicKey,
       editionMint,
-      editionTokenAccountOwner: umiSigner.publicKey,
+      editionTokenAccountOwner: fromWeb3JsPublicKey(pendingReceivers[copyIndex].publicKey),
       editionNumber: masterEditionSupply + copyIndex + 1,
-      tokenStandard: TokenStandard.ProgrammableNonFungible,
-    })
-
-    const transferNFTInstruction = transferV1(umi, {
-      mint: editionMint.publicKey,
-      authority: umiSigner,
-      tokenOwner: umiSigner.publicKey,
-      destinationOwner: fromWeb3JsPublicKey(pendingReceivers[copyIndex].publicKey),
       tokenStandard: TokenStandard.ProgrammableNonFungible,
     })
 
     const updateNFTPrimarySaleInstruction = updateV1(umi, {
       mint: editionMint.publicKey,
       primarySaleHappened: true,
+      authorizationRules: publicKey(METAPLEX_FOUNDATION_RULE_SET_ADDRESS),
     })
 
     const currentTransaction = nftAirdropTransactions[currentTransactionIndex] ?? {
@@ -102,11 +94,7 @@ const sendNFTAirdrop = async () => {
       receiverAddresses: [],
     }
     nftAirdropTransactions[currentTransactionIndex] = {
-      transaction: currentTransaction.transaction.add([
-        printNFTInstruction,
-        transferNFTInstruction,
-        updateNFTPrimarySaleInstruction,
-      ]),
+      transaction: currentTransaction.transaction.add([printNFTInstruction, updateNFTPrimarySaleInstruction]),
       receiverAddresses: [...currentTransaction.receiverAddresses, pendingReceivers[copyIndex].publicKey.toString()],
     }
 

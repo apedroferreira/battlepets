@@ -32,7 +32,8 @@ export const SOL_TOKEN_EXCHANGE_RATE = 12500
 export const METAPLEX_FOUNDATION_RULE_SET_ADDRESS = 'eBJLFYPxJmMGKuFwpDWkzxZeUrad92kZRC5BJLpzyT9'
 
 export const NFT_COLLECTION_NAME = 'Battlepets'
-export const NFT_COLLECTION_DESCRIPTION = 'Official NFT collection of Battlepets.'
+export const NFT_COLLECTION_DESCRIPTION =
+  'Official NFT collection of Battlepets. Collect pet NFTs, battle and win rewards in a deck-builder, auto-battler mobile game on Solana!'
 
 export const NFT_SERIES_NAMES = {
   [NFTSeries.SERIES_1]: 'Battlepets Series 1',
@@ -42,7 +43,7 @@ export const NFT_SYMBOL = 'BPETS'
 export const NFT_SELLER_FEE_BASIS_POINTS = 5 // %
 
 export const MASTER_NFTS = {
-  '1-pvtbarkley-g-1': '9BYugj3wSEhLLdiayavhFeLGF8KW5WQo8jagShKTGL1h',
+  '1-pvtbarkley-g-1': '9oBcE79id4trmWHLKF9pD2bVUTfRtKzpYGSoBGZsq1oD',
 }
 
 interface EmailData {
