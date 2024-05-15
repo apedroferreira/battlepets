@@ -1556,7 +1556,7 @@
   padding-top: 3rem;
   position: relative;
 
-  &::after {
+  &::before {
     @include mixins.fillSpace;
 
     background-image: url('../../public/images/promodecoration.png');
@@ -1570,7 +1570,6 @@
     opacity: 0.55;
     transform: translateX(-50%);
     width: 120%;
-    z-index: -1;
 
     @include breakpoints.breakpoint(sm) {
       background-position: bottom -2rem center;
