@@ -1556,7 +1556,7 @@
   padding-top: 3rem;
   position: relative;
 
-  &::before {
+  &::after {
     @include mixins.fillSpace;
 
     background-image: url('../../public/images/promodecoration.png');
