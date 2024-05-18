@@ -1634,12 +1634,16 @@
 }
 
 @keyframes promoCardImageDecorationAnimation {
-  from {
-    transform: rotate(0deg) scale(1.25);
+  0% {
+    transform: rotate(0deg) scale(1.225);
   }
 
-  to {
-    transform: rotate(360deg) scale(1.25);
+  50% {
+    transform: rotate(180deg) scale(1.275);
+  }
+
+  100% {
+    transform: rotate(360deg) scale(1.225);
   }
 }
 
@@ -1658,7 +1662,7 @@
     content: '';
     opacity: 0.75;
     transform: rotate(0deg) scale(1.25);
-    z-index: -1;
+    z-index: -2;
   }
 }
 

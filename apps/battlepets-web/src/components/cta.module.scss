@@ -36,6 +36,7 @@
   margin: -5.4rem 0 -1.8rem;
   position: relative;
   width: 39rem;
+  z-index: -1;
 
   @include breakpoints.breakpoint(sm) {
     height: 41rem;
