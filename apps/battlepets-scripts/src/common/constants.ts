@@ -52,8 +52,8 @@ interface EmailData {
 }
 
 export const EMAILS: Record<Email, EmailData> = {
-  template1: {
-    subject: 'A very nice email for you.',
-    tag: 'Template',
+  'og-airdrop': {
+    subject: 'Don’t miss the OG airdrop!',
+    tag: 'Pre-launch',
   },
 }
