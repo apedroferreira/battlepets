@@ -6,7 +6,13 @@ import {
   printV2,
   updateV1,
 } from '@metaplex-foundation/mpl-token-metadata'
-import { TransactionBuilder, createSignerFromKeypair, generateSigner, publicKey } from '@metaplex-foundation/umi'
+import {
+  TransactionBuilder,
+  TransactionSignature,
+  createSignerFromKeypair,
+  generateSigner,
+  publicKey,
+} from '@metaplex-foundation/umi'
 import { createUmi } from '@metaplex-foundation/umi-bundle-defaults'
 import { fromWeb3JsKeypair, fromWeb3JsPublicKey } from '@metaplex-foundation/umi-web3js-adapters'
 import { getKeypairFromEnvironment } from '@solana-developers/helpers'
@@ -103,19 +109,39 @@ const sendNFTAirdrop = async () => {
     }
   }
 
-  const transactionResults = await Promise.allSettled(
-    nftAirdropTransactions.map(async ({ receiverAddresses, transaction }) => {
+  let transactionResults: PromiseSettledResult<{
+    result: { signature: TransactionSignature }
+    receivers: { address: string; amount: number }[]
+  }>[] = []
+  try {
+    for (const nftAirdropTransaction of nftAirdropTransactions) {
+      const { receiverAddresses, transaction } = nftAirdropTransaction
+
       const transactionResult = await transaction.sendAndConfirm(umi)
 
-      return {
-        result: transactionResult,
-        receivers: receiverAddresses.map(address => ({
-          address,
-          amount: 1,
-        })),
-      }
-    })
-  )
+      transactionResults = [
+        ...transactionResults,
+        {
+          status: 'fulfilled',
+          value: {
+            result: transactionResult,
+            receivers: receiverAddresses.map(address => ({
+              address,
+              amount: 1,
+            })),
+          },
+        },
+      ]
+    }
+  } catch (error) {
+    transactionResults = [
+      ...transactionResults,
+      {
+        status: 'rejected',
+        reason: (error as Error).message,
+      },
+    ]
+  }
 
   const { failedTransactionReasons, successfulTransactions } = await updateSuccessfulAirdropReceivers(
     fileName,
