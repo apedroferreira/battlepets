@@ -32,7 +32,7 @@
     },
     {
       "trait_type": "Ability",
-      "value": "Hit: applies Blind status for 1 turn."
+      "value": "Hit: apply Blind status for 1 turn."
     },
     {
       "trait_type": "Category",

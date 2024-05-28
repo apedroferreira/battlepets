@@ -1,0 +1,50 @@
+{
+  "name": "Astro",
+  "description": "Astro has been sent on a very important mission to the moon! Is he gonna make it?",
+  "attributes": [
+    {
+      "trait_type": "Rarity",
+      "value": "Limited Edition"
+    },
+    {
+      "trait_type": "Variant",
+      "value": "To The Moon"
+    },
+    {
+      "trait_type": "Edition",
+      "value": 1
+    },
+    {
+      "trait_type": "Series",
+      "value": "Series 1"
+    },
+    {
+      "trait_type": "Cost",
+      "value": 3
+    },
+    {
+      "trait_type": "Health",
+      "value": 6
+    },
+    {
+      "trait_type": "Attack",
+      "value": 3
+    },
+    {
+      "trait_type": "Ability",
+      "value": "Placed: draw a card."
+    },
+    {
+      "trait_type": "Category",
+      "value": "Dog"
+    },
+    {
+      "trait_type": "Type",
+      "value": "Normal"
+    },
+    {
+      "trait_type": "Pet Number",
+      "value": 7
+    }
+  ]
+}
