@@ -1,3 +1,5 @@
+import Link from 'next/link'
+
 export const EMAIL_REGEX = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/
 
 // Node environment variables
@@ -23,6 +25,22 @@ export const GA_ID = process.env.NEXT_PUBLIC_GA_ID
 export const SENTRY_DSN = process.env.NEXT_PUBLIC_SENTRY_DSN
 export const SENTRY_ENVIRONMENT = IS_STAGING ? 'staging' : NODE_ENV
 
+// Links
+
+export const AIRDROP_X_LINK = 'https://twitter.com/battlepets_game/status/1796938563705012661'
+
 // Presentational
 
-export const BANNER_CONTENT = ''
+export const BANNER_CONTENT = (
+  <>
+    The{' '}
+    <Link href={AIRDROP_X_LINK} rel="noopener noreferrer nofollow">
+      BPETS Token Airdrop
+    </Link>{' '}
+    is ongoing! Find out how to sign up on our{' '}
+    <Link href={AIRDROP_X_LINK} rel="noopener noreferrer nofollow">
+      X/Twitter
+    </Link>
+    !
+  </>
+)

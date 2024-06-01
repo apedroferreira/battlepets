@@ -57,4 +57,8 @@ export const EMAILS: Record<Email, EmailData> = {
     subject: 'Don’t miss the OG airdrop!',
     tag: 'Pre-launch',
   },
+  airdrop: {
+    subject: 'It’s Airdrop Time!',
+    tag: 'Pre-launch',
+  },
 }

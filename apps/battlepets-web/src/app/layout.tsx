@@ -16,14 +16,14 @@ export const metadata: Metadata = {
   metadataBase: new URL(BASE_URL),
   title: 'Battlepets | Collectible card-battler game on Solana!',
   description:
-    'Collect pet NFTs, battle and win rewards in a deck-builder, auto-battler mobile game on the blockchain!',
+    'Collect pet NFTs, battle and win rewards in a deck-builder, auto-battler mobile game on the Solana blockchain!',
   alternates: {
     canonical: '/',
   },
   openGraph: {
     title: 'Battlepets',
     description:
-      'Collect pet NFTs, battle and win rewards in a deck-builder, auto-battler mobile game on the blockchain!',
+      'Collect pet NFTs, battle and win rewards in a deck-builder, auto-battler mobile game on the Solana blockchain!',
     url: BASE_URL,
     siteName: 'Battlepets',
   },

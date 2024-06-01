@@ -157,9 +157,9 @@ const Home = () => {
                 </h1>
                 <div className={styles.heroContent}>
                   <p className={styles.heroText}>
-                    Join the waitlist to get the <strong>BPETS</strong>{' '}
-                    <span className={globalStyles.iceText}>airdrop</span> and sign up for our{' '}
-                    <span className={globalStyles.fireText}>public sale</span> at pre-launch price!
+                    Join the waitlist to sign up for the <strong>BPETS</strong>{' '}
+                    <span className={globalStyles.fireText}>public sale</span> at{' '}
+                    <span className={globalStyles.iceText}>pre-launch</span> price!
                   </p>
                   <EmailForm
                     className={styles.heroSignUpForm}
@@ -412,9 +412,8 @@ const Home = () => {
                   }
                   ctaText={
                     <>
-                      Sign up below for the <strong>BPETS airdrop</strong> and <strong>public sale</strong> at
-                      pre&#8209;launch price, where you also get a{' '}
-                      <span className={globalStyles.promoText}>limited edition</span> <strong>Hellcat</strong>!
+                      Sign up below for the <strong>BPETS public sale</strong> at pre&#8209;launch price, where you also
+                      get a <span className={globalStyles.promoText}>limited edition</span> <strong>Hellcat</strong>!
                     </>
                   }
                   email={email}
@@ -504,8 +503,8 @@ const Home = () => {
                 heading="Want to stay in the loop?"
                 ctaText={
                   <>
-                    Join the waitlist to get the <strong>BPETS airdrop</strong> and sign up for our{' '}
-                    <strong>public sale</strong> at pre-launch price!
+                    Join the waitlist to sign up for the <strong>BPETS public sale</strong> at pre-launch price, and not
+                    miss any other updates!
                   </>
                 }
                 email={email}
