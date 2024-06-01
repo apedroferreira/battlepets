@@ -12,4 +12,6 @@ export const LITEPAPER_URL =
 export const TELEGRAM_URL = 'https://t.me/battlepets_game'
 export const X_URL = 'https://twitter.com/battlepets_game'
 
+export const AIRDROP_X_LINK = `${X_URL}/status/1796938563705012661`
+
 export const CONTACT_EMAIL = `team@${DOMAIN}`
