@@ -171,7 +171,7 @@ const Home = () => {
                     Join the waitlist to sign up for the <strong>BPETS</strong>{' '}
                     <span className={globalStyles.fireText}>public sale</span> at pre-launch price, on{' '}
                     <span className={globalStyles.iceText}>
-                      June 22 (
+                      June&nbsp;22 (
                       <LiveTime timestamp={TOKEN_SALE_TIMESTAMP} showSeconds={false} /> left)
                     </span>
                     !
