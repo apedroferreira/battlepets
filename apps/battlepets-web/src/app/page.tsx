@@ -3,7 +3,7 @@
 import { AIRDROP_X_LINK, CONTACT_EMAIL, LITEPAPER_URL, STATUS_URL } from 'battlepets-shared/constants'
 import Image from 'next/image'
 import Link from 'next/link'
-import { useCallback, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import { Lightbox } from 'yet-another-react-lightbox'
 import LightboxFullscreen from 'yet-another-react-lightbox/plugins/fullscreen'
 import LightboxZoom from 'yet-another-react-lightbox/plugins/zoom'
@@ -101,6 +101,8 @@ const Home = () => {
 
   const [isLightboxOpen, setIsLightboxOpen] = useState(false)
 
+  const [hasCountdowns, setHasCountdowns] = useState(false)
+
   const handleEmailChange = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
     setEmail(event.target.value)
   }, [])
@@ -111,6 +113,10 @@ const Home = () => {
 
   const handleToggleLightbox = useCallback(() => {
     setIsLightboxOpen(previousIsLightboxOpen => !previousIsLightboxOpen)
+  }, [])
+
+  useEffect(() => {
+    setHasCountdowns(true)
   }, [])
 
   return (
@@ -171,8 +177,16 @@ const Home = () => {
                     Join the waitlist to sign up for the <strong>BPETS</strong>{' '}
                     <span className={globalStyles.fireText}>public sale</span> at pre-launch price, on{' '}
                     <span className={globalStyles.iceText}>
-                      June&nbsp;22 (
-                      <LiveTime timestamp={TOKEN_SALE_TIMESTAMP} showSeconds={false} /> left)
+                      June&nbsp;22
+                      {hasCountdowns ? (
+                        <>
+                          {' '}
+                          (
+                          <LiveTime timestamp={TOKEN_SALE_TIMESTAMP} showSeconds={false} /> left)
+                        </>
+                      ) : (
+                        ''
+                      )}
                     </span>
                     !
                   </p>
