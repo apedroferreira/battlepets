@@ -1,6 +1,6 @@
 'use client'
 
-import { CONTACT_EMAIL, LITEPAPER_URL, STATUS_URL } from 'battlepets-shared/constants'
+import { AIRDROP_X_LINK, CONTACT_EMAIL, LITEPAPER_URL, STATUS_URL } from 'battlepets-shared/constants'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useCallback, useState } from 'react'
@@ -14,6 +14,7 @@ import { Banner } from '@/components/Banner'
 import { Button } from '@/components/Button'
 import { CTA } from '@/components/CTA'
 import { EmailForm } from '@/components/EmailForm'
+import { LiveTime } from '@/components/LiveTime'
 import { RevealedSection } from '@/components/RevealedSection'
 import { Socials } from '@/components/Socials'
 
@@ -62,8 +63,16 @@ const ROADMAP_POINTS: { heading: string; items: React.ReactNode[] }[] = [
   {
     heading: 'Q2 2024',
     items: [
-      <strong>BPETS airdrop</strong>,
-      <strong>BPETS presale</strong>,
+      <strong>
+        BPETS airdrop (
+        <Link href={AIRDROP_X_LINK} target="_blank" rel="noopener noreferrer nofollow">
+          ongoing
+        </Link>
+        )
+      </strong>,
+      <strong>
+        BPETS presale (<span className={globalStyles.fireText}>June 22</span>)
+      </strong>,
       <>
         <strong>BPETS</strong> token launch
       </>,
@@ -83,6 +92,8 @@ const ROADMAP_POINTS: { heading: string; items: React.ReactNode[] }[] = [
   },
 ]
 /* eslint-enable react/jsx-key */
+
+const TOKEN_SALE_TIMESTAMP = 1719075600000
 
 const Home = () => {
   const [email, setEmail] = useState('')
@@ -158,8 +169,12 @@ const Home = () => {
                 <div className={styles.heroContent}>
                   <p className={styles.heroText}>
                     Join the waitlist to sign up for the <strong>BPETS</strong>{' '}
-                    <span className={globalStyles.fireText}>public sale</span> at{' '}
-                    <span className={globalStyles.iceText}>pre-launch</span> price!
+                    <span className={globalStyles.fireText}>public sale</span> at pre-launch price, on{' '}
+                    <span className={globalStyles.iceText}>
+                      June 22 (
+                      <LiveTime timestamp={TOKEN_SALE_TIMESTAMP} showSeconds={false} /> left)
+                    </span>
+                    !
                   </p>
                   <EmailForm
                     className={styles.heroSignUpForm}
@@ -412,8 +427,9 @@ const Home = () => {
                   }
                   ctaText={
                     <>
-                      Sign up below for the <strong>BPETS public sale</strong> at pre&#8209;launch price, where you also
-                      get a <span className={globalStyles.promoText}>limited edition</span> <strong>Hellcat</strong>!
+                      Sign up below for the <strong>BPETS public sale</strong> at pre&#8209;launch price on{' '}
+                      <span className={globalStyles.promoText}>June 22</span>, where you also get a{' '}
+                      <span className={globalStyles.promoText}>limited edition</span> <strong>Hellcat</strong>!
                     </>
                   }
                   email={email}
@@ -503,8 +519,8 @@ const Home = () => {
                 heading="Want to stay in the loop?"
                 ctaText={
                   <>
-                    Join the waitlist to sign up for the <strong>BPETS public sale</strong> at pre-launch price, and not
-                    miss any other updates!
+                    Join the waitlist to sign up for the <strong>BPETS public sale</strong> at pre-launch price on{' '}
+                    <strong>June 22</strong>, and not to miss any other updates!
                   </>
                 }
                 email={email}

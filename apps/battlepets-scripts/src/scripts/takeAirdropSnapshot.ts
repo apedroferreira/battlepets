@@ -18,6 +18,8 @@ const getAirdropSnapshotFilePath = (id?: string) =>
 
 const getAddressReferral = (address: string) => address.slice(-4)
 
+const parseHandle = (handle: string) => (handle.startsWith('@') ? handle.slice(1) : handle)
+
 type AirdropEntries = {
   address: string
   twitter: string
@@ -25,28 +27,24 @@ type AirdropEntries = {
   referral: string
 }[]
 
-type TelegramGroupMembers = {
-  id: string
-  username?: string
+type OGs = {
+  address: string
 }[]
 
 const argv = yargs(process.argv.slice(2)).options({
   fileName: { type: 'string', demandOption: true },
-  telegramFileName: { type: 'string', demandOption: true },
   ogsFileName: { type: 'string', demandOption: true },
   id: { type: 'string' },
 })
 
 const takeAirdropSnapshot = async () => {
-  const { fileName, id, ogsFileName, telegramFileName } = await argv.parse()
+  const { fileName, id, ogsFileName } = await argv.parse()
 
   const airdropEntriesFilePath = path.resolve(__dirname, `../scripts/scriptsData/input/${fileName}.csv`)
-  const telegramGroupMembersFilePath = path.resolve(__dirname, `../scripts/scriptsData/input/${telegramFileName}.csv`)
   const ogsFilePath = path.resolve(__dirname, `../scripts/scriptsData/input/${ogsFileName}.csv`)
 
   const airdropEntries = (await csvToJson().fromFile(airdropEntriesFilePath)) as AirdropEntries
-  const telegramGroupMembers = (await csvToJson().fromFile(telegramGroupMembersFilePath)) as TelegramGroupMembers
-  const ogs = (await csvToJson().fromFile(ogsFilePath)) as { address: string }[]
+  const ogs = (await csvToJson().fromFile(ogsFilePath)) as OGs
 
   const validAirdropEntries = airdropEntries.filter(({ address, referral, telegram, twitter }, index, self) => {
     if (!address) {
@@ -61,13 +59,17 @@ const takeAirdropSnapshot = async () => {
 
     const addressReferral = getAddressReferral(address)
 
+    const parsedTelegram = parseHandle(telegram)
+    const parsedTwitter = parseHandle(twitter)
+
     return (
       addressReferral.toUpperCase() !== referral.toUpperCase() &&
-      telegramGroupMembers.some(({ username }) => username === telegram) &&
       index ===
         self.findIndex(
           airdropEntry =>
-            airdropEntry.address === address || airdropEntry.twitter === twitter || airdropEntry.telegram === telegram
+            airdropEntry.address === address ||
+            parseHandle(airdropEntry.twitter) === parsedTwitter ||
+            parseHandle(airdropEntry.telegram) === parsedTelegram
         )
     )
   })
@@ -88,7 +90,9 @@ const takeAirdropSnapshot = async () => {
         (isOG ? 15 : isValidReferral ? 11 : 10) +
           self.filter(
             airdropEntry =>
-              airdropEntry.referral && airdropEntry.referral.toUpperCase() === addressReferral.toUpperCase()
+              !ogs.some(({ address: ogsAddress }) => ogsAddress === airdropEntry.address) &&
+              airdropEntry.referral &&
+              airdropEntry.referral.toUpperCase() === addressReferral.toUpperCase()
           ).length *
             2,
         100

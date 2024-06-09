@@ -4928,6 +4928,7 @@ __metadata:
     "@vercel/analytics": "npm:^1.2.2"
     "@vercel/speed-insights": "npm:^1.0.10"
     battlepets-shared: "workspace:^"
+    dayjs: "npm:^1.11.11"
     eslint: "npm:^8.57.0"
     eslint-config-next: "npm:14.2.3"
     modern-normalize: "npm:^2.0.0"
