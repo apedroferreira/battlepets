@@ -19,11 +19,11 @@ import { getExplorerURLQueryString, uploadMetadata } from '@/utils/solanaUtils'
 const SELLER_FEE_BASIS_POINTS = 0
 
 const createNFTCollection = async () => {
-  if (!process.env.WALLET_SECRET_KEY) {
+  if (!process.env.NFT_WALLET_SECRET_KEY) {
     throw new Error('Must set secret key!')
   }
 
-  const ownerAccount = getKeypairFromEnvironment('WALLET_SECRET_KEY')
+  const ownerAccount = getKeypairFromEnvironment('NFT_WALLET_SECRET_KEY')
 
   const explorerURLQueryString = getExplorerURLQueryString()
 

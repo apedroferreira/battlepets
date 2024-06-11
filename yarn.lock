@@ -4871,6 +4871,7 @@ __metadata:
   dependencies:
     "@coral-xyz/anchor": "npm:^0.30.0"
     "@metaplex-foundation/mpl-token-metadata": "npm:^3.2.1"
+    "@metaplex-foundation/mpl-toolbox": "npm:^0.9.4"
     "@metaplex-foundation/umi": "npm:^0.9.1"
     "@metaplex-foundation/umi-bundle-defaults": "npm:^0.9.1"
     "@metaplex-foundation/umi-uploader-irys": "npm:^0.9.1"

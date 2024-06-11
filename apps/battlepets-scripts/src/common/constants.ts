@@ -45,6 +45,7 @@ export const NFT_SELLER_FEE_BASIS_POINTS = 5 // %
 export const MASTER_NFTS = {
   '6-hoppy-biz-1': '9LEB8M64QRDVe39biphpBMypDvhf8Ry4GxZVanWzrjGP',
   '7-astro-mon-1': '6D2pG8ft3kv8poEppVK9VcGxhe6Vy2tWoyjmJQ3gDR6X',
+  '10-glitch-sol-1': 'BSaa3eSFxtFrYVWsrKnNhp4u4zpHbargxZMNSnY9NUQW',
 }
 
 interface EmailData {
@@ -59,6 +60,10 @@ export const EMAILS: Record<Email, EmailData> = {
   },
   airdrop: {
     subject: 'It’s Airdrop Time!',
+    tag: 'Pre-launch',
+  },
+  'presale-date': {
+    subject: 'Presale Date Confirmed!',
     tag: 'Pre-launch',
   },
 }

@@ -1,0 +1,50 @@
+{
+  "name": "Glitch",
+  "description": "No, it’s not another scam NFT! Glitch just enjoys hacking his way into people’s Solana wallets sometimes… but he’s a white hat hacker!",
+  "attributes": [
+    {
+      "trait_type": "Rarity",
+      "value": "Special Edition"
+    },
+    {
+      "trait_type": "Variant",
+      "value": "Solana"
+    },
+    {
+      "trait_type": "Edition",
+      "value": 1
+    },
+    {
+      "trait_type": "Series",
+      "value": "Series 1"
+    },
+    {
+      "trait_type": "Cost",
+      "value": 2
+    },
+    {
+      "trait_type": "Health",
+      "value": 3
+    },
+    {
+      "trait_type": "Attack",
+      "value": 2
+    },
+    {
+      "trait_type": "Ability",
+      "value": "Placed: scrambles opposing row."
+    },
+    {
+      "trait_type": "Category",
+      "value": "Cat"
+    },
+    {
+      "trait_type": "Type",
+      "value": "Normal"
+    },
+    {
+      "trait_type": "Pet Number",
+      "value": 10
+    }
+  ]
+}

@@ -23,7 +23,7 @@ const argv = yargs(process.argv.slice(2)).options({
 const verifyMasterNFTCollection = async () => {
   const { id } = await argv.parse()
 
-  if (!process.env.WALLET_SECRET_KEY) {
+  if (!process.env.NFT_WALLET_SECRET_KEY) {
     throw new Error('Must set secret key!')
   }
 
@@ -31,7 +31,7 @@ const verifyMasterNFTCollection = async () => {
     throw new Error('Must set collection address!')
   }
 
-  const ownerAccount = getKeypairFromEnvironment('WALLET_SECRET_KEY')
+  const ownerAccount = getKeypairFromEnvironment('NFT_WALLET_SECRET_KEY')
 
   const collectionPublicKey = publicKey(process.env.COLLECTION_ADDRESS)
 

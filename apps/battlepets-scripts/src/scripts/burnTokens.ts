@@ -28,7 +28,7 @@ const argv = yargs(process.argv.slice(2))
 const burnTokens = async () => {
   const { amount } = await argv.parse()
 
-  if (!process.env.WALLET_SECRET_KEY) {
+  if (!process.env.TOKEN_WALLET_SECRET_KEY) {
     throw new Error('Must set secret key!')
   }
 
@@ -38,7 +38,7 @@ const burnTokens = async () => {
 
   const connection = getConnection()
 
-  const burnerAccount = getKeypairFromEnvironment('WALLET_SECRET_KEY')
+  const burnerAccount = getKeypairFromEnvironment('TOKEN_WALLET_SECRET_KEY')
 
   const tokenPublicKey = new web3.PublicKey(process.env.TOKEN_ADDRESS)
 

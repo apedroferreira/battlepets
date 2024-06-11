@@ -39,12 +39,13 @@ const argv = yargs(process.argv.slice(2)).options({
   id: { type: 'string', demandOption: true },
   series: { type: 'string', choices: Object.keys(NFT_SERIES_NAMES), demandOption: true },
   maxSupply: { type: 'number' },
+  metadataUri: { type: 'string' },
 })
 
 const createMasterNFT = async () => {
-  const { id, maxSupply = Infinity, series } = await argv.parse()
+  const { id, maxSupply = Infinity, metadataUri = null, series } = await argv.parse()
 
-  if (!process.env.WALLET_SECRET_KEY) {
+  if (!process.env.NFT_WALLET_SECRET_KEY) {
     throw new Error('Must set secret key!')
   }
 
@@ -67,7 +68,7 @@ const createMasterNFT = async () => {
     throw new Error('JSON file metadata must include "description" property!')
   }
 
-  const ownerAccount = getKeypairFromEnvironment('WALLET_SECRET_KEY')
+  const ownerAccount = getKeypairFromEnvironment('NFT_WALLET_SECRET_KEY')
 
   const collectionPublicKey = publicKey(process.env.COLLECTION_ADDRESS)
 
@@ -96,21 +97,23 @@ const createMasterNFT = async () => {
     },
   }
 
-  const metadataUri = await uploadMetadata(umi, id, jsonMetadata, true)
+  const nftMetadataUri = metadataUri ?? (await uploadMetadata(umi, id, jsonMetadata, true))
 
-  const { signature: createMasterNFTransactionSignature } = await createProgrammableNft(umi, {
+  const createNFTTransaction = createProgrammableNft(umi, {
     mint: masterNFTMint,
     authority: umiSigner,
     name: jsonMetadata.name,
     symbol: NFT_SYMBOL,
-    uri: metadataUri,
+    uri: nftMetadataUri,
     sellerFeeBasisPoints: percentAmount(NFT_SELLER_FEE_BASIS_POINTS),
     collection: some({ key: collectionPublicKey, verified: false }),
     uses: null,
     isMutable: true,
     printSupply: maxSupply === Infinity ? printSupply('Unlimited') : printSupply('Limited', [maxSupply]),
     ruleSet: publicKey(METAPLEX_FOUNDATION_RULE_SET_ADDRESS),
-  }).sendAndConfirm(umi)
+  })
+
+  const { signature: createMasterNFTransactionSignature } = await createNFTTransaction.sendAndConfirm(umi)
 
   console.log(
     `Create Master NFT Transaction: https://explorer.solana.com/tx/${bs58.encode(createMasterNFTransactionSignature)}${explorerURLQueryString}`

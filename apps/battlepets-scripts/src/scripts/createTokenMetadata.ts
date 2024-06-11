@@ -19,7 +19,7 @@ import { executeScript } from '@/utils/scriptUtils'
 import { getConnection, getExplorerURLQueryString, uploadMetadata } from '@/utils/solanaUtils'
 
 const createTokenMetadata = async () => {
-  if (!process.env.WALLET_SECRET_KEY) {
+  if (!process.env.TOKEN_WALLET_SECRET_KEY) {
     throw new Error('Must set secret key!')
   }
 
@@ -29,7 +29,7 @@ const createTokenMetadata = async () => {
 
   const connection = getConnection()
 
-  const ownerAccount = getKeypairFromEnvironment('WALLET_SECRET_KEY')
+  const ownerAccount = getKeypairFromEnvironment('TOKEN_WALLET_SECRET_KEY')
 
   const tokenPublicKey = new web3.PublicKey(process.env.TOKEN_ADDRESS)
 

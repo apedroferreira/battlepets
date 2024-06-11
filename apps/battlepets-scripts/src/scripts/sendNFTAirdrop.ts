@@ -30,6 +30,7 @@ import { executeScript } from '@/utils/scriptUtils'
 import {
   getAirdropPendingReceivers,
   getExplorerURLQueryString,
+  getPrioritizedTransaction,
   updateSuccessfulAirdropReceivers,
 } from '@/utils/solanaUtils'
 
@@ -43,11 +44,11 @@ const argv = yargs(process.argv.slice(2)).options({
 const sendNFTAirdrop = async () => {
   const { fileName, id } = await argv.parse()
 
-  if (!process.env.WALLET_SECRET_KEY) {
+  if (!process.env.NFT_WALLET_SECRET_KEY) {
     throw new Error('Must set secret key!')
   }
 
-  const ownerAccount = getKeypairFromEnvironment('WALLET_SECRET_KEY')
+  const ownerAccount = getKeypairFromEnvironment('NFT_WALLET_SECRET_KEY')
 
   const explorerURLQueryString = getExplorerURLQueryString()
 
@@ -117,7 +118,9 @@ const sendNFTAirdrop = async () => {
     for (const nftAirdropTransaction of nftAirdropTransactions) {
       const { receiverAddresses, transaction } = nftAirdropTransaction
 
-      const transactionResult = await transaction.sendAndConfirm(umi)
+      const prioritizedTransaction = getPrioritizedTransaction(umi, transaction)
+
+      const transactionResult = await prioritizedTransaction.sendAndConfirm(umi)
 
       transactionResults = [
         ...transactionResults,

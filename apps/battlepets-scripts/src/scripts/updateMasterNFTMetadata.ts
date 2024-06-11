@@ -30,7 +30,7 @@ const argv = yargs(process.argv.slice(2)).options({
 const updateMasterNFTMetadata = async () => {
   const { id, skipImageUpload = false, skipJsonUpload = false } = await argv.parse()
 
-  if (!process.env.WALLET_SECRET_KEY) {
+  if (!process.env.NFT_WALLET_SECRET_KEY) {
     throw new Error('Must set secret key!')
   }
 
@@ -53,7 +53,7 @@ const updateMasterNFTMetadata = async () => {
     throw new Error('JSON file metadata must include "description" property!')
   }
 
-  const ownerAccount = getKeypairFromEnvironment('WALLET_SECRET_KEY')
+  const ownerAccount = getKeypairFromEnvironment('NFT_WALLET_SECRET_KEY')
 
   const explorerURLQueryString = getExplorerURLQueryString()
 

@@ -1,6 +1,6 @@
 {
   "name": "battlepets-scripts",
-  "version": "1.1.16",
+  "version": "1.1.17",
   "private": true,
   "scripts": {
     "run:script": "yarn g:ts-node -r tsconfig-paths/register --cwd ./src/scripts",
@@ -13,6 +13,7 @@
   "dependencies": {
     "@coral-xyz/anchor": "^0.30.0",
     "@metaplex-foundation/mpl-token-metadata": "^3.2.1",
+    "@metaplex-foundation/mpl-toolbox": "^0.9.4",
     "@metaplex-foundation/umi": "^0.9.1",
     "@metaplex-foundation/umi-bundle-defaults": "^0.9.1",
     "@metaplex-foundation/umi-uploader-irys": "^0.9.1",

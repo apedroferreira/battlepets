@@ -14,4 +14,5 @@ export const enum NFTSeries {
 export const enum Email {
   OG_AIRDROP = 'og-airdrop',
   AIRDROP = 'airdrop',
+  PRESALE_DATE = 'presale-date',
 }

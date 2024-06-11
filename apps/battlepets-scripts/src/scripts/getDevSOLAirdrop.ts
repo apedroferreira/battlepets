@@ -24,13 +24,13 @@ const argv = yargs(process.argv.slice(2))
 const getDevSOLAirdrop = async () => {
   const { amount = 2 } = await argv.parse()
 
-  if (!process.env.WALLET_SECRET_KEY) {
+  if (!process.env.TOKEN_WALLET_SECRET_KEY) {
     throw new Error('Must set secret key!')
   }
 
   const connection = getConnection()
 
-  const receiverAccount = getKeypairFromEnvironment('WALLET_SECRET_KEY')
+  const receiverAccount = getKeypairFromEnvironment('TOKEN_WALLET_SECRET_KEY')
 
   const lamportsBalanceBefore = await connection.getBalance(receiverAccount.publicKey)
 

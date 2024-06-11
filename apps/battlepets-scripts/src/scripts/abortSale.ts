@@ -25,13 +25,13 @@ const argv = yargs(process.argv.slice(2)).options({
 const abortSale = async () => {
   const { fileName, maxReceiversPerTransaction = Infinity } = await argv.parse()
 
-  if (!process.env.WALLET_SECRET_KEY) {
+  if (!process.env.TOKEN_WALLET_SECRET_KEY) {
     throw new Error('Must set secret key!')
   }
 
   const connection = getConnection()
 
-  const fundRaiserAccount = getKeypairFromEnvironment('WALLET_SECRET_KEY')
+  const fundRaiserAccount = getKeypairFromEnvironment('TOKEN_WALLET_SECRET_KEY')
 
   const explorerURLQueryString = getExplorerURLQueryString()
 

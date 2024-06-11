@@ -15,13 +15,13 @@ import { getConnection, getExplorerURLQueryString } from '@/utils/solanaUtils'
 import type { BattlepetsSale } from 'battlepets-shared/types/battlepets_sale'
 
 const openSale = async () => {
-  if (!process.env.WALLET_SECRET_KEY) {
+  if (!process.env.TOKEN_WALLET_SECRET_KEY) {
     throw new Error('Must set secret key!')
   }
 
   const connection = getConnection()
 
-  const fundRaiserAccount = getKeypairFromEnvironment('WALLET_SECRET_KEY')
+  const fundRaiserAccount = getKeypairFromEnvironment('TOKEN_WALLET_SECRET_KEY')
 
   const provider = new anchor.AnchorProvider(connection, new NodeWallet(fundRaiserAccount))
   anchor.setProvider(provider)

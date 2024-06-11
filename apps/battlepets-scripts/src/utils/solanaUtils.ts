@@ -2,7 +2,8 @@ import fs from 'fs/promises'
 import path from 'path'
 
 import { JsonMetadata, Metadata, fetchJsonMetadata } from '@metaplex-foundation/mpl-token-metadata'
-import { Umi, createGenericFile, createGenericFileFromJson } from '@metaplex-foundation/umi'
+import { mplToolbox, setComputeUnitLimit, setComputeUnitPrice } from '@metaplex-foundation/mpl-toolbox'
+import { TransactionBuilder, Umi, createGenericFile, createGenericFileFromJson } from '@metaplex-foundation/umi'
 import { createIrysUploader } from '@metaplex-foundation/umi-uploader-irys'
 import * as token from '@solana/spl-token'
 import * as web3 from '@solana/web3.js'
@@ -17,7 +18,7 @@ import type { EnhancedOmit, RequiredFields } from 'battlepets-shared/utils/typeU
 
 export const getConnection = () =>
   new web3.Connection(getEndpoint(CLUSTER), {
-    commitment: 'confirmed',
+    commitment: 'finalized',
   })
 
 export const getExplorerURLQueryString = () => {
@@ -43,6 +44,18 @@ export const getExplorerURLQueryString = () => {
 export const getTokenAmount = (uiAmount: number) => Math.floor(uiAmount * 10 ** TOKEN_DECIMALS)
 
 export const getTokenUIAmount = (amount: number) => amount / 10 ** TOKEN_DECIMALS
+
+export const getPrioritizedTransaction = (umi: Umi, instruction: TransactionBuilder) => {
+  const PRIORITIZED_COMPUTE_UNIT_LIMIT = 600000
+  const PRIORITIZED_PRIORITY_FEE = 20220000 // micro-lamports
+
+  umi.use(mplToolbox())
+
+  const modifyComputeUnitsInstruction = setComputeUnitLimit(umi, { units: PRIORITIZED_COMPUTE_UNIT_LIMIT })
+  const addPriorityFeeInstruction = setComputeUnitPrice(umi, { microLamports: PRIORITIZED_PRIORITY_FEE })
+
+  return new TransactionBuilder().add([modifyComputeUnitsInstruction, addPriorityFeeInstruction, instruction])
+}
 
 export const multiSendSOL = async (
   connection: web3.Connection,

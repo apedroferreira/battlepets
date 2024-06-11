@@ -30,13 +30,13 @@ const argv = yargs(process.argv.slice(2)).options({
 const takeSaleSnapshot = async () => {
   const { id, minSOLAmount = 0 } = await argv.parse()
 
-  if (!process.env.WALLET_SECRET_KEY) {
+  if (!process.env.TOKEN_WALLET_SECRET_KEY) {
     throw new Error('Must set secret key!')
   }
 
   const connection = getConnection()
 
-  const saleAccount = getKeypairFromEnvironment('WALLET_SECRET_KEY')
+  const saleAccount = getKeypairFromEnvironment('TOKEN_WALLET_SECRET_KEY')
 
   const provider = new anchor.AnchorProvider(connection, new NodeWallet(saleAccount))
   anchor.setProvider(provider)

@@ -27,7 +27,7 @@ const argv = yargs(process.argv.slice(2)).options({
 const distributeSale = async () => {
   const { fileName, maxReceiversPerTransaction = Infinity } = await argv.parse()
 
-  if (!process.env.WALLET_SECRET_KEY) {
+  if (!process.env.TOKEN_WALLET_SECRET_KEY) {
     throw new Error('Must set secret key!')
   }
 
@@ -37,7 +37,7 @@ const distributeSale = async () => {
 
   const connection = getConnection()
 
-  const saleAccount = getKeypairFromEnvironment('WALLET_SECRET_KEY')
+  const saleAccount = getKeypairFromEnvironment('TOKEN_WALLET_SECRET_KEY')
 
   const tokenPublicKey = new web3.PublicKey(process.env.TOKEN_ADDRESS)
 
