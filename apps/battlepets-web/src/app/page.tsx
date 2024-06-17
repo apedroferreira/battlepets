@@ -50,11 +50,11 @@ const TOKEN_METRICS: { value: string; caption: React.ReactNode }[] = [
   },
   {
     value: '$0.006',
-    caption: 'Est. Presale price',
+    caption: 'Max. Est. Presale price',
   },
   {
     value: '$348K',
-    caption: 'Est. Presale market cap',
+    caption: 'Max. Est. Presale market cap',
   },
 ]
 
