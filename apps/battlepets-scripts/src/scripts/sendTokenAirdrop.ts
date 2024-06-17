@@ -19,13 +19,13 @@ import {
 } from '@/utils/solanaUtils'
 
 const argv = yargs(process.argv.slice(2)).options({
-  amount: { type: 'number', demandOption: true },
   fileName: { type: 'string', demandOption: true },
+  amount: { type: 'number' },
   maxReceiversPerTransaction: { type: 'number' },
 })
 
 const sendTokenAirdrop = async () => {
-  const { amount = 0, fileName, maxReceiversPerTransaction = Infinity } = await argv.parse()
+  const { amount = null, fileName, maxReceiversPerTransaction = Infinity } = await argv.parse()
 
   if (!process.env.AIRDROP_WALLET_SECRET_KEY) {
     throw new Error('Must set secret key!')
@@ -45,13 +45,23 @@ const sendTokenAirdrop = async () => {
 
   const tokenMint = await token.getMint(connection, tokenPublicKey)
 
+  const senderTokenAccount = await token.getOrCreateAssociatedTokenAccount(
+    connection,
+    senderAccount,
+    tokenMint.address,
+    senderAccount.publicKey
+  )
+
   const pendingReceivers = await getAirdropPendingReceivers(fileName, ['weight'])
+
+  const airdropAmount =
+    amount ?? (await connection.getTokenAccountBalance(senderTokenAccount.address)).value.uiAmount ?? 0
 
   const totalWeight = pendingReceivers.reduce((acc, { weight = 1 }) => acc + Number(weight), 0)
 
   const pendingReceiversWithAmount = pendingReceivers.map(({ publicKey, weight = 1 }) => ({
     publicKey,
-    amount: (amount / totalWeight) * Number(weight),
+    amount: (airdropAmount / totalWeight) * Number(weight),
   }))
 
   const transactionResults = await multiSendTokens(

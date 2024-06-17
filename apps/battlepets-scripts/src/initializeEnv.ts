@@ -1,6 +1,6 @@
 import { execSync } from 'child_process'
 
-import dotenv from 'dotenv'
+import dotenvFlow from 'dotenv-flow'
 
 const HAS_INITIALIZED_ENV_KEY = 'HAS_INITIALIZED_ENV'
 
@@ -31,7 +31,7 @@ const loadRemoteScriptEnv = () => {
 
 export const initializeEnv = () => {
   if (process.env[HAS_INITIALIZED_ENV_KEY] !== 'true') {
-    dotenv.config()
+    dotenvFlow.config()
     loadRemoteScriptEnv()
     process.env[HAS_INITIALIZED_ENV_KEY] = 'true'
   }

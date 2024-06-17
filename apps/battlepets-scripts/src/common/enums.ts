@@ -1,5 +1,4 @@
 export const enum TokenDistribution {
-  PRESALE = 'Presale',
   AIRDROP = 'Airdrop',
   LIQUIDITY = 'Liquidity',
   DEVELOPMENT_AND_MARKETING = 'Development & Marketing',
@@ -15,4 +14,5 @@ export const enum Email {
   OG_AIRDROP = 'og-airdrop',
   AIRDROP = 'airdrop',
   PRESALE_DATE = 'presale-date',
+  SQUID_GAME = 'squid-game',
 }

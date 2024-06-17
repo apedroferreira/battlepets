@@ -1,0 +1,157 @@
+<mjml>
+  <mj-head>
+    <mj-attributes>
+      <mj-text align="center" color="#202020" font-family="Sora, Helvetica Neue, Helvetica, sans-serif" />
+      <mj-section background-color="#fff" />
+      <mj-button
+        background-color="#7a00b8"
+        color="#fff"
+        font-family="bernhard-gothic-urw, Sora, Helvetica Neue, Helvetica, sans-serif"
+        font-size="20px"
+        font-weight="bold"
+        text-transform="uppercase"
+        inner-padding="20px 22px"
+        line-height="1.3"
+      />
+    </mj-attributes>
+    <mj-font name="bernhard-gothic-urw" href="https://use.typekit.net/bjy5uxp.css" />
+    <mj-font name="Sora" href="https://fonts.googleapis.com/css2?family=Sora:wght@400;700&display=swap" />
+    <mj-preview
+      >Don't miss out on the Battlepets Squid Game Competition! Only one winner can take the prize of $500 USD in BPETS
+      at launch price, airdropped right after the token launch! The top 10 participants will also get a limited edition
+      Inkweaver Maya NFT card!</mj-preview
+    >
+    <mj-style>@media screen and (max-width: 480px) { .heading-text div { font-size: 28px !important; } } </mj-style>
+    <mj-title>🦑 Battlepets Squid Game!</mj-title>
+  </mj-head>
+
+  <mj-body background-color="#f8eeff">
+    <mj-section background-color="#4e0075" padding-bottom="0">
+      <mj-column>
+        <mj-image
+          href="https://www.battlepets.io"
+          width="80px"
+          src="https://imagedelivery.net/tQX6spJrZdgf00cBsxL4kQ/3e1bb9cc-3078-4c49-42e4-577b8996d000/public"
+          alt="Battlepets logo"
+          padding-top="0"
+        />
+        <mj-text
+          css-class="heading-text"
+          align="center"
+          color="#fff"
+          font-family="bernhard-gothic-urw, Sora, Helvetica Neue, Helvetica, sans-serif"
+          font-size="36px"
+          font-weight="bold"
+          line-height="1.3"
+          >Battlepets <span style="color: #d000ff">Squid</span> Game!</mj-text
+        >
+        <mj-image
+          width="600px"
+          src="https://imagedelivery.net/tQX6spJrZdgf00cBsxL4kQ/f2757a33-3df9-4fea-dc63-7449abd9b800/public"
+          alt="Battlepets cards"
+          padding="0"
+        />
+      </mj-column>
+    </mj-section>
+    <mj-section>
+      <mj-column padding-left="6.5%" padding-right="6.5%" padding-bottom="30px">
+        <mj-text font-size="16px" line-height="1.5" align="left">
+          <p>Don't miss out on the <strong>Battlepets Squid Game Competition</strong>! 🦑</p>
+          <p>
+            Only <strong>one winner</strong> can take the prize of <strong>$500 USD in BPETS at launch price</strong>,
+            airdropped right after the token launch! The <strong>top 10 participants</strong> will also get a limited
+            edition <strong><span style="color: #610a8c">Inkweaver</span> Maya</strong> NFT card!
+          </p>
+          <p>
+            The competition will be played mostly in our
+            <a href="https://t.me/battlepets_game" style="color: #7a00b8; font-weight: bold; text-decoration: underline"
+              >Telegram group</a
+            >. Join if you want to participate!
+          </p>
+          <p>
+            It’s going to have <strong>5 elimination rounds</strong>, 1 round per day, so it’s going to run almost until
+            the <strong>BPETS presale</strong> in <strong>June 22</strong>.
+          </p>
+          <p>
+            If you think you have what it takes fill in the
+            <a
+              href="https://forms.gle/uDia5Vq27aF78E9k8"
+              style="color: #7a00b8; font-weight: bold; text-decoration: underline"
+              >participation form</a
+            >!
+          </p>
+          <p>You have <strong>less than 24 hours</strong> until the competition starts!</p></mj-text
+        >
+        <mj-image
+          width="280px"
+          src="https://imagedelivery.net/tQX6spJrZdgf00cBsxL4kQ/be0ecc4f-e1a1-4681-4d48-d99bc4d8f500/public"
+          alt="Inkweaver Maya card"
+          padding="0"
+        />
+        <mj-text font-size="16px" line-height="1.5" align="left">
+          <p>May the best squid win!</p>
+        </mj-text>
+        <mj-button href="https://forms.gle/uDia5Vq27aF78E9k8">Join the Squid Game</mj-button>
+      </mj-column>
+    </mj-section>
+    <mj-section background-color="#f8eeff" padding-bottom="4px">
+      <mj-group>
+        <mj-column>
+          <mj-image
+            href="https://t.me/battlepets_game"
+            alt="Telegram logo"
+            align="right"
+            height="44px"
+            width="44px"
+            padding-left="6px"
+            padding-right="6px"
+            src="https://imagedelivery.net/tQX6spJrZdgf00cBsxL4kQ/c5e8f177-28e1-4f92-3380-36f34a961d00/public"
+          />
+        </mj-column>
+        <mj-column>
+          <mj-image
+            href="https://twitter.com/battlepets_game"
+            alt="X logo"
+            align="left"
+            padding-left="6px"
+            padding-right="6px"
+            height="44px"
+            width="44px"
+            src="https://imagedelivery.net/tQX6spJrZdgf00cBsxL4kQ/aef63962-4b4b-47b0-b518-1110a8ebdd00/public"
+          />
+        </mj-column>
+      </mj-group>
+    </mj-section>
+    <mj-section
+      background-color="#f8eeff"
+      padding-top="0"
+      padding-left="10px"
+      padding-right="10px"
+      padding-bottom="40px"
+    >
+      <mj-column>
+        <mj-text color="#883fbc" font-size="12px" padding="2px" line-height="1.5"
+          >Sent by
+          <a href="https://www.battlepets.io" style="color: #d000ff; text-decoration: underline">Battlepets</a
+          >.</mj-text
+        >
+        <mj-text color="#883fbc" font-size="12px" padding="2px" line-height="1.5"
+          >© 2024 Battlepets. All rights reserved. |
+          <a
+            href="{{{ pm:unsubscribe }}}"
+            style="
+              color: #d000ff;
+              font-family:
+                Sora,
+                Helvetica Neue,
+                Helvetica,
+                sans-serif;
+              text-decoration: underline;
+            "
+            >Unsubscribe</a
+          >
+        </mj-text>
+      </mj-column>
+    </mj-section>
+  </mj-body>
+</mjml>

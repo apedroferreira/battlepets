@@ -12,19 +12,33 @@ export const TOKEN_SYMBOL = 'BPETS'
 export const TOKEN_DESCRIPTION =
   'Official token of the Battlepets game. Collect pet NFTs, battle and win rewards in a deck-builder, auto-battler mobile game on Solana!'
 
+const PRESALE_TOKEN_ALLOCATION = 0.35
+const NON_PRESALE_TOKEN_ALLOCATION = 1 - PRESALE_TOKEN_ALLOCATION
+
 export const INITIAL_TOKEN_DISTRIBUTION: Record<
   TokenDistribution,
   { allocation: number; walletAddress: string | undefined }
 > = {
-  [TokenDistribution.PRESALE]: { allocation: 0.35, walletAddress: process.env.PRESALE_WALLET_ADDRESS },
-  [TokenDistribution.AIRDROP]: { allocation: 0.05, walletAddress: process.env.AIRDROP_WALLET_ADDRESS },
-  [TokenDistribution.LIQUIDITY]: { allocation: 0.168, walletAddress: process.env.LIQUIDITY_WALLET_ADDRESS },
+  [TokenDistribution.AIRDROP]: {
+    allocation: 0.05 / NON_PRESALE_TOKEN_ALLOCATION,
+    walletAddress: process.env.AIRDROP_WALLET_ADDRESS,
+  },
+  [TokenDistribution.LIQUIDITY]: {
+    allocation: 0.168 / NON_PRESALE_TOKEN_ALLOCATION,
+    walletAddress: process.env.LIQUIDITY_WALLET_ADDRESS,
+  },
   [TokenDistribution.DEVELOPMENT_AND_MARKETING]: {
-    allocation: 0.182,
+    allocation: 0.182 / NON_PRESALE_TOKEN_ALLOCATION,
     walletAddress: process.env.DEVELOPMENT_AND_MARKETING_WALLET_ADDRESS,
   },
-  [TokenDistribution.TEAM]: { allocation: 0.15, walletAddress: process.env.TEAM_WALLET_ADDRESS },
-  [TokenDistribution.RESERVE]: { allocation: 0.1, walletAddress: process.env.RESERVE_WALLET_ADDRESS },
+  [TokenDistribution.TEAM]: {
+    allocation: 0.15 / NON_PRESALE_TOKEN_ALLOCATION,
+    walletAddress: process.env.TEAM_WALLET_ADDRESS,
+  },
+  [TokenDistribution.RESERVE]: {
+    allocation: 0.1 / NON_PRESALE_TOKEN_ALLOCATION,
+    walletAddress: process.env.RESERVE_WALLET_ADDRESS,
+  },
 }
 
 export const SOL_TOKEN_EXCHANGE_RATE = 12500
@@ -64,6 +78,10 @@ export const EMAILS: Record<Email, EmailData> = {
   },
   'presale-date': {
     subject: 'Presale Date Confirmed!',
+    tag: 'Pre-launch',
+  },
+  'squid-game': {
+    subject: '🦑 Battlepets Squid Game!',
     tag: 'Pre-launch',
   },
 }
