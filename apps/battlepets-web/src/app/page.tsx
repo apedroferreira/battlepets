@@ -1,6 +1,6 @@
 'use client'
 
-import { AIRDROP_X_LINK, CONTACT_EMAIL, LITEPAPER_URL, STATUS_URL } from 'battlepets-shared/constants'
+import { CONTACT_EMAIL, LITEPAPER_URL, STATUS_URL } from 'battlepets-shared/constants'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useCallback, useEffect, useState } from 'react'
@@ -50,11 +50,11 @@ const TOKEN_METRICS: { value: string; caption: React.ReactNode }[] = [
   },
   {
     value: '$0.006',
-    caption: 'Max. Est. Presale price',
+    caption: 'Max Est. Presale price',
   },
   {
     value: '$348K',
-    caption: 'Max. Est. Presale market cap',
+    caption: 'Max Est. Presale market cap',
   },
 ]
 
@@ -63,13 +63,7 @@ const ROADMAP_POINTS: { heading: string; items: React.ReactNode[] }[] = [
   {
     heading: 'Q2 2024',
     items: [
-      <strong>
-        BPETS airdrop (
-        <Link href={AIRDROP_X_LINK} target="_blank" rel="noopener noreferrer nofollow">
-          ongoing
-        </Link>
-        )
-      </strong>,
+      <strong>BPETS airdrop</strong>,
       <strong>
         BPETS presale (<span className={globalStyles.fireText}>June 22</span>)
       </strong>,

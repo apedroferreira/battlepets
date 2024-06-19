@@ -1,6 +1,3 @@
-import { AIRDROP_X_LINK } from 'battlepets-shared/constants'
-import Link from 'next/link'
-
 export const EMAIL_REGEX = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/
 
 // Node environment variables
@@ -28,16 +25,4 @@ export const SENTRY_ENVIRONMENT = IS_STAGING ? 'staging' : NODE_ENV
 
 // Presentational
 
-export const BANNER_CONTENT = (
-  <>
-    The{' '}
-    <Link href={AIRDROP_X_LINK} rel="noopener noreferrer nofollow">
-      BPETS Token Airdrop
-    </Link>{' '}
-    is ongoing! Find out how to sign up on our{' '}
-    <Link href={AIRDROP_X_LINK} rel="noopener noreferrer nofollow">
-      X/Twitter
-    </Link>
-    !
-  </>
-)
+export const BANNER_CONTENT = ''
