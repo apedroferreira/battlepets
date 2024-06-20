@@ -39,7 +39,6 @@ export const CTA: React.FC<CTAProps> = ({ buttonText, buttonVariant, ctaText, he
     <Link
       className={`${styles.ctaSignUpForm} ${globalStyles.slideInVerticalOnReveal3}`}
       href={PRESALE_URL}
-      target="_blank"
       rel="noopener noreferrer nofollow"
     >
       <Button asDiv variant={buttonVariant}>

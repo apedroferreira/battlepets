@@ -183,12 +183,7 @@ const Home = () => {
                     </span>
                     !
                   </p>
-                  <Link
-                    className={styles.heroSignUpForm}
-                    href={PRESALE_URL}
-                    target="_blank"
-                    rel="noopener noreferrer nofollow"
-                  >
+                  <Link className={styles.heroSignUpForm} href={PRESALE_URL} rel="noopener noreferrer nofollow">
                     <Button asDiv>Join The Presale</Button>
                   </Link>
                 </div>
