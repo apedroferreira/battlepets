@@ -1,3 +1,6 @@
+import { PRESALE_URL } from 'battlepets-shared/constants'
+import Link from 'next/link'
+
 export const EMAIL_REGEX = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/
 
 // Node environment variables
@@ -25,4 +28,16 @@ export const SENTRY_ENVIRONMENT = IS_STAGING ? 'staging' : NODE_ENV
 
 // Presentational
 
-export const BANNER_CONTENT = ''
+export const BANNER_CONTENT = (
+  <>
+    Don’t miss the{' '}
+    <Link href={PRESALE_URL} rel="noopener noreferrer nofollow">
+      BPETS Token Presale
+    </Link>{' '}
+    on{' '}
+    <Link href={PRESALE_URL} rel="noopener noreferrer nofollow">
+      PinkSale
+    </Link>
+    , starting on <strong>Saturday, June 22, 5 PM UTC</strong>!
+  </>
+)

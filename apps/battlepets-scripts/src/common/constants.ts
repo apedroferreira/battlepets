@@ -84,4 +84,12 @@ export const EMAILS: Record<Email, EmailData> = {
     subject: '🦑 Battlepets Squid Game!',
     tag: 'Pre-launch',
   },
+  'presale-reminder-1': {
+    subject: 'The BPETS Presale Is Close!',
+    tag: 'Pre-launch',
+  },
+  'presale-reminder-2': {
+    subject: 'BPETS Presale Tomorrow!',
+    tag: 'Pre-launch',
+  },
 }

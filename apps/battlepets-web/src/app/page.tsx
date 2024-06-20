@@ -1,6 +1,6 @@
 'use client'
 
-import { CONTACT_EMAIL, LITEPAPER_URL, STATUS_URL } from 'battlepets-shared/constants'
+import { CONTACT_EMAIL, LITEPAPER_URL, PRESALE_URL, STATUS_URL } from 'battlepets-shared/constants'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useCallback, useEffect, useState } from 'react'
@@ -13,7 +13,6 @@ import globalStyles from '@/common/global.module.scss'
 import { Banner } from '@/components/Banner'
 import { Button } from '@/components/Button'
 import { CTA } from '@/components/CTA'
-import { EmailForm } from '@/components/EmailForm'
 import { LiveTime } from '@/components/LiveTime'
 import { RevealedSection } from '@/components/RevealedSection'
 import { Socials } from '@/components/Socials'
@@ -168,8 +167,8 @@ const Home = () => {
                 </h1>
                 <div className={styles.heroContent}>
                   <p className={styles.heroText}>
-                    Join the waitlist to sign up for the <strong>BPETS</strong>{' '}
-                    <span className={globalStyles.fireText}>public sale</span> at pre-launch price, on{' '}
+                    Join the <strong>BPETS</strong> <span className={globalStyles.fireText}>presale</span> to get the
+                    token at pre-launch price on{' '}
                     <span className={globalStyles.iceText}>
                       June&nbsp;22
                       {hasCountdowns ? (
@@ -184,15 +183,14 @@ const Home = () => {
                     </span>
                     !
                   </p>
-                  <EmailForm
+                  <Link
                     className={styles.heroSignUpForm}
-                    email={email}
-                    onEmailChange={handleEmailChange}
-                    hasSignedUp={hasSignedUp}
-                    onSuccess={handleSignUpSuccess}
-                    buttonVariant="fire"
-                    buttonText="I’m in!"
-                  />
+                    href={PRESALE_URL}
+                    target="_blank"
+                    rel="noopener noreferrer nofollow"
+                  >
+                    <Button asDiv>Join The Presale</Button>
+                  </Link>
                 </div>
                 <div className={styles.heroCaptions}>
                   <div className={globalStyles.captionWrapper}>
@@ -435,9 +433,10 @@ const Home = () => {
                   }
                   ctaText={
                     <>
-                      Sign up below for the <strong>BPETS public sale</strong> at pre&#8209;launch price on{' '}
-                      <span className={globalStyles.promoText}>June 22</span>, where you also get a{' '}
-                      <span className={globalStyles.promoText}>limited edition</span> <strong>Hellcat</strong>!
+                      Join the <strong>BPETS presale</strong> on{' '}
+                      <span className={globalStyles.promoText}>June 22, 5PM UTC</span> and get a{' '}
+                      <span className={globalStyles.promoText}>limited edition</span> <strong>Hellcat</strong> just for
+                      sale participants!
                     </>
                   }
                   email={email}
@@ -451,7 +450,7 @@ const Home = () => {
                   onSuccess={handleSignUpSuccess}
                   inputVariant="promo"
                   buttonVariant="promo"
-                  buttonText="Let me in!"
+                  buttonText="Join The Presale"
                 />
               </div>
             </RevealedSection>
@@ -523,21 +522,6 @@ const Home = () => {
                   <Button asDiv>Read Litepaper</Button>
                 </Link>
               </div>
-              <CTA
-                heading="Want to stay in the loop?"
-                ctaText={
-                  <>
-                    Join the waitlist to sign up for the <strong>BPETS public sale</strong> at pre-launch price on{' '}
-                    <strong>June 22</strong>, and not to miss any other updates!
-                  </>
-                }
-                email={email}
-                onEmailChange={handleEmailChange}
-                hasSignedUp={hasSignedUp}
-                onSuccess={handleSignUpSuccess}
-                buttonText="Let me know!"
-                buttonVariant="fire"
-              />
             </div>
           </RevealedSection>
         </main>

@@ -12,4 +12,6 @@ export const LITEPAPER_URL =
 export const TELEGRAM_URL = 'https://t.me/battlepets_game'
 export const X_URL = 'https://twitter.com/battlepets_game'
 
+export const PRESALE_URL = 'https://www.pinksale.finance/solana/launchpad/7JKzneYgmVCTcokGhMNmehE5jua92YZkgiEMZZzDxTs1'
+
 export const CONTACT_EMAIL = `team@${DOMAIN}`

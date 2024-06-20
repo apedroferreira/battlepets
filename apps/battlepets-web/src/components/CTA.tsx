@@ -1,9 +1,12 @@
+import { PRESALE_URL } from 'battlepets-shared/constants'
 import Image, { StaticImageData } from 'next/image'
+import Link from 'next/link'
 
 import globalStyles from '@/common/global.module.scss'
 
+import { Button } from './Button'
 import styles from './cta.module.scss'
-import { EmailForm, EmailFormProps } from './EmailForm'
+import { EmailFormProps } from './EmailForm'
 import { Socials } from './Socials'
 
 interface CTAProps extends EmailFormProps {
@@ -16,18 +19,7 @@ interface CTAProps extends EmailFormProps {
   }
 }
 
-export const CTA: React.FC<CTAProps> = ({
-  buttonText,
-  buttonVariant,
-  ctaText,
-  email,
-  hasSignedUp,
-  heading,
-  image,
-  inputVariant,
-  onEmailChange,
-  onSuccess,
-}) => (
+export const CTA: React.FC<CTAProps> = ({ buttonText, buttonVariant, ctaText, heading, image }) => (
   <>
     <h4 className={globalStyles.slideInVerticalOnReveal1}>{heading}</h4>
     <p className={`${globalStyles.sectionText} ${globalStyles.slideInVerticalOnReveal2}`}>{ctaText}</p>
@@ -44,16 +36,16 @@ export const CTA: React.FC<CTAProps> = ({
         </div>
       </div>
     )}
-    <EmailForm
+    <Link
       className={`${styles.ctaSignUpForm} ${globalStyles.slideInVerticalOnReveal3}`}
-      email={email}
-      onEmailChange={onEmailChange}
-      hasSignedUp={hasSignedUp}
-      onSuccess={onSuccess}
-      inputVariant={inputVariant}
-      buttonVariant={buttonVariant}
-      buttonText={buttonText}
-    />
+      href={PRESALE_URL}
+      target="_blank"
+      rel="noopener noreferrer nofollow"
+    >
+      <Button asDiv variant={buttonVariant}>
+        {buttonText}
+      </Button>
+    </Link>
     <Socials className={globalStyles.slideInVerticalOnReveal3} />
   </>
 )
