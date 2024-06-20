@@ -430,7 +430,7 @@ const Home = () => {
                   ctaText={
                     <>
                       Join the <strong>BPETS presale</strong> on{' '}
-                      <span className={globalStyles.promoText}>June 22, 5PM UTC</span> and get a{' '}
+                      <span className={globalStyles.promoText}>June 22, 17:00 UTC</span> and get a{' '}
                       <span className={globalStyles.promoText}>limited edition</span> <strong>Hellcat</strong> just for
                       sale participants!
                     </>

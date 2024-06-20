@@ -17,7 +17,7 @@
     <mj-font name="bernhard-gothic-urw" href="https://use.typekit.net/bjy5uxp.css" />
     <mj-font name="Sora" href="https://fonts.googleapis.com/css2?family=Sora:wght@400;700&display=swap" />
     <mj-preview
-      >Hey, just a quick reminder that the BPETS Token Presale starts tomorrow on Saturday, June 22 2024, 5PM UTC! You
+      >Hey, just a quick reminder that the BPETS Token Presale starts tomorrow on Saturday, June 22 2024, 17:00 UTC! You
       can be one of the first people to buy BPETS on PinkSale at a price of 1 SOL = 25K BPETS!</mj-preview
     >
     <mj-style>@media screen and (max-width: 480px) { .heading-text div { font-size: 28px !important; } } </mj-style>
@@ -57,7 +57,7 @@
         <mj-text font-size="16px" line-height="1.5" align="left">
           <p>
             Hey, just a quick reminder that the <strong>BPETS Token Presale</strong> starts tomorrow on
-            <strong><span style="color: #c324dd">Saturday, June 22 2024, 5PM UTC</span></strong
+            <strong><span style="color: #c324dd">Saturday, June 22 2024, 17:00 UTC</span></strong
             >!
           </p>
           <p>

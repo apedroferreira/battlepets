@@ -38,6 +38,6 @@ export const BANNER_CONTENT = (
     <Link href={PRESALE_URL} rel="noopener noreferrer nofollow">
       PinkSale
     </Link>
-    , starting on <strong>Saturday, June 22, 5 PM UTC</strong>!
+    , starting on <strong>Saturday, June 22, 17:00&nbsp;UTC</strong>!
   </>
 )
