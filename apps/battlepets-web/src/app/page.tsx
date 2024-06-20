@@ -420,6 +420,7 @@ const Home = () => {
             <RevealedSection>
               <div className={`${styles.sectionContent} ${styles.gameCTASectionContent}`}>
                 <CTA
+                  variant="link"
                   heading={
                     <>
                       Get in the <span className={globalStyles.promoText}>BPETS</span> sale and win a{' '}
@@ -517,6 +518,21 @@ const Home = () => {
                   <Button asDiv>Read Litepaper</Button>
                 </Link>
               </div>
+              <CTA
+                heading="Want to stay in the loop?"
+                ctaText={
+                  <>
+                    <strong>Join the newsletter</strong> to get all the latest news, updates and promotions about
+                    Battlepets!
+                  </>
+                }
+                email={email}
+                onEmailChange={handleEmailChange}
+                hasSignedUp={hasSignedUp}
+                onSuccess={handleSignUpSuccess}
+                buttonText="Let me know!"
+                buttonVariant="fire"
+              />
             </div>
           </RevealedSection>
         </main>

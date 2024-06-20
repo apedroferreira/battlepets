@@ -2,20 +2,12 @@
 @use '../common/variables' as variables;
 @use '../common/breakpoints' as breakpoints;
 
-.ctaSignUpForm {
+@mixin ctaActionWrapper {
   margin-bottom: 2.4rem;
   max-width: 52rem;
   position: relative;
   width: 100%;
   z-index: 1;
-
-  @include mixins.signUpForm;
-
-  @include breakpoints.breakpoint(sm) {
-    > div {
-      flex: 1;
-    }
-  }
 
   @include breakpoints.breakpoint(md) {
     max-width: 100%;
@@ -28,6 +20,51 @@
 
   @include breakpoints.breakpoint(xxl) {
     margin-bottom: 3rem;
+  }
+}
+
+.ctaLink {
+  @include ctaActionWrapper;
+
+  > div {
+    margin-bottom: 0.4rem;
+    width: 100%;
+  }
+
+  @include breakpoints.breakpoint(sm) {
+    > div {
+      margin-bottom: 0;
+      width: auto;
+    }
+  }
+
+  @include breakpoints.breakpoint(md) {
+    > div {
+      width: 32rem;
+    }
+  }
+
+  @include breakpoints.breakpoint(lg) {
+    > div {
+      width: 40rem;
+    }
+  }
+
+  @include breakpoints.breakpoint(xxl) {
+    > div {
+      width: 44rem;
+    }
+  }
+}
+
+.ctaSignUpForm {
+  @include ctaActionWrapper;
+  @include mixins.signUpForm;
+
+  @include breakpoints.breakpoint(sm) {
+    > div {
+      flex: 1;
+    }
   }
 }
 

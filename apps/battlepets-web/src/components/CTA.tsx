@@ -6,10 +6,11 @@ import globalStyles from '@/common/global.module.scss'
 
 import { Button } from './Button'
 import styles from './cta.module.scss'
-import { EmailFormProps } from './EmailForm'
+import { EmailForm, EmailFormProps } from './EmailForm'
 import { Socials } from './Socials'
 
 interface CTAProps extends EmailFormProps {
+  variant?: 'link' | 'email'
   heading: React.ReactNode
   ctaText: React.ReactNode
   image?: {
@@ -19,7 +20,19 @@ interface CTAProps extends EmailFormProps {
   }
 }
 
-export const CTA: React.FC<CTAProps> = ({ buttonText, buttonVariant, ctaText, heading, image }) => (
+export const CTA: React.FC<CTAProps> = ({
+  buttonText,
+  buttonVariant,
+  ctaText,
+  email,
+  hasSignedUp,
+  heading,
+  image,
+  inputVariant,
+  onEmailChange,
+  onSuccess,
+  variant = 'email',
+}) => (
   <>
     <h4 className={globalStyles.slideInVerticalOnReveal1}>{heading}</h4>
     <p className={`${globalStyles.sectionText} ${globalStyles.slideInVerticalOnReveal2}`}>{ctaText}</p>
@@ -36,15 +49,28 @@ export const CTA: React.FC<CTAProps> = ({ buttonText, buttonVariant, ctaText, he
         </div>
       </div>
     )}
-    <Link
-      className={`${styles.ctaSignUpForm} ${globalStyles.slideInVerticalOnReveal3}`}
-      href={PRESALE_URL}
-      rel="noopener noreferrer nofollow"
-    >
-      <Button asDiv variant={buttonVariant}>
-        {buttonText}
-      </Button>
-    </Link>
+    {variant !== 'email' ? (
+      <Link
+        className={`${styles.ctaLink} ${globalStyles.slideInVerticalOnReveal3}`}
+        href={PRESALE_URL}
+        rel="noopener noreferrer nofollow"
+      >
+        <Button asDiv variant={buttonVariant}>
+          {buttonText}
+        </Button>
+      </Link>
+    ) : (
+      <EmailForm
+        className={`${styles.ctaSignUpForm} ${globalStyles.slideInVerticalOnReveal3}`}
+        email={email}
+        onEmailChange={onEmailChange}
+        hasSignedUp={hasSignedUp}
+        onSuccess={onSuccess}
+        inputVariant={inputVariant}
+        buttonVariant={buttonVariant}
+        buttonText={buttonText}
+      />
+    )}
     <Socials className={globalStyles.slideInVerticalOnReveal3} />
   </>
 )
