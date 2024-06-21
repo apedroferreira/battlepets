@@ -59,6 +59,7 @@ export const NFT_SELLER_FEE_BASIS_POINTS = 5 // %
 export const MASTER_NFTS = {
   '6-hoppy-biz-1': '9LEB8M64QRDVe39biphpBMypDvhf8Ry4GxZVanWzrjGP',
   '7-astro-mon-1': '6D2pG8ft3kv8poEppVK9VcGxhe6Vy2tWoyjmJQ3gDR6X',
+  '9-maya-ink-1': '8aFt5mXj64KpMib6rud8tWhocWNH7dp4haBk5vLdtMs',
   '10-glitch-sol-1': 'BSaa3eSFxtFrYVWsrKnNhp4u4zpHbargxZMNSnY9NUQW',
 }
 
