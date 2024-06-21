@@ -167,9 +167,9 @@ const Home = () => {
                 </h1>
                 <div className={styles.heroContent}>
                   <p className={styles.heroText}>
-                    Join the <span className={globalStyles.iceText}>BPETS presale</span> to get the token at pre-launch
+                    Join the <span className={globalStyles.fireText}>BPETS presale</span> to get the token at pre-launch
                     price on{' '}
-                    <span className={globalStyles.fireText}>
+                    <span className={globalStyles.iceText}>
                       June&nbsp;22
                       {hasCountdowns ? (
                         <>
@@ -184,7 +184,9 @@ const Home = () => {
                     !
                   </p>
                   <Link className={styles.heroSignUpForm} href={PRESALE_URL} rel="noopener noreferrer nofollow">
-                    <Button asDiv>Join The Presale</Button>
+                    <Button asDiv variant="fire">
+                      Join The Presale
+                    </Button>
                   </Link>
                 </div>
                 <div className={styles.heroCaptions}>
