@@ -167,9 +167,9 @@ const Home = () => {
                 </h1>
                 <div className={styles.heroContent}>
                   <p className={styles.heroText}>
-                    Join the <span className={globalStyles.fireText}>BPETS presale</span> to get the token at pre-launch
-                    price on{' '}
-                    <span className={globalStyles.iceText}>
+                    Join the <span className={globalStyles.iceText}>BPETS presale</span> to get the token at{' '}
+                    <strong>pre-launch price</strong> on{' '}
+                    <span className={globalStyles.fireText}>
                       June&nbsp;22
                       {hasCountdowns ? (
                         <>
