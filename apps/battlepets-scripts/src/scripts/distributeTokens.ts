@@ -1,6 +1,7 @@
 import * as token from '@solana/spl-token'
 import * as web3 from '@solana/web3.js'
 import { getKeypairFromEnvironment } from '@solana-developers/helpers'
+import yargs from 'yargs'
 import 'colors'
 
 // eslint-disable-next-line import/order
@@ -12,7 +13,13 @@ import { TokenDistribution } from '@/common/enums'
 import { executeScript } from '@/utils/scriptUtils'
 import { getConnection, getExplorerURLQueryString, multiSendTokens } from '@/utils/solanaUtils'
 
+const argv = yargs(process.argv.slice(2)).options({
+  amount: { type: 'number' },
+})
+
 const distributeTokens = async () => {
+  const { amount = null } = await argv.parse()
+
   if (!process.env.TOKEN_WALLET_SECRET_KEY) {
     throw new Error('Must set secret key!')
   }
@@ -38,7 +45,8 @@ const distributeTokens = async () => {
     senderAccount.publicKey
   )
 
-  const tokenAmount = (await connection.getTokenAccountBalance(senderTokenAccount.address)).value.uiAmount ?? 0
+  const tokenAmount =
+    amount ?? (await connection.getTokenAccountBalance(senderTokenAccount.address)).value.uiAmount ?? 0
 
   const initialDistributionReceivers = Object.entries(INITIAL_TOKEN_DISTRIBUTION).map(
     ([tokenDistribution, { walletAddress: tokenDistributionAddress }]) => {

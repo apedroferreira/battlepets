@@ -1,0 +1,144 @@
+<mjml>
+  <mj-head>
+    <mj-attributes>
+      <mj-text align="center" color="#202020" font-family="Sora, Helvetica Neue, Helvetica, sans-serif" />
+      <mj-section background-color="#fff" />
+      <mj-button
+        background-color="#7a00b8"
+        color="#fff"
+        font-family="bernhard-gothic-urw, Sora, Helvetica Neue, Helvetica, sans-serif"
+        font-size="20px"
+        font-weight="bold"
+        text-transform="uppercase"
+        inner-padding="20px 22px"
+        line-height="1.3"
+      />
+    </mj-attributes>
+    <mj-font name="bernhard-gothic-urw" href="https://use.typekit.net/bjy5uxp.css" />
+    <mj-font name="Sora" href="https://fonts.googleapis.com/css2?family=Sora:wght@400;700&display=swap" />
+    <mj-preview
+      >The BPETS Token Presale has finally started! Join in on PinkSale to get the Battlepets (BPETS) token at an early
+      price! The sale will last for max. 72 hours, or until the hard cap is hit!</mj-preview
+    >
+    <mj-style>@media screen and (max-width: 480px) { .heading-text div { font-size: 28px !important; } } </mj-style>
+    <mj-title>BPETS Presale Started!</mj-title>
+  </mj-head>
+
+  <mj-body background-color="#f8eeff">
+    <mj-section background-color="#4e0075" padding-bottom="0">
+      <mj-column>
+        <mj-image
+          href="https://www.battlepets.io"
+          width="80px"
+          src="https://imagedelivery.net/tQX6spJrZdgf00cBsxL4kQ/3e1bb9cc-3078-4c49-42e4-577b8996d000/public"
+          alt="Battlepets logo"
+          padding-top="0"
+        />
+        <mj-text
+          css-class="heading-text"
+          align="center"
+          color="#fff"
+          font-family="bernhard-gothic-urw, Sora, Helvetica Neue, Helvetica, sans-serif"
+          font-size="36px"
+          font-weight="bold"
+          line-height="1.3"
+          >BPETS <span style="color: #d000ff">Presale</span> Started!</mj-text
+        >
+        <mj-image
+          width="600px"
+          src="https://imagedelivery.net/tQX6spJrZdgf00cBsxL4kQ/e98509a8-55b7-4b24-1a5f-e5be39168000/public"
+          alt="Battlepets cards"
+          padding="0"
+        />
+      </mj-column>
+    </mj-section>
+    <mj-section>
+      <mj-column padding-left="6.5%" padding-right="6.5%" padding-bottom="30px">
+        <mj-text font-size="16px" line-height="1.5" align="left">
+          <p>The <strong>BPETS Token Presale</strong> has finally started!</p>
+          <p>
+            Join in on
+            <a
+              href="https://www.pinksale.finance/solana/launchpad/7JKzneYgmVCTcokGhMNmehE5jua92YZkgiEMZZzDxTs1"
+              style="color: #7a00b8; font-weight: bold; text-decoration: underline"
+              >PinkSale</a
+            >
+            to get the Battlepets (<strong>BPETS</strong>) token at an early price! The sale will last for max.
+            <strong>72 hours</strong>, or until the hard cap is hit!
+          </p>
+          <p>
+            Again, you can find the full details on this
+            <a
+              href="https://medium.com/@battlepets_game/bpets-presale-how-to-buy-2b6113381b21"
+              style="color: #7a00b8; font-weight: bold; text-decoration: underline"
+              >Medium article</a
+            >.
+          </p>
+          <p>Get in before it’s too late!</p>
+        </mj-text>
+        <mj-button href="https://www.pinksale.finance/solana/launchpad/7JKzneYgmVCTcokGhMNmehE5jua92YZkgiEMZZzDxTs1"
+          >Join Presale</mj-button
+        >
+      </mj-column>
+    </mj-section>
+    <mj-section background-color="#f8eeff" padding-bottom="4px">
+      <mj-group>
+        <mj-column>
+          <mj-image
+            href="https://t.me/battlepets_game"
+            alt="Telegram logo"
+            align="right"
+            height="44px"
+            width="44px"
+            padding-left="6px"
+            padding-right="6px"
+            src="https://imagedelivery.net/tQX6spJrZdgf00cBsxL4kQ/c5e8f177-28e1-4f92-3380-36f34a961d00/public"
+          />
+        </mj-column>
+        <mj-column>
+          <mj-image
+            href="https://twitter.com/battlepets_game"
+            alt="X logo"
+            align="left"
+            padding-left="6px"
+            padding-right="6px"
+            height="44px"
+            width="44px"
+            src="https://imagedelivery.net/tQX6spJrZdgf00cBsxL4kQ/aef63962-4b4b-47b0-b518-1110a8ebdd00/public"
+          />
+        </mj-column>
+      </mj-group>
+    </mj-section>
+    <mj-section
+      background-color="#f8eeff"
+      padding-top="0"
+      padding-left="10px"
+      padding-right="10px"
+      padding-bottom="40px"
+    >
+      <mj-column>
+        <mj-text color="#883fbc" font-size="12px" padding="2px" line-height="1.5"
+          >Sent by
+          <a href="https://www.battlepets.io" style="color: #d000ff; text-decoration: underline">Battlepets</a
+          >.</mj-text
+        >
+        <mj-text color="#883fbc" font-size="12px" padding="2px" line-height="1.5"
+          >© 2024 Battlepets. All rights reserved. |
+          <a
+            href="{{{ pm:unsubscribe }}}"
+            style="
+              color: #d000ff;
+              font-family:
+                Sora,
+                Helvetica Neue,
+                Helvetica,
+                sans-serif;
+              text-decoration: underline;
+            "
+            >Unsubscribe</a
+          >
+        </mj-text>
+      </mj-column>
+    </mj-section>
+  </mj-body>
+</mjml>

@@ -62,9 +62,9 @@ const ROADMAP_POINTS: { heading: string; items: React.ReactNode[] }[] = [
   {
     heading: 'Q2 2024',
     items: [
-      <strong>BPETS airdrop</strong>,
+      <strong>BPETS airdrop ✔️</strong>,
       <strong>
-        BPETS presale (<span className={globalStyles.fireText}>June 22</span>)
+        BPETS presale (<span className={globalStyles.fireText}>ongoing</span>)
       </strong>,
       <>
         <strong>BPETS</strong> token launch
@@ -86,7 +86,7 @@ const ROADMAP_POINTS: { heading: string; items: React.ReactNode[] }[] = [
 ]
 /* eslint-enable react/jsx-key */
 
-const TOKEN_SALE_TIMESTAMP = 1719075600000
+const TOKEN_SALE_TIMESTAMP = 1719334800000
 
 const Home = () => {
   const [email, setEmail] = useState('')
@@ -168,9 +168,8 @@ const Home = () => {
                 <div className={styles.heroContent}>
                   <p className={styles.heroText}>
                     Join the <span className={globalStyles.iceText}>BPETS presale</span> to get the token at{' '}
-                    <strong>pre-launch price</strong> on{' '}
+                    <strong>pre-launch price</strong> before it’s too late!
                     <span className={globalStyles.fireText}>
-                      June&nbsp;22
                       {hasCountdowns ? (
                         <>
                           {' '}
@@ -431,10 +430,9 @@ const Home = () => {
                   }
                   ctaText={
                     <>
-                      Join the <strong>BPETS presale</strong> on{' '}
-                      <span className={globalStyles.promoText}>June 22, 17:00 UTC</span> and get a{' '}
-                      <span className={globalStyles.promoText}>limited edition</span> <strong>Hellcat</strong> just for
-                      sale participants!
+                      Join the <strong>ongoing</strong> <span className={globalStyles.promoText}>BPETS presale</span>{' '}
+                      before it ends and get a <span className={globalStyles.promoText}>limited edition</span>{' '}
+                      <strong>Hellcat</strong> just for sale participants!
                     </>
                   }
                   email={email}

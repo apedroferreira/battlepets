@@ -1,0 +1,50 @@
+{
+  "name": "Winterwind",
+  "description": "At the peak of his powers, Winterwind can create devastating snowstorms and freeze everything around him with his mere presence.",
+  "attributes": [
+    {
+      "trait_type": "Rarity",
+      "value": "Limited Edition"
+    },
+    {
+      "trait_type": "Variant",
+      "value": "Blizzard"
+    },
+    {
+      "trait_type": "Edition",
+      "value": 1
+    },
+    {
+      "trait_type": "Series",
+      "value": "Series 1"
+    },
+    {
+      "trait_type": "Cost",
+      "value": 6
+    },
+    {
+      "trait_type": "Health",
+      "value": 9
+    },
+    {
+      "trait_type": "Attack",
+      "value": 5
+    },
+    {
+      "trait_type": "Ability",
+      "value": "Attacks all pets in opposing row."
+    },
+    {
+      "trait_type": "Category",
+      "value": "Dog"
+    },
+    {
+      "trait_type": "Type",
+      "value": "Ice"
+    },
+    {
+      "trait_type": "Pet Number",
+      "value": 5
+    }
+  ]
+}

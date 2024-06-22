@@ -30,14 +30,14 @@ export const SENTRY_ENVIRONMENT = IS_STAGING ? 'staging' : NODE_ENV
 
 export const BANNER_CONTENT = (
   <>
-    Don’t miss the{' '}
+    The{' '}
     <Link href={PRESALE_URL} rel="noopener noreferrer nofollow">
       BPETS Token Presale
     </Link>{' '}
-    on{' '}
+    is ongoing on{' '}
     <Link href={PRESALE_URL} rel="noopener noreferrer nofollow">
       PinkSale
     </Link>
-    , starting on <strong>Saturday, June 22, 17:00&nbsp;UTC</strong>!
+    ! Don’t miss it!
   </>
 )

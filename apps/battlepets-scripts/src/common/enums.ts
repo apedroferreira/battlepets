@@ -17,4 +17,5 @@ export const enum Email {
   SQUID_GAME = 'squid-game',
   PRESALE_REMINDER_1 = 'presale-reminder-1',
   PRESALE_REMINDER_2 = 'presale-reminder-2',
+  PRESALE_START = 'presale-start',
 }

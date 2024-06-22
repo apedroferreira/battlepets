@@ -93,4 +93,8 @@ export const EMAILS: Record<Email, EmailData> = {
     subject: 'BPETS Presale Tomorrow!',
     tag: 'Pre-launch',
   },
+  'presale-start': {
+    subject: 'BPETS Presale Started!',
+    tag: 'Pre-launch',
+  },
 }
