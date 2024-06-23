@@ -99,7 +99,7 @@ const Home = () => {
                   <p className={styles.heroText}>
                     <span className={globalStyles.fireText}>Join the newsletter</span> to get all the latest{' '}
                     <span className={globalStyles.iceText}>news, updates and promotions</span> about{' '}
-                    <strong>Battlepets</strong>!<strong>Battlepets</strong>!
+                    <strong>Battlepets</strong>!
                   </p>
                   <EmailForm
                     className={styles.heroSignUpForm}
