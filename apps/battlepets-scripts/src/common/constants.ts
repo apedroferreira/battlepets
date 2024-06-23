@@ -57,6 +57,7 @@ export const NFT_SYMBOL = 'BPETS'
 export const NFT_SELLER_FEE_BASIS_POINTS = 5 // %
 
 export const MASTER_NFTS = {
+  '5-winterwind-blz-1': '2FfCBbqMf8sHLZT5fGQXB46uCzuEfGybc2GZUGCG6sY1',
   '6-hoppy-biz-1': '9LEB8M64QRDVe39biphpBMypDvhf8Ry4GxZVanWzrjGP',
   '7-astro-mon-1': '6D2pG8ft3kv8poEppVK9VcGxhe6Vy2tWoyjmJQ3gDR6X',
   '9-maya-ink-1': '8aFt5mXj64KpMib6rud8tWhocWNH7dp4haBk5vLdtMs',

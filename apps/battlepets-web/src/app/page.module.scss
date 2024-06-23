@@ -1305,7 +1305,7 @@
   align-items: center;
   background: linear-gradient(0deg, var(--energy-gradient-light), var(--energy-gradient-dark));
   box-shadow: inset 0 0 20rem 2rem var(--energy-glow-strong);
-  clip-path: polygon(0% 2.5%, 100% 0%, 100% 100%, 0% 97.5%);
+  clip-path: polygon(0% 2.5%, 100% 0%, 100% 100%, 0% 100%);
   color: var(--contrast-text);
   display: flex;
   flex-direction: column;

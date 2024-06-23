@@ -1,9 +1,9 @@
 'use client'
 
-import { CONTACT_EMAIL, LITEPAPER_URL, PRESALE_URL, STATUS_URL } from 'battlepets-shared/constants'
+import { CONTACT_EMAIL, STATUS_URL } from 'battlepets-shared/constants'
 import Image from 'next/image'
 import Link from 'next/link'
-import { useCallback, useEffect, useState } from 'react'
+import { useCallback, useState } from 'react'
 import { Lightbox } from 'yet-another-react-lightbox'
 import LightboxFullscreen from 'yet-another-react-lightbox/plugins/fullscreen'
 import LightboxZoom from 'yet-another-react-lightbox/plugins/zoom'
@@ -11,9 +11,7 @@ import LightboxZoom from 'yet-another-react-lightbox/plugins/zoom'
 import { BANNER_CONTENT } from '@/common/constants'
 import globalStyles from '@/common/global.module.scss'
 import { Banner } from '@/components/Banner'
-import { Button } from '@/components/Button'
-import { CTA } from '@/components/CTA'
-import { LiveTime } from '@/components/LiveTime'
+import { EmailForm } from '@/components/EmailForm'
 import { RevealedSection } from '@/components/RevealedSection'
 import { Socials } from '@/components/Socials'
 
@@ -29,7 +27,6 @@ import card2 from '../../public/images/card2.png'
 import card3 from '../../public/images/card3.png'
 import googlePlayLogo from '../../public/images/googleplaylogo.svg'
 import logo from '../../public/images/logo.png'
-import promoCard from '../../public/images/promocard.png'
 import screenshot from '../../public/images/screenshot.png'
 import solanaLogo from '../../public/images/solanalogo.svg'
 import token from '../../public/images/token.png'
@@ -38,63 +35,11 @@ import styles from './page.module.scss'
 
 import type { StaticImport } from 'next/dist/shared/lib/get-img-props'
 
-const TOKEN_METRICS: { value: string; caption: React.ReactNode }[] = [
-  {
-    value: '100M',
-    caption: (
-      <>
-        Max <strong>BPETS</strong> supply
-      </>
-    ),
-  },
-  {
-    value: '$0.006',
-    caption: 'Max Est. Presale price',
-  },
-  {
-    value: '$348K',
-    caption: 'Max Est. Presale market cap',
-  },
-]
-
-/* eslint-disable react/jsx-key */
-const ROADMAP_POINTS: { heading: string; items: React.ReactNode[] }[] = [
-  {
-    heading: 'Q2 2024',
-    items: [
-      <strong>BPETS airdrop ✔️</strong>,
-      <strong>
-        BPETS presale (<span className={globalStyles.fireText}>ongoing</span>)
-      </strong>,
-      <>
-        <strong>BPETS</strong> token launch
-      </>,
-    ],
-  },
-  {
-    heading: 'Q3-Q4 2024',
-    items: ['Battlepets DAO', 'Create starter cards', 'Battlepets NFT web store', 'Game development'],
-  },
-  {
-    heading: 'Q1 2025',
-    items: ['Beta game launch'],
-  },
-  {
-    heading: 'Q2 2025',
-    items: ['Public game launch'],
-  },
-]
-/* eslint-enable react/jsx-key */
-
-const TOKEN_SALE_TIMESTAMP = 1719334800000
-
 const Home = () => {
   const [email, setEmail] = useState('')
   const [hasSignedUp, setHasSignedUp] = useState(false)
 
   const [isLightboxOpen, setIsLightboxOpen] = useState(false)
-
-  const [hasCountdowns, setHasCountdowns] = useState(false)
 
   const handleEmailChange = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
     setEmail(event.target.value)
@@ -106,10 +51,6 @@ const Home = () => {
 
   const handleToggleLightbox = useCallback(() => {
     setIsLightboxOpen(previousIsLightboxOpen => !previousIsLightboxOpen)
-  }, [])
-
-  useEffect(() => {
-    setHasCountdowns(true)
   }, [])
 
   return (
@@ -135,20 +76,9 @@ const Home = () => {
                   <li>
                     <Link href="#game">Game</Link>
                   </li>
-                  <li>
-                    <Link href="#token">Token</Link>
-                  </li>
-                  <li>
-                    <Link href="#roadmap">Roadmap</Link>
-                  </li>
                 </ul>
               </nav>
             </div>
-            <Link href={LITEPAPER_URL} target="_blank" rel="noopener noreferrer nofollow">
-              <Button asDiv className={styles.headerActionButton}>
-                Read Litepaper
-              </Button>
-            </Link>
           </div>
         </header>
         <main>
@@ -167,26 +97,19 @@ const Home = () => {
                 </h1>
                 <div className={styles.heroContent}>
                   <p className={styles.heroText}>
-                    Join the <span className={globalStyles.iceText}>BPETS presale</span> to get the token at{' '}
-                    <strong>pre-launch price</strong> before it’s too late!
-                    <span className={globalStyles.fireText}>
-                      {hasCountdowns ? (
-                        <>
-                          {' '}
-                          (
-                          <LiveTime timestamp={TOKEN_SALE_TIMESTAMP} showSeconds={false} /> left)
-                        </>
-                      ) : (
-                        ''
-                      )}
-                    </span>
-                    !
+                    <span className={globalStyles.fireText}>Join the newsletter</span> to get all the latest{' '}
+                    <span className={globalStyles.iceText}>news, updates and promotions</span> about{' '}
+                    <strong>Battlepets</strong>!<strong>Battlepets</strong>!
                   </p>
-                  <Link className={styles.heroSignUpForm} href={PRESALE_URL} rel="noopener noreferrer nofollow">
-                    <Button asDiv variant="fire">
-                      Join The Presale
-                    </Button>
-                  </Link>
+                  <EmailForm
+                    className={styles.heroSignUpForm}
+                    email={email}
+                    onEmailChange={handleEmailChange}
+                    hasSignedUp={hasSignedUp}
+                    onSuccess={handleSignUpSuccess}
+                    buttonVariant="fire"
+                    buttonText="I’m In!"
+                  />
                 </div>
                 <div className={styles.heroCaptions}>
                   <div className={globalStyles.captionWrapper}>
@@ -417,124 +340,6 @@ const Home = () => {
               </div>
             </RevealedSection>
           </div>
-          <div className={styles.gameCTA}>
-            <RevealedSection>
-              <div className={`${styles.sectionContent} ${styles.gameCTASectionContent}`}>
-                <CTA
-                  variant="link"
-                  heading={
-                    <>
-                      Get in the <span className={globalStyles.promoText}>BPETS</span> sale and win a{' '}
-                      <span className={globalStyles.promoText}>sale-only</span> NFT!
-                    </>
-                  }
-                  ctaText={
-                    <>
-                      Join the <strong>ongoing</strong> <span className={globalStyles.promoText}>BPETS presale</span>{' '}
-                      before it ends and get a <span className={globalStyles.promoText}>limited edition</span>{' '}
-                      <strong>Hellcat</strong> just for sale participants!
-                    </>
-                  }
-                  email={email}
-                  onEmailChange={handleEmailChange}
-                  image={{
-                    data: promoCard,
-                    alt: 'Inferno Devil Cat Battlepet Card',
-                    wrapperClassName: styles.promoCardImageWrapper,
-                  }}
-                  hasSignedUp={hasSignedUp}
-                  onSuccess={handleSignUpSuccess}
-                  inputVariant="promo"
-                  buttonVariant="promo"
-                  buttonText="Join The Presale"
-                />
-              </div>
-            </RevealedSection>
-          </div>
-          <RevealedSection className={styles.tokenSection}>
-            <div id="token" className={styles.sectionTarget} />
-            <div className={styles.tokenSectionBackground} />
-            <div className={styles.tokenSectionContent}>
-              {TOKEN_METRICS.map(({ caption, value }, index) => (
-                <div
-                  key={value}
-                  className={`${styles.tokenMetric} ${globalStyles[`scaleInOnReveal${index <= 2 ? index + 1 : 3}`]}`}
-                >
-                  <div className={styles.tokenValue}>{value}</div>
-                  <div className={globalStyles.captionText}>{caption}</div>
-                </div>
-              ))}
-            </div>
-          </RevealedSection>
-          <RevealedSection className={styles.roadmapSection}>
-            <div id="roadmap" className={styles.sectionTarget} />
-            <div className={`${styles.sectionContent} ${styles.roadmapSectionContent}`}>
-              <div className={styles.roadmapSectionHeader}>
-                <h3 className={globalStyles.slideInVerticalOnReveal1}>Roadmap</h3>
-                <Link href={LITEPAPER_URL} target="_blank" rel="noopener noreferrer nofollow">
-                  <Button asDiv className={styles.headerActionButton}>
-                    Read Litepaper
-                  </Button>
-                </Link>
-              </div>
-              <div className={styles.roadmapWrapper}>
-                <div className={styles.roadmap}>
-                  <svg viewBox="0 0 1280 160" xmlns="http://www.w3.org/2000/svg">
-                    <path
-                      d="M 0 60 Q 320 120, 640 60 T 1280 60"
-                      strokeWidth={6}
-                      strokeOpacity={0.85}
-                      fill="transparent"
-                    />
-                    <path
-                      d="M 0 60 Q 320 120, 640 60 T 1280 60"
-                      strokeWidth={6}
-                      strokeOpacity={0.85}
-                      fill="transparent"
-                      strokeDasharray="128 1280"
-                    />
-                  </svg>
-                  {ROADMAP_POINTS.map(({ heading, items }, index) => (
-                    <div key={heading} className={styles.roadmapPointWrapper}>
-                      <div className={`${styles.roadmapPointOnReveal} ${globalStyles[`scaleInOnReveal${index + 1}`]}`}>
-                        <div className={styles.roadmapPointScaler}>
-                          <div className={styles.roadmapPoint} />
-                        </div>
-                      </div>
-                      <div className={styles.roadmapPointText}>
-                        <p className={styles.roadmapPointTextHeading}>{heading}</p>
-                        <ul className={styles.roadmapPointTextItems}>
-                          {items.map((item, itemIndex) => (
-                            <li key={itemIndex}>{item}</li>
-                          ))}
-                        </ul>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-              <div className={styles.roadmapMobileCTAWrapper}>
-                <Link href={LITEPAPER_URL} target="_blank" rel="noopener noreferrer nofollow">
-                  <Button asDiv>Read Litepaper</Button>
-                </Link>
-              </div>
-              <CTA
-                heading="Want to stay in the loop?"
-                ctaText={
-                  <>
-                    <strong>Join the newsletter</strong> to get all the latest news, updates and promotions about
-                    Battlepets!
-                  </>
-                }
-                email={email}
-                onEmailChange={handleEmailChange}
-                hasSignedUp={hasSignedUp}
-                onSuccess={handleSignUpSuccess}
-                buttonText="Let me know!"
-                buttonVariant="fire"
-              />
-            </div>
-          </RevealedSection>
         </main>
         <footer>
           <div className={styles.footerTopBorder} />
@@ -565,17 +370,6 @@ const Home = () => {
                 </li>
                 <li>
                   <Link href="#game">Game</Link>
-                </li>
-                <li>
-                  <Link href="#token">Token</Link>
-                </li>
-                <li>
-                  <Link href="#roadmap">Roadmap</Link>
-                </li>
-                <li>
-                  <Link href={LITEPAPER_URL} target="_blank" rel="noopener noreferrer nofollow">
-                    Litepaper
-                  </Link>
                 </li>
                 <li>
                   <Link href={STATUS_URL} target="_blank" rel="noopener noreferrer nofollow">
