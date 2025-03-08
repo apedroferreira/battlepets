@@ -3,15 +3,11 @@
   "version": "1.1.6",
   "private": true,
   "scripts": {
-    "format": "prettier --write '*/**/*.{js,ts,md,json}'",
-    "lint": "eslint \"**/*.{js,ts}\" --fix",
-    "precommit": "lint-staged"
+    "format": "yarn g:prettier --write '*/**/*.{js,ts,md,json}'",
+    "lint": "yarn g:eslint \"**/*.{js,ts}\" --fix",
+    "precommit": "yarn g:lint-staged"
   },
   "dependencies": {
     "@solana/web3.js": "^1.91.8"
-  },
-  "devDependencies": {
-    "@types/eslint": "^8.56.10",
-    "eslint": "^8.57.0"
   }
 }

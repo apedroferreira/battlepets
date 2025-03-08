@@ -261,11 +261,11 @@ export const updateSuccessfulAirdropReceivers = async <
 ) => {
   const successfulTransactions = airdropTransactionResults
     .filter(result => result.status === 'fulfilled')
-    .map(result => (result as PromiseFulfilledResult<AirdropTransactionResult>).value)
+    .map(result => result.value)
 
   const failedTransactionReasons = airdropTransactionResults
     .filter(result => result.status === 'rejected')
-    .map(result => (result as PromiseRejectedResult).reason as string)
+    .map(result => result.reason as string)
 
   const successfulReceivers = successfulTransactions.flatMap(({ receivers }) => receivers)
 

@@ -6,10 +6,10 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "format": "prettier --write '*/**/*.{js,jsx,ts,tsx,md,json}'",
-    "lint": "next lint && stylelint \"**/*.{css,scss}\"",
+    "format": "yarn g:prettier --write '*/**/*.{js,jsx,ts,tsx,md,json}'",
+    "lint": "next lint && yarn g:stylelint \"**/*.{css,scss}\"",
     "analyze": "ANALYZE=true yarn build",
-    "precommit": "lint-staged"
+    "precommit": "yarn g:lint-staged"
   },
   "dependencies": {
     "@neondatabase/serverless": "^0.9.3",
@@ -28,12 +28,12 @@
   },
   "devDependencies": {
     "@next/bundle-analyzer": "^14.2.3",
-    "@types/eslint": "^8.56.10",
     "@types/react": "^18.3.2",
     "@types/react-dom": "^18.3.0",
-    "eslint": "^8.57.0",
+    "eslint": "^8.57.1",
     "eslint-config-next": "14.2.3",
-    "sass": "^1.77.1"
+    "sass": "^1.77.1",
+    "typescript": "^5.8.2"
   },
   "browserslist": {
     "production": [

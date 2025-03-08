@@ -97,7 +97,7 @@ const sendEmail = async () => {
 
   const failedEmailReasons = sendEmailResults
     .filter(result => result.status === 'rejected')
-    .map(result => (result as PromiseRejectedResult).reason as string)
+    .map(result => result.reason as string)
 
   const successfulEmailAddresses = successfulEmails.map(({ email }) => email)
 

@@ -6,10 +6,10 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
-    "format": "prettier --write '*/**/*.{js,jsx,ts,tsx,md,json}'",
-    "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0 && stylelint \"**/*.{css,scss}\"",
+    "format": "yarn g:prettier --write '*/**/*.{js,jsx,ts,tsx,md,json}'",
+    "lint": "yarn g:eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0 && yarn g:stylelint \"**/*.{css,scss}\"",
     "preview": "vite preview",
-    "precommit": "lint-staged"
+    "precommit": "yarn g:lint-staged"
   },
   "dependencies": {
     "@coral-xyz/anchor": "^0.30.0",
@@ -28,20 +28,18 @@
   "devDependencies": {
     "@sentry/vite-plugin": "^2.16.1",
     "@types/bn.js": "^5.1.5",
-    "@types/eslint": "^8.56.10",
     "@types/react": "^18.3.2",
     "@types/react-dom": "^18.3.0",
     "@types/react-transition-group": "^4.4.10",
     "@vitejs/plugin-react-swc": "^3.6.0",
-    "eslint": "^8.57.0",
+    "eslint": "^8.57.1",
     "eslint-import-resolver-alias": "^1.1.2",
     "eslint-import-resolver-typescript": "^3.6.1",
-    "eslint-plugin-import": "^2.29.1",
+    "eslint-plugin-import": "^2.31.0",
     "eslint-plugin-react": "^7.34.1",
     "eslint-plugin-react-hooks": "^4.6.2",
     "eslint-plugin-react-refresh": "^0.4.7",
     "sass": "^1.77.1",
-    "typescript": "^5.4.5",
     "vite": "^5.2.11"
   }
 }
